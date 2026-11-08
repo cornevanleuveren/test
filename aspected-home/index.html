@@ -420,7 +420,7 @@ footer a:hover{color:var(--ink)}
       <h2 id="stack-h">One index under the AI you already use.</h2>
       <div class="stack-grid">
         <div><b>Under Copilot</b><p>Copilot stays the screen. Aspected decides what it reads.</p></div>
-        <div><b>In your agents</b><p>The same index over MCP and REST, with the Studio console.</p></div>
+        <div><b>In your agents</b><p>The same index over a REST API, with Aspected Studio built in.</p></div>
         <div><b>In your AWS account</b><p>Including the European Sovereign Cloud. Your data stays in your tenant.</p></div>
         <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
       </div>
@@ -493,14 +493,14 @@ footer a:hover{color:var(--ink)}
   <!-- WHY ASPECTED: vs vector search -->
   <section class="view" id="v-why">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Aspected vs vector search</p>
+      <p class="eyebrow" style="margin-bottom:14px">Aspected vs plain vector search</p>
       <h1>Same question. Two rankings.</h1>
-      <p class="lede">Vector search ranks on one blended score. Aspected keeps every aspect apart and weighs them in one calculation.</p>
+      <p class="lede">A plain vector search ranks on one embedding of the text. Aspected builds the vector from aspects, each with its own weight, and searches them in one calculation.</p>
       <div class="vs">
         <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
         <div class="vs-cols">
           <div class="vs-col">
-            <p class="eyebrow">Vector search · one score</p>
+            <p class="eyebrow">Plain vector search · text only</p>
             <ol>
               <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
               <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
@@ -521,11 +521,11 @@ footer a:hover{color:var(--ink)}
       </div>
       <h2 class="h2s">Questions people ask</h2>
       <div class="faq">
-        <details open><summary>What is the difference with vector search?</summary><p>A vector search turns each document into one point and ranks on one similarity score, so meaning is all it sees. Aspected keeps meaning next to aspects such as version, date, source or price, each with its own weight, and ranks on all of them in one calculation.</p></details>
+        <details open><summary>Isn't Aspected a vector database too?</summary><p>Yes. The difference is what goes into the vector. A plain vector search embeds the text, so meaning is all it sees. Aspected builds the vector from aspects, such as meaning, version, date, source or price, each with its own weight, and ranks on all of them in one calculation.</p></details>
         <details><summary>Isn't that just a filter?</summary><p>A filter says yes or no and drops everything else, including the almost-right. An aspect says how close a record is, so a near match still ranks, only lower.</p></details>
         <details><summary>How is it different from hybrid search, boosting or a reranker?</summary><p>Those add rules or a second model on top of one score, and every rule interacts with the others. Aspected ranks on all aspects in the first pass and shows the distance per aspect.</p></details>
         <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
-        <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over MCP or REST.</p></details>
+        <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over its REST API.</p></details>
         <details><summary>Who decides what counts?</summary><p>The people who own the content. They set the weights, or pick the better of two results and the weights follow.</p></details>
         <details><summary>Can I see why a document was used?</summary><p>Yes. Every answer comes with a receipt: what was used, what was kept out and which aspect decided. It shows why a document was selected, not that the answer is right.</p></details>
         <details><summary>Where does my data live?</summary><p>In your own AWS account, including the European Sovereign Cloud. Smaller catalogues can run hosted by us.</p></details>
@@ -557,7 +557,7 @@ footer a:hover{color:var(--ink)}
         <div class="way">
           <span class="badge req">Works today</span>
           <h3>Run the Docker image</h3>
-          <p>Run Aspected on your own machine or in your AWS account. Install steps, API and MCP are on the docs site.</p>
+          <p>One Docker image, xillio/aspected, with a REST API and Aspected Studio built in. Running in about five minutes.</p>
           <a class="btn ghost" href="https://docs.aspected.com" target="_blank" rel="noopener">Open docs.aspected.com ↗</a>
         </div>
       </div>
@@ -568,13 +568,13 @@ footer a:hover{color:var(--ink)}
         <button class="btn copy" id="copyBtn" type="button">Copy</button>
         <pre id="aiPrompt">You are helping me try Aspected, a database that ranks records on several weighted aspects at once and shows the distance per aspect.
 
-1. Read https://docs.aspected.com first. Follow it for installation, the Docker image, the API and MCP. Do not guess commands that are not in the docs.
-2. Start Aspected with the Docker image from the docs, on this machine. Tell me when it responds.
+1. Read https://docs.aspected.com first, starting with Getting Started and the Tutorial. Follow it for installing, the license key and the REST API. Do not guess commands that are not in the docs.
+2. Pull and run the Docker image from the docs (xillio/aspected, port 8080). Check that http://localhost:8080/indexes responds.
 3. Ask me for a dataset: a CSV, an Excel file or a folder of documents. If I have none, use a small public CSV.
-4. Profile the data and propose aspects: one per useful column, typed as text, number, category or date. Show me the list and wait for my OK.
-5. Build the index and run three "like this, but" queries, for example "like this one, but cheaper". For each result, show the distance per aspect.
+4. Profile the data and propose a schema: one aspect per useful column, each with a resolver from the docs (enum, text, number or datetime). Show me the list and wait for my OK.
+5. Create the index, train it with my data and run three "like this, but" searches, for example "like this one, but cheaper". For each result, show the distance per aspect.
 6. Change one weight, run the same query again, and show me what moved and why.
-7. End with a short summary: what you built, the commands you ran, and how I reach it over REST or MCP.
+7. End with a short summary: what you built, the commands you ran, and how my own apps can call it over the REST API.
 
 Rules: ask before installing anything new, keep my data on this machine, and stop and ask me when the docs and my setup disagree.</pre>
       </div>
@@ -583,7 +583,7 @@ Rules: ask before installing anything new, keep my data on this machine, and sto
       <p class="sub">Aspected works with the data you have. These six checks make the first results better.</p>
       <ol class="prep">
         <li><b>One row per thing people look for.</b><span>A product, a document, a session or a contract. Not one row per sale or per page.</span></li>
-        <li><b>Columns become aspects.</b><span>Text for descriptions, numbers for price or size, categories for type or department, dates for published or start time.</span></li>
+        <li><b>Columns become aspects.</b><span>Each gets a resolver: text for descriptions, number for price or size, enum for a fixed list such as type or department, datetime for dates.</span></li>
         <li><b>One unit per column.</b><span>All grams or all kilos, all euros or all dollars. Mixed units look like outliers.</span></li>
         <li><b>Empty means unknown.</b><span>Leave a value empty when you don't know it. A zero is read as a real zero.</span></li>
         <li><b>Say which version counts.</b><span>For documents, keep version, status (draft, published, superseded), owner and source. They decide which copy the AI reads.</span></li>
@@ -612,7 +612,7 @@ Rules: ask before installing anything new, keep my data on this machine, and sto
       <p class="lede" id="iLede"></p>
       <div class="grid" id="iGrid" style="margin-top:36px"></div>
       <div class="iproof" id="iProof"></div>
-      <div class="ctas" style="margin-top:28px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a><a class="btn ghost" href="#why">Aspected vs vector search</a></div>
+      <div class="ctas" style="margin-top:28px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a><a class="btn ghost" href="#why">Aspected vs plain vector search</a></div>
     </div>
   </section>
 
