@@ -57,7 +57,7 @@ p{margin:0}
 @keyframes viewin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* hero */
-.hero{padding-block:clamp(48px,8vw,104px) clamp(40px,6vw,72px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero{padding-block:clamp(40px,7vw,88px) clamp(16px,3vw,32px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:center}
 .hero-l{min-width:0}
 .hero-sp{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
 @media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero-sp{max-width:420px;width:100%;margin-inline:auto}}
@@ -227,14 +227,24 @@ p{margin:0}
 .facts a:hover b{text-decoration:underline}
 .facts span{font-size:14px;color:var(--muted)}
 @media (max-width:860px){.quotes,.facts{grid-template-columns:minmax(0,1fr)}}
-.try{padding-block:clamp(64px,10vw,120px);text-align:left}
-.try h2{font-size:clamp(48px,8vw,96px);font-weight:800;letter-spacing:-.045em;line-height:.95}
+.stack{padding-block:clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:12px}
+.stack h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;line-height:1.15;max-width:22ch}
+.stack-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:20px}
+.stack-grid div{border-top:2px solid var(--ink);padding-top:14px;display:grid;gap:6px;min-width:0;align-content:start}
+.stack-grid b{font-size:16px;font-weight:800}
+.stack-grid p{font-size:14.5px;color:var(--muted)}
+@media (max-width:980px){.stack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.stack-grid{grid-template-columns:minmax(0,1fr)}}
+.try{padding-block:clamp(48px,8vw,96px) clamp(64px,9vw,112px);text-align:left;border-top:1px solid var(--line)}
+.try h2{font-size:clamp(44px,6.5vw,80px);font-weight:800;letter-spacing:-.045em;line-height:.95}
 .try h2 b{color:var(--blue)}
 .try p{margin-top:16px;color:var(--muted);font-size:17px;max-width:46ch}
 .try .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:13.5px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
-footer nav{display:flex;gap:18px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer .fmore{flex-basis:100%;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--line)}
+@media (max-width:620px){footer .fmore{justify-content:flex-start}}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
 
@@ -268,6 +278,8 @@ footer a:hover{color:var(--ink)}
 .tier p{color:var(--muted);font-size:15px}
 .tier .btn{margin-top:auto;align-self:flex-start}
 .fine{margin-top:20px;font-size:13px;color:var(--muted)}
+.about-foot{margin-top:32px;display:flex;flex-direction:column;gap:14px;max-width:760px}
+.about-foot p{font-size:18px;font-weight:600}
 .timeline{margin-top:40px;display:grid;border-top:1px solid var(--line);max-width:760px}
 .timeline div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
 .timeline b{font:600 14px/1.5 var(--f-mono);color:var(--blue)}
@@ -350,6 +362,17 @@ footer a:hover{color:var(--ink)}
       </div>
     </section>
 
+    <section class="wrap stack" aria-labelledby="stack-h">
+      <p class="eyebrow">Fits what you run</p>
+      <h2 id="stack-h">One index under the AI you already use.</h2>
+      <div class="stack-grid">
+        <div><b>Under Copilot</b><p>Copilot stays the screen. Aspected decides what it reads.</p></div>
+        <div><b>In your agents</b><p>The same index over MCP and REST, with the Studio console.</p></div>
+        <div><b>In your AWS account</b><p>Including the European Sovereign Cloud. Your data stays in your tenant.</p></div>
+        <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
+      </div>
+    </section>
+
     <div class="wrap try" id="try">
       <h2>Try it now<b>.</b></h2>
       <p>Two showcases are live. Open one and change what you are looking for, or book 20 minutes on your own data.</p>
@@ -407,6 +430,10 @@ footer a:hover{color:var(--ink)}
         <div><b>Oct 2026</b><p>samebutbetter.food goes live on 45,000 Dutch supermarket products.</p></div>
         <div><b>Dec 2026</b><p>Vegas, the session finder, runs at AWS re:Invent in Las Vegas.</p></div>
       </div>
+      <div class="about-foot">
+        <p>45 people in Hilversum, the Netherlands.</p>
+        <div class="ctas"><a class="btn" data-link="careers" href="#" target="_blank" rel="noopener">We're hiring ↗</a><a class="btn ghost" data-link="investors" href="#" target="_blank" rel="noopener">Investors and press ↗</a></div>
+      </div>
     </div>
   </section>
 
@@ -445,19 +472,19 @@ footer a:hover{color:var(--ink)}
     <div class="wrap page">
       <p class="eyebrow" style="margin-bottom:14px">Pricing</p>
       <h1>Pay for searches and records.</h1>
-      <p class="lede">Nothing else. Every edition and every interface bills the same way.</p>
+      <p class="lede">Nothing else. Every showcase, API and agent bills the same way.</p>
       <div class="tiers">
         <div class="tier">
           <span class="eyebrow">Free · hosted</span>
           <div class="price">€0</div>
           <p>10,000 searches and 10,000 records a month. Build and share a page.</p>
-          <a class="btn ghost" href="#try">Start free</a>
+          <a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Get early access ↗</a>
         </div>
         <div class="tier hl">
           <span class="eyebrow">Pay as you go · hosted</span>
           <div class="price">€1 <small>per 1,000 searches</small></div>
           <p>€0.50 per 1,000 records a month. Rates fall with volume. Pay by card.</p>
-          <a class="btn" href="#try">Start free</a>
+          <a class="btn" data-book href="#" target="_blank" rel="noopener">Get early access ↗</a>
         </div>
         <div class="tier">
           <span class="eyebrow">Enterprise · your tenant</span>
@@ -475,6 +502,7 @@ footer a:hover{color:var(--ink)}
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>US patent 12,517,879</span></span>
     <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#research">Research</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
+    <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a><a data-link="careers" href="#" target="_blank" rel="noopener">Careers</a><a data-link="login" href="#" target="_blank" rel="noopener">Customer login</a></nav>
   </div>
 </footer>
 
@@ -493,6 +521,9 @@ var BOOK="https://example.com/book-aspected";
 var MOSAIC_VIDEO="https://example.com/mosaic-video";
 document.querySelectorAll("[data-video]").forEach(function(a){a.href=MOSAIC_VIDEO});
 document.querySelectorAll("[data-book]").forEach(function(a){a.href=BOOK});
+/* PLACEHOLDERS: the secondary audiences, routed from the footer and About. */
+var LINKS={docs:"https://example.com/docs",partners:BOOK,analysts:BOOK,careers:"https://example.com/careers",login:"https://example.com/login",investors:BOOK};
+document.querySelectorAll("[data-link]").forEach(function(a){a.href=LINKS[a.getAttribute("data-link")]||BOOK});
 function badge(s){return s.live?'<span class="badge live">Live</span>':(s.onRequest?'<span class="badge req">Live demo on request</span>':'<span class="badge soon">Coming soon</span>')}
 
 /* ---------- logo ---------- */
@@ -608,7 +639,9 @@ var BUILD = {
       at(e+1150,function(){rows[c.after[0]].classList.add("hit"); rows.forEach(function(r,k){if(c.after.indexOf(k)>1) r.classList.add("dim")})});
       return e+3400;
     }
-    reset(); return {reset:reset,play:play};
+    function end(){q.classList.add("typed"); t.textContent=c.query; if(knob) knob.style.setProperty("--k",c.slider[2]+"%");
+      rows.forEach(function(r,k){var p=c.after.indexOf(k); r.style.setProperty("--i",p); r.querySelector("i").style.setProperty("--w",(c.items[k][4]*100)+"%"); r.classList.toggle("hit",p===0); r.classList.toggle("dim",p>1)})}
+    reset(); return {reset:reset,play:play,end:end};
   },
   lies:function(stage){
     function cubes(g){var n=g/4, out="", i; for(i=0;i<Math.floor(n);i++) out+='<i></i>'; if(n%1) out+='<i class="part" style="--p:'+Math.round((n%1)*100)+'%"></i>'; return out}
@@ -626,7 +659,8 @@ var BUILD = {
       at(1700,function(){a.classList.remove("tap"); a.classList.add("liar"); q.textContent="The smoothie. Aspected found it."; cb.classList.add("in")});
       return 5600;
     }
-    reset(); return {reset:reset,play:play};
+    function end(){a.classList.remove("tap"); b.classList.remove("tap"); a.classList.add("liar"); cb.classList.add("in"); q.textContent="The smoothie. Aspected found it."}
+    reset(); return {reset:reset,play:play,end:end};
   },
   receipt:function(stage){
     stage.classList.add("rc");
@@ -667,7 +701,8 @@ var BUILD = {
       at(2500,function(){res.classList.add("in")});
       return 5600;
     }
-    reset(); return {reset:reset,play:play};
+    function end(){hs.forEach(function(x){x.classList.add("lit")}); cs.forEach(function(x){x.classList.add("in")}); tbl.classList.add("away"); res.classList.add("in")}
+    reset(); return {reset:reset,play:play,end:end};
   },
   dups:function(stage){
     var labels={0:"v7 · current",3:"v6 · 2024",7:"draft · Jan",10:"copy · HR"};
@@ -686,7 +721,8 @@ var BUILD = {
       at(1400,function(){docs.forEach(function(d,k){if(k===0) d.classList.add("win"); else {d.classList.add("fade"); if(labels[k]) d.classList.add("lab")}}); cap.textContent="by version · date · owner"});
       return 5200;
     }
-    reset(); return {reset:reset,play:play};
+    function end(){setPos(ring); docs.forEach(function(d,k){d.classList.remove("fade","win","lab"); if(k===0) d.classList.add("win"); else {d.classList.add("fade"); if(labels[k]) d.classList.add("lab")}}); cap.textContent="by version · date · owner"}
+    reset(); return {reset:reset,play:play,end:end};
   }
 };
 
@@ -695,10 +731,12 @@ function Player(stage, show){
   function at(ms,fn){timers.push(setTimeout(fn,ms))}
   function clear(){timers.forEach(clearTimeout); timers=[]}
   function snapReset(){stage.classList.add("snap"); demo.reset(); void stage.offsetWidth; stage.classList.remove("snap")}
+  function snapEnd(){stage.classList.add("snap"); (demo.end||demo.reset)(); void stage.offsetWidth; stage.classList.remove("snap")}
   function run(){clear(); snapReset(); var d=demo.play(at); at(d,run)}
+  snapEnd();
   return {
     start:function(){if(on||reduce) return; on=true; run()},
-    stop:function(){if(!on) return; on=false; clear(); snapReset()}
+    stop:function(){if(!on) return; on=false; clear(); snapEnd()}
   };
 }
 
