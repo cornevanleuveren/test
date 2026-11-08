@@ -405,13 +405,13 @@ footer a:hover{color:var(--ink)}
         </div>
         <div class="quotes">
           <figure><blockquote>“Aspected has added the context Microsoft Copilot needed.”</blockquote><figcaption><b>Rob Kasslack</b>IT Business Partner, AI &amp; Innovation · Agfa</figcaption></figure>
-          <figure><blockquote>“Aspected includes all context directly in the search query upfront.”</blockquote><figcaption><b>Wim Verheij</b>Managing Director · Novadoc Netherlands</figcaption></figure>
+          <figure><blockquote>“Aspected is a back-end technology that improves speed and accuracy. You do not have to interact with a separate Aspected interface.”</blockquote><figcaption><b>Marshall</b>Senior Healthcare Data Strategist · Mosaic Community Health</figcaption></figure>
           <figure><blockquote>“You guys are purely unique in this space… there's your ROI, isn't it?”</blockquote><figcaption><b>Tom Lane</b>Content Management Lead · Capgemini UK</figcaption></figure>
         </div>
         <div class="facts">
-          <a data-video href="#" target="_blank" rel="noopener"><b>Mosaic, in their own words ↗</b><span>On video at the Northwest Community Health AI Summit</span></a>
-          <div><b>Patented</b><span>US 12,517,879, granted January 2026</span></div>
-          <div><b>Implemented with Xillio</b><span>1,000+ projects for 250+ organisations since 2004</span></div>
+          <a href="https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf" target="_blank" rel="noopener"><b>Agfa case study ↗</b><span>Copilot answers for field engineers</span></a>
+          <a data-video href="#" target="_blank" rel="noopener"><b>Mosaic on stage ↗</b><span>NWRPCA 2026, Portland</span></a>
+          <div><b>Patented</b><span>US 12,517,879, granted 6 January 2026</span></div>
         </div>
       </div>
     </section>
@@ -420,9 +420,9 @@ footer a:hover{color:var(--ink)}
       <p class="eyebrow">Fits what you run</p>
       <h2 id="stack-h">One index under the AI you already use.</h2>
       <div class="stack-grid">
-        <div><b>Under Copilot</b><p>Copilot stays the screen. Aspected decides what it reads.</p></div>
-        <div><b>In your agents</b><p>The same index over a REST API, with Aspected Studio built in.</p></div>
-        <div><b>In your AWS account</b><p>Including the European Sovereign Cloud. Your data stays in your tenant.</p></div>
+        <div><b>Under Copilot</b><p>Deployed as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
+        <div><b>In your agents</b><p>Bedrock agents and other assistants over MCP, your own apps over the REST API.</p></div>
+        <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
         <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
       </div>
     </section>
@@ -482,7 +482,7 @@ footer a:hover{color:var(--ink)}
         <div><b>Jan 2026</b><p>US patent 12,517,879 granted for the method. PCT application filed.</p></div>
         <div><b>2026</b><p>Agfa and Mosaic Community Health run Aspected under Copilot, in production.</p></div>
         <div><b>Oct 2026</b><p>samebutbetter.food goes live on 45,000 Dutch supermarket products.</p></div>
-        <div><b>Dec 2026</b><p>Vegas, the session finder, runs at AWS re:Invent in Las Vegas.</p></div>
+        <div><b>Dec 2026</b><p>Vegas, an independent session finder, goes live for the AWS week in Las Vegas.</p></div>
       </div>
       <div class="about-foot">
         <p>45 people in Hilversum, the Netherlands.</p>
@@ -527,11 +527,11 @@ footer a:hover{color:var(--ink)}
         <details><summary>Isn't that just a filter?</summary><p>A filter says yes or no and drops everything else, including the almost-right. An aspect says how close a record is, so a near match still ranks, only lower.</p></details>
         <details><summary>How is it different from hybrid search, boosting or a reranker?</summary><p>Those add rules or a second model on top of one score, and every rule interacts with the others. Aspected ranks on all aspects in the first pass and shows the distance per aspect.</p></details>
         <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
-        <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over its REST API.</p></details>
-        <details><summary>Who decides what counts?</summary><p>The people who own the content. They set the weights, or pick the better of two results and the weights follow.</p></details>
+        <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over MCP or the REST API.</p></details>
+        <details><summary>Who decides what counts?</summary><p>You do. Every query can weigh its aspects differently, so the people who own the content decide what counts, not a model.</p></details>
         <details><summary>Can I see why a document was used?</summary><p>Yes. Every answer comes with a receipt: what was used, what was kept out and which aspect decided. It shows why a document was selected, not that the answer is right.</p></details>
-        <details><summary>Where does my data live?</summary><p>In your own AWS account, including the European Sovereign Cloud. Smaller catalogues can run hosted by us.</p></details>
-        <details><summary>Is it patented?</summary><p>Yes. US patent 12,517,879, granted January 2026, with a PCT application filed. <a href="https://patents.google.com/patent/US12517879" target="_blank" rel="noopener">Read the patent ↗</a></p></details>
+        <details><summary>Where does my data live?</summary><p>In your own Azure or AWS tenant, inside your VPC, including AWS European Sovereign Cloud. Aspected is also on the Azure and AWS marketplaces.</p></details>
+        <details><summary>Is it patented?</summary><p>Yes. US patent 12,517,879, “Multi-aspect vector search index creation and retrieval method and system”, granted 6 January 2026 to Xillio AI, invented by Rikkert Engels and Jorn Verhoeven. A PCT application is filed. <a href="https://patents.google.com/patent/US12517879B1" target="_blank" rel="noopener">Read the patent ↗</a></p></details>
       </div>
       <div class="ctas" style="margin-top:32px"><a class="btn" data-book href="#" target="_blank" rel="noopener">See it on your own data ↗</a><a class="btn ghost" href="#show-receipt">How the receipt works</a></div>
     </div>
@@ -640,7 +640,7 @@ Rules: ask before installing anything new, keep my data on this machine, and sto
         <div class="tier">
           <span class="eyebrow">Enterprise · your tenant</span>
           <div class="price">€30k <small>a year, from</small></div>
-          <p>Runs in your AWS account, including the European Sovereign Cloud. With Xillio and partners.</p>
+          <p>Runs in your own Azure or AWS tenant, including AWS European Sovereign Cloud. With Xillio and partners.</p>
           <a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Book a call ↗</a>
         </div>
       </div>
@@ -653,7 +653,7 @@ Rules: ask before installing anything new, keep my data on this machine, and sto
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>US patent 12,517,879</span></span>
     <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
-    <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a><a data-link="login" href="#" target="_blank" rel="noopener">Customer login</a></nav>
+    <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a></nav>
   </div>
 </footer>
 
@@ -666,14 +666,14 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp
 function h(tag, cls, html){var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e}
 
 /* ---------- booking ---------- */
-/* PLACEHOLDER: replace with the real booking page (Calendly, HubSpot, Microsoft Bookings). */
-var BOOK="https://example.com/book-aspected";
-/* PLACEHOLDER: replace with the Mosaic video (the Aspected part starts at 2:20). */
-var MOSAIC_VIDEO="https://example.com/mosaic-video";
+/* Contact form on aspected.com (no calendar link exists yet). */
+var BOOK="https://aspected.com/contact-form";
+/* Mosaic at NWRPCA 2026, on the Xillio channel. */
+var MOSAIC_VIDEO="https://youtu.be/FurgujVK_Bc";
 document.querySelectorAll("[data-video]").forEach(function(a){a.href=MOSAIC_VIDEO});
 document.querySelectorAll("[data-book]").forEach(function(a){a.href=BOOK});
 /* PLACEHOLDERS: the secondary audiences, routed from the footer and About. */
-var LINKS={docs:"https://docs.aspected.com",partners:BOOK,analysts:BOOK,login:"https://example.com/login",investors:BOOK};
+var LINKS={docs:"https://docs.aspected.com",partners:BOOK,analysts:BOOK,investors:BOOK};
 document.querySelectorAll("[data-link]").forEach(function(a){a.href=LINKS[a.getAttribute("data-link")]||BOOK});
 function badge(s){return s.live?'<span class="badge live">Live</span>':(s.onRequest?'<span class="badge req">Live demo on request</span>':'<span class="badge soon">Coming soon</span>')}
 
@@ -699,18 +699,18 @@ document.querySelectorAll("[data-logo]").forEach(function(el,i){
 var SHOWS = [
   {id:"vegas", role:"Every session carries its aspects, such as topic, format, level and time. Aspected weighs them in one calculation, and the sliders change the weights.", me:"Open Vegas, pick a session you like and move a slider. During the event, tap Last minute to see what you can still catch.", name:"Vegas", live:true, url:"https://vegas.aspected.com",
    title:"This session, but hands-on and after three.",
-   say:"2,447 re:Invent sessions. Pick one you like, move the sliders, and Aspected plans what you can still catch.",
+   say:"All 2,447 sessions of the AWS week in Las Vegas. Pick one you like, move the sliders, and fill your day.",
    biz:"Course catalogues and events where people choose instead of filter.",
    elsewhere:[["HR and learning","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
    demo:"rerank", cfg:{seed:"Agents on Bedrock", tag:"Breakout · 10:00", query:"like this, but hands-on, after 3 pm",
      items:[["Agents on Bedrock, deep dive","Breakout",.9,"10:00",.3],["Serverless RAG patterns","Breakout",.8,"11:30",.2],["Build an agent in 60 min","Workshop",.6,"15:30",.95],["Agent evals in practice","Workshop",.5,"16:00",.85]],
      after:[2,3,0,1]}},
-  {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then slide what should change.", name:"samebutbetter.food", live:true, url:"https://samebutbetter.food",
+  {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then pick what should change: less sugar, salt or fat.", name:"samebutbetter.food", live:true, url:"https://samebutbetter.food",
    title:"This one, but healthier.",
-   say:"Scan a supermarket product. Slide sugar down or protein up, and 45,000 products re-sort around your wish.",
+   say:"Scan a supermarket product, pick less sugar or more protein, and 45,000 products re-sort around your wish.",
    biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
    elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
-   demo:"rerank", cfg:{seed:"Choco Crunch cereal", tag:"sugar 29 g", query:"this one, but less sugar", slider:["sugar",72,18],
+   demo:"rerank", cfg:{seed:"Choco Crunch cereal", tag:"sugar 29 g", query:"this one, but less sugar",
      items:[["Honey Rings","cereal",.95,"31 g",.2],["Choco Crunch Lite","cereal",.75,"22 g",.5],["Oat Crisp Choco","cereal",.4,"11 g",.85],["Spelt Flakes Cocoa","cereal",.25,"7 g",.95]],
      after:[3,2,0,1]}},
   {id:"lies", role:"Aspected finds what kind of product each one is, then checks every aspect against that kind. The aspect furthest off is the reason it is flagged.", me:"Book a live run of the guessing game, then try the same check on your own list.", name:"Sweet Little Lies", live:false, onRequest:true,
@@ -933,7 +933,8 @@ var INDS=[
    lede:"Clinical and technical teams ask Copilot in their own words. Aspected makes sure it reads the version that counts.",
    who:"Mosaic Community Health, in production",
    shows:[["receipt","Every answer shows which protocol was used, kept for audit."],["copies","One procedure on twelve sites: settle the current one before Copilot reads it."],["csv","Equipment and service lists, searchable as “like this, but”."]],
-   note:{b:"Mosaic Community Health runs Aspected under Copilot, in production.",p:"They told the story on video at the Northwest Community Health AI Summit.",a:"Watch it ↗",video:true}},
+   quote:{q:"[Aspected] is a back-end technology that improves speed and accuracy. You do not have to interact with a separate Aspected interface.",who:"Marshall",role:"Senior Healthcare Data Strategist · Mosaic Community Health"},
+   note:{b:"Mosaic Community Health runs Aspected, now in production.",p:"They told the story on video at the Northwest Community Health AI Summit.",a:"Watch it ↗",video:true}},
   {id:"government", name:"Government", label:"In government", title:"Every answer traceable to the rule in force.",
    lede:"Policies change, copies stay. Aspected answers from the version in force and keeps a receipt for every answer.",
    who:"With Xillio, in national and local government",
@@ -944,7 +945,7 @@ var INDS=[
    who:"Agfa, in production",
    shows:[["receipt","The answer comes from the current manual for this model, not last year's."],["csv","Parts and asset lists: “this part, but in stock and closer”."],["copies","Instructions that drifted across sites, settled in one place."]],
    quote:{q:"Aspected has added the context Microsoft Copilot needed.",who:"Rob Kasslack",role:"IT Business Partner, AI & Innovation · Agfa"},
-   note:{b:"At Agfa, under Copilot.",p:"Field engineers get manuals, instructions and tickets in one question instead of three searches."}},
+   note:{b:"At Agfa, under Copilot.",p:"Field engineers get manuals, instructions and tickets in one question instead of three searches.",a:"Read the case study ↗",url:"https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf"}},
   {id:"retail", name:"Retail and e-commerce", label:"In retail", title:"Let customers say what they want.",
    lede:"Shoppers point at a product and say what should change. Aspected keeps what they liked and moves the rest.",
    who:"samebutbetter.food, live",
@@ -957,9 +958,9 @@ var INDS=[
    quote:{q:"Aspected includes all context directly in the search query upfront.",who:"Wim Verheij",role:"Managing Director · Novadoc Netherlands"}},
   {id:"events-learning", name:"Events and learning", label:"In events and learning", title:"People choose sessions, not filters.",
    lede:"Attendees and learners pick one thing they like and say what should change.",
-   who:"Vegas at AWS re:Invent, live",
-   shows:[["vegas","2,447 re:Invent sessions: “this one, but hands-on and after three”."],["csv","Course catalogues and internal training, searchable in minutes."],["copies","Course material copied across teams, settled once."]],
-   note:{b:"Vegas runs at AWS re:Invent.",p:"The session finder for 2,447 sessions, with Fill my day and Last minute.",a:"Open Vegas ↗",url:"https://vegas.aspected.com"}}
+   who:"Vegas, live for the AWS week",
+   shows:[["vegas","2,447 sessions in Las Vegas: “this one, but hands-on”."],["csv","Course catalogues and internal training, searchable in minutes."],["copies","Course material copied across teams, settled once."]],
+   note:{b:"Vegas is live for the AWS week in Las Vegas.",p:"An independent finder for 2,447 sessions, with Fill my day and Last minute.",a:"Open Vegas ↗",url:"https://vegas.aspected.com"}}
 ];
 var chipsEl=document.getElementById("indChips"), tilesEl=document.getElementById("iTiles");
 INDS.forEach(function(d){
