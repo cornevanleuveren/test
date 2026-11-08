@@ -196,8 +196,13 @@ footer a:hover{color:var(--ink)}
 .detail{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start;margin-top:32px}
 @media (max-width:860px){.detail{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:620px){.stage.big{aspect-ratio:auto;height:300px;--rh:34px}}
-.detail .side{display:flex;flex-direction:column;gap:20px}
+.detail .side{display:flex;flex-direction:column;gap:28px}
 .detail .side .say{font-size:18px}
+.blk{display:flex;flex-direction:column;gap:8px}
+.blk p:not(.eyebrow){font-size:15.5px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.talk{font-weight:700;font-size:14.5px;color:var(--blue);text-decoration:none;margin-top:4px}
+.talk:hover{text-decoration:underline}
 .vidnote{font:500 12px/1.4 var(--f-mono);color:var(--muted);margin-top:10px}
 .else{display:grid;gap:0;border-top:1px solid var(--line)}
 .else div{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
@@ -300,10 +305,19 @@ footer a:hover{color:var(--ink)}
         </div>
         <div class="side">
           <p class="say" id="dSay"></p>
-          <div id="dCta"></div>
-          <div>
-            <p class="eyebrow" style="margin-bottom:10px">Where else this works</p>
+          <div class="blk">
+            <p class="eyebrow">What Aspected does here</p>
+            <p id="dRole"></p>
+          </div>
+          <div class="blk">
+            <p class="eyebrow">Use it yourself</p>
+            <p id="dMe"></p>
+            <div class="ctas" id="dCta"></div>
+          </div>
+          <div class="blk">
+            <p class="eyebrow">In your organization</p>
             <div class="else" id="dElse"></div>
+            <a class="talk" href="#pricing">Run it on your own data, in your own AWS account →</a>
           </div>
         </div>
       </div>
@@ -403,45 +417,45 @@ function h(tag, cls, html){var e=document.createElement(tag); if(cls) e.classNam
 
 /* ---------- showcase content ---------- */
 var SHOWS = [
-  {id:"vegas", name:"Vegas", live:true, url:"https://vegas.aspected.com",
+  {id:"vegas", role:"Every session carries its aspects, such as topic, format, level and time. Aspected weighs them in one calculation, and the sliders change the weights.", me:"Open Vegas, pick a session you like and move a slider. During the event, tap Last minute to see what you can still catch.", name:"Vegas", live:true, url:"https://vegas.aspected.com",
    title:"This session, but hands-on and after three.",
    say:"2,447 re:Invent sessions. Pick one you like, move the sliders, and Aspected plans what you can still catch.",
    biz:"Course catalogues and events where people choose instead of filter.",
-   elsewhere:[["Enterprise","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
+   elsewhere:[["HR and learning","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
    demo:"rerank", cfg:{seed:"Agents on Bedrock", tag:"Breakout · 10:00", query:"like this, but hands-on, after 3 pm",
      items:[["Agents on Bedrock, deep dive","Breakout",.9,"10:00",.3],["Serverless RAG patterns","Breakout",.8,"11:30",.2],["Build an agent in 60 min","Workshop",.6,"15:30",.95],["Agent evals in practice","Workshop",.5,"16:00",.85]],
      after:[2,3,0,1]}},
-  {id:"food", name:"Same but Better", live:true, url:"https://samebutbetter.food",
+  {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then slide what should change.", name:"Same but Better", live:true, url:"https://samebutbetter.food",
    title:"This one, but healthier.",
    say:"Scan a supermarket product. Slide sugar down or protein up, and 45,000 products re-sort around your wish.",
    biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
-   elsewhere:[["Enterprise","Procurement: the same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Care","Menus that keep the taste and change the nutrients."]],
+   elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
    demo:"rerank", cfg:{seed:"Choco Crunch cereal", tag:"sugar 29 g", query:"this one, but less sugar", slider:["sugar",72,18],
      items:[["Honey Rings","cereal",.95,"31 g",.2],["Choco Crunch Lite","cereal",.75,"22 g",.5],["Oat Crisp Choco","cereal",.4,"11 g",.85],["Spelt Flakes Cocoa","cereal",.25,"7 g",.95]],
      after:[3,2,0,1]}},
-  {id:"lies", name:"Sweet Little Lies", live:false,
+  {id:"lies", role:"Aspected finds what kind of product each one is, then checks every aspect against that kind. The aspect furthest off is the reason it is flagged.", me:"Play the guessing game when it launches, then run the same check on your own list.", name:"Sweet Little Lies", live:false,
    title:"The smoothie with more sugar than cola.",
    say:"Guess which product is the liar. Aspected compares each one with its own kind and shows what gives it away.",
    biz:"Master data and catalogues: the record that does not fit, and why.",
-   elsewhere:[["Enterprise","Contracts: the MSA whose liability cap is far above every other MSA of its type."],["Finance","An invoice identical to the last twelve, except for the bank account."],["Data quality","Lost decimals, wrong units and misfiled records, each with the aspect that is off."]],
+   elsewhere:[["Legal","Contracts: the MSA whose liability cap is far above every other MSA of its type."],["Finance","An invoice identical to the last twelve, except for the bank account."],["Data quality","Lost decimals, wrong units and misfiled records, each with the aspect that is off."]],
    demo:"lies"},
-  {id:"csv", name:"Your data", live:false,
+  {id:"csv", role:"A local model reads your columns and proposes aspects with first weights. Pick the better of two results and the weights adjust.", me:"Drop a CSV or Excel file and get a search page with its own link to share.", name:"Your data", live:false,
    title:"Your spreadsheet, searchable in minutes.",
    say:"Drop a CSV. Aspected finds the aspects, sets first weights and hands you a search page to share.",
    biz:"Supplier lists, asset registers and CRM exports, without a developer.",
-   elsewhere:[["Enterprise","Any internal list gets a “like this, but” search on day one."],["Builders","Try aspect search on your data before you commit to an index."],["Tuning","Pick the better of two results and the weights adjust. No tuning by hand."]],
+   elsewhere:[["IT","Asset registers: “this laptop model, but newer and in stock in Rotterdam.”"],["Sales","CRM exports: “accounts like this one, but in Germany and not yet a customer.”"],["Any team","Any internal list gets a “like this, but” search on day one."]],
    demo:"csv"},
-  {id:"copies", name:"Near-duplicates", live:false,
+  {id:"copies", role:"Aspected compares every copy on text, version, date and owner, then groups the copies and shows the one aspect that separates each from the rest.", me:"Drop a folder of documents and see which copies belong together, and why.", name:"Near-duplicates", live:false,
    title:"Twelve copies. One that counts.",
    say:"One procedure, twelve near-identical copies. See what separates them by version, date and owner, then choose.",
    biz:"SharePoint and file shares: settle the right version before Copilot reads it.",
-   elsewhere:[["Enterprise","Before a Copilot rollout, the current version wins and the older ones stay out."],["Migration","Move one copy instead of seven, with Xillio's connectors."],["Legal","See what changed between the contract you signed and the copy on the share."]],
+   elsewhere:[["IT","Before a Copilot rollout, the current version wins and the older ones stay out."],["Migration","Move one copy instead of seven, with Xillio's connectors."],["Legal","See what changed between the contract you signed and the copy on the share."]],
    demo:"dups"},
-  {id:"music", name:"Music", live:false,
+  {id:"music", role:"Each song carries aspects such as tempo, mood, genre and decade. Aspected keeps the groove close and moves only the decade.", me:"Pick a song, say what should change, and send the playlist to Spotify.", name:"Music", live:false,
    title:"Uptown Funk, but from the 70s.",
    say:"Pick a song, say what should change, and get a playlist that keeps the groove and moves the decade.",
    biz:"Media and content libraries with recommendations people can steer.",
-   elsewhere:[["Enterprise","Knowledge bases: “this answer, but the current version, for this region.”"],["Media","Broadcast archives: the same mood from a different era."],["Marketing","Asset libraries: “this image, but in our colours and landscape.”"]],
+   elsewhere:[["Support","Knowledge bases: “this answer, but the current version, for this region.”"],["Media","Broadcast archives: the same mood from a different era."],["Marketing","Asset libraries: “this image, but in our colours and landscape.”"]],
    demo:"rerank", cfg:{seed:"Uptown Funk", tag:"2014 · 115 bpm", query:"like this, but from the 70s", slider:["decade",86,22],
      items:[["Treasure","2013",.95,"2013",.15],["Can't Stop the Feeling","2016",.85,"2016",.1],["Le Freak","1978",.5,"1978",.9],["Superstition","1972",.4,"1972",.95]],
      after:[2,3,0,1]}}
@@ -602,9 +616,12 @@ function openShow(id){
   document.getElementById("dTop").innerHTML=(s.live?'<span class="badge live">Live</span>':'<span class="badge soon">Coming soon</span>')+'<span class="eyebrow">'+esc(s.name)+'</span>';
   document.getElementById("dTitle").textContent=s.title;
   document.getElementById("dSay").textContent=s.say;
-  document.getElementById("dCta").innerHTML = s.live
+  document.getElementById("dRole").textContent=s.role;
+  document.getElementById("dMe").textContent=s.me;
+  document.getElementById("dCta").innerHTML = (s.live
     ? '<a class="btn" href="'+s.url+'" target="_blank" rel="noopener">Open '+esc(s.name)+' ↗</a>'
-    : '<span class="btn ghost" style="cursor:default">Launching soon</span>';
+    : '<span class="btn ghost" style="cursor:default">Launching soon</span>')
+    + (s.id!=="csv" ? '<a class="btn ghost" href="#show-csv">Build this on your own data</a>' : '');
   document.getElementById("dNote").textContent = s.live ? "A preview. The live site has the full data." : "Preview. The full demo and video launch soon.";
   document.getElementById("dElse").innerHTML=s.elsewhere.map(function(e){return '<div><b>'+esc(e[0])+'</b><p>'+esc(e[1])+'</p></div>'}).join("");
   var st=document.getElementById("dStage"); if(dPlayer) dPlayer.stop(); st.innerHTML="";
