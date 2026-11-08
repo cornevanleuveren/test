@@ -7,7 +7,7 @@
 /* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then six showcase cards (3/2/1 columns) whose mini demos play on hover; a thin proof strip; "Try it now". About, Research, Pricing and each showcase are hash views. */
 :root{
   --bg:#F8F8F8; --surface:#FFFFFF; --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
-  --blue:#0055FF; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
+  --blue:#005CFC; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
   --f-sans:"Manrope", "Segoe UI", system-ui, sans-serif;
   --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --r:14px; --rh:32px;
@@ -33,8 +33,11 @@ p{margin:0}
 /* menu */
 .menu{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .menu .wrap{display:flex;align-items:center;gap:24px;height:64px}
-.logo{font-weight:800;font-size:20px;letter-spacing:-.03em;text-decoration:none}
-.logo b{color:var(--blue)}
+.logo{display:inline-flex;text-decoration:none;color:var(--ink)}
+.logo svg{height:26px;width:auto;display:block}
+.alogo{display:block;width:100%;height:auto;overflow:visible}
+.flogo{display:inline-flex;align-items:center;gap:14px}
+.flogo svg{height:18px;width:auto;display:block;color:var(--ink)}
 .menu nav{display:flex;gap:4px;margin-left:auto;align-items:center}
 .menu nav a{text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 12px;border-radius:999px;color:var(--muted)}
 .menu nav a:hover,.menu nav a[aria-current="page"]{color:var(--ink);background:var(--stage)}
@@ -54,8 +57,8 @@ p{margin:0}
 
 /* hero */
 .hero{padding-block:clamp(56px,10vw,120px) clamp(40px,6vw,72px)}
-.wordmark{font-size:clamp(64px,13vw,168px);font-weight:800;line-height:.92;letter-spacing:-.055em}
-.wordmark b{color:var(--blue)}
+.wordmark{width:clamp(260px,62vw,720px);color:var(--ink);line-height:0}
+.wordmark svg{width:100%;height:auto;display:block}
 .oneliner{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.02em;margin-top:20px;color:var(--ink)}
 .ask{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:640px}
 .askbox{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:14px 22px;font:500 clamp(15px,2vw,18px)/1.3 var(--f-mono);min-height:56px;box-shadow:0 18px 40px -28px rgba(20,22,28,.35)}
@@ -242,7 +245,7 @@ footer a:hover{color:var(--ink)}
 
 <header class="menu">
   <div class="wrap">
-    <a class="logo" href="#home">Aspected<b>.</b></a>
+    <a class="logo" href="#home" aria-label="Aspected, home"><span data-logo></span></a>
     <nav aria-label="Main">
       <a class="opt" href="#showcases" data-nav="home">Showcases</a>
       <a href="#research" data-nav="research">Research</a>
@@ -257,7 +260,7 @@ footer a:hover{color:var(--ink)}
   <!-- HOME -->
   <section class="view" id="v-home">
     <div class="wrap hero">
-      <h1 class="wordmark">Aspected<b>.</b></h1>
+      <h1 class="wordmark" aria-label="Aspected"><span data-logo></span></h1>
       <p class="oneliner">Search the way you choose.</p>
       <div class="ask" aria-hidden="true">
         <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
@@ -402,7 +405,7 @@ footer a:hover{color:var(--ink)}
 
 <footer>
   <div class="wrap">
-    <span>Aspected · US patent 12,517,879</span>
+    <span class="flogo"><span data-logo></span><span>US patent 12,517,879</span></span>
     <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#research">Research</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
   </div>
 </footer>
@@ -414,6 +417,15 @@ var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 var noHover = matchMedia("(hover: none)").matches;
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function h(tag, cls, html){var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e}
+
+/* ---------- logo ---------- */
+var LOGO_P=["M5616 5840.5L3700 1709.5L2755.24 3584.5L4981.5 5840.5H5616Z","M0 5840.5L2858.5 0L3700 1709.5L1618.5 5840.5H0Z","M9042.15 4289H8388.8L8235.5 3836.4H7155.1L7005.45 4289H6374L7330.3 1690.2H8063.95L9042.15 4289ZM7476.3 2876.45L7326.65 3321.75H8060.3L7910.65 2876.45C7864.42 2745.05 7791.42 2526.05 7691.65 2219.45C7562.68 2616.08 7490.9 2835.08 7476.3 2876.45ZM10010.8 4343.75C9713.9 4343.75 9492.47 4292.65 9346.47 4190.45C9202.9 4085.82 9122.6 3919.13 9105.57 3690.4H9660.37C9670.1 3790.17 9701.74 3860.73 9755.27 3902.1C9811.24 3943.47 9900.05 3964.15 10021.7 3964.15C10233.4 3964.15 10339.3 3903.32 10339.3 3781.65C10339.3 3723.25 10316.2 3679.45 10269.9 3650.25C10223.7 3618.62 10138.5 3593.07 10014.4 3573.6L9769.87 3533.45C9346.47 3467.75 9134.77 3275.52 9134.77 2956.75C9134.77 2766.95 9207.77 2620.95 9353.77 2518.75C9499.77 2414.12 9709.04 2361.8 9981.57 2361.8C10543.7 2361.8 10835.7 2577.15 10857.6 3007.85H10328.3C10325.9 2830.22 10210.3 2741.4 9981.57 2741.4C9789.34 2741.4 9693.22 2801.02 9693.22 2920.25C9693.22 2973.78 9715.12 3015.15 9758.92 3044.35C9802.72 3073.55 9872.07 3095.45 9966.97 3110.05L10248 3150.2C10474.3 3184.27 10641 3248.75 10748.1 3343.65C10855.1 3438.55 10908.7 3568.73 10908.7 3734.2C10908.7 3928.87 10829.6 4079.73 10671.4 4186.8C10515.7 4291.43 10295.5 4343.75 10010.8 4343.75ZM12239.2 2361.8C12492.3 2361.8 12693 2450.62 12841.5 2628.25C12987.5 2805.88 13060.5 3045.57 13060.5 3347.3C13060.5 3649.03 12987.5 3888.72 12841.5 4066.35C12693 4243.98 12492.3 4332.8 12239.2 4332.8C11998.3 4332.8 11813.4 4241.55 11684.4 4059.05V5004.4H11115V2405.6H11669.8V2657.45C11798.8 2460.35 11988.6 2361.8 12239.2 2361.8ZM12082.3 3876.55C12208.8 3876.55 12307.3 3830.32 12377.9 3737.85C12448.5 3642.95 12483.8 3507.9 12483.8 3332.7C12483.8 2989.6 12349.9 2818.05 12082.3 2818.05C11812.2 2818.05 11677.1 2994.47 11677.1 3347.3C11677.1 3700.13 11812.2 3876.55 12082.3 3876.55ZM15175.9 3402.05V3515.2H13781.6C13801 3644.17 13848.5 3742.72 13923.9 3810.85C13999.3 3878.98 14095.5 3913.05 14212.3 3913.05C14397.2 3913.05 14523.7 3842.48 14591.9 3701.35H15132.1C15081 3896.02 14972.7 4050.53 14807.2 4164.9C14641.7 4276.83 14443.4 4332.8 14212.3 4332.8C13920.3 4332.8 13684.2 4242.77 13504.2 4062.7C13324.1 3882.63 13234.1 3644.17 13234.1 3347.3C13234.1 3048 13322.9 2809.53 13500.5 2631.9C13675.7 2451.83 13910.5 2361.8 14205 2361.8C14497 2361.8 14733 2455.48 14913.1 2642.85C15088.3 2832.65 15175.9 3085.72 15175.9 3402.05ZM14197.7 2781.55C13964.1 2781.55 13826.6 2905.65 13785.2 3153.85H14617.4C14597.9 3037.05 14551.7 2945.8 14478.7 2880.1C14405.7 2814.4 14312 2781.55 14197.7 2781.55ZM16332.9 4332.8C16038.4 4332.8 15803.6 4242.77 15628.4 4062.7C15453.2 3882.63 15365.6 3644.17 15365.6 3347.3C15365.6 3045.57 15453.2 2805.88 15628.4 2628.25C15803.6 2450.62 16038.4 2361.8 16332.9 2361.8C16590.8 2361.8 16801.3 2429.93 16964.3 2566.2C17129.8 2700.03 17225.9 2882.53 17252.7 3113.7H16686.9C16655.3 2921.47 16537.3 2825.35 16332.9 2825.35C16072.5 2825.35 15942.3 2999.33 15942.3 3347.3C15942.3 3692.83 16072.5 3865.6 16332.9 3865.6C16551.9 3865.6 16673.5 3759.75 16697.9 3548.05H17263.6C17246.6 3786.52 17152.9 3977.53 16982.6 4121.1C16812.2 4262.23 16595.7 4332.8 16332.9 4332.8ZM18533.2 2405.6V2821.7H18171.8V3701.35C18171.8 3764.62 18187.6 3808.42 18219.3 3832.75C18250.9 3854.65 18306.9 3865.6 18387.2 3865.6H18533.2V4289C18465 4298.73 18377.4 4303.6 18270.4 4303.6C18034.3 4303.6 17864 4262.23 17759.4 4179.5C17654.7 4094.33 17602.4 3955.63 17602.4 3763.4V2821.7H17321.4V2405.6H17602.4V1847.15H18171.8V2405.6H18533.2ZM20604.5 3402.05V3515.2H19210.2C19229.7 3644.17 19277.1 3742.72 19352.6 3810.85C19428 3878.98 19524.1 3913.05 19640.9 3913.05C19825.9 3913.05 19952.4 3842.48 20020.5 3701.35H20560.7C20509.6 3896.02 20401.3 4050.53 20235.9 4164.9C20070.4 4276.83 19872.1 4332.8 19640.9 4332.8C19348.9 4332.8 19112.9 4242.77 18932.8 4062.7C18752.8 3882.63 18662.7 3644.17 18662.7 3347.3C18662.7 3048 18751.5 2809.53 18929.2 2631.9C19104.4 2451.83 19339.2 2361.8 19633.6 2361.8C19925.6 2361.8 20161.7 2455.48 20341.7 2642.85C20516.9 2832.65 20604.5 3085.72 20604.5 3402.05ZM19626.3 2781.55C19392.7 2781.55 19255.2 2905.65 19213.9 3153.85H20046.1C20026.6 3037.05 19980.4 2945.8 19907.4 2880.1C19834.4 2814.4 19740.7 2781.55 19626.3 2781.55ZM22166.7 2631.9V1690.2H22736.1V4289H22181.3V4044.45C22054.7 4236.68 21866.1 4332.8 21615.5 4332.8C21362.4 4332.8 21162.9 4243.98 21016.9 4066.35C20868.5 3888.72 20794.3 3649.03 20794.3 3347.3C20794.3 3045.57 20868.5 2805.88 21016.9 2628.25C21162.9 2450.62 21362.4 2361.8 21615.5 2361.8C21854 2361.8 22037.7 2451.83 22166.7 2631.9ZM21772.5 3876.55C22042.6 3876.55 22177.6 3700.13 22177.6 3347.3C22177.6 2994.47 22042.6 2818.05 21772.5 2818.05C21645.9 2818.05 21547.4 2865.5 21476.8 2960.4C21406.2 3052.87 21371 3186.7 21371 3361.9C21371 3705 21504.8 3876.55 21772.5 3876.55Z"];
+document.querySelectorAll("[data-logo]").forEach(function(el,i){
+  var g="lg"+i;
+  el.outerHTML='<svg class="alogo" viewBox="0 0 22899 5841" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+
+    '<defs><linearGradient id="'+g+'" x1="2935" y1="2441.5" x2="5781.5" y2="6491.5" gradientUnits="userSpaceOnUse"><stop stop-color="#0040B2"/><stop offset="1" stop-color="#005BFB"/></linearGradient></defs>'+
+    '<path d="'+LOGO_P[0]+'" fill="url(#'+g+')"/><path d="'+LOGO_P[1]+'" fill="#005CFC"/><path d="'+LOGO_P[2]+'" fill="currentColor"/></svg>';
+});
 
 /* ---------- showcase content ---------- */
 var SHOWS = [
