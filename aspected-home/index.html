@@ -83,6 +83,7 @@ p{margin:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px;min-height:30px;padding-left:22px}
 .chip{font:500 12.5px/1 var(--f-mono);padding:7px 11px;border-radius:999px;background:var(--blue-soft);color:var(--blue);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
 .chip.in{opacity:1;transform:none}
+.chip.open{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
 
 /* showcases */
 .sec{padding-block:clamp(40px,6vw,72px)}
@@ -522,6 +523,7 @@ footer a:hover{color:var(--ink)}
       <h2 class="h2s">Questions people ask</h2>
       <div class="faq">
         <details open><summary>Isn't Aspected a vector database too?</summary><p>Yes. The difference is what goes into the vector. A plain vector search embeds the text, so meaning is all it sees. Aspected builds the vector from aspects, such as meaning, version, date, source or price, each with its own weight, and ranks on all of them in one calculation.</p></details>
+        <details><summary>Is this sparse vector search?</summary><p>In our sense, yes: you ask with only the aspects you care about, and the ones you leave out don't count. It is not the "sparse vectors" of keyword-style retrieval such as SPLADE, where each dimension is a word.</p></details>
         <details><summary>Isn't that just a filter?</summary><p>A filter says yes or no and drops everything else, including the almost-right. An aspect says how close a record is, so a near match still ranks, only lower.</p></details>
         <details><summary>How is it different from hybrid search, boosting or a reranker?</summary><p>Those add rules or a second model on top of one score, and every rule interacts with the others. Aspected ranks on all aspects in the first pass and shows the distance per aspect.</p></details>
         <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
@@ -985,7 +987,7 @@ var ASKS=[["this pasta, but less sugar",["kind = pasta","sugar ↓","price ="]],
           ["the notice period, from the published contract",["topic ≈ notice period","lifecycle = published","source = official"]]];
 var askText=document.getElementById("askText"), askChips=document.getElementById("askChips"), ai=0;
 function showChips(list, animate){
-  askChips.innerHTML=list.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("");
+  askChips.innerHTML=list.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("")+'<span class="chip open">the rest: open</span>';
   var cs=askChips.querySelectorAll(".chip");
   cs.forEach(function(c,i){ if(!animate){c.classList.add("in")} else setTimeout(function(){c.classList.add("in")},150+i*220)});
 }
