@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then six showcase cards (3/2/1 columns) whose mini demos play on hover; a thin proof strip; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
+/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then a showcase player: six titles beside one large demo that plays; a thin proof strip; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
 :root{
   --bg:#F8F8F8; --surface:#FFFFFF; --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
   --blue:#005CFC; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
@@ -113,6 +113,51 @@ p{margin:0}
 .card .foot .go{color:var(--blue)}
 .card .foot a.more{position:relative;z-index:2;color:var(--muted);text-decoration:none;font-weight:600}
 .card .foot a.more:hover{color:var(--ink);text-decoration:underline}
+
+/* the showcase player */
+.player{display:grid;grid-template-columns:minmax(260px,.42fr) minmax(0,1fr);gap:clamp(16px,2.5vw,32px);align-items:start}
+.plist{display:flex;flex-direction:column;gap:4px;min-width:0}
+.pgroup{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 16px 6px}
+.pgroup:first-child{padding-top:0}
+.pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:12px 16px;border-radius:12px;display:grid;gap:4px;font:inherit;transition:background .25s}
+.pitem:hover{background:color-mix(in srgb,var(--surface) 70%,transparent)}
+.pitem .n{font:600 11.5px/1.2 var(--f-mono);color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.pitem .n .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.pitem .t{font-size:16.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em;color:var(--muted);transition:color .25s}
+.pitem[aria-selected="true"]{background:var(--surface);box-shadow:0 0 0 1px var(--line) inset}
+.pitem[aria-selected="true"] .t{color:var(--ink)}
+.pitem .prog{height:2px;border-radius:2px;background:var(--line);overflow:hidden;margin-top:6px;display:none}
+.pitem .prog i{display:block;height:100%;width:0;background:var(--blue)}
+.pitem.run .prog{display:block}
+.pitem.run .prog i{animation:prog 8s linear forwards}
+.plist.manual .pitem .prog{display:none}
+@keyframes prog{to{width:100%}}
+.ppanel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.ppanel.swap .stage,.ppanel.swap .pmeta{animation:viewin .45s ease both}
+.ppanel .stage.big{border-radius:10px;aspect-ratio:16/9}
+.pmeta{padding:4px 10px 10px;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;row-gap:8px;align-items:start;min-height:150px}
+.pmeta>*{grid-column:1}
+.pmeta .ctas{grid-column:2;grid-row:1 / span 4;flex-direction:column;align-items:stretch;margin-top:0}
+@media (max-width:760px){.pmeta{grid-template-columns:minmax(0,1fr)}.pmeta .ctas{grid-column:1;grid-row:auto;flex-direction:row;margin-top:6px}}
+.pmeta .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pmeta .name{font:600 12px/1 var(--f-mono);color:var(--muted)}
+.pmeta h3{font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1.2}
+.pmeta .say{color:var(--muted);font-size:15.5px;max-width:62ch}
+.pmeta .biz{font-size:14.5px}
+.pmeta .biz b{color:var(--blue);font-weight:700}
+.pmeta .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+@media (max-width:900px){
+  .player{grid-template-columns:minmax(0,1fr)}
+  .plist{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}
+  .plist::-webkit-scrollbar{display:none}
+  .pgroup{display:none}
+  .pitem{flex:none;padding:9px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset;background:var(--surface)}
+  .pitem .t,.pitem .prog{display:none!important}
+  .pitem .n{font-size:13px;color:var(--ink)}
+  .pitem[aria-selected="true"]{background:var(--blue);box-shadow:none}
+  .pitem[aria-selected="true"] .n{color:#fff}
+  .pitem[aria-selected="true"] .n .dot{background:#fff}
+}
 
 /* the mini demo stage */
 .stage{position:relative;height:250px;--rh:30px;max-width:100%;background:var(--stage);border-radius:10px;overflow:hidden;padding:14px;font:12px/1.3 var(--f-mono);color:var(--ink)}
@@ -330,7 +375,8 @@ footer a:hover{color:var(--ink)}
 .faq details[open] summary::after{content:"–"}
 .faq details p{padding:0 0 20px;color:var(--muted);max-width:65ch;font-size:16px}
 .faq details a{color:var(--blue);font-weight:600}
-.indchips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-8px 0 24px}
+.indchips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:28px}
+@media (max-width:620px){.indchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}.indchips::-webkit-scrollbar{display:none}.indchips a,.indchips span{flex:none}}
 .indchips span{font-size:14px;color:var(--muted);margin-right:4px}
 .indchips a{font-size:13.5px;font-weight:600;text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
 .indchips a:hover{border-color:var(--blue);color:var(--blue)}
@@ -391,10 +437,13 @@ footer a:hover{color:var(--ink)}
     <div class="wrap sec" id="showcases">
       <div class="sec-head">
         <h2>Six showcases</h2>
-        <p id="playHint">Hover to play. Click to open.</p>
+        <p id="playHint">Pick one. Each plays in a few seconds.</p>
+      </div>
+      <div class="player" id="player">
+        <div class="plist" id="plist" role="tablist" aria-label="Showcases"></div>
+        <div class="ppanel" id="ppanel" role="tabpanel" aria-live="polite"></div>
       </div>
       <div class="indchips" id="indChips"><span>See it for your industry</span></div>
-      <div class="grid" id="grid"></div>
     </div>
 
     <section class="proof" aria-labelledby="proof-h">
@@ -901,7 +950,7 @@ function Player(stage, show){
 }
 
 /* ---------- cards ---------- */
-if(noHover) document.getElementById("playHint").textContent="Each demo plays as you scroll. Tap to open.";
+
 function makeCard(s, bizLabel, bizText, into){
   var card=h("article","card");
   var primary = s.live ? '<a class="cover" href="'+s.url+'" target="_blank" rel="noopener" aria-label="Open '+esc(s.name)+' live"></a>'
@@ -923,8 +972,56 @@ function makeCard(s, bizLabel, bizText, into){
     new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?go():halt()})},{threshold:.6}).observe(card);
   }
 }
-var grid=document.getElementById("grid");
-SHOWS.forEach(function(s){makeCard(s,null,null,grid)});
+/* ---------- the showcase player (home) ---------- */
+var GROUPS=[["Try it live",["vegas","food"]],["In your organization",["receipt","copies","lies","csv"]]];
+var ORDER=[].concat(GROUPS[0][1],GROUPS[1][1]), ADV=8000;
+var plist=document.getElementById("plist"), ppanel=document.getElementById("ppanel"), playerEl=document.getElementById("player");
+var cur=null, curPlayer=null, auto=!reduce, inView=false, advT=0;
+GROUPS.forEach(function(g){
+  plist.insertAdjacentHTML("beforeend",'<p class="pgroup">'+esc(g[0])+'</p>');
+  g[1].forEach(function(id){var s=showById(id);
+    plist.insertAdjacentHTML("beforeend",'<button type="button" class="pitem" role="tab" id="tab-'+id+'" data-id="'+id+'" aria-selected="false" aria-controls="ppanel">'+
+      '<span class="n">'+(s.live?'<i class="dot"></i>':'')+esc(s.name)+'</span><span class="t">'+esc(s.title)+'</span><span class="prog"><i></i></span></button>');
+  });
+});
+function primary(s){
+  return s.live ? '<a class="btn" href="'+s.url+'" target="_blank" rel="noopener">Open '+esc(s.name)+' ↗</a>'
+       : s.onRequest ? '<a class="btn" href="'+BOOK+'" target="_blank" rel="noopener">Book a live demo ↗</a>'
+       : '<a class="btn" href="#show-'+s.id+'">Watch the preview →</a>';
+}
+function select(id, byUser){
+  if(byUser) stopAuto();
+  if(cur===id && !byUser) return;
+  cur=id; var s=showById(id);
+  plist.querySelectorAll(".pitem").forEach(function(b){var on=b.dataset.id===id; b.setAttribute("aria-selected",on); b.tabIndex=on?0:-1; b.classList.remove("run")});
+  if(curPlayer) curPlayer.stop();
+  ppanel.innerHTML='<div class="stage big"></div><div class="pmeta"><div class="top">'+badge(s)+'<span class="name">'+esc(s.name)+'</span></div>'+
+    '<h3>'+esc(s.title)+'</h3><p class="say">'+esc(s.say)+'</p><p class="biz"><b>In your business:</b> '+esc(s.biz)+'</p>'+
+    '<div class="ctas">'+primary(s)+'<a class="btn ghost" href="#show-'+s.id+'">Details</a></div></div>';
+  curPlayer=Player(ppanel.querySelector(".stage"), s);
+  ppanel.classList.remove("swap"); void ppanel.offsetWidth; ppanel.classList.add("swap");
+  if(inView){curPlayer.start(); if(auto) schedule()}
+}
+function schedule(){
+  clearTimeout(advT); if(!auto||!inView) return;
+  var b=document.getElementById("tab-"+cur); b.classList.remove("run"); void b.offsetWidth; b.classList.add("run");
+  advT=setTimeout(function(){select(ORDER[(ORDER.indexOf(cur)+1)%ORDER.length]); schedule()},ADV);
+}
+function stopAuto(){auto=false; clearTimeout(advT); plist.classList.add("manual")}
+plist.addEventListener("click",function(e){var b=e.target.closest(".pitem"); if(b) select(b.dataset.id,true)});
+plist.addEventListener("keydown",function(e){
+  if(["ArrowDown","ArrowUp","ArrowLeft","ArrowRight"].indexOf(e.key)<0) return; e.preventDefault();
+  var i=ORDER.indexOf(cur)+((e.key==="ArrowDown"||e.key==="ArrowRight")?1:-1);
+  var id=ORDER[(i+ORDER.length)%ORDER.length]; select(id,true); document.getElementById("tab-"+id).focus();
+});
+ppanel.addEventListener("pointerenter",function(e){if(e.pointerType==="mouse") stopAuto()});
+if("IntersectionObserver" in window){
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    inView=e.isIntersecting;
+    if(inView){curPlayer&&curPlayer.start(); if(auto) schedule()} else {curPlayer&&curPlayer.stop(); clearTimeout(advT)}
+  })},{threshold:.35}).observe(playerEl);
+} else inView=true;
+select(ORDER[0]);
 function showById(id){return SHOWS.filter(function(x){return x.id===id})[0]}
 
 /* ---------- industries ---------- */
