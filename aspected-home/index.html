@@ -57,8 +57,22 @@ p{margin:0}
 @keyframes viewin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* hero */
-.hero{padding-block:clamp(56px,10vw,120px) clamp(40px,6vw,72px)}
-.wordmark{width:clamp(260px,62vw,720px);color:var(--ink);line-height:0}
+.hero{padding-block:clamp(48px,8vw,104px) clamp(40px,6vw,72px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero-l{min-width:0}
+.hero-sp{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero-sp{max-width:420px;width:100%;margin-inline:auto}}
+.spider{display:block;width:100%;height:auto;overflow:visible}
+.sp-grid{fill:none;stroke:var(--line);stroke-width:1.5}
+.sp-axis{stroke:var(--line);stroke-width:1.5}
+.sp-lab{font:500 26px var(--f-mono);fill:var(--muted);transition:fill .3s}
+.sp-lab.hi{fill:var(--blue);font-weight:600}
+.sp-this{fill:none;stroke:var(--muted);stroke-width:3;stroke-dasharray:9 8}
+.sp-bet{fill:var(--blue);fill-opacity:.16;stroke:var(--blue);stroke-width:4;stroke-linejoin:round}
+.legend{display:flex;gap:18px;justify-content:center;font:500 12.5px/1 var(--f-mono);color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.k{display:inline-block;width:18px;border-top:2px dashed var(--muted)}
+.k.bet{height:10px;border:2px solid var(--blue);background:var(--blue-soft);border-radius:2px}
+.wordmark{width:min(100%,640px);color:var(--ink);line-height:0}
 .wordmark svg{width:100%;height:auto;display:block}
 .oneliner{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.02em;margin-top:20px;color:var(--ink)}
 .ask{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:640px}
@@ -145,6 +159,27 @@ p{margin:0}
 .cr.hot .g{color:var(--coral);font-weight:500}
 .cr .g{font-variant-numeric:tabular-nums}
 .lnote{font-size:.9em;color:var(--muted)}
+/* the web (spider) */
+.web{display:flex;flex-direction:column;gap:8px;height:100%}
+.web .st-q{margin:0}
+.web-mid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px;align-items:center}
+.web-sp{min-width:0;height:100%;display:flex;align-items:center}
+.web-sp svg{max-height:100%}
+.web .sp-lab{font-size:38px}
+.web .sp-bet{stroke-width:6}
+.web .sp-this{stroke-width:4.5}
+.web-r{display:flex;flex-direction:column;gap:8px;min-width:0}
+.web-r .seed{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.web-r .seed span{color:var(--ink)}
+.web-r .st-slider{margin:0}
+.res{background:var(--surface);border-radius:8px;padding:7px 10px;display:grid;gap:2px;opacity:.3;transition:opacity .4s,box-shadow .4s}
+.res.in{opacity:1;box-shadow:0 0 0 1.5px var(--blue) inset}
+.res b{font-weight:500;color:var(--blue);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res span{color:var(--muted);font-size:.92em}
+.stage.big .web{gap:clamp(16px,3vw,40px)}
+.stage.big .web-r{gap:14px}
+.stage.big .web .sp-lab{font-size:30px}
+
 /* the receipt */
 .stage.rc{padding:0}
 .slot{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(86%,340px);height:8px;border-radius:0 0 6px 6px;background:var(--ink);z-index:2}
@@ -295,12 +330,18 @@ footer a:hover{color:var(--ink)}
   <!-- HOME -->
   <section class="view" id="v-home">
     <div class="wrap hero">
+      <div class="hero-l">
       <h1 class="wordmark" aria-label="Aspected"><span data-logo></span></h1>
       <p class="oneliner">Same, but better.</p>
       <div class="ask" aria-hidden="true">
         <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
         <div class="chips" id="askChips"></div>
       </div>
+      </div>
+      <figure class="hero-sp" aria-label="Spider chart: the blue shape is the same as the grey one, except on the aspects you asked to change">
+        <div id="heroSpider"></div>
+        <figcaption class="legend"><span><i class="k"></i>this</span><span><i class="k bet"></i>same, but better</span></figcaption>
+      </figure>
     </div>
 
     <div class="wrap sec" id="showcases">
@@ -496,12 +537,10 @@ var SHOWS = [
      after:[2,3,0,1]}},
   {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then slide what should change.", name:"samebutbetter.food", live:true, url:"https://samebutbetter.food",
    title:"This one, but healthier.",
-   say:"Scan a supermarket product. Slide sugar down or protein up, and 45,000 products re-sort around your wish.",
+   say:"Scan a product and slide sugar down. The web shows what stays the same and what gets better.",
    biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
    elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
-   demo:"rerank", cfg:{seed:"Choco Crunch cereal", tag:"sugar 29 g", query:"this one, but less sugar", slider:["sugar",72,18],
-     items:[["Honey Rings","cereal",.95,"31 g",.2],["Choco Crunch Lite","cereal",.75,"22 g",.5],["Oat Crisp Choco","cereal",.4,"11 g",.85],["Spelt Flakes Cocoa","cereal",.25,"7 g",.95]],
-     after:[3,2,0,1]}},
+   demo:"web", cfg:{seed:"Choco Crunch", tag:"sugar 29 g", query:"this one, but less sugar", labels:["sugar","salt","protein","fibre","price"], a:[.82,.42,.45,.32,.55], b:[.24,.42,.5,.44,.55], hi:[0], result:"Spelt Flakes", meta:"sugar 7 g, rest the same"}},
   {id:"lies", role:"Aspected finds what kind of product each one is, then checks every aspect against that kind. The aspect furthest off is the reason it is flagged.", me:"Book a live run of the guessing game, then try the same check on your own list.", name:"Sweet Little Lies", live:false, onRequest:true,
    title:"The smoothie with more sugar than cola.",
    say:"Guess which product is the liar. Aspected compares each one with its own kind and shows what gives it away.",
@@ -529,6 +568,34 @@ var SHOWS = [
    elsewhere:[["Legal","Answers come from the published contract, not the draft that ranks first on meaning."],["Compliance","An audit trail per answer: what the model saw, what was withheld, which aspect decided."],["Agents","Next: a receipt for every agent step, so one wrong document at step one can't steer the rest."]],
    demo:"receipt"}
 ];
+
+/* ---------- spider chart ---------- */
+function Spider(host, n){
+  var C=200, R=150, NS="http://www.w3.org/2000/svg";
+  var svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox","-95 -5 590 410"); svg.setAttribute("class","spider"); svg.setAttribute("aria-hidden","true");
+  function el(t,a){var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e}
+  function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/n; return [C+Math.cos(a)*R*v, C+Math.sin(a)*R*v]}
+  function pts(vals){return vals.map(function(v,i){var p=pt(i,v); return p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")}
+  var ones=[]; for(var z=0;z<n;z++) ones.push(1);
+  [1/3,2/3,1].forEach(function(r){el("polygon",{points:pts(ones.map(function(){return r})),"class":"sp-grid"})});
+  for(var i=0;i<n;i++){var p=pt(i,1); el("line",{x1:C,y1:C,x2:p[0].toFixed(1),y2:p[1].toFixed(1),"class":"sp-axis"})}
+  var labs=[]; for(var j=0;j<n;j++){var q=pt(j,1.18); labs.push(el("text",{x:q[0].toFixed(1),y:(q[1]+9).toFixed(1),"text-anchor":q[0]>C+8?"start":(q[0]<C-8?"end":"middle"),"class":"sp-lab"}))}
+  var pThis=el("polygon",{"class":"sp-this"}), pBet=el("polygon",{"class":"sp-bet"});
+  host.appendChild(svg);
+  var cur=ones.slice(), raf=0;
+  return {
+    labels:function(ls){ls.forEach(function(l,i){labs[i].textContent=l})},
+    hi:function(h){labs.forEach(function(t,i){t.classList.toggle("hi",h.indexOf(i)>=0)})},
+    set:function(a,b){cancelAnimationFrame(raf); pThis.setAttribute("points",pts(a)); pBet.setAttribute("points",pts(b)); cur=b.slice()},
+    morph:function(to,ms){
+      cancelAnimationFrame(raf); var from=cur.slice(), t0=performance.now();
+      if(reduce){pBet.setAttribute("points",pts(to)); cur=to.slice(); return}
+      function step(now){var k=Math.min(1,(now-t0)/ms); k=1-Math.pow(1-k,3); cur=from.map(function(f,i){return f+(to[i]-f)*k}); pBet.setAttribute("points",pts(cur)); if(k<1) raf=requestAnimationFrame(step)}
+      raf=requestAnimationFrame(step);
+    },
+    stop:function(){cancelAnimationFrame(raf)}
+  };
+}
 
 /* ---------- demo builders: each returns {reset(), play(at) -> duration} ---------- */
 function typeInto(el, text, at, start, speed){
@@ -579,6 +646,25 @@ var BUILD = {
       return 5600;
     }
     reset(); return {reset:reset,play:play};
+  },
+  web:function(stage,c){
+    stage.innerHTML='<div class="web"><div class="st-q"><span class="t">'+esc(c.query)+'</span></div>'+
+      '<div class="web-mid"><div class="web-sp"></div><div class="web-r">'+
+      '<div class="seed"><span>'+esc(c.seed)+'</span> · '+esc(c.tag)+'</div>'+
+      '<div class="st-slider"><span class="lab">'+esc(c.labels[c.hi[0]])+'</span><span class="track"><span class="knob"></span></span></div>'+
+      '<div class="res"><b>→ '+esc(c.result)+'</b><span>'+esc(c.meta)+'</span></div></div></div></div>';
+    var sp=Spider(stage.querySelector(".web-sp"), c.labels.length); sp.labels(c.labels);
+    var q=stage.querySelector(".st-q"), t=q.querySelector(".t"), knob=stage.querySelector(".knob"), res=stage.querySelector(".res");
+    function reset(){sp.set(c.a,c.b); sp.hi(c.hi); q.classList.add("typed"); t.textContent=c.query; knob.style.setProperty("--k","18%"); res.classList.add("in")}
+    function play(at){
+      at(30,function(){stage.classList.add("snap"); sp.set(c.a,c.a); sp.hi([]); q.classList.remove("typed"); knob.style.setProperty("--k","72%"); res.classList.remove("in"); void stage.offsetWidth; stage.classList.remove("snap")});
+      at(220,function(){q.classList.add("typed"); t.textContent=""});
+      var e=typeInto(t,c.query,at,260,38);
+      at(e+150,function(){knob.style.setProperty("--k","18%"); sp.hi(c.hi); sp.morph(c.b,1300)});
+      at(e+1300,function(){res.classList.add("in")});
+      return e+4300;
+    }
+    reset(); return {reset:function(){sp.stop(); reset()},play:play};
   },
   receipt:function(stage){
     stage.classList.add("rc");
@@ -691,14 +777,20 @@ function showChips(list, animate){
   cs.forEach(function(c,i){ if(!animate){c.classList.add("in")} else setTimeout(function(){c.classList.add("in")},150+i*220)});
 }
 showChips(ASKS[0][1], false);
+var SP=[{l:["sugar","salt","protein","fibre","price","taste"],a:[.8,.45,.5,.35,.55,.82],b:[.28,.45,.52,.42,.55,.8],h:[0]},
+        {l:["topic","level","hands-on","time","length","venue"],a:[.88,.6,.22,.3,.62,.5],b:[.85,.6,.9,.82,.62,.5],h:[2,3]},
+        {l:["meaning","version","date","owner","site","status"],a:[.9,.3,.32,.62,.8,.4],b:[.86,.95,.9,.62,.8,.92],h:[1,2,5]},
+        {l:["meaning","lifecycle","source","date","client","version"],a:[.95,.22,.4,.8,.6,.7],b:[.84,.95,.92,.62,.6,.66],h:[1,2]}];
+var hs=Spider(document.getElementById("heroSpider"),6);
+hs.labels(SP[0].l); hs.hi(SP[0].h); hs.set(SP[0].a,SP[0].b);
 if(!reduce){
   (function cycle(){
     setTimeout(function(){
-      ai=(ai+1)%ASKS.length; var txt=ASKS[ai][0], i=0;
+      ai=(ai+1)%ASKS.length; var txt=ASKS[ai][0], i=0; hs.labels(SP[ai].l); hs.hi([]); hs.set(SP[ai].a,SP[ai].a);
       askChips.querySelectorAll(".chip").forEach(function(c){c.classList.remove("in")});
       askText.textContent="";
-      var iv=setInterval(function(){i++; askText.textContent=txt.slice(0,i); if(i>=txt.length){clearInterval(iv); showChips(ASKS[ai][1],true); cycle()}},42);
-    },3200);
+      var iv=setInterval(function(){i++; askText.textContent=txt.slice(0,i); if(i>=txt.length){clearInterval(iv); showChips(ASKS[ai][1],true); hs.hi(SP[ai].h); hs.morph(SP[ai].b,1300); cycle()}},42);
+    },4200);
   })();
 }
 
