@@ -381,7 +381,7 @@ footer a:hover{color:var(--ink)}
       <p class="lede">Search engines answer with one blended score. We built a database that keeps every aspect of the question, with its weight, and shows why each result is there.</p>
       <div class="timeline">
         <div><b>2004</b><p>Xillio starts moving enterprise content: 1,000+ projects for 250+ organisations, including NASA, KLM and Moody's.</p></div>
-        <div><b>2025</b><p>Rikkert Engels and Corné van Leuveren found Aspected in Hilversum. Xillio stays on as implementation partner.</p></div>
+        <div><b>2025</b><p>Rikkert Engels founds Aspected in Hilversum with co-founders Corné van Leuveren and Jorn Verhoeven. Xillio stays on as implementation partner.</p></div>
         <div><b>Jan 2026</b><p>US patent 12,517,879 granted for the method. PCT application filed.</p></div>
         <div><b>2026</b><p>Agfa and Mosaic Community Health run Aspected under Copilot, in production.</p></div>
         <div><b>Oct 2026</b><p>samebutbetter.food goes live on 45,000 Dutch supermarket products.</p></div>
@@ -521,11 +521,11 @@ var SHOWS = [
    elsewhere:[["IT","Before a Copilot rollout, the current version wins and the older ones stay out."],["Migration","Move one copy instead of seven, with Xillio's connectors."],["Legal","See what changed between the contract you signed and the copy on the share."]],
    demo:"dups"},
   {id:"receipt", name:"The receipt", live:false, onRequest:true,
-   role:"Aspected keeps a separate score per aspect, such as content, lifecycle and source. The receipt prints those scores for every answer.",
+   role:"Aspected keeps a separate score per aspect, such as content, lifecycle and source. The receipt records why each document was used or kept out. In production it runs in the background, ready for an audit.",
    me:"Book a live run: ask a question, set one weight to zero, and watch the answer and its receipt change.",
    title:"Every answer comes with a receipt.",
    say:"Ask for a notice period. See which document the AI got, which ones it kept out, and why.",
-   biz:"Copilot and agents: every answer shows what it was given, and what decided.",
+   biz:"Copilot and agents: a receipt for every answer, kept for audit or shown to the user.",
    elsewhere:[["Legal","Answers come from the published contract, not the draft that ranks first on meaning."],["Compliance","An audit trail per answer: what the model saw, what was withheld, which aspect decided."],["Agents","Next: a receipt for every agent step, so one wrong document at step one can't steer the rest."]],
    demo:"receipt"}
 ];
