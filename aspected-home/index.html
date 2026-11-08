@@ -186,6 +186,20 @@ p{margin:0}
 .st-row.hit .v{color:var(--blue);font-weight:500}
 .st-row.dim{opacity:.55}
 
+/* real screens of the live sites */
+.stage.lv{padding:0}
+.lvwrap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:minmax(0,100%);gap:clamp(14px,3vw,40px);height:100%;align-items:center;padding:4% 6%}
+.phone{position:relative;box-sizing:content-box;height:calc(100% - 10px);aspect-ratio:390/664;border-radius:clamp(14px,2vw,28px);border:5px solid var(--ink);overflow:hidden;background:#fff;box-shadow:0 22px 44px -26px rgba(0,0,0,.55)}
+.phone img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top;opacity:0;transition:opacity .6s ease}
+.phone img.on{opacity:1}
+.lsteps{margin:0;padding:0;list-style:none;display:grid;gap:clamp(8px,1.2vw,14px);counter-reset:l;min-width:0;align-self:center}
+.lsteps li{counter-increment:l;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;color:var(--muted);opacity:.5;transition:opacity .4s,color .4s;font:600 clamp(12.5px,1.25vw,16px)/1.3 var(--f-sans)}
+.lsteps li::before{content:counter(l);font:600 .8em/1 var(--f-mono);width:1.9em;height:1.9em;border-radius:50%;display:inline-grid;place-items:center;box-shadow:inset 0 0 0 1.5px currentColor;flex:none}
+.lsteps li.on{opacity:1;color:var(--ink)}
+.lsteps li.on::before{background:var(--blue);color:#fff;box-shadow:none}
+.lsteps li.done{opacity:.75}
+.lsteps em{font:600 10.5px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
+
 /* sweet little lies */
 .lq{font-weight:500;margin-bottom:10px;transition:color .3s}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -751,17 +765,13 @@ var SHOWS = [
    say:"All 2,447 sessions of the AWS week in Las Vegas. Pick one you like, move the sliders, and fill your day.",
    biz:"Course catalogues and events where people choose instead of filter.",
    elsewhere:[["HR and learning","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
-   demo:"rerank", cfg:{seed:"Agents on Bedrock", tag:"Breakout · 10:00", query:"like this, but hands-on, after 3 pm",
-     items:[["Agents on Bedrock, deep dive","Breakout",.9,"10:00",.3],["Serverless RAG patterns","Breakout",.8,"11:30",.2],["Build an agent in 60 min","Workshop",.6,"15:30",.95],["Agent evals in practice","Workshop",.5,"16:00",.85]],
-     after:[2,3,0,1]}},
+   demo:"live", cfg:{frames:[["live/vegas-1.jpg","Ask: hands-on agents, level 300",0],["live/vegas-2.jpg","98 sessions, ranked by Aspected",1],["live/vegas-4.jpg","Like this one, but more business. Why?",1]]}},
   {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then pick what should change: less sugar, salt or fat.", name:"samebutbetter.food", live:true, url:"https://samebutbetter.food",
    title:"This one, but healthier.",
    say:"Scan a supermarket product, pick less sugar or more protein, and 45,000 products re-sort around your wish.",
    biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
    elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
-   demo:"rerank", cfg:{seed:"Choco Crunch cereal", tag:"sugar 29 g", query:"this one, but less sugar",
-     items:[["Honey Rings","cereal",.95,"31 g",.2],["Choco Crunch Lite","cereal",.75,"22 g",.5],["Oat Crisp Choco","cereal",.4,"11 g",.85],["Spelt Flakes Cocoa","cereal",.25,"7 g",.95]],
-     after:[3,2,0,1]}},
+   demo:"live", cfg:{frames:[["live/food-2.jpg","Search: chocopasta",0],["live/food-3.jpg","Open one: high in sugar",0],["live/food-alt.jpg","Less sugar, the rest the same: 89% alike",1]]}},
   {id:"lies", role:"Aspected finds what kind of product each one is, then checks every aspect against that kind. The aspect furthest off is the reason it is flagged.", me:"Book a live run of the guessing game, then try the same check on your own list.", name:"Sweet Little Lies", live:false, onRequest:true,
    title:"The smoothie with more sugar than cola.",
    say:"Guess which product is the liar. Aspected compares each one with its own kind and shows what gives it away.",
@@ -851,6 +861,17 @@ var BUILD = {
     function end(){q.classList.add("typed"); t.textContent=c.query; if(knob) knob.style.setProperty("--k",c.slider[2]+"%");
       rows.forEach(function(r,k){var p=c.after.indexOf(k); r.style.setProperty("--i",p); r.querySelector("i").style.setProperty("--w",(c.items[k][4]*100)+"%"); r.classList.toggle("hit",p===0); r.classList.toggle("dim",p>1)})}
     reset(); return {reset:reset,play:play,end:end};
+  },
+  live:function(stage,c){
+    stage.classList.add("lv");
+    stage.innerHTML='<div class="lvwrap"><div class="phone">'+c.frames.map(function(f){return '<img src="'+f[0]+'" alt="'+esc(f[1])+'">'}).join("")+'</div>'+
+      '<ol class="lsteps">'+c.frames.map(function(f){return '<li><span>'+esc(f[1])+'</span>'+(f[2]?'<em>Aspected</em>':'')+'</li>'}).join("")+'</ol></div>';
+    var imgs=stage.querySelectorAll(".phone img"), steps=stage.querySelectorAll(".lsteps li"), n=imgs.length;
+    function show(k){imgs.forEach(function(im,i){im.classList.toggle("on",i===k)}); steps.forEach(function(li,i){li.classList.toggle("on",i===k); li.classList.toggle("done",i<k)})}
+    function reset(){show(0)}
+    function end(){show(n-1)}
+    function play(at){for(var k=0;k<n;k++){(function(k){at(300+k*1900,function(){show(k)})})(k)} return 300+n*1900+1600}
+    end(); return {reset:reset,play:play,end:end};
   },
   lies:function(stage){
     function cubes(g){var n=g/4, out="", i; for(i=0;i<Math.floor(n);i++) out+='<i></i>'; if(n%1) out+='<i class="part" style="--p:'+Math.round((n%1)*100)+'%"></i>'; return out}
@@ -1121,7 +1142,7 @@ function openShow(id){
     : s.onRequest ? '<a class="btn" href="'+BOOK+'" target="_blank" rel="noopener">Book a live demo ↗</a>'
     : '<span class="btn ghost" style="cursor:default">Launching soon</span>')
     + (s.id!=="csv" ? '<a class="btn ghost" href="#show-csv">Build this on your own data</a>' : '');
-  document.getElementById("dNote").textContent = s.live ? "A preview. The live site has the full data." : s.onRequest ? "A preview. The full demo runs on request, on real data." : "Preview. The full demo and video launch soon.";
+  document.getElementById("dNote").textContent = s.live ? "Real screens from the live site." : s.onRequest ? "A preview. The full demo runs on request, on real data." : "Preview. The full demo and video launch soon.";
   document.getElementById("dElse").innerHTML=s.elsewhere.map(function(e){return '<div><b>'+esc(e[0])+'</b><p>'+esc(e[1])+'</p></div>'}).join("");
   var st=document.getElementById("dStage"); if(dPlayer) dPlayer.stop(); st.innerHTML=""; st.className="stage big";
   dPlayer=Player(st,s); dPlayer.start();
