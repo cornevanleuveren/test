@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then six showcase cards (3/2/1 columns) whose mini demos play on hover; a thin proof strip; "Try it now". About, Research, Pricing and each showcase are hash views. */
+/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then six showcase cards (3/2/1 columns) whose mini demos play on hover; a thin proof strip; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
 :root{
   --bg:#F8F8F8; --surface:#FFFFFF; --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
   --blue:#005CFC; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
@@ -49,7 +49,7 @@ p{margin:0}
 .menu nav a.btn{padding:9px 16px;font-size:14px;margin-left:8px;color:#fff;background:var(--blue)}
 .menu nav a.btn:hover{color:#fff;background:var(--blue)}
 @media (max-width:720px){.menu nav a.opt{display:none}.menu .wrap{gap:8px}.menu nav a{padding:8px 9px}}
-@media (max-width:420px){.menu nav a[href="#research"]{display:none}}
+@media (max-width:480px){.menu nav a.opt2{display:none}}
 
 /* views */
 .view{display:none}
@@ -283,23 +283,74 @@ footer a:hover{color:var(--ink)}
 .timeline{margin-top:40px;display:grid;border-top:1px solid var(--line);max-width:760px}
 .timeline div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
 .timeline b{font:600 14px/1.5 var(--f-mono);color:var(--blue)}
-.patent{margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:32px}
-@media (max-width:760px){.patent{grid-template-columns:minmax(0,1fr)}}
-.patent .num{font-size:clamp(36px,5vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1}
-.patent .num small{display:block;font:600 12px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.patent p{font-size:16px}
-.patent .meta{margin-top:12px;color:var(--muted);font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:20px}
-@media (max-width:980px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.stats{grid-template-columns:minmax(0,1fr)}}
-.stat{border-top:2px solid var(--blue);padding-top:14px;display:grid;gap:4px}
-.stat b{font-size:34px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.stat span{color:var(--muted);font-size:14.5px}
-.refs{margin-top:20px;display:grid;border-top:1px solid var(--line)}
-.refs a{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none}
-.refs a span{color:var(--muted);font-size:14px;white-space:nowrap}
-.refs a:hover b{color:var(--blue)}
 .h2s{font-size:24px;font-weight:800;margin-top:56px}
+.vs{margin-top:36px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:20px}
+.vs-q{font:500 clamp(15px,1.8vw,18px)/1.4 var(--f-mono)}
+.vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.vs-cols{grid-template-columns:minmax(0,1fr)}}
+.vs-col{background:var(--bg);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.vs-col.good{box-shadow:0 0 0 1.5px var(--blue) inset}
+.vs-col ol{margin:0;padding:0;list-style:none;counter-reset:r;display:grid;gap:8px}
+.vs-col li{counter-increment:r;display:grid;grid-template-columns:1.6em minmax(0,1fr);column-gap:8px;padding:10px 12px;border-radius:8px;background:var(--surface)}
+.vs-col li::before{content:counter(r);grid-row:span 2;font:600 14px/1.5 var(--f-mono);color:var(--muted)}
+.vs-col li b{font-weight:700;font-size:15px}
+.vs-col li span{font-size:13.5px;color:var(--muted)}
+.vs-col li.bad{box-shadow:0 0 0 1.5px var(--coral) inset}
+.vs-col li.bad span{color:var(--coral)}
+.vs-col li.win{box-shadow:0 0 0 1.5px var(--blue) inset}
+.vs-col li.win span{color:var(--blue)}
+.vs-col li.void{opacity:.6}
+.vs-col li.void::before{content:"—"}
+.vs-out{font-size:15px}
+.vs-col .vs-out b{font-weight:800}
+.vs-col:not(.good) .vs-out b{color:var(--coral)}
+.vs-col.good .vs-out b{color:var(--blue)}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+@media (max-width:900px){.ways{grid-template-columns:minmax(0,1fr)}}
+.way{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;min-width:0}
+.way.hl{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.way h3{font-size:22px;font-weight:800}
+.way p{color:var(--muted);font-size:15px;flex:1}
+.page .sub{color:var(--muted);margin-top:8px;max-width:65ch}
+.prompt{position:relative;margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.prompt pre{margin:0;padding:24px;padding-top:56px;font:13.5px/1.6 var(--f-mono);white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.prompt .copy{position:absolute;top:12px;right:12px;padding:8px 14px;font-size:13.5px}
+.prep{margin:20px 0 0;padding:0;list-style:none;counter-reset:p;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;max-width:980px}
+@media (max-width:760px){.prep{grid-template-columns:minmax(0,1fr)}}
+.prep li{counter-increment:p;display:grid;grid-template-columns:2em minmax(0,1fr);column-gap:10px;row-gap:4px;padding:16px 0;border-top:1px solid var(--line)}
+.prep li::before{content:counter(p);grid-row:span 2;font:600 15px/1.4 var(--f-mono);color:var(--blue)}
+.prep b{font-size:16px;font-weight:700}
+.prep span{color:var(--muted);font-size:15px}
+.faq{margin-top:16px;border-top:1px solid var(--line);max-width:820px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 32px 18px 0;font-weight:700;font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:14px;font:400 24px/1 var(--f-sans);color:var(--blue)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:65ch;font-size:16px}
+.faq details a{color:var(--blue);font-weight:600}
+.indchips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-8px 0 24px}
+.indchips span{font-size:14px;color:var(--muted);margin-right:4px}
+.indchips a{font-size:13.5px;font-weight:600;text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.indchips a:hover{border-color:var(--blue);color:var(--blue)}
+.itiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+@media (max-width:900px){.itiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.itiles{grid-template-columns:minmax(0,1fr)}}
+.itile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;text-decoration:none;display:flex;flex-direction:column;gap:10px;min-width:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.itile:hover{transform:translateY(-3px);border-color:var(--blue)}
+.itile h3{font-size:20px;font-weight:800}
+.itile p{color:var(--muted);font-size:15px}
+.itile .who{margin-top:auto;font:600 12px/1.3 var(--f-mono);letter-spacing:.04em;color:var(--blue)}
+.iproof{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:stretch}
+@media (max-width:760px){.iproof{grid-template-columns:minmax(0,1fr)}}
+.iproof figure{margin:0;padding:24px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;justify-content:space-between}
+.iproof blockquote{margin:0;font-size:20px;font-weight:600;line-height:1.35}
+.iproof figcaption{font-size:13.5px;color:var(--muted)}
+.iproof figcaption b{display:block;color:var(--ink)}
+.iproof .note{padding:24px;border-radius:var(--r);border:1px solid var(--line);display:flex;flex-direction:column;gap:8px;justify-content:center}
+.iproof .note b{font-size:16px;font-weight:800}
+.iproof .note p{color:var(--muted);font-size:15px}
+.iproof .note a{color:var(--blue);font-weight:700;text-decoration:none}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -309,10 +360,11 @@ footer a:hover{color:var(--ink)}
     <a class="logo" href="#home" aria-label="Aspected, home"><span data-logo></span></a>
     <nav aria-label="Main">
       <a class="opt" href="#showcases" data-nav="home">Showcases</a>
-      <a href="#research" data-nav="research">Research</a>
-      <a href="#about" data-nav="about">About</a>
-      <a href="#pricing" data-nav="pricing">Pricing</a>
-      <a class="btn" href="#try">Try now</a>
+      <a href="#industries" data-nav="industries">Industries</a>
+      <a class="opt2" href="#why" data-nav="why">Why Aspected</a>
+      <a class="opt" href="#about" data-nav="about">About</a>
+      <a class="opt2" href="#pricing" data-nav="pricing">Pricing</a>
+      <a class="btn" href="#start" data-nav="start">Get started</a>
     </nav>
   </div>
 </header>
@@ -340,6 +392,7 @@ footer a:hover{color:var(--ink)}
         <h2>Six showcases</h2>
         <p id="playHint">Hover to play. Click to open.</p>
       </div>
+      <div class="indchips" id="indChips"><span>See it for your industry</span></div>
       <div class="grid" id="grid"></div>
     </div>
 
@@ -375,11 +428,11 @@ footer a:hover{color:var(--ink)}
 
     <div class="wrap try" id="try">
       <h2>Try it now<b>.</b></h2>
-      <p>Two showcases are live. Open one and change what you are looking for, or book 20 minutes on your own data.</p>
+      <p>Two showcases are live. Open one and change what you are looking for, or get started on your own data.</p>
       <div class="row">
         <a class="btn" href="https://samebutbetter.food" target="_blank" rel="noopener">Open samebutbetter.food ↗</a>
         <a class="btn" href="https://vegas.aspected.com" target="_blank" rel="noopener">Open Vegas ↗</a>
-        <a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Book a demo ↗</a>
+        <a class="btn ghost" href="#start">Run it on your own data →</a>
       </div>
     </div>
   </section>
@@ -432,38 +485,134 @@ footer a:hover{color:var(--ink)}
       </div>
       <div class="about-foot">
         <p>45 people in Hilversum, the Netherlands.</p>
-        <div class="ctas"><a class="btn" data-link="careers" href="#" target="_blank" rel="noopener">We're hiring ↗</a><a class="btn ghost" data-link="investors" href="#" target="_blank" rel="noopener">Investors and press ↗</a></div>
+        <div class="ctas"><a class="btn ghost" data-link="investors" href="#" target="_blank" rel="noopener">Investors and press ↗</a></div>
       </div>
     </div>
   </section>
 
-  <!-- RESEARCH -->
-  <section class="view" id="v-research">
+  <!-- WHY ASPECTED: vs vector search -->
+  <section class="view" id="v-why">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Research</p>
-      <h1>One calculation, with its reasons.</h1>
-      <p class="lede">The method is patented. The numbers below are measured on our own demos.</p>
-      <div class="patent">
-        <div class="num"><small>United States patent</small>12,517,879</div>
-        <div>
-          <p>Every record and every question becomes a set of weighted aspects. One calculation ranks them all and returns the distance per aspect, so each result carries its own reason.</p>
-          <p class="meta">Granted January 2026 · PCT application filed · Assignee Xillio AI BV</p>
-          <p style="margin-top:16px"><a class="btn ghost" href="https://patents.google.com/patent/US12517879" target="_blank" rel="noopener">Read the patent ↗</a></p>
+      <p class="eyebrow" style="margin-bottom:14px">Aspected vs vector search</p>
+      <h1>Same question. Two rankings.</h1>
+      <p class="lede">Vector search ranks on one blended score. Aspected keeps every aspect apart and weighs them in one calculation.</p>
+      <div class="vs">
+        <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
+        <div class="vs-cols">
+          <div class="vs-col">
+            <p class="eyebrow">Vector search · one score</p>
+            <ol>
+              <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
+              <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
+              <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>120 days</b>, from a draft.</p>
+          </div>
+          <div class="vs-col good">
+            <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
+            <ol>
+              <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+              <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
+              <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>90 days</b>, from the published version, with a receipt.</p>
+          </div>
         </div>
       </div>
-      <h2 class="h2s">Measured</h2>
-      <div class="stats">
-        <div class="stat"><b>1,237 / 1,237</b><span>food swaps that go the way you asked, p95 129 ms</span></div>
-        <div class="stat"><b>93.9%</b><span>accuracy on Banking77 intent labels, in 66 ms, no language model</span></div>
-        <div class="stat"><b>42.5%</b><span>of 771 test answers where plain vector search would have led with the wrong document</span></div>
-        <div class="stat"><b>0 errors</b><span>in 12,906 requests during the Vegas load test</span></div>
+      <h2 class="h2s">Questions people ask</h2>
+      <div class="faq">
+        <details open><summary>What is the difference with vector search?</summary><p>A vector search turns each document into one point and ranks on one similarity score, so meaning is all it sees. Aspected keeps meaning next to aspects such as version, date, source or price, each with its own weight, and ranks on all of them in one calculation.</p></details>
+        <details><summary>Isn't that just a filter?</summary><p>A filter says yes or no and drops everything else, including the almost-right. An aspect says how close a record is, so a near match still ranks, only lower.</p></details>
+        <details><summary>How is it different from hybrid search, boosting or a reranker?</summary><p>Those add rules or a second model on top of one score, and every rule interacts with the others. Aspected ranks on all aspects in the first pass and shows the distance per aspect.</p></details>
+        <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
+        <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over MCP or REST.</p></details>
+        <details><summary>Who decides what counts?</summary><p>The people who own the content. They set the weights, or pick the better of two results and the weights follow.</p></details>
+        <details><summary>Can I see why a document was used?</summary><p>Yes. Every answer comes with a receipt: what was used, what was kept out and which aspect decided. It shows why a document was selected, not that the answer is right.</p></details>
+        <details><summary>Where does my data live?</summary><p>In your own AWS account, including the European Sovereign Cloud. Smaller catalogues can run hosted by us.</p></details>
+        <details><summary>Is it patented?</summary><p>Yes. US patent 12,517,879, granted January 2026, with a PCT application filed. <a href="https://patents.google.com/patent/US12517879" target="_blank" rel="noopener">Read the patent ↗</a></p></details>
       </div>
-      <h2 class="h2s">Research it builds on</h2>
-      <div class="refs">
-        <a href="https://www2.cs.sfu.ca/~jpei/publications/Outlying%20aspects%20DAMI15.pdf" target="_blank" rel="noopener"><b>Mining outlying aspects</b><span>Duan et al., 2015 ↗</span></a>
-        <a href="https://arxiv.org/abs/2103.14749" target="_blank" rel="noopener"><b>Confident learning and label errors</b><span>Northcutt et al., 2021 ↗</span></a>
-        <a href="https://arxiv.org/abs/2107.07511" target="_blank" rel="noopener"><b>Conformal prediction</b><span>Angelopoulos and Bates, 2021 ↗</span></a>
+      <div class="ctas" style="margin-top:32px"><a class="btn" data-book href="#" target="_blank" rel="noopener">See it on your own data ↗</a><a class="btn ghost" href="#show-receipt">How the receipt works</a></div>
+    </div>
+  </section>
+
+  <!-- GET STARTED -->
+  <section class="view" id="v-start">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Get started</p>
+      <h1>Up and running today.</h1>
+      <p class="lede">Three ways in. Pick the one that fits how you work.</p>
+      <div class="ways">
+        <div class="way">
+          <span class="badge soon">Coming soon</span>
+          <h3>Upload a CSV</h3>
+          <p>Drop a CSV or Excel file. Aspected finds the aspects and gives you a search page to share, within minutes.</p>
+          <a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Meanwhile, book 20 minutes ↗</a>
+        </div>
+        <div class="way hl">
+          <span class="badge req">Works today</span>
+          <h3>Give it to your AI</h3>
+          <p>Paste the instructions below into Claude, or any AI that can use a terminal. It sets up Aspected, loads your data and shows the first results.</p>
+          <a class="btn" href="#ai-steps" data-jump="ai-steps">Copy the instructions ↓</a>
+        </div>
+        <div class="way">
+          <span class="badge req">Works today</span>
+          <h3>Run the Docker image</h3>
+          <p>Run Aspected on your own machine or in your AWS account. Install steps, API and MCP are on the docs site.</p>
+          <a class="btn ghost" href="https://docs.aspected.com" target="_blank" rel="noopener">Open docs.aspected.com ↗</a>
+        </div>
       </div>
+
+      <h2 class="h2s" id="ai-steps">Instructions for your AI</h2>
+      <p class="sub">Copy this into Claude Code, Claude, or another AI assistant with a terminal.</p>
+      <div class="prompt">
+        <button class="btn copy" id="copyBtn" type="button">Copy</button>
+        <pre id="aiPrompt">You are helping me try Aspected, a database that ranks records on several weighted aspects at once and shows the distance per aspect.
+
+1. Read https://docs.aspected.com first. Follow it for installation, the Docker image, the API and MCP. Do not guess commands that are not in the docs.
+2. Start Aspected with the Docker image from the docs, on this machine. Tell me when it responds.
+3. Ask me for a dataset: a CSV, an Excel file or a folder of documents. If I have none, use a small public CSV.
+4. Profile the data and propose aspects: one per useful column, typed as text, number, category or date. Show me the list and wait for my OK.
+5. Build the index and run three "like this, but" queries, for example "like this one, but cheaper". For each result, show the distance per aspect.
+6. Change one weight, run the same query again, and show me what moved and why.
+7. End with a short summary: what you built, the commands you ran, and how I reach it over REST or MCP.
+
+Rules: ask before installing anything new, keep my data on this machine, and stop and ask me when the docs and my setup disagree.</pre>
+      </div>
+
+      <h2 class="h2s" id="data-ready">Get your data ready</h2>
+      <p class="sub">Aspected works with the data you have. These six checks make the first results better.</p>
+      <ol class="prep">
+        <li><b>One row per thing people look for.</b><span>A product, a document, a session or a contract. Not one row per sale or per page.</span></li>
+        <li><b>Columns become aspects.</b><span>Text for descriptions, numbers for price or size, categories for type or department, dates for published or start time.</span></li>
+        <li><b>One unit per column.</b><span>All grams or all kilos, all euros or all dollars. Mixed units look like outliers.</span></li>
+        <li><b>Empty means unknown.</b><span>Leave a value empty when you don't know it. A zero is read as a real zero.</span></li>
+        <li><b>Say which version counts.</b><span>For documents, keep version, status (draft, published, superseded), owner and source. They decide which copy the AI reads.</span></li>
+        <li><b>Keep the copies.</b><span>Don't clean out near-duplicates first. Aspected finds them and shows what separates them.</span></li>
+      </ol>
+      <p class="fine">Documents on file shares or SharePoint? Xillio's connectors bring them in with their version, date, owner and department.</p>
+      <div class="ctas" style="margin-top:28px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a><a class="btn ghost" href="https://docs.aspected.com" target="_blank" rel="noopener">Read the docs ↗</a></div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="view" id="v-industries">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Industries</p>
+      <h1>Same engine, your world.</h1>
+      <p class="lede">Each page shows the showcases that matter there, and who already runs Aspected.</p>
+      <div class="itiles" id="iTiles"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-industry">
+    <div class="wrap page">
+      <a class="back" href="#industries">← All industries</a>
+      <p class="eyebrow" id="iName" style="margin-bottom:14px"></p>
+      <h1 id="iTitle"></h1>
+      <p class="lede" id="iLede"></p>
+      <div class="grid" id="iGrid" style="margin-top:36px"></div>
+      <div class="iproof" id="iProof"></div>
+      <div class="ctas" style="margin-top:28px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a><a class="btn ghost" href="#why">Aspected vs vector search</a></div>
     </div>
   </section>
 
@@ -478,13 +627,13 @@ footer a:hover{color:var(--ink)}
           <span class="eyebrow">Free · hosted</span>
           <div class="price">€0</div>
           <p>10,000 searches and 10,000 records a month. Build and share a page.</p>
-          <a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Get early access ↗</a>
+          <a class="btn ghost" href="#start">Get started</a>
         </div>
         <div class="tier hl">
           <span class="eyebrow">Pay as you go · hosted</span>
           <div class="price">€1 <small>per 1,000 searches</small></div>
           <p>€0.50 per 1,000 records a month. Rates fall with volume. Pay by card.</p>
-          <a class="btn" data-book href="#" target="_blank" rel="noopener">Get early access ↗</a>
+          <a class="btn" href="#start">Get started</a>
         </div>
         <div class="tier">
           <span class="eyebrow">Enterprise · your tenant</span>
@@ -501,8 +650,8 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>US patent 12,517,879</span></span>
-    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#research">Research</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
-    <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a><a data-link="careers" href="#" target="_blank" rel="noopener">Careers</a><a data-link="login" href="#" target="_blank" rel="noopener">Customer login</a></nav>
+    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
+    <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a><a data-link="login" href="#" target="_blank" rel="noopener">Customer login</a></nav>
   </div>
 </footer>
 
@@ -522,9 +671,18 @@ var MOSAIC_VIDEO="https://example.com/mosaic-video";
 document.querySelectorAll("[data-video]").forEach(function(a){a.href=MOSAIC_VIDEO});
 document.querySelectorAll("[data-book]").forEach(function(a){a.href=BOOK});
 /* PLACEHOLDERS: the secondary audiences, routed from the footer and About. */
-var LINKS={docs:"https://example.com/docs",partners:BOOK,analysts:BOOK,careers:"https://example.com/careers",login:"https://example.com/login",investors:BOOK};
+var LINKS={docs:"https://docs.aspected.com",partners:BOOK,analysts:BOOK,login:"https://example.com/login",investors:BOOK};
 document.querySelectorAll("[data-link]").forEach(function(a){a.href=LINKS[a.getAttribute("data-link")]||BOOK});
 function badge(s){return s.live?'<span class="badge live">Live</span>':(s.onRequest?'<span class="badge req">Live demo on request</span>':'<span class="badge soon">Coming soon</span>')}
+
+/* ---------- get started: copy the AI instructions ---------- */
+document.getElementById("copyBtn").addEventListener("click",function(){
+  var btn=this, txt=document.getElementById("aiPrompt").textContent;
+  function done(){btn.textContent="Copied"; setTimeout(function(){btn.textContent="Copy"},1800)}
+  function select(){var r=document.createRange(); r.selectNodeContents(document.getElementById("aiPrompt")); var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent="Selected, press Ctrl+C"}
+  try{navigator.clipboard.writeText(txt).then(done,select)}catch(e){select()}
+});
+document.querySelectorAll("[data-jump]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault(); document.getElementById(a.getAttribute("data-jump")).scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})});
 
 /* ---------- logo ---------- */
 var LOGO_P=["M5616 5840.5L3700 1709.5L2755.24 3584.5L4981.5 5840.5H5616Z","M0 5840.5L2858.5 0L3700 1709.5L1618.5 5840.5H0Z","M9042.15 4289H8388.8L8235.5 3836.4H7155.1L7005.45 4289H6374L7330.3 1690.2H8063.95L9042.15 4289ZM7476.3 2876.45L7326.65 3321.75H8060.3L7910.65 2876.45C7864.42 2745.05 7791.42 2526.05 7691.65 2219.45C7562.68 2616.08 7490.9 2835.08 7476.3 2876.45ZM10010.8 4343.75C9713.9 4343.75 9492.47 4292.65 9346.47 4190.45C9202.9 4085.82 9122.6 3919.13 9105.57 3690.4H9660.37C9670.1 3790.17 9701.74 3860.73 9755.27 3902.1C9811.24 3943.47 9900.05 3964.15 10021.7 3964.15C10233.4 3964.15 10339.3 3903.32 10339.3 3781.65C10339.3 3723.25 10316.2 3679.45 10269.9 3650.25C10223.7 3618.62 10138.5 3593.07 10014.4 3573.6L9769.87 3533.45C9346.47 3467.75 9134.77 3275.52 9134.77 2956.75C9134.77 2766.95 9207.77 2620.95 9353.77 2518.75C9499.77 2414.12 9709.04 2361.8 9981.57 2361.8C10543.7 2361.8 10835.7 2577.15 10857.6 3007.85H10328.3C10325.9 2830.22 10210.3 2741.4 9981.57 2741.4C9789.34 2741.4 9693.22 2801.02 9693.22 2920.25C9693.22 2973.78 9715.12 3015.15 9758.92 3044.35C9802.72 3073.55 9872.07 3095.45 9966.97 3110.05L10248 3150.2C10474.3 3184.27 10641 3248.75 10748.1 3343.65C10855.1 3438.55 10908.7 3568.73 10908.7 3734.2C10908.7 3928.87 10829.6 4079.73 10671.4 4186.8C10515.7 4291.43 10295.5 4343.75 10010.8 4343.75ZM12239.2 2361.8C12492.3 2361.8 12693 2450.62 12841.5 2628.25C12987.5 2805.88 13060.5 3045.57 13060.5 3347.3C13060.5 3649.03 12987.5 3888.72 12841.5 4066.35C12693 4243.98 12492.3 4332.8 12239.2 4332.8C11998.3 4332.8 11813.4 4241.55 11684.4 4059.05V5004.4H11115V2405.6H11669.8V2657.45C11798.8 2460.35 11988.6 2361.8 12239.2 2361.8ZM12082.3 3876.55C12208.8 3876.55 12307.3 3830.32 12377.9 3737.85C12448.5 3642.95 12483.8 3507.9 12483.8 3332.7C12483.8 2989.6 12349.9 2818.05 12082.3 2818.05C11812.2 2818.05 11677.1 2994.47 11677.1 3347.3C11677.1 3700.13 11812.2 3876.55 12082.3 3876.55ZM15175.9 3402.05V3515.2H13781.6C13801 3644.17 13848.5 3742.72 13923.9 3810.85C13999.3 3878.98 14095.5 3913.05 14212.3 3913.05C14397.2 3913.05 14523.7 3842.48 14591.9 3701.35H15132.1C15081 3896.02 14972.7 4050.53 14807.2 4164.9C14641.7 4276.83 14443.4 4332.8 14212.3 4332.8C13920.3 4332.8 13684.2 4242.77 13504.2 4062.7C13324.1 3882.63 13234.1 3644.17 13234.1 3347.3C13234.1 3048 13322.9 2809.53 13500.5 2631.9C13675.7 2451.83 13910.5 2361.8 14205 2361.8C14497 2361.8 14733 2455.48 14913.1 2642.85C15088.3 2832.65 15175.9 3085.72 15175.9 3402.05ZM14197.7 2781.55C13964.1 2781.55 13826.6 2905.65 13785.2 3153.85H14617.4C14597.9 3037.05 14551.7 2945.8 14478.7 2880.1C14405.7 2814.4 14312 2781.55 14197.7 2781.55ZM16332.9 4332.8C16038.4 4332.8 15803.6 4242.77 15628.4 4062.7C15453.2 3882.63 15365.6 3644.17 15365.6 3347.3C15365.6 3045.57 15453.2 2805.88 15628.4 2628.25C15803.6 2450.62 16038.4 2361.8 16332.9 2361.8C16590.8 2361.8 16801.3 2429.93 16964.3 2566.2C17129.8 2700.03 17225.9 2882.53 17252.7 3113.7H16686.9C16655.3 2921.47 16537.3 2825.35 16332.9 2825.35C16072.5 2825.35 15942.3 2999.33 15942.3 3347.3C15942.3 3692.83 16072.5 3865.6 16332.9 3865.6C16551.9 3865.6 16673.5 3759.75 16697.9 3548.05H17263.6C17246.6 3786.52 17152.9 3977.53 16982.6 4121.1C16812.2 4262.23 16595.7 4332.8 16332.9 4332.8ZM18533.2 2405.6V2821.7H18171.8V3701.35C18171.8 3764.62 18187.6 3808.42 18219.3 3832.75C18250.9 3854.65 18306.9 3865.6 18387.2 3865.6H18533.2V4289C18465 4298.73 18377.4 4303.6 18270.4 4303.6C18034.3 4303.6 17864 4262.23 17759.4 4179.5C17654.7 4094.33 17602.4 3955.63 17602.4 3763.4V2821.7H17321.4V2405.6H17602.4V1847.15H18171.8V2405.6H18533.2ZM20604.5 3402.05V3515.2H19210.2C19229.7 3644.17 19277.1 3742.72 19352.6 3810.85C19428 3878.98 19524.1 3913.05 19640.9 3913.05C19825.9 3913.05 19952.4 3842.48 20020.5 3701.35H20560.7C20509.6 3896.02 20401.3 4050.53 20235.9 4164.9C20070.4 4276.83 19872.1 4332.8 19640.9 4332.8C19348.9 4332.8 19112.9 4242.77 18932.8 4062.7C18752.8 3882.63 18662.7 3644.17 18662.7 3347.3C18662.7 3048 18751.5 2809.53 18929.2 2631.9C19104.4 2451.83 19339.2 2361.8 19633.6 2361.8C19925.6 2361.8 20161.7 2455.48 20341.7 2642.85C20516.9 2832.65 20604.5 3085.72 20604.5 3402.05ZM19626.3 2781.55C19392.7 2781.55 19255.2 2905.65 19213.9 3153.85H20046.1C20026.6 3037.05 19980.4 2945.8 19907.4 2880.1C19834.4 2814.4 19740.7 2781.55 19626.3 2781.55ZM22166.7 2631.9V1690.2H22736.1V4289H22181.3V4044.45C22054.7 4236.68 21866.1 4332.8 21615.5 4332.8C21362.4 4332.8 21162.9 4243.98 21016.9 4066.35C20868.5 3888.72 20794.3 3649.03 20794.3 3347.3C20794.3 3045.57 20868.5 2805.88 21016.9 2628.25C21162.9 2450.62 21362.4 2361.8 21615.5 2361.8C21854 2361.8 22037.7 2451.83 22166.7 2631.9ZM21772.5 3876.55C22042.6 3876.55 22177.6 3700.13 22177.6 3347.3C22177.6 2994.47 22042.6 2818.05 21772.5 2818.05C21645.9 2818.05 21547.4 2865.5 21476.8 2960.4C21406.2 3052.87 21371 3186.7 21371 3361.9C21371 3705 21504.8 3876.55 21772.5 3876.55Z"];
@@ -742,8 +900,7 @@ function Player(stage, show){
 
 /* ---------- cards ---------- */
 if(noHover) document.getElementById("playHint").textContent="Each demo plays as you scroll. Tap to open.";
-var grid=document.getElementById("grid");
-SHOWS.forEach(function(s){
+function makeCard(s, bizLabel, bizText, into){
   var card=h("article","card");
   var primary = s.live ? '<a class="cover" href="'+s.url+'" target="_blank" rel="noopener" aria-label="Open '+esc(s.name)+' live"></a>'
                        : '<a class="cover" href="#show-'+s.id+'" aria-label="See '+esc(s.name)+'"></a>';
@@ -751,9 +908,9 @@ SHOWS.forEach(function(s){
     '<div class="stage"></div>'+
     '<div class="body"><div class="top">'+badge(s)+'<span class="name">'+esc(s.name)+'</span></div>'+
     '<h3>'+esc(s.title)+'</h3><p class="say">'+esc(s.say)+'</p>'+
-    '<p class="biz"><b>In your business:</b> '+esc(s.biz)+'</p></div>'+
+    '<p class="biz"><b>'+esc(bizLabel||"In your business")+':</b> '+esc(bizText||s.biz)+'</p></div>'+
     '<div class="foot"><span class="go">'+(s.live?"Open live site ↗":s.onRequest?"Preview and book a demo →":"Watch the preview →")+'</span><a class="more" href="#show-'+s.id+'">'+(s.live?"For business":"Details")+'</a></div>';
-  grid.appendChild(card);
+  into.appendChild(card);
   var stage=card.querySelector(".stage");
   var p=Player(stage,s);
   function go(){card.classList.add("playing"); p.start()}
@@ -763,7 +920,63 @@ SHOWS.forEach(function(s){
   if(noHover && "IntersectionObserver" in window){
     new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?go():halt()})},{threshold:.6}).observe(card);
   }
+}
+var grid=document.getElementById("grid");
+SHOWS.forEach(function(s){makeCard(s,null,null,grid)});
+function showById(id){return SHOWS.filter(function(x){return x.id===id})[0]}
+
+/* ---------- industries ---------- */
+var INDS=[
+  {id:"healthcare", name:"Healthcare", label:"In healthcare", title:"The current protocol, not the one that ranks first.",
+   lede:"Clinical and technical teams ask Copilot in their own words. Aspected makes sure it reads the version that counts.",
+   who:"Mosaic Community Health, in production",
+   shows:[["receipt","Every answer shows which protocol was used, kept for audit."],["copies","One procedure on twelve sites: settle the current one before Copilot reads it."],["csv","Equipment and service lists, searchable as “like this, but”."]],
+   note:{b:"Mosaic Community Health runs Aspected under Copilot, in production.",p:"They told the story on video at the Northwest Community Health AI Summit.",a:"Watch it ↗",video:true}},
+  {id:"government", name:"Government", label:"In government", title:"Every answer traceable to the rule in force.",
+   lede:"Policies change, copies stay. Aspected answers from the version in force and keeps a receipt for every answer.",
+   who:"With Xillio, in national and local government",
+   shows:[["receipt","A receipt per answer: which rule was used, which older versions were kept out."],["copies","File shares full of copies: keep the one in force before a migration or Copilot."],["lies","Records filed under the wrong case or department, with the aspect that gives it away."]],
+   note:{b:"Implemented with Xillio.",p:"1,000+ content projects since 2004, including national and local government."}},
+  {id:"field-service", name:"Manufacturing and field service", label:"In field service", title:"One question instead of three searches.",
+   lede:"Engineers need the manual, the instruction and the last ticket for this model and firmware, in one answer.",
+   who:"Agfa, in production",
+   shows:[["receipt","The answer comes from the current manual for this model, not last year's."],["csv","Parts and asset lists: “this part, but in stock and closer”."],["copies","Instructions that drifted across sites, settled in one place."]],
+   quote:{q:"Aspected has added the context Microsoft Copilot needed.",who:"Rob Kasslack",role:"IT Business Partner, AI & Innovation · Agfa"},
+   note:{b:"At Agfa, under Copilot.",p:"Field engineers get manuals, instructions and tickets in one question instead of three searches."}},
+  {id:"retail", name:"Retail and e-commerce", label:"In retail", title:"Let customers say what they want.",
+   lede:"Shoppers point at a product and say what should change. Aspected keeps what they liked and moves the rest.",
+   who:"samebutbetter.food, live",
+   shows:[["food","“This one, but healthier” on 45,000 products, live today."],["lies","Product data errors: lost decimals, wrong units, claims that don't hold."],["csv","Your product feed, searchable in minutes."]],
+   note:{b:"samebutbetter.food is live.",p:"45,000 Dutch supermarket products, one index.",a:"Try it ↗",url:"https://samebutbetter.food"}},
+  {id:"legal-finance", name:"Legal and finance", label:"In legal and finance", title:"The clause that doesn't belong, found and explained.",
+   lede:"Contracts and invoices look alike until one aspect moves. Aspected shows which one, and why.",
+   who:"Contracts, invoices, policies",
+   shows:[["receipt","Answers from the signed contract, not the draft that reads closest."],["lies","The MSA whose liability cap is far above every other MSA of its type."],["copies","What changed between the version you signed and the copy on the share."]],
+   quote:{q:"Aspected includes all context directly in the search query upfront.",who:"Wim Verheij",role:"Managing Director · Novadoc Netherlands"}},
+  {id:"events-learning", name:"Events and learning", label:"In events and learning", title:"People choose sessions, not filters.",
+   lede:"Attendees and learners pick one thing they like and say what should change.",
+   who:"Vegas at AWS re:Invent, live",
+   shows:[["vegas","2,447 re:Invent sessions: “this one, but hands-on and after three”."],["csv","Course catalogues and internal training, searchable in minutes."],["copies","Course material copied across teams, settled once."]],
+   note:{b:"Vegas runs at AWS re:Invent.",p:"The session finder for 2,447 sessions, with Fill my day and Last minute.",a:"Open Vegas ↗",url:"https://vegas.aspected.com"}}
+];
+var chipsEl=document.getElementById("indChips"), tilesEl=document.getElementById("iTiles");
+INDS.forEach(function(d){
+  chipsEl.insertAdjacentHTML("beforeend",'<a href="#industry-'+d.id+'">'+esc(d.name)+'</a>');
+  tilesEl.insertAdjacentHTML("beforeend",'<a class="itile" href="#industry-'+d.id+'"><h3>'+esc(d.name)+'</h3><p>'+esc(d.title)+'</p><span class="who">'+esc(d.who)+'</span></a>');
 });
+function openIndustry(id){
+  var d=INDS.filter(function(x){return x.id===id})[0]; if(!d) return false;
+  document.getElementById("iName").textContent=d.name;
+  document.getElementById("iTitle").textContent=d.title;
+  document.getElementById("iLede").textContent=d.lede;
+  var g=document.getElementById("iGrid"); g.innerHTML="";
+  d.shows.forEach(function(x){makeCard(showById(x[0]),d.label,x[1],g)});
+  var html="";
+  if(d.quote) html+='<figure><blockquote>“'+esc(d.quote.q.replace(/^“|”$/g,""))+'”</blockquote><figcaption><b>'+esc(d.quote.who)+'</b>'+esc(d.quote.role)+'</figcaption></figure>';
+  if(d.note){var href=d.note.video?MOSAIC_VIDEO:d.note.url; html+='<div class="note"><b>'+esc(d.note.b)+'</b><p>'+esc(d.note.p)+'</p>'+(d.note.a?'<a href="'+href+'" target="_blank" rel="noopener">'+esc(d.note.a)+'</a>':'')+'</div>'}
+  var pr=document.getElementById("iProof"); pr.innerHTML=html; pr.style.gridTemplateColumns=(d.quote&&d.note)?"":"minmax(0,1fr)";
+  return true;
+}
 
 /* ---------- hero query ---------- */
 var ASKS=[["this pasta, but less sugar",["kind = pasta","sugar ↓","price ="]],
@@ -820,10 +1033,12 @@ function route(){
   var hsh=(location.hash||"#home").slice(1), view="home", scrollTo=null;
   if(hsh==="showcases"||hsh==="try"){scrollTo=hsh}
   else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
-  else if(["about","research","pricing"].indexOf(hsh)>=0){view=hsh}
+  else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
+  else if(["about","why","pricing","industries","start"].indexOf(hsh)>=0){view=hsh}
   if(view!=="show" && dPlayer){dPlayer.stop()}
   document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id==="v-"+view)});
-  document.querySelectorAll("[data-nav]").forEach(function(a){a.toggleAttribute("aria-current",a.dataset.nav===view); if(a.dataset.nav===view) a.setAttribute("aria-current","page")});
+  var navv = view==="industry" ? "industries" : view;
+  document.querySelectorAll("[data-nav]").forEach(function(a){a.toggleAttribute("aria-current",a.dataset.nav===navv); if(a.dataset.nav===navv) a.setAttribute("aria-current","page")});
   if(scrollTo){var el=document.getElementById(scrollTo); requestAnimationFrame(function(){el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})}
   else window.scrollTo(0,0);
 }
