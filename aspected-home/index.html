@@ -3,7 +3,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then a showcase player: six titles beside one large demo that plays; the contrast (two rankings) and one paragraph on how; proof; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
 :root{
@@ -202,45 +202,50 @@ p{margin:0}
 .lsteps li.done{opacity:.75}
 .lsteps em{font:600 10.5px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
 
-/* sweet little lies */
-.lq{font-weight:500;margin-bottom:10px;transition:color .3s}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.prod{background:var(--surface);border-radius:10px;padding:10px 12px;display:grid;gap:2px;border:1.5px solid transparent;transition:border-color .3s,transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;min-width:0}
-.prod b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prod span{color:var(--muted);font-size:.92em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prod.tap{transform:scale(.97);border-color:var(--line)}
-.prod.liar{border-color:var(--coral);box-shadow:0 0 0 4px var(--coral-soft)}
-.cubes{margin-top:12px;display:grid;gap:7px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
-.cubes.in{opacity:1;transform:none}
-.cr{display:grid;grid-template-columns:5.5em minmax(0,1fr) auto;gap:8px;align-items:center;color:var(--muted)}
-.cb{display:flex;gap:3px;flex-wrap:nowrap;overflow:hidden}
-.cb i{flex:none;width:clamp(9px,1.4vw,16px);aspect-ratio:1;border-radius:2px;background:var(--muted);opacity:.6}
-.cb i.part{background:linear-gradient(90deg,var(--muted) var(--p),var(--line) var(--p))}
-.cr.hot .cb i{background:var(--coral);opacity:1}
-.cr.hot .cb i.part{background:linear-gradient(90deg,var(--coral) var(--p),var(--coral-soft) var(--p))}
-.cr.hot .g{color:var(--coral);font-weight:500}
-.cr .g{font-variant-numeric:tabular-nums}
-.lnote{font-size:.9em;color:var(--muted)}
-/* the receipt */
-.stage.rc{padding:0}
-.slot{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(86%,340px);height:8px;border-radius:0 0 6px 6px;background:var(--ink);z-index:2}
-.stage.big .slot{width:min(76%,500px);height:10px}
-.paper{position:absolute;left:50%;top:4px;width:min(78%,300px);transform:translate(-50%,0);transition:transform 2.2s cubic-bezier(.35,.1,.3,1);background:var(--paper);color:var(--paper-ink);padding:14px 14px 18px;font-size:10.5px;line-height:1.4;box-shadow:0 14px 28px -16px rgba(0,0,0,.55)}
-.stage.big .paper{width:min(66%,440px);font-size:clamp(11px,1.3vw,14px);padding:22px 24px 26px}
-.paper.up{transform:translate(-50%,-102%)}
-.paper .c{text-align:center}
-.paper .hd{font-weight:700;letter-spacing:.14em}
-.paper .mu{color:var(--paper-mute)}
-.paper hr{border:0;border-top:1px dashed var(--paper-mute);margin:6px 0}
-.paper .rs{font-weight:600;letter-spacing:.08em;margin-top:5px}
-.paper .row{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
-.paper .row>span:first-child{overflow:hidden;text-overflow:ellipsis;min-width:0}
-.paper .ok{color:var(--paper-blue);font-weight:600}
-.paper .dec{display:inline-block;background:var(--paper-blue);color:#fff;padding:0 6px;border-radius:3px;transition:background .4s,color .4s}
-.paper .dec.hide{background:transparent;color:var(--paper-ink)}
-.paper .v b{display:inline-block;color:var(--paper-red);border:1.5px solid var(--paper-red);border-radius:2px;padding:0 3px;margin-right:6px;font-weight:700;line-height:1.15;transform:rotate(-4deg);transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .2s}
-.paper .v.hide b{opacity:0;transform:scale(1.9) rotate(-12deg)}
-.paper .barcode{height:24px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--paper-ink) 0 2px,transparent 2px 3px,var(--paper-ink) 3px 4px,transparent 4px 7px,var(--paper-ink) 7px 10px,transparent 10px 12px)}
+/* sweet little lies: the deck's own look (orange = this product, purple = the other) */
+.stage.sl{padding:0;background:linear-gradient(160deg,#FFEDE3 0%,#FFDCD6 45%,#FFD0DF 100%);color:#1E1A2B;font-family:"Plus Jakarta Sans",var(--f-sans)}
+.slslide{height:100%;display:flex;flex-direction:column;gap:6px;padding:12px 14px}
+.sltop{display:flex}
+.slbadge{font:800 9.5px/1 "Plus Jakarta Sans",var(--f-sans);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#F0612A,#E8457A);padding:5px 9px;border-radius:999px}
+.slh{margin:0;font:800 15px/1.2 "Plus Jakarta Sans",var(--f-sans);letter-spacing:-.03em}
+.slv{color:#F0612A;margin-right:6px}
+.slv:empty{margin:0}
+.slsub{margin:0;font-size:11.5px;color:#7D7890;font-weight:600}
+.sltiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sltile{background:#fff;border-radius:14px;padding:6px 10px;display:grid;gap:1px;border:2px solid #F0612A;transition:transform .2s}
+.sltile.b{border-color:#7B61FF;background:#EFEBFF}
+.sltile b{font-weight:800;font-size:12px}
+.sltile span{font-size:10.5px;color:#7D7890}
+.sltile.tap{transform:scale(.94)}
+.slpic{position:relative;flex:1;min-height:0;background:#fff;border-radius:16px;padding:8px 10px;display:flex;flex-direction:column;justify-content:center}
+.slq{position:absolute;inset:0;display:grid;place-items:center;font:800 52px/1 "Plus Jakarta Sans",var(--f-sans);color:#F0612A;transition:opacity .3s;animation:slbob 1.6s ease-in-out infinite}
+@keyframes slbob{50%{transform:translateY(-5px)}}
+.slcubes{display:grid;gap:5px;opacity:0;transition:opacity .25s}
+.slrow{display:grid;grid-template-columns:6.6em minmax(0,1fr) auto;align-items:center;gap:6px;padding:4px 7px;border-radius:8px;font-size:10.5px}
+.slrow.a{background:rgba(240,97,42,.09)}
+.slrow.b{background:rgba(123,97,255,.09)}
+.slrow .lg{display:flex;align-items:center;gap:5px;font-weight:600;white-space:nowrap}
+.slrow .lg i{width:7px;height:7px;border-radius:50%;background:#F0612A}
+.slrow.b .lg i{background:#7B61FF}
+.slrow .g{font-weight:800}
+.cbs{display:flex;gap:2px;overflow:hidden}
+.cbs i{flex:none;width:clamp(9px,1.2vw,16px);aspect-ratio:1;border-radius:2px;background:linear-gradient(135deg,#FFFFFF 0 45%,#E6E0EE 45% 72%,#CFC5DC 72%);box-shadow:inset 0 0 0 1px #B9AFC8;opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .3s cubic-bezier(.3,1.5,.5,1);transition-delay:calc(var(--d) * 60ms)}
+.cbs i.part{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.slcap{margin:2px 0 0;font-size:9.5px;color:#7D7890}
+.stage.sl.rev .slq{opacity:0;animation:none}
+.stage.sl.rev .slcubes{opacity:1}
+.stage.sl.rev .cbs i{opacity:1;transform:none}
+.slfoot{margin:0;font-size:10.5px;color:#4A4560;font-weight:600}
+.slfoot b{color:#F0612A}
+.stage.big.sl .slslide{padding:clamp(14px,2.2vw,28px) clamp(16px,2.6vw,34px);gap:clamp(6px,1vw,12px)}
+.stage.big.sl .slh{font-size:clamp(16px,2vw,26px)}
+.stage.big.sl .slsub,.stage.big.sl .slfoot{font-size:clamp(11.5px,1.2vw,15px)}
+.stage.big.sl .sltile b{font-size:clamp(12px,1.3vw,16px)}
+.stage.big.sl .sltile span,.stage.big.sl .slrow{font-size:clamp(10.5px,1.1vw,14px)}
+.stage.big.sl .slq{font-size:clamp(52px,7vw,96px)}
+.stage.big.sl .cbs{gap:3px}
+.stage.big.sl .cbs i{width:clamp(12px,1.9vw,26px)}
+.stage.big.sl .slcap{font-size:clamp(9.5px,1vw,12.5px)}
 
 /* csv */
 .csv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
@@ -861,11 +866,11 @@ var SHOWS = [
    biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
    elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
    demo:"live", cfg:{frames:[["live/food-2.jpg","Search: chocopasta",0],["live/food-3.jpg","Open one: high in sugar",0],["live/food-alt.jpg","Less sugar, the rest the same: 89% alike",1]]}},
-  {id:"lies", role:"Aspected finds what kind of product each one is, then checks every aspect against that kind. The aspect furthest off is the reason it is flagged.", me:"Book a live run of the guessing game, then try the same check on your own list.", name:"Sweet Little Lies", live:false, onRequest:true,
-   title:"The smoothie with more sugar than cola.",
-   say:"Guess which product is the liar. Aspected compares each one with its own kind and shows what gives it away.",
+  {id:"lies", role:"Aspected keeps a product's name and its numbers apart. Ask for a well-known sweet by name plus only its sugar, and the “healthy” products that come as close show up, with the distance per aspect.", me:"Book a live run of the game: 24 products that are not what they seem, each with how Aspected found it.", name:"Sweet Little Lies", live:false, onRequest:true,
+   title:"A smoothie, sweeter than cola.",
+   say:"A guessing game on 14,961 supermarket products. Aspected finds the ones that are not what they seem, and shows why.",
    biz:"Master data and catalogues: the record that does not fit, and why.",
-   elsewhere:[["Legal","Contracts: the MSA whose liability cap is far above every other MSA of its type."],["Finance","An invoice identical to the last twelve, except for the bank account."],["Data quality","Lost decimals, wrong units and misfiled records, each with the aspect that is off."]],
+   elsewhere:[["IT","A document in the wrong folder, or a file labelled public that reads as confidential."],["Finance","An invoice far above its peers, or one supplier twice under two names."],["Legal","The MSA whose liability cap is far above every other MSA of its type."]],
    demo:"lies"},
   {id:"csv", role:"A local model reads your columns and proposes aspects with first weights. Pick the better of two results and the weights adjust.", me:"Drop a CSV or Excel file and get a search page with its own link to share.", name:"Your data", live:false,
    title:"Your spreadsheet, searchable in minutes.",
@@ -963,22 +968,25 @@ var BUILD = {
     end(); return {reset:reset,play:play,end:end};
   },
   lies:function(stage){
-    function cubes(g){var n=g/4, out="", i; for(i=0;i<Math.floor(n);i++) out+='<i></i>'; if(n%1) out+='<i class="part" style="--p:'+Math.round((n%1)*100)+'%"></i>'; return out}
-    stage.innerHTML='<div class="lq">Which one is the liar?</div>'+
-      '<div class="pair"><div class="prod" data-p="a"><b>Fruit smoothie</b><span>“no added sugar”</span></div>'+
-      '<div class="prod" data-p="b"><b>Cola</b><span>regular</span></div></div>'+
-      '<div class="cubes"><div class="cr hot"><span>smoothie</span><span class="cb">'+cubes(33)+'</span><span class="g">33 g</span></div>'+
-      '<div class="cr"><span>cola</span><span class="cb">'+cubes(27)+'</span><span class="g">27 g</span></div>'+
-      '<p class="lnote">sugar per glass · the smoothie is far above other smoothies</p></div>';
-    var a=stage.querySelector('[data-p="a"]'), b=stage.querySelector('[data-p="b"]'), cb=stage.querySelector(".cubes"), q=stage.querySelector(".lq");
-    function reset(){a.classList.remove("tap","liar"); b.classList.remove("tap"); cb.classList.remove("in"); q.textContent="Which one is the liar?"}
+    stage.classList.add("sl");
+    var Q="Smoothie or cola: which has more sugar?", T="A smoothie, sweeter than cola", ANS="13 g sugar per 100 ml. Coca-Cola: 10.6 g.";
+    function cubes(g,base){var n=g/4,out="",k=0;for(;k<Math.floor(n);k++) out+='<i style="--d:'+(base+k)+'"></i>'; if(n%1) out+='<i class="part" style="--d:'+(base+k)+';--p:'+Math.round(n%1*100)+'%"></i>'; return out}
+    stage.innerHTML='<div class="slslide"><div class="sltop"><span class="slbadge">The Great Pretender</span></div>'+
+      '<p class="slh"><span class="slv"></span><span class="slt"></span></p><p class="slsub"></p>'+
+      '<div class="sltiles"><div class="sltile a"><b>Smoothie</b><span>sounds healthy</span></div><div class="sltile b"><b>Coca-Cola</b><span>regular</span></div></div>'+
+      '<div class="slpic"><span class="slq">?</span><div class="slcubes">'+
+        '<div class="slrow a"><span class="lg"><i></i>Smoothie</span><span class="cbs">'+cubes(33,0)+'</span><span class="g">33 g</span></div>'+
+        '<div class="slrow b"><span class="lg"><i></i>Coca-Cola</span><span class="cbs">'+cubes(27,9)+'</span><span class="g">27 g</span></div>'+
+        '<p class="slcap">Sugar cubes per glass (250 ml), 4 g each</p></div></div>'+
+      '<p class="slfoot"><b>Matched by Aspected:</b> the name + sugar ›</p></div>';
+    var v=stage.querySelector(".slv"), t=stage.querySelector(".slt"), sub=stage.querySelector(".slsub"), a=stage.querySelector(".sltile.a");
+    function reset(){stage.classList.remove("rev"); v.textContent=""; t.textContent=Q; sub.textContent="Tap your guess."; a.classList.remove("tap")}
+    function end(){a.classList.remove("tap"); stage.classList.add("rev"); v.textContent="Right!"; t.textContent=T; sub.textContent=ANS}
     function play(at){
-      at(500,function(){b.classList.add("tap")});
-      at(1100,function(){b.classList.remove("tap"); a.classList.add("tap")});
-      at(1700,function(){a.classList.remove("tap"); a.classList.add("liar"); q.textContent="The smoothie. Aspected found it."; cb.classList.add("in")});
-      return 5600;
+      at(1000,function(){a.classList.add("tap")});
+      at(1350,end);
+      return 6200;
     }
-    function end(){a.classList.remove("tap"); b.classList.remove("tap"); a.classList.add("liar"); cb.classList.add("in"); q.textContent="The smoothie. Aspected found it."}
     reset(); return {reset:reset,play:play,end:end};
   },
   receipt:function(stage){
