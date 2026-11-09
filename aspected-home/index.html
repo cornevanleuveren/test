@@ -76,6 +76,10 @@ p{margin:0}
 .herotag{color:var(--blue);margin-bottom:14px}
 .wordmark{font-size:clamp(44px,5.6vw,84px);font-weight:800;line-height:.92;letter-spacing:-.055em}
 .wordmark b{color:var(--blue)}
+.plain{margin-top:14px;font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:44ch}
+.heroproof{display:block;margin-top:22px;font-size:14px;color:var(--muted);text-decoration:none}
+.heroproof b{color:var(--ink);font-weight:700}
+.heroproof:hover b{color:var(--blue)}
 .oneliner{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.02em;margin-top:20px;color:var(--ink)}
 .ask{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:640px}
 .askbox{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:14px 22px;font:500 clamp(15px,2vw,18px)/1.3 var(--f-mono);min-height:56px;box-shadow:0 18px 40px -28px rgba(20,22,28,.35)}
@@ -123,7 +127,8 @@ p{margin:0}
 .pgroup:first-child{padding-top:0}
 .pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:12px 16px;border-radius:12px;display:grid;gap:4px;font:inherit;transition:background .25s}
 .pitem:hover{background:color-mix(in srgb,var(--surface) 70%,transparent)}
-.pitem .n{font:600 11.5px/1.2 var(--f-mono);color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.pitem .n{font:600 11.5px/1.2 var(--f-mono);color:var(--muted);display:none;align-items:center;gap:6px}
+.pitem .t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:8px;vertical-align:2px}
 .pitem .n .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
 .pitem .t{font-size:16.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em;color:var(--muted);transition:color .25s}
 .pitem[aria-selected="true"]{background:var(--surface);box-shadow:0 0 0 1px var(--line) inset}
@@ -155,7 +160,7 @@ p{margin:0}
   .pgroup{display:none}
   .pitem{flex:none;padding:9px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset;background:var(--surface)}
   .pitem .t,.pitem .prog{display:none!important}
-  .pitem .n{font-size:13px;color:var(--ink)}
+  .pitem .n{font-size:13px;color:var(--ink);display:inline-flex}
   .pitem[aria-selected="true"]{background:var(--blue);box-shadow:none}
   .pitem[aria-selected="true"] .n{color:#fff}
   .pitem[aria-selected="true"] .n .dot{background:#fff}
@@ -186,7 +191,7 @@ p{margin:0}
 .st-row.hit{background:var(--surface);box-shadow:0 0 0 1.5px var(--blue) inset}
 .st-row.hit .bar i{background:var(--blue)}
 .st-row.hit .v{color:var(--blue);font-weight:500}
-.st-row.dim{opacity:.55}
+.st-row.dim{opacity:.75}
 
 /* real screens of the live sites */
 .stage.lv{padding:0}
@@ -246,6 +251,27 @@ p{margin:0}
 .stage.big.sl .cbs{gap:3px}
 .stage.big.sl .cbs i{width:clamp(12px,1.9vw,26px)}
 .stage.big.sl .slcap{font-size:clamp(9.5px,1vw,12.5px)}
+
+/* the receipt */
+.stage.rc{padding:0}
+.slot{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(86%,340px);height:8px;border-radius:0 0 6px 6px;background:var(--ink);z-index:2}
+.stage.big .slot{width:min(76%,500px);height:10px}
+.paper{position:absolute;left:50%;top:4px;width:min(78%,300px);transform:translate(-50%,0);transition:transform 2.2s cubic-bezier(.35,.1,.3,1);background:var(--paper);color:var(--paper-ink);padding:14px 14px 18px;font-size:10.5px;line-height:1.4;box-shadow:0 14px 28px -16px rgba(0,0,0,.55)}
+.stage.big .paper{width:min(66%,440px);font-size:clamp(11px,1.3vw,14px);padding:22px 24px 26px}
+.paper.up{transform:translate(-50%,-102%)}
+.paper .c{text-align:center}
+.paper .hd{font-weight:700;letter-spacing:.14em}
+.paper .mu{color:var(--paper-mute)}
+.paper hr{border:0;border-top:1px dashed var(--paper-mute);margin:6px 0}
+.paper .rs{font-weight:600;letter-spacing:.08em;margin-top:5px}
+.paper .row{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
+.paper .row>span:first-child{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.paper .ok{color:var(--paper-blue);font-weight:600}
+.paper .dec{display:inline-block;background:var(--paper-blue);color:#fff;padding:0 6px;border-radius:3px;transition:background .4s,color .4s}
+.paper .dec.hide{background:transparent;color:var(--paper-ink)}
+.paper .v b{display:inline-block;color:var(--paper-red);border:1.5px solid var(--paper-red);border-radius:2px;padding:0 3px;margin-right:6px;font-weight:700;line-height:1.15;transform:rotate(-4deg);transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.paper .v.hide b{opacity:0;transform:scale(1.9) rotate(-12deg)}
+.paper .barcode{height:24px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--paper-ink) 0 2px,transparent 2px 3px,var(--paper-ink) 3px 4px,transparent 4px 7px,var(--paper-ink) 7px 10px,transparent 10px 12px)}
 
 /* csv */
 .csv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
@@ -472,17 +498,16 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
   <section class="view" id="v-home">
     <div class="wrap hero">
       <div class="hero-l">
-      <p class="eyebrow herotag">Aspect search</p>
       <h1 class="wordmark">Aspected</h1>
       <p class="oneliner">Every word counts. Even “but”.</p>
+      <p class="plain">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
       <div class="ask" aria-hidden="true">
         <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
-        <div class="chips" id="askChips"></div>
       </div>
+      <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
       </div>
       <figure class="hero-sp" aria-label="Spider chart: what you asked stays the same as this one, except on the aspects you asked to change">
         <div id="heroSpider"></div>
-        <figcaption class="legend"><span><i class="k"></i>this</span><span><i class="k bet"></i>what you asked</span></figcaption>
       </figure>
     </div>
 
@@ -495,7 +520,6 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
         <div class="plist" id="plist" role="tablist" aria-label="Showcases"></div>
         <div class="ppanel" id="ppanel" role="tabpanel" aria-live="polite"></div>
       </div>
-      <div class="indchips" id="indChips"><span>See it for your industry</span></div>
     </div>
 
     <section class="wrap whyhome" aria-labelledby="whyhome-h">
@@ -531,7 +555,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       </div>
     </section>
 
-    <section class="proof" aria-labelledby="proof-h">
+    <section class="proof" id="proof" aria-labelledby="proof-h">
       <div class="wrap">
         <div class="proof-head">
           <p class="eyebrow">In production</p>
@@ -883,7 +907,9 @@ var SHOWS = [
    say:"One procedure, twelve near-identical copies. See what separates them by version, date and owner, then choose.",
    biz:"SharePoint and file shares: settle the right version before Copilot reads it.",
    elsewhere:[["IT","Before a Copilot rollout, the current version wins and the older ones stay out."],["Migration","Move one copy instead of seven, with Xillio's connectors."],["Legal","See what changed between the contract you signed and the copy on the share."]],
-   demo:"dups"},
+   demo:"rerank", cfg:{seed:"procedure-site-safety.docx", tag:"12 copies", query:"the current one, for this site",
+     items:[["v6 · 2024","superseded",.92,"older",.35],["Draft · Jan 2026","not approved",.88,"draft",.3],["Copy · HR team site","not the source",.85,"copy",.25],["v7 · Mar 2026","published · QA",.8,"current",.95]],
+     after:[3,0,1,2]}},
   {id:"receipt", name:"The receipt", live:false, onRequest:true,
    role:"Aspected keeps a separate score per aspect, such as content, lifecycle and source. The receipt records why each document was used or kept out. In production it runs in the background, ready for an audit.",
    me:"Book a live run: ask a question, set one weight to zero, and watch the answer and its receipt change.",
@@ -1099,7 +1125,7 @@ GROUPS.forEach(function(g){
   plist.insertAdjacentHTML("beforeend",'<p class="pgroup">'+esc(g[0])+'</p>');
   g[1].forEach(function(id){var s=showById(id);
     plist.insertAdjacentHTML("beforeend",'<button type="button" class="pitem" role="tab" id="tab-'+id+'" data-id="'+id+'" aria-selected="false" aria-controls="ppanel">'+
-      '<span class="n">'+(s.live?'<i class="dot"></i>':'')+esc(s.name)+'</span><span class="t">'+esc(s.title)+'</span><span class="prog"><i></i></span></button>');
+      '<span class="n">'+(s.live?'<i class="dot"></i>':'')+esc(s.name)+'</span><span class="t">'+(s.live?'<i class="dot"></i>':'')+esc(s.title)+'</span><span class="prog"><i></i></span></button>');
   });
 });
 function primary(s){
@@ -1113,7 +1139,7 @@ function select(id, byUser){
   cur=id; var s=showById(id);
   plist.querySelectorAll(".pitem").forEach(function(b){var on=b.dataset.id===id; b.setAttribute("aria-selected",on); b.tabIndex=on?0:-1; b.classList.remove("run")});
   if(curPlayer) curPlayer.stop();
-  ppanel.innerHTML='<div class="stage big"></div><div class="pmeta"><div class="top">'+badge(s)+'<span class="name">'+esc(s.name)+'</span></div>'+
+  ppanel.innerHTML='<div class="stage big"></div><div class="pmeta"><div class="top">'+badge(s)+'</div>'+
     '<h3>'+esc(s.title)+'</h3><p class="say">'+esc(s.say)+'</p><p class="biz"><b>In your business:</b> '+esc(s.biz)+'</p>'+
     '<div class="ctas">'+primary(s)+'<a class="btn ghost" href="#show-'+s.id+'">Details</a></div></div>';
   curPlayer=Player(ppanel.querySelector(".stage"), s);
@@ -1179,7 +1205,7 @@ var INDS=[
 ];
 var chipsEl=document.getElementById("indChips"), tilesEl=document.getElementById("iTiles");
 INDS.forEach(function(d){
-  chipsEl.insertAdjacentHTML("beforeend",'<a href="#industry-'+d.id+'">'+esc(d.name)+'</a>');
+  if(chipsEl) chipsEl.insertAdjacentHTML("beforeend",'<a href="#industry-'+d.id+'">'+esc(d.name)+'</a>');
   tilesEl.insertAdjacentHTML("beforeend",'<a class="itile" href="#industry-'+d.id+'"><h3>'+esc(d.name)+'</h3><p>'+esc(d.title)+'</p><span class="who">'+esc(d.who)+'</span></a>');
 });
 function openIndustry(id){
@@ -1203,6 +1229,7 @@ var ASKS=[["this pasta, but less sugar",["kind = pasta","sugar ↓","price ="]],
           ["the notice period, from the published contract",["topic ≈ notice period","lifecycle = published","source = official"]]];
 var askText=document.getElementById("askText"), askChips=document.getElementById("askChips"), ai=0;
 function showChips(list, animate){
+  if(!askChips) return;
   askChips.innerHTML=list.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("")+'<span class="chip open">the rest: open</span>';
   var cs=askChips.querySelectorAll(".chip");
   cs.forEach(function(c,i){ if(!animate){c.classList.add("in")} else setTimeout(function(){c.classList.add("in")},150+i*220)});
@@ -1218,7 +1245,7 @@ if(!reduce){
   (function cycle(){
     setTimeout(function(){
       ai=(ai+1)%ASKS.length; var txt=ASKS[ai][0], i=0; hs.labels(SP[ai].l); hs.hi([]); hs.set(SP[ai].a,SP[ai].a);
-      askChips.querySelectorAll(".chip").forEach(function(c){c.classList.remove("in")});
+      if(askChips) askChips.querySelectorAll(".chip").forEach(function(c){c.classList.remove("in")});
       askText.textContent="";
       var iv=setInterval(function(){i++; askText.textContent=txt.slice(0,i); if(i>=txt.length){clearInterval(iv); showChips(ASKS[ai][1],true); hs.hi(SP[ai].h); hs.morph(SP[ai].b,1300); cycle()}},42);
     },4200);
@@ -1249,7 +1276,7 @@ function openShow(id){
 /* ---------- routing ---------- */
 function route(){
   var hsh=(location.hash||"#home").slice(1), view="home", scrollTo=null;
-  if(hsh==="showcases"||hsh==="try"){scrollTo=hsh}
+  if(hsh==="showcases"||hsh==="try"||hsh==="proof"){scrollTo=hsh}
   else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
   else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
   else if(["about","why","pricing","industries","start"].indexOf(hsh)>=0){view=hsh}
