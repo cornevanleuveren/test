@@ -143,7 +143,7 @@ p{margin:0}
 .pitem .prog{height:2px;border-radius:2px;background:var(--line);overflow:hidden;margin-top:6px;display:none}
 .pitem .prog i{display:block;height:100%;width:0;background:var(--blue)}
 .pitem.run .prog{display:block}
-.pitem.run .prog i{animation:prog 8s linear forwards}
+.pitem.run .prog i{animation:prog 13s linear forwards}
 .plist.manual .pitem .prog{display:none}
 @keyframes prog{to{width:100%}}
 .ppanel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
@@ -292,6 +292,29 @@ p{margin:0}
 .paper .v b{display:inline-block;color:var(--paper-red);border:1.5px solid var(--paper-red);border-radius:2px;padding:0 3px;margin-right:6px;font-weight:700;line-height:1.15;transform:rotate(-4deg);transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .2s}
 .paper .v.hide b{opacity:0;transform:scale(1.9) rotate(-12deg)}
 .paper .barcode{height:24px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--paper-ink) 0 2px,transparent 2px 3px,var(--paper-ink) 3px 4px,transparent 4px 7px,var(--paper-ink) 7px 10px,transparent 10px 12px)}
+
+/* twelve copies */
+.stage.cp{display:flex;flex-direction:column;gap:10px}
+.stage.cp .st-q{margin:0}
+.cpwrap{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:16px;align-items:center}
+.cptiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.cpt{position:relative;aspect-ratio:3/4;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:14% 14%;display:flex;flex-direction:column;gap:4px;transition:opacity .4s,border-color .4s,box-shadow .4s,transform .4s;transition-delay:calc(var(--d) * 40ms)}
+.cpt i{display:block;height:2px;background:var(--line);border-radius:1px}
+.cpt i:nth-child(2){width:70%}
+.cpt span{position:absolute;left:2px;right:2px;bottom:5px;font:600 9.5px/1 var(--f-mono);text-align:center;color:var(--muted);opacity:0;transition:opacity .3s;white-space:nowrap;overflow:hidden}
+.stage.cp.rev .cpt span{opacity:1}
+.stage.cp.rev .cpt:not(.win){opacity:.45}
+.stage.cp.rev .cpt.win{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);transform:scale(1.08)}
+.stage.cp.rev .cpt.win span{color:var(--blue)}
+.cpsum{margin:0;padding:0;list-style:none;display:grid;gap:7px;font:13px/1.3 var(--f-sans)}
+.cpsum li{display:grid;gap:1px;opacity:0;transform:translateX(8px);transition:opacity .35s,transform .35s;transition-delay:calc(400ms + var(--d) * 260ms)}
+.stage.cp.rev .cpsum li{opacity:1;transform:none}
+.cpsum b{font-weight:700}
+.cpsum span{color:var(--muted);font-size:.92em}
+.cpsum li.win b{color:var(--blue)}
+.stage.big.cp .cpsum{font-size:clamp(13px,1.4vw,17px);gap:clamp(7px,1vw,12px)}
+.stage.big.cp .cpt span{font-size:clamp(9.5px,1vw,12px)}
+.stage:not(.big).cp .cpsum li:nth-child(n+4){display:none}
 
 /* csv */
 .csv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
@@ -923,12 +946,10 @@ var SHOWS = [
    demo:"csv"},
   {id:"copies", role:"Aspected compares every copy on text, version, date and owner, then groups the copies and shows the one aspect that separates each from the rest.", me:"Drop a folder of documents and see which copies belong together, and why.", name:"Near-duplicates", live:false, onRequest:true,
    title:"Twelve copies. One that counts.",
-   say:"One procedure, twelve near-identical copies. See what separates them by version, date and owner, then choose.",
+   say:"One safety procedure, twelve copies in five places. Aspected finds the one that counts, and says why the others don't.",
    biz:"SharePoint and file shares: settle the right version before Copilot reads it.",
    elsewhere:[["IT","Before a Copilot rollout, the current version wins and the older ones stay out."],["Migration","Move one copy instead of seven, with Xillio's connectors."],["Legal","See what changed between the contract you signed and the copy on the share."]],
-   demo:"rerank", cfg:{seed:"procedure-site-safety.docx", tag:"12 copies", query:"the current one, for this site",
-     items:[["v6 · 2024","superseded",.92,"older",.35],["Draft · Jan 2026","not approved",.88,"draft",.3],["Copy · HR team site","not the source",.85,"copy",.25],["v7 · Mar 2026","published · QA",.8,"current",.95]],
-     after:[3,0,1,2]}},
+   demo:"copies"},
   {id:"receipt", name:"The receipt", live:false, onRequest:true,
    role:"Aspected keeps a separate score per aspect, such as content, lifecycle and source. The receipt records why each document was used or kept out. In production it runs in the background, ready for an audit.",
    me:"Book a live run: ask a question, set one weight to zero, and watch the answer and its receipt change.",
@@ -1009,19 +1030,19 @@ var BUILD = {
     function show(k){imgs.forEach(function(im,i){im.classList.toggle("on",i===k)}); steps.forEach(function(li,i){li.classList.toggle("on",i===k); li.classList.toggle("done",i<k)})}
     function reset(){show(0)}
     function end(){show(n-1)}
-    function play(at){for(var k=0;k<n;k++){(function(k){at(300+k*1900,function(){show(k)})})(k)} return 300+n*1900+1600}
+    function play(at){for(var k=0;k<n;k++){(function(k){at(300+k*3200,function(){show(k)})})(k)} return 300+n*3200+2000}
     end(); return {reset:reset,play:play,end:end};
   },
   lies:function(stage){
     stage.classList.add("sl");
-    var Q="Smoothie or cola: which has more sugar?", T="A smoothie, sweeter than cola", ANS="13 g sugar per 100 ml. Coca-Cola: 10.6 g.";
+    var Q="Smoothie or cola: which has more sugar?", T="A smoothie, sweeter than cola", ANS="13 g sugar per 100 ml. Cola: 10.6 g.";
     function cubes(g,base){var n=g/4,out="",k=0;for(;k<Math.floor(n);k++) out+='<i style="--d:'+(base+k)+'"></i>'; if(n%1) out+='<i class="part" style="--d:'+(base+k)+';--p:'+Math.round(n%1*100)+'%"></i>'; return out}
     stage.innerHTML='<div class="slslide"><div class="sltop"><span class="slbadge">The Great Pretender</span></div>'+
       '<p class="slh"><span class="slv"></span><span class="slt"></span></p><p class="slsub"></p>'+
-      '<div class="sltiles"><div class="sltile a"><b>Smoothie</b><span>sounds healthy</span></div><div class="sltile b"><b>Coca-Cola</b><span>regular</span></div></div>'+
+      '<div class="sltiles"><div class="sltile a"><b>Smoothie</b><span>sounds healthy</span></div><div class="sltile b"><b>Cola</b><span>regular</span></div></div>'+
       '<div class="slpic"><span class="slq">?</span><div class="slcubes">'+
         '<div class="slrow a"><span class="lg"><i></i>Smoothie</span><span class="cbs">'+cubes(33,0)+'</span><span class="g">33 g</span></div>'+
-        '<div class="slrow b"><span class="lg"><i></i>Coca-Cola</span><span class="cbs">'+cubes(27,9)+'</span><span class="g">27 g</span></div>'+
+        '<div class="slrow b"><span class="lg"><i></i>Cola</span><span class="cbs">'+cubes(27,9)+'</span><span class="g">27 g</span></div>'+
         '<p class="slcap">Sugar cubes per glass (250 ml), 4 g each</p></div></div>'+
       '<p class="slfoot"><b>Matched by Aspected:</b> the name + sugar ›</p></div>';
     var v=stage.querySelector(".slv"), t=stage.querySelector(".slt"), sub=stage.querySelector(".slsub"), a=stage.querySelector(".sltile.a");
@@ -1058,13 +1079,25 @@ var BUILD = {
     }
     reset(); return {reset:reset,play:play};
   },
+  copies:function(stage){
+    stage.classList.add("cp");
+    var tiles=[["v6","old"],["draft","draft"],["copy","copy"],["v5","old"],["v7","win"],["copy","copy"],["draft","draft"],["v4","old"],["Antwerp","other"],["v3","old"],["copy","copy"],["draft","draft"]];
+    var groups=[["win","The one that counts","v7 · published · owner QA · Rotterdam"],["old","4 older versions","superseded"],["draft","3 drafts","never approved"],["copy","3 copies","on team sites and in HR"],["other","1 other site","Antwerp, not Rotterdam"]];
+    stage.innerHTML='<div class="st-q typed"><span class="t">the current safety procedure for Rotterdam</span></div>'+
+      '<div class="cpwrap"><div class="cptiles">'+tiles.map(function(t,i){return '<div class="cpt '+t[1]+'" style="--d:'+i+'"><i></i><i></i><i></i><span>'+esc(t[0])+'</span></div>'}).join("")+'</div>'+
+      '<ul class="cpsum">'+groups.map(function(g,i){return '<li class="'+g[0]+'" style="--d:'+i+'"><b>'+esc(g[1])+'</b><span>'+esc(g[2])+'</span></li>'}).join("")+'</ul></div>';
+    function reset(){stage.classList.remove("rev")}
+    function end(){stage.classList.add("rev")}
+    function play(at){at(900,end); return 7000}
+    reset(); return {reset:reset,play:play,end:end};
+  },
   csv:function(stage){
-    var cells=["model","drive","range","price","VW ID.3","electric","430 km","€37k","Kia Niro","hybrid","900 km","€35k","Tesla Model 3","electric","510 km","€43k","Toyota Corolla","hybrid","950 km","€32k"];
+    var cells=["model","drive","range","price","Volvo EX30","electric","470 km","€37k","Hyundai Ioniq 5","electric","570 km","€46k","Toyota C-HR","hybrid","900 km","€38k","Kia EV3","electric","600 km","€36k"];
     var chips=["model · text","drive · enum","range · number","price · number"];
     stage.innerHTML='<div class="csv">'+cells.map(function(c,i){return '<span'+(i<4?' class="h"':'')+'>'+esc(c)+'</span>'}).join("")+'</div>'+
       '<div class="aspects">'+chips.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("")+'</div>'+
-      '<div class="result"><div class="st-q typed"><span class="t">like this ID.3, but more range</span></div>'+
-      '<div class="r"><span>Skoda Elroq · electric · 580 km</span><b>0.06</b></div><div class="r"><span>Tesla Model 3 · electric · 510 km</span><b>0.09</b></div><div class="r"><span>Kia EV3 · electric · 600 km</span><b>0.11</b></div></div>';
+      '<div class="result"><div class="st-q typed"><span class="t">like this Volvo EX30, but more range</span></div>'+
+      '<div class="r"><span>Kia EV3 · electric · 600 km</span><b>0.05</b></div><div class="r"><span>Skoda Elroq · electric · 580 km</span><b>0.08</b></div><div class="r"><span>Hyundai Ioniq 5 · electric · 570 km</span><b>0.11</b></div></div>';
     var hs=stage.querySelectorAll(".csv .h"), cs=stage.querySelectorAll(".aspects .chip"), tbl=stage.querySelector(".csv"), res=stage.querySelector(".result");
     function reset(){hs.forEach(function(x){x.classList.remove("lit")}); cs.forEach(function(x){x.classList.remove("in")}); tbl.classList.remove("away"); res.classList.remove("in")}
     function play(at){
@@ -1136,9 +1169,9 @@ function makeCard(s, bizLabel, bizText, into){
   }
 }
 /* ---------- the showcase player (home) ---------- */
-var ASK={vegas:"like this session, but more business",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current procedure, not the eleven copies",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this ID.3, but more range"};
+var ASK={vegas:"like this session, but more business",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current safety procedure for Rotterdam",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this Volvo EX30, but more range"};
 var DOM={vegas:"Conference sessions",food:"Groceries",receipt:"Contracts",copies:"Procedures",lies:"Product claims",csv:"Your spreadsheet"};
-var ORDER=["vegas","food","receipt","copies","lies","csv"], ADV=8000;
+var ORDER=["vegas","food","receipt","copies","lies","csv"], ADV=13000;
 var plist=document.getElementById("plist"), ppanel=document.getElementById("ppanel"), playerEl=document.getElementById("player");
 var cur=null, curPlayer=null, auto=!reduce, inView=false, advT=0;
 ORDER.forEach(function(id){var s=showById(id);
