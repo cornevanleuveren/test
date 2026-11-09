@@ -1,4 +1,5 @@
 <title>Aspected Homepage</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("asp-theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -306,6 +307,8 @@ footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
 footer .fmore{flex-basis:100%;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--line)}
 @media (max-width:620px){footer .fmore{justify-content:flex-start}}
 footer a{text-decoration:none}
+.themebtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:600 12.5px/1 var(--f-sans);padding:7px 12px;border-radius:999px;cursor:pointer}
+.themebtn:hover{color:var(--ink);border-color:var(--ink)}
 footer a:hover{color:var(--ink)}
 
 /* inner pages */
@@ -715,6 +718,7 @@ Rules: ask before installing anything new, keep my data on this machine, and sto
 <footer>
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>US patent 12,517,879</span></span>
+    <button class="themebtn" id="themeBtn" type="button">Dark mode</button>
     <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
     <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a></nav>
   </div>
@@ -739,6 +743,15 @@ document.querySelectorAll("[data-book]").forEach(function(a){a.href=BOOK});
 var LINKS={docs:"https://docs.aspected.com",partners:BOOK,analysts:BOOK,investors:BOOK};
 document.querySelectorAll("[data-link]").forEach(function(a){a.href=LINKS[a.getAttribute("data-link")]||BOOK});
 function badge(s){return s.live?'<span class="badge live">Live</span>':(s.onRequest?'<span class="badge req">Live demo on request</span>':'<span class="badge soon">Coming soon</span>')}
+
+/* ---------- light by default, dark on request ---------- */
+var themeBtn=document.getElementById("themeBtn");
+function paintThemeBtn(){themeBtn.textContent=document.documentElement.dataset.theme==="dark"?"Light mode":"Dark mode"}
+themeBtn.addEventListener("click",function(){
+  var next=document.documentElement.dataset.theme==="dark"?"light":"dark";
+  document.documentElement.dataset.theme=next; try{localStorage.setItem("asp-theme",next)}catch(e){} paintThemeBtn();
+});
+paintThemeBtn();
 
 /* ---------- get started: copy the AI instructions ---------- */
 document.getElementById("copyBtn").addEventListener("click",function(){
