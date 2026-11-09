@@ -126,7 +126,9 @@ p{margin:0}
 .plist{display:flex;flex-direction:column;gap:2px;min-width:0;padding-top:4px}
 .pgroup{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 16px 6px}
 .pgroup:first-child{padding-top:0}
-.pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:13px 16px;border-radius:12px;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:6px;align-items:center;font:inherit;transition:background .25s}
+.pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:13px 16px;border-radius:12px;display:grid;grid-template-columns:minmax(0,1fr);row-gap:5px;font:inherit;transition:background .25s}
+.pitem .dom{font:600 12.5px/1.2 var(--f-sans);color:var(--muted)}
+.pitem .dom b{color:var(--blue);font-weight:700}
 .pitem .q{font:500 14.5px/1.4 var(--f-mono);color:var(--muted);transition:color .25s}
 .pitem[aria-selected="true"] .q{color:var(--ink)}
 .livetag{font:600 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
@@ -164,8 +166,9 @@ p{margin:0}
   .plist::-webkit-scrollbar{display:none}
   .pgroup{display:none}
   .pitem{flex:none;display:flex;padding:9px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset;background:var(--surface)}
-  .pitem .q,.pitem .livetag,.pitem .prog{display:none!important}
-  .pitem .n{font-size:13px;color:var(--ink);display:inline-flex}
+  .pitem .q,.pitem .prog{display:none!important}
+  .pitem .dom{font-size:13px;color:var(--ink);white-space:nowrap}
+  .pitem[aria-selected="true"] .dom,.pitem[aria-selected="true"] .dom b{color:#fff}
   .pitem[aria-selected="true"]{background:var(--blue);box-shadow:none}
   .pitem[aria-selected="true"] .n{color:#fff}
   .pitem[aria-selected="true"] .n .dot{background:#fff}
@@ -518,7 +521,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <h1 class="wordmark">Aspected</h1>
       <p class="oneliner">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
       <div class="ask" aria-hidden="true">
-        <div class="askbox"><span id="askText">this session, but hands-on and after three</span><span class="caret"></span></div>
+        <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
       </div>
       <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
       </div>
@@ -895,7 +898,7 @@ document.querySelectorAll("[data-logo]").forEach(function(el,i){
 /* ---------- showcase content ---------- */
 var SHOWS = [
   {id:"vegas", role:"Every session carries its aspects, such as topic, format, level and time. Aspected weighs them in one calculation, and the sliders change the weights.", me:"Open Vegas, pick a session you like and move a slider. During the event, tap Last minute to see what you can still catch.", name:"Vegas", live:true, url:"https://vegas.aspected.com",
-   title:"This session, but hands-on and after three.",
+   title:"2,447 sessions. The one you meant.",
    say:"All 2,447 sessions of the AWS week in Las Vegas. Pick one you like, move the sliders, and fill your day.",
    biz:"Course catalogues and events where people choose instead of filter.",
    elsewhere:[["HR and learning","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
@@ -1133,13 +1136,14 @@ function makeCard(s, bizLabel, bizText, into){
   }
 }
 /* ---------- the showcase player (home) ---------- */
-var ASK={vegas:"this session, but hands-on and after three",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current procedure, not the eleven copies",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this ID.3, but more range"};
+var ASK={vegas:"like this session, but more business",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current procedure, not the eleven copies",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this ID.3, but more range"};
+var DOM={vegas:"Conference sessions",food:"Groceries",receipt:"Contracts",copies:"Procedures",lies:"Product claims",csv:"Your spreadsheet"};
 var ORDER=["vegas","food","receipt","copies","lies","csv"], ADV=8000;
 var plist=document.getElementById("plist"), ppanel=document.getElementById("ppanel"), playerEl=document.getElementById("player");
 var cur=null, curPlayer=null, auto=!reduce, inView=false, advT=0;
 ORDER.forEach(function(id){var s=showById(id);
   plist.insertAdjacentHTML("beforeend",'<button type="button" class="pitem" role="tab" id="tab-'+id+'" data-id="'+id+'" aria-selected="false" aria-controls="ppanel">'+
-    '<span class="n">'+esc(s.name)+'</span><span class="q">'+esc(ASK[id])+'</span>'+(s.live?'<span class="livetag">Live</span>':'')+'<span class="prog"><i></i></span></button>');
+    '<span class="dom">'+esc(DOM[id])+(s.live?' · <b>live</b>':'')+'</span><span class="q">'+esc(ASK[id])+'</span><span class="prog"><i></i></span></button>');
 });
 function primary(s){
   return s.live ? '<a class="btn" href="'+s.url+'" target="_blank" rel="noopener">Open '+esc(s.name)+' ↗</a>'
@@ -1236,7 +1240,7 @@ function openIndustry(id){
 }
 
 /* ---------- hero query ---------- */
-var ASKS=ORDER.map(function(id){return [ASK[id],[]]});
+var ASKS=[["this pasta, but less sugar",[]],["this hotel, but closer to the venue",[]],["this supplier, but in Germany",[]],["this laptop, but lighter",[]]];
 var askText=document.getElementById("askText"), askChips=document.getElementById("askChips"), ai=0;
 function showChips(list, animate){
   if(!askChips) return;
@@ -1245,12 +1249,10 @@ function showChips(list, animate){
   cs.forEach(function(c,i){ if(!animate){c.classList.add("in")} else setTimeout(function(){c.classList.add("in")},150+i*220)});
 }
 showChips(ASKS[0][1], false);
-var SP=[{l:["topic","level","hands-on","time","length"],a:[.88,.6,.22,.3,.62],b:[.85,.6,.9,.82,.62],h:[2,3]},
-        {l:["sugar","salt","protein","fat","price"],a:[.82,.3,.35,.6,.5],b:[.26,.3,.42,.56,.5],h:[0]},
-        {l:["meaning","lifecycle","source","date","version"],a:[.95,.22,.4,.8,.7],b:[.84,.95,.92,.62,.66],h:[1,2]},
-        {l:["meaning","version","date","owner","site"],a:[.9,.3,.32,.62,.8],b:[.86,.95,.9,.62,.8],h:[1,2]},
-        {l:["name","sugar","fat","salt","protein"],a:[.9,.85,.12,.1,.1],b:[.3,.85,.14,.1,.16],h:[0]},
-        {l:["model","drive","range","price","seats"],a:[.8,.9,.45,.5,.6],b:[.74,.9,.86,.55,.6],h:[2]}];
+var SP=[{l:["sugar","salt","protein","fibre","price"],a:[.8,.45,.5,.35,.55],b:[.28,.45,.52,.42,.55],h:[0]},
+        {l:["distance","price","rating","quiet","size"],a:[.25,.6,.7,.5,.6],b:[.88,.58,.68,.52,.6],h:[0]},
+        {l:["product","country","price","rating","lead time"],a:[.9,.2,.6,.7,.5],b:[.88,.9,.6,.68,.5],h:[1]},
+        {l:["weight","price","battery","screen","speed"],a:[.3,.6,.7,.6,.7],b:[.85,.58,.68,.6,.7],h:[0]}];
 var hs=Spider(document.getElementById("heroSpider"),5);
 hs.labels(SP[0].l); hs.hi(SP[0].h); hs.set(SP[0].a,SP[0].b);
 if(!reduce){
