@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then a showcase player: six titles beside one large demo that plays; a thin proof strip; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
+/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then a showcase player: six titles beside one large demo that plays; the contrast (two rankings) and one paragraph on how; proof; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
 :root{
   --bg:#F8F8F8; --surface:#FFFFFF; --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
   --blue:#005CFC; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
@@ -73,7 +73,7 @@ p{margin:0}
 .legend span{display:inline-flex;align-items:center;gap:7px}
 .k{display:inline-block;width:18px;border-top:2px dashed var(--muted)}
 .k.bet{height:10px;border:2px solid var(--blue);background:var(--blue-soft);border-radius:2px}
-.wordmark{font-size:clamp(56px,8.5vw,128px);font-weight:800;line-height:.92;letter-spacing:-.055em}
+.wordmark{font-size:clamp(44px,5.6vw,84px);font-weight:800;line-height:.92;letter-spacing:-.055em}
 .wordmark b{color:var(--blue)}
 .oneliner{font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.02em;margin-top:20px;color:var(--ink)}
 .ask{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:640px}
@@ -297,7 +297,7 @@ p{margin:0}
 @media (max-width:980px){.stack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.stack-grid{grid-template-columns:minmax(0,1fr)}}
 .try{padding-block:clamp(48px,8vw,96px) clamp(64px,9vw,112px);text-align:left;border-top:1px solid var(--line)}
-.try h2{font-size:clamp(44px,6.5vw,80px);font-weight:800;letter-spacing:-.045em;line-height:.95}
+.try h2{font-size:clamp(34px,4.4vw,60px);font-weight:800;letter-spacing:-.045em;line-height:.95}
 .try h2 b{color:var(--blue)}
 .try p{margin-top:16px;color:var(--muted);font-size:17px;max-width:46ch}
 .try .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
@@ -347,6 +347,14 @@ footer a:hover{color:var(--ink)}
 .timeline div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
 .timeline b{font:600 14px/1.5 var(--f-mono);color:var(--blue)}
 .h2s{font-size:24px;font-weight:800;margin-top:56px}
+.whyhome{padding-block:clamp(48px,7vw,88px);display:flex;flex-direction:column;gap:10px}
+.whyhome h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;line-height:1.15}
+.whyhome .vs{margin-top:20px}
+.bottomline{margin-top:28px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:8px 40px;align-items:start}
+.bottomline h3{font-size:22px;font-weight:800;line-height:1.25}
+.bottomline p{color:var(--muted);font-size:16.5px;max-width:62ch}
+.bottomline .talk{grid-column:2}
+@media (max-width:760px){.bottomline{grid-template-columns:minmax(0,1fr)}.bottomline .talk{grid-column:1}}
 .vs{margin-top:36px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:20px}
 .vs-q{font:500 clamp(15px,1.8vw,18px)/1.4 var(--f-mono)}
 .vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
@@ -438,7 +446,7 @@ footer a:hover{color:var(--ink)}
   <section class="view" id="v-home">
     <div class="wrap hero">
       <div class="hero-l">
-      <h1 class="wordmark">Aspected<b>.</b></h1>
+      <h1 class="wordmark">Aspected</h1>
       <p class="oneliner">Same, but better.</p>
       <div class="ask" aria-hidden="true">
         <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
@@ -463,6 +471,39 @@ footer a:hover{color:var(--ink)}
       <div class="indchips" id="indChips"><span>See it for your industry</span></div>
     </div>
 
+    <section class="wrap whyhome" aria-labelledby="whyhome-h">
+      <p class="eyebrow">Why it works</p>
+      <h2 id="whyhome-h">Same question. Two rankings.</h2>
+      <div class="vs">
+        <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
+        <div class="vs-cols">
+          <div class="vs-col">
+            <p class="eyebrow">Plain vector search · text only</p>
+            <ol>
+              <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
+              <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
+              <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>120 days</b>, from a draft.</p>
+          </div>
+          <div class="vs-col good">
+            <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
+            <ol>
+              <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+              <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
+              <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>90 days</b>, from the published version, with a receipt.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottomline">
+        <h3>One thing changed, at the bottom.</h3>
+        <p>In every database today, a field like price, version or date can only be a filter: in or out. In Aspected, every field becomes an aspect. It has a distance to your question and a weight in the ranking. That is what lets a whole sentence go in, and what lets every answer show its reasons.</p>
+        <a class="talk" href="#why">Read why it works →</a>
+      </div>
+    </section>
+
     <section class="proof" aria-labelledby="proof-h">
       <div class="wrap">
         <div class="proof-head">
@@ -482,19 +523,9 @@ footer a:hover{color:var(--ink)}
       </div>
     </section>
 
-    <section class="wrap stack" aria-labelledby="stack-h">
-      <p class="eyebrow">Fits what you run</p>
-      <h2 id="stack-h">One index under the AI you already use.</h2>
-      <div class="stack-grid">
-        <div><b>Under Copilot</b><p>Deployed as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
-        <div><b>In your agents</b><p>Bedrock agents and other assistants over MCP, your own apps over the REST API.</p></div>
-        <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
-        <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
-      </div>
-    </section>
 
     <div class="wrap try" id="try">
-      <h2>Try it now<b>.</b></h2>
+      <h2>Try it now</h2>
       <p>Two showcases are live. Open one and change what you are looking for, or get started on your own data.</p>
       <div class="row">
         <a class="btn" href="https://samebutbetter.food" target="_blank" rel="noopener">Open samebutbetter.food ↗</a>
@@ -562,7 +593,7 @@ footer a:hover{color:var(--ink)}
     <div class="wrap page">
       <p class="eyebrow" style="margin-bottom:14px">Aspected vs plain vector search</p>
       <h1>Same question. Two rankings.</h1>
-      <p class="lede">A plain vector search ranks on one embedding of the text. Aspected builds the vector from aspects, each with its own weight, and searches them in one calculation.</p>
+      <p class="lede">“This pasta, but with less sugar, same price.” Search today breaks that into a query and two filters, and the most important word, <i>but</i>, is thrown away before the search starts. Aspected weighs the whole sentence in one calculation.</p>
       <div class="vs">
         <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
         <div class="vs-cols">
@@ -592,6 +623,7 @@ footer a:hover{color:var(--ink)}
         <details><summary>Is this sparse vector search?</summary><p>In our sense, yes: you ask with only the aspects you care about, and the ones you leave out don't count. It is not the "sparse vectors" of keyword-style retrieval such as SPLADE, where each dimension is a word.</p></details>
         <details><summary>Isn't that just a filter?</summary><p>A filter says yes or no and drops everything else, including the almost-right. An aspect says how close a record is, so a near match still ranks, only lower.</p></details>
         <details><summary>How is it different from hybrid search, boosting or a reranker?</summary><p>Those add rules or a second model on top of one score, and every rule interacts with the others. Aspected ranks on all aspects in the first pass and shows the distance per aspect.</p></details>
+        <details><summary>Do I need to clean my data first?</summary><p>No. Search today shortlists on one score before anything else is checked, so an old draft can beat the current version. Aspected weighs every aspect of every record, so an old or stray document has a different profile and sinks. Clean data still helps; it is no longer a precondition.</p></details>
         <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
         <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over MCP or the REST API.</p></details>
         <details><summary>Who decides what counts?</summary><p>You do. Every query can weigh its aspects differently, so the people who own the content decide what counts, not a model.</p></details>
@@ -629,6 +661,17 @@ footer a:hover{color:var(--ink)}
           <a class="btn ghost" href="https://docs.aspected.com" target="_blank" rel="noopener">Open docs.aspected.com ↗</a>
         </div>
       </div>
+
+<section class="stack" aria-labelledby="stack-h">
+      <p class="eyebrow">Fits what you run</p>
+      <h2 id="stack-h">One index under the AI you already use.</h2>
+      <div class="stack-grid">
+        <div><b>Under Copilot</b><p>Deployed as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
+        <div><b>In your agents</b><p>Bedrock agents and other assistants over MCP, your own apps over the REST API.</p></div>
+        <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
+        <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
+      </div>
+    </section>
 
       <h2 class="h2s" id="ai-steps">Instructions for your AI</h2>
       <p class="sub">Copy this into Claude Code, Claude, or another AI assistant with a terminal.</p>
