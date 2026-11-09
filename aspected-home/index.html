@@ -61,11 +61,12 @@ p{margin:0}
 .hero{padding-block:clamp(40px,7vw,88px) clamp(16px,3vw,32px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:center}
 .hero-l{min-width:0}
 .hero-sp{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
-@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero-sp{max-width:420px;width:100%;margin-inline:auto}}
+.hero-sp{max-width:400px;justify-self:end;width:100%}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero-sp{max-width:340px;justify-self:center;width:100%;margin-inline:auto}}
 .spider{display:block;width:100%;height:auto;overflow:visible}
 .sp-grid{fill:none;stroke:var(--line);stroke-width:1.5}
 .sp-axis{stroke:var(--line);stroke-width:1.5}
-.sp-lab{font:500 26px var(--f-mono);fill:var(--muted);transition:fill .3s}
+.sp-lab{font:500 19px var(--f-mono);fill:var(--muted);transition:fill .3s}
 .sp-lab.hi{fill:var(--blue);font-weight:600}
 .sp-this{fill:none;stroke:var(--muted);stroke-width:3;stroke-dasharray:9 8}
 .sp-bet{fill:var(--blue);fill-opacity:.16;stroke:var(--blue);stroke-width:4;stroke-linejoin:round}
@@ -80,7 +81,7 @@ p{margin:0}
 .heroproof{display:block;margin-top:22px;font-size:14px;color:var(--muted);text-decoration:none}
 .heroproof b{color:var(--ink);font-weight:700}
 .heroproof:hover b{color:var(--blue)}
-.oneliner{max-width:30ch;font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.02em;margin-top:20px;color:var(--ink)}
+.oneliner{max-width:36ch;font-size:clamp(17px,1.6vw,21px);font-weight:500;line-height:1.45;letter-spacing:-.02em;margin-top:20px;color:var(--ink)}
 .ask{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:640px}
 .askbox{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:14px 22px;font:500 clamp(15px,2vw,18px)/1.3 var(--f-mono);min-height:56px;box-shadow:0 18px 40px -28px rgba(20,22,28,.35)}
 .askbox::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--blue)}
@@ -122,10 +123,14 @@ p{margin:0}
 
 /* the showcase player */
 .player{display:grid;grid-template-columns:minmax(260px,.42fr) minmax(0,1fr);gap:clamp(16px,2.5vw,32px);align-items:start}
-.plist{display:flex;flex-direction:column;gap:4px;min-width:0}
+.plist{display:flex;flex-direction:column;gap:2px;min-width:0;padding-top:4px}
 .pgroup{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 16px 6px}
 .pgroup:first-child{padding-top:0}
-.pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:12px 16px;border-radius:12px;display:grid;gap:4px;font:inherit;transition:background .25s}
+.pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:13px 16px;border-radius:12px;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:6px;align-items:center;font:inherit;transition:background .25s}
+.pitem .q{font:500 14.5px/1.4 var(--f-mono);color:var(--muted);transition:color .25s}
+.pitem[aria-selected="true"] .q{color:var(--ink)}
+.livetag{font:600 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
+.pitem .prog{grid-column:1 / -1}
 .pitem:hover{background:color-mix(in srgb,var(--surface) 70%,transparent)}
 .pitem .n{font:600 11.5px/1.2 var(--f-mono);color:var(--muted);display:none;align-items:center;gap:6px}
 .pitem .t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:8px;vertical-align:2px}
@@ -158,8 +163,8 @@ p{margin:0}
   .plist{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}
   .plist::-webkit-scrollbar{display:none}
   .pgroup{display:none}
-  .pitem{flex:none;padding:9px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset;background:var(--surface)}
-  .pitem .t,.pitem .prog{display:none!important}
+  .pitem{flex:none;display:flex;padding:9px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset;background:var(--surface)}
+  .pitem .q,.pitem .livetag,.pitem .prog{display:none!important}
   .pitem .n{font-size:13px;color:var(--ink);display:inline-flex}
   .pitem[aria-selected="true"]{background:var(--blue);box-shadow:none}
   .pitem[aria-selected="true"] .n{color:#fff}
@@ -195,18 +200,30 @@ p{margin:0}
 
 /* real screens of the live sites */
 .stage.lv{padding:0}
-.lvwrap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:minmax(0,100%);gap:clamp(14px,3vw,40px);height:100%;align-items:center;padding:4% 6%}
+.lvwrap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:minmax(0,100%);gap:clamp(14px,3vw,40px);height:100%;align-items:center;padding:4% 5%}
 .phone{position:relative;box-sizing:content-box;height:calc(100% - 10px);aspect-ratio:390/664;border-radius:clamp(14px,2vw,28px);border:5px solid var(--ink);overflow:hidden;background:#fff;box-shadow:0 22px 44px -26px rgba(0,0,0,.55)}
 .phone img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top;opacity:0;transition:opacity .6s ease}
 .phone img.on{opacity:1}
-.lsteps{margin:0;padding:0;list-style:none;display:grid;gap:clamp(8px,1.2vw,14px);counter-reset:l;min-width:0;align-self:center}
-.lsteps li{counter-increment:l;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;color:var(--muted);opacity:.5;transition:opacity .4s,color .4s;font:600 clamp(12.5px,1.25vw,16px)/1.3 var(--f-sans)}
+.lright{display:flex;flex-direction:column;gap:clamp(10px,1.4vw,18px);min-width:0;align-self:center;max-width:42ch}
+.lctx{margin:0;font:600 clamp(12.5px,1.2vw,15px)/1.4 var(--f-sans);color:var(--ink)}
+.lsteps{margin:0;padding:0;list-style:none;display:grid;gap:clamp(8px,1.1vw,12px);counter-reset:l;min-width:0}
+.lsteps li{counter-increment:l;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start;gap:10px;color:var(--muted);opacity:.6;transition:opacity .4s,color .4s;font:500 clamp(12px,1.1vw,14.5px)/1.4 var(--f-sans)}
+.lsteps li.asp span::after{content:"Aspected";margin-left:8px;font:600 10px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:3px 6px;border-radius:999px;vertical-align:1px;white-space:nowrap}
 .lsteps li::before{content:counter(l);font:600 .8em/1 var(--f-mono);width:1.9em;height:1.9em;border-radius:50%;display:inline-grid;place-items:center;box-shadow:inset 0 0 0 1.5px currentColor;flex:none}
 .lsteps li.on{opacity:1;color:var(--ink)}
 .lsteps li.on::before{background:var(--blue);color:#fff;box-shadow:none}
 .lsteps li.done{opacity:.75}
 .lsteps em{font:600 10.5px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
 
+.stage:not(.big) .lctx{display:none}
+.stage:not(.big) .lsteps li:not(.on){display:none}
+.stage:not(.big) .lsteps li{font-size:11.5px}
+@media (max-width:620px){
+  .stage.big.lv{aspect-ratio:auto;height:auto}
+  .stage.big .lvwrap{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;justify-items:center;padding:16px;gap:16px}
+  .stage.big .lvwrap .phone{height:300px}
+  .stage.big .lright{max-width:none;align-self:stretch}
+}
 /* sweet little lies: the deck's own look (orange = this product, purple = the other) */
 .stage.sl{padding:0;background:linear-gradient(160deg,#FFEDE3 0%,#FFDCD6 45%,#FFD0DF 100%);color:#1E1A2B;font-family:"Plus Jakarta Sans",var(--f-sans)}
 .slslide{height:100%;display:flex;flex-direction:column;gap:6px;padding:12px 14px}
@@ -501,7 +518,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <h1 class="wordmark">Aspected</h1>
       <p class="oneliner">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
       <div class="ask" aria-hidden="true">
-        <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
+        <div class="askbox"><span id="askText">this session, but hands-on and after three</span><span class="caret"></span></div>
       </div>
       <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
       </div>
@@ -882,13 +899,13 @@ var SHOWS = [
    say:"All 2,447 sessions of the AWS week in Las Vegas. Pick one you like, move the sliders, and fill your day.",
    biz:"Course catalogues and events where people choose instead of filter.",
    elsewhere:[["HR and learning","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
-   demo:"live", cfg:{frames:[["live/vegas-1.jpg","Ask: hands-on agents, level 300",0],["live/vegas-2.jpg","98 sessions, ranked by Aspected",1],["live/vegas-4.jpg","Like this one, but more business. Why?",1]]}},
+   demo:"live", cfg:{context:"A session finder for the 2,447 talks of the AWS week in Las Vegas, built on Aspected.", frames:[["live/vegas-1.jpg","You ask in your own words: hands-on agents, level 300.",0],["live/vegas-2.jpg","Aspected weighs topic, level and format at once. 98 sessions come close, best first.",1],["live/vegas-4.jpg","Pick one and say what should change: more business. Each result shows why.",1]]}},
   {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then pick what should change: less sugar, salt or fat.", name:"samebutbetter.food", live:true, url:"https://samebutbetter.food",
    title:"This one, but healthier.",
    say:"Scan a supermarket product, pick less sugar or more protein, and 45,000 products re-sort around your wish.",
    biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
    elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
-   demo:"live", cfg:{frames:[["live/food-2.jpg","Search: chocopasta",0],["live/food-3.jpg","Open one: high in sugar",0],["live/food-alt.jpg","Less sugar, the rest the same: 89% alike",1]]}},
+   demo:"live", cfg:{context:"A grocery app for 45,000 Dutch supermarket products, built on Aspected.", frames:[["live/food-2.jpg","You search for what is in your hand: chocolate spread.",0],["live/food-3.jpg","You say what should be better: less sugar.",0],["live/food-alt.jpg","Aspected finds the same kind of product with less sugar, the rest as close as possible: 89% alike.",1]]}},
   {id:"lies", role:"Aspected keeps a product's name and its numbers apart. Ask for a well-known sweet by name plus only its sugar, and the “healthy” products that come as close show up, with the distance per aspect.", me:"Book a live run of the game: 24 products that are not what they seem, each with how Aspected found it.", name:"Sweet Little Lies", live:false, onRequest:true,
    title:"A smoothie, sweeter than cola.",
    say:"A guessing game on 14,961 supermarket products. Aspected finds the ones that are not what they seem, and shows why.",
@@ -984,7 +1001,7 @@ var BUILD = {
   live:function(stage,c){
     stage.classList.add("lv");
     stage.innerHTML='<div class="lvwrap"><div class="phone">'+c.frames.map(function(f){return '<img src="'+f[0]+'" alt="'+esc(f[1])+'">'}).join("")+'</div>'+
-      '<ol class="lsteps">'+c.frames.map(function(f){return '<li><span>'+esc(f[1])+'</span>'+(f[2]?'<em>Aspected</em>':'')+'</li>'}).join("")+'</ol></div>';
+      '<div class="lright">'+(c.context?'<p class="lctx">'+esc(c.context)+'</p>':'')+'<ol class="lsteps">'+c.frames.map(function(f){return '<li'+(f[2]?' class="asp"':'')+'><span>'+esc(f[1])+'</span></li>'}).join("")+'</ol></div></div>';
     var imgs=stage.querySelectorAll(".phone img"), steps=stage.querySelectorAll(".lsteps li"), n=imgs.length;
     function show(k){imgs.forEach(function(im,i){im.classList.toggle("on",i===k)}); steps.forEach(function(li,i){li.classList.toggle("on",i===k); li.classList.toggle("done",i<k)})}
     function reset(){show(0)}
@@ -1116,16 +1133,13 @@ function makeCard(s, bizLabel, bizText, into){
   }
 }
 /* ---------- the showcase player (home) ---------- */
-var GROUPS=[["Try it live",["vegas","food"]],["In your organization",["receipt","copies","lies","csv"]]];
-var ORDER=[].concat(GROUPS[0][1],GROUPS[1][1]), ADV=8000;
+var ASK={vegas:"this session, but hands-on and after three",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current procedure, not the eleven copies",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this ID.3, but more range"};
+var ORDER=["vegas","food","receipt","copies","lies","csv"], ADV=8000;
 var plist=document.getElementById("plist"), ppanel=document.getElementById("ppanel"), playerEl=document.getElementById("player");
 var cur=null, curPlayer=null, auto=!reduce, inView=false, advT=0;
-GROUPS.forEach(function(g){
-  plist.insertAdjacentHTML("beforeend",'<p class="pgroup">'+esc(g[0])+'</p>');
-  g[1].forEach(function(id){var s=showById(id);
-    plist.insertAdjacentHTML("beforeend",'<button type="button" class="pitem" role="tab" id="tab-'+id+'" data-id="'+id+'" aria-selected="false" aria-controls="ppanel">'+
-      '<span class="n">'+(s.live?'<i class="dot"></i>':'')+esc(s.name)+'</span><span class="t">'+(s.live?'<i class="dot"></i>':'')+esc(s.title)+'</span><span class="prog"><i></i></span></button>');
-  });
+ORDER.forEach(function(id){var s=showById(id);
+  plist.insertAdjacentHTML("beforeend",'<button type="button" class="pitem" role="tab" id="tab-'+id+'" data-id="'+id+'" aria-selected="false" aria-controls="ppanel">'+
+    '<span class="n">'+esc(s.name)+'</span><span class="q">'+esc(ASK[id])+'</span>'+(s.live?'<span class="livetag">Live</span>':'')+'<span class="prog"><i></i></span></button>');
 });
 function primary(s){
   return s.live ? '<a class="btn" href="'+s.url+'" target="_blank" rel="noopener">Open '+esc(s.name)+' ↗</a>'
@@ -1222,10 +1236,7 @@ function openIndustry(id){
 }
 
 /* ---------- hero query ---------- */
-var ASKS=[["this pasta, but less sugar",["kind = pasta","sugar ↓","price ="]],
-          ["this session, but hands-on, after 3 pm",["topic ≈ this","format = workshop","time > 15:00"]],
-          ["this procedure, the current version",["text ≈ this","version = latest","site = Rotterdam"]],
-          ["the notice period, from the published contract",["topic ≈ notice period","lifecycle = published","source = official"]]];
+var ASKS=ORDER.map(function(id){return [ASK[id],[]]});
 var askText=document.getElementById("askText"), askChips=document.getElementById("askChips"), ai=0;
 function showChips(list, animate){
   if(!askChips) return;
@@ -1234,10 +1245,12 @@ function showChips(list, animate){
   cs.forEach(function(c,i){ if(!animate){c.classList.add("in")} else setTimeout(function(){c.classList.add("in")},150+i*220)});
 }
 showChips(ASKS[0][1], false);
-var SP=[{l:["sugar","salt","protein","fibre","price"],a:[.8,.45,.5,.35,.55],b:[.28,.45,.52,.42,.55],h:[0]},
-        {l:["topic","level","hands-on","time","length"],a:[.88,.6,.22,.3,.62],b:[.85,.6,.9,.82,.62],h:[2,3]},
+var SP=[{l:["topic","level","hands-on","time","length"],a:[.88,.6,.22,.3,.62],b:[.85,.6,.9,.82,.62],h:[2,3]},
+        {l:["sugar","salt","protein","fat","price"],a:[.82,.3,.35,.6,.5],b:[.26,.3,.42,.56,.5],h:[0]},
+        {l:["meaning","lifecycle","source","date","version"],a:[.95,.22,.4,.8,.7],b:[.84,.95,.92,.62,.66],h:[1,2]},
         {l:["meaning","version","date","owner","site"],a:[.9,.3,.32,.62,.8],b:[.86,.95,.9,.62,.8],h:[1,2]},
-        {l:["meaning","lifecycle","source","date","version"],a:[.95,.22,.4,.8,.7],b:[.84,.95,.92,.62,.66],h:[1,2]}];
+        {l:["name","sugar","fat","salt","protein"],a:[.9,.85,.12,.1,.1],b:[.3,.85,.14,.1,.16],h:[0]},
+        {l:["model","drive","range","price","seats"],a:[.8,.9,.45,.5,.6],b:[.74,.9,.86,.55,.6],h:[2]}];
 var hs=Spider(document.getElementById("heroSpider"),5);
 hs.labels(SP[0].l); hs.hi(SP[0].h); hs.set(SP[0].a,SP[0].b);
 if(!reduce){
