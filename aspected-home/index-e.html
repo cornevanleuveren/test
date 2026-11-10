@@ -95,6 +95,9 @@ p{margin:0}
 .ph1{display:inline}
 .prow{display:inline-flex;align-items:center;gap:.28em}
 .herotop{grid-column:1 / -1;margin-bottom:4px}
+.newpill{justify-self:start;display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;margin-bottom:-4px;transition:box-shadow .2s}
+.newpill:hover{box-shadow:inset 0 0 0 1px var(--blue)}
+.newtag{font:700 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--blue);padding:5px 9px;border-radius:999px}
 .answer{font-size:clamp(20px,2vw,26px);font-weight:600;line-height:1.35;letter-spacing:-.015em;color:var(--ink);max-width:24ch}
 .hero-l .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
 @media (max-width:900px){.hero .hero-l{order:1}.hero .convo{order:2}}
@@ -566,6 +569,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
   <!-- HOME -->
   <section class="view" id="v-home">
     <div class="wrap hero">
+      <a class="newpill herotop" href="#why"><span class="newtag">New</span>Introducing Aspect Database <span aria-hidden="true">→</span></a>
       <h1 class="pickh herotop" aria-label="Your embeddings don't know what year, version, type, language or size it is.">
         <span class="ph1" aria-hidden="true">Your embeddings don’t know what</span>
         <span class="prow" aria-hidden="true"><span class="picker" id="picker"></span><span class="itis">it is.</span></span>
