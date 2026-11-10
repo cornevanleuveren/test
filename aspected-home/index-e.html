@@ -83,21 +83,16 @@ p{margin:0}
 .heroproof:hover b{color:var(--blue)}
 .brandline{font-size:15px;color:var(--muted);margin-bottom:18px}
 .brandline b{color:var(--ink);font-weight:800;font-size:17px;letter-spacing:-.02em}
-.herotop{grid-column:1 / -1}
-.hero{grid-template-columns:minmax(0,1fr)!important;row-gap:18px}
-.hero .hero-l{max-width:760px}
-.askbox{padding-right:8px}
-.asktxt{flex:1;min-width:0}
-.minisp{flex:none;width:52px;height:52px;margin-left:auto;padding-left:8px;border-left:1px solid var(--line)}
-.minisp svg{width:100%;height:100%}
-.minisp .sp-lab{display:none}
-.minisp .sp-grid,.minisp .sp-axis{stroke-width:6}
-.minisp .sp-axis.hi{stroke:var(--blue);stroke-width:14}
-.minisp .sp-this{stroke-width:7}
-.minisp .sp-bet{stroke-width:9}
-.pickh{font-size:clamp(28px,3.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.1;display:flex;flex-wrap:wrap;align-items:center;column-gap:.28em}
-.ph1{display:inline}
-.prow{display:inline-flex;align-items:center;gap:.28em}
+.hero{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center}
+.convo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 24px 50px -36px rgba(20,22,28,.45);min-width:0}
+.convo .askbox{box-shadow:none;background:var(--bg);min-height:52px;padding:12px 18px;font-size:15px}
+.convo-sp{max-width:420px;width:100%;margin:6px auto 0}
+.convo-cap{display:flex;justify-content:center;gap:18px;font:500 12px/1 var(--f-mono);color:var(--muted);margin:0}
+.convo-cap span{display:inline-flex;align-items:center;gap:7px}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}}
+.pickh{font-size:clamp(32px,4vw,56px);font-weight:800;letter-spacing:-.035em;line-height:1.05}
+.ph1{display:block}
+.prow{display:flex;align-items:center;gap:.28em;margin-top:.04em}
 .picker{position:relative;display:block;width:4.7em;height:3.1em;flex:none}
 .picker::before,.picker::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--blue);opacity:.8}
 .picker::before{top:calc(50% - .6em)}
@@ -566,19 +561,19 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
   <!-- HOME -->
   <section class="view" id="v-home">
     <div class="wrap hero">
-      <div class="herotop">
-      <p class="brandline"><b>Aspected</b> · Similarity, aspect by aspect.</p>
-      <h1 class="pickh" aria-label="Your embeddings don't know what year, version, type, language or size it is.">
-        <span class="ph1" aria-hidden="true">Your embeddings don’t know what</span>
-        <span class="prow" aria-hidden="true"><span class="picker" id="picker"></span><span class="itis">it is.</span></span>
-      </h1>
-      </div>
       <div class="hero-l">
-      <p class="oneliner" style="margin-top:0">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
-      <div class="ask" aria-hidden="true">
-        <div class="askbox"><span class="asktxt"><span id="askText">this report, but from 2026</span><span class="caret"></span></span><span class="minisp" id="heroSpider" title="The aspect you asked about lights up"></span></div>
+        <p class="brandline"><b>Aspected</b> · Similarity, aspect by aspect.</p>
+        <h1 class="pickh" aria-label="Your embeddings don't know what year, version, type, language or size it is.">
+          <span class="ph1" aria-hidden="true">Your embeddings don’t know what</span>
+          <span class="prow" aria-hidden="true"><span class="picker" id="picker"></span><span class="itis">it is.</span></span>
+        </h1>
+        <p class="oneliner">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
+        <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
       </div>
-      <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
+      <div class="convo" aria-hidden="true">
+        <div class="askbox"><span id="askText">this report, but from 2026</span><span class="caret"></span></div>
+        <div class="convo-sp" id="heroSpider"></div>
+        <p class="convo-cap"><span><i class="k bet"></i>what you asked</span><span><i class="k"></i>where you started</span></p>
       </div>
     </div>
 
@@ -1322,7 +1317,6 @@ function place(k){
   });
 }
 var hs=Spider(document.getElementById("heroSpider"),5);
-document.querySelector("#heroSpider svg").setAttribute("viewBox","40 40 320 320");
 function showAspect(k,animate){
   var p=PK[k], i=0; clearInterval(typeT);
   hs.labels(p.l);
