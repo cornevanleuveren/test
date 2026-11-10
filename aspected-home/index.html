@@ -435,6 +435,12 @@ footer a:hover{color:var(--ink)}
 .bottomline .talk{grid-column:2}
 @media (max-width:760px){.bottomline{grid-template-columns:minmax(0,1fr)}.bottomline .talk{grid-column:1}}
 .vs{margin-top:36px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:20px}
+.bub{max-width:min(560px,100%);padding:12px 16px;border-radius:18px;font-size:15.5px;line-height:1.45}
+.bub.user{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:6px;font-weight:500}
+.bub.ai{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px;display:grid;gap:4px}
+.bub.ai b{font-weight:800}
+.bub.ai small{font-size:12.5px;color:var(--muted)}
+.why{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:8px 0 -2px}
 .vs-q{font:500 clamp(15px,1.8vw,18px)/1.4 var(--f-mono)}
 .vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.vs-cols{grid-template-columns:minmax(0,1fr)}}
@@ -547,7 +553,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <p class="slogan">Similarity, aspect by aspect.</p>
       <p class="oneliner">Aspect Database weighs every part of a question at once, and shows why each answer fits.</p>
       <div class="ask" aria-hidden="true">
-        <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
+        <div class="askbox"><span id="askText">this pasta sauce, but less sugar</span><span class="caret"></span></div>
       </div>
       <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
       </div>
@@ -571,25 +577,29 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <p class="eyebrow">Why it works</p>
       <h2 id="whyhome-h">Same question. Different answer.</h2>
       <div class="vs">
-        <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
+        <div class="bub user">What is the notice period in our standard framework agreement?</div>
         <div class="vs-cols">
           <div class="vs-col">
             <p class="eyebrow">Plain vector search · text only</p>
+            <div class="bub ai"><span>The notice period is <b>120 days</b>.</span><small>Source: Framework Agreement v3.1</small></div>
+            <p class="why">What it read</p>
             <ol>
               <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
               <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
               <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
             </ol>
-            <p class="vs-out">The AI answers <b>120 days</b>, from a draft.</p>
+            <p class="vs-out">That answer came from a <b>draft</b>.</p>
           </div>
           <div class="vs-col good">
             <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
+            <div class="bub ai"><span>The notice period is <b>90 days</b>.</span><small>Source: Framework Agreement v3.0 · receipt attached</small></div>
+            <p class="why">What it read</p>
             <ol>
               <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
               <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
               <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
             </ol>
-            <p class="vs-out">The AI answers <b>90 days</b>, from the published version, with a receipt.</p>
+            <p class="vs-out">That answer came from the <b>published version</b>.</p>
           </div>
         </div>
       </div>
@@ -687,31 +697,35 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <p class="eyebrow" style="margin-bottom:14px">Aspected vs plain vector search</p>
       <h1>Same question. Different answer.</h1>
       <div class="vs">
-        <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
+        <div class="bub user">What is the notice period in our standard framework agreement?</div>
         <div class="vs-cols">
           <div class="vs-col">
             <p class="eyebrow">Plain vector search · text only</p>
+            <div class="bub ai"><span>The notice period is <b>120 days</b>.</span><small>Source: Framework Agreement v3.1</small></div>
+            <p class="why">What it read</p>
             <ol>
               <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
               <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
               <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
             </ol>
-            <p class="vs-out">The AI answers <b>120 days</b>, from a draft.</p>
+            <p class="vs-out">That answer came from a <b>draft</b>.</p>
           </div>
           <div class="vs-col good">
             <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
+            <div class="bub ai"><span>The notice period is <b>90 days</b>.</span><small>Source: Framework Agreement v3.0 · receipt attached</small></div>
+            <p class="why">What it read</p>
             <ol>
               <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
               <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
               <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
             </ol>
-            <p class="vs-out">The AI answers <b>90 days</b>, from the published version, with a receipt.</p>
+            <p class="vs-out">That answer came from the <b>published version</b>.</p>
           </div>
         </div>
       </div>
       <div class="bottomline">
         <h3>The word that gets thrown away.</h3>
-        <p>“This pasta, but with less sugar, same price.” Search today breaks that into a query and two filters, and the most important word, <i>but</i>, is thrown away before the search starts. Aspected weighs the whole sentence in one calculation.</p>
+        <p>“This pasta sauce, but with less sugar, same price.” Search today breaks that into a query and two filters, and the most important word, <i>but</i>, is thrown away before the search starts. Aspected weighs the whole sentence in one calculation.</p>
       </div>
       <div class="bottomline">
         <h3>One thing changed, at the bottom.</h3>
@@ -1092,12 +1106,12 @@ var BUILD = {
     reset(); return {reset:reset,play:play,end:end};
   },
   csv:function(stage){
-    var cells=["model","drive","range","price","Volvo EX30","electric","470 km","€37k","Hyundai Ioniq 5","electric","570 km","€46k","Toyota C-HR","hybrid","900 km","€38k","Kia EV3","electric","600 km","€36k"];
+    var cells=["model","drive","range","price","Ford Mustang Mach-E","electric","320 mi","$40k","Chevrolet Equinox EV","electric","319 mi","$35k","Toyota RAV4 Hybrid","hybrid","580 mi","$33k","Tesla Model Y","electric","337 mi","$45k"];
     var chips=["model · text","drive · enum","range · number","price · number"];
     stage.innerHTML='<div class="csv">'+cells.map(function(c,i){return '<span'+(i<4?' class="h"':'')+'>'+esc(c)+'</span>'}).join("")+'</div>'+
       '<div class="aspects">'+chips.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("")+'</div>'+
-      '<div class="result"><div class="st-q typed"><span class="t">like this Volvo EX30, but more range</span></div>'+
-      '<div class="r"><span>Kia EV3 · electric · 600 km</span><b>0.05</b></div><div class="r"><span>Skoda Elroq · electric · 580 km</span><b>0.08</b></div><div class="r"><span>Hyundai Ioniq 5 · electric · 570 km</span><b>0.11</b></div></div>';
+      '<div class="result"><div class="st-q typed"><span class="t">like this Mustang Mach-E, but more range</span></div>'+
+      '<div class="r"><span>Tesla Model Y · electric · 337 mi</span><b>0.05</b></div><div class="r"><span>Tesla Model 3 · electric · 363 mi</span><b>0.09</b></div><div class="r"><span>Rivian R1S · electric · 410 mi</span><b>0.14</b></div></div>';
     var hs=stage.querySelectorAll(".csv .h"), cs=stage.querySelectorAll(".aspects .chip"), tbl=stage.querySelector(".csv"), res=stage.querySelector(".result");
     function reset(){hs.forEach(function(x){x.classList.remove("lit")}); cs.forEach(function(x){x.classList.remove("in")}); tbl.classList.remove("away"); res.classList.remove("in")}
     function play(at){
@@ -1169,7 +1183,7 @@ function makeCard(s, bizLabel, bizText, into){
   }
 }
 /* ---------- the showcase player (home) ---------- */
-var ASK={vegas:"like this session, but more business",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current safety procedure for Rotterdam",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this Volvo EX30, but more range"};
+var ASK={vegas:"like this session, but more business",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current safety procedure for Rotterdam",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this Mustang Mach-E, but more range"};
 var DOM={vegas:"Conference sessions",food:"Groceries",receipt:"Contracts",copies:"Procedures",lies:"Product claims",csv:"Your spreadsheet"};
 var ORDER=["vegas","food","receipt","copies","lies","csv"], ADV=13000;
 var plist=document.getElementById("plist"), ppanel=document.getElementById("ppanel"), playerEl=document.getElementById("player");
@@ -1273,7 +1287,7 @@ function openIndustry(id){
 }
 
 /* ---------- hero query ---------- */
-var ASKS=[["this pasta, but less sugar",[]],["this hotel, but closer to the venue",[]],["this supplier, but in Germany",[]],["this laptop, but lighter",[]]];
+var ASKS=[["this pasta sauce, but less sugar",[]],["this hotel, but closer to the venue",[]],["this supplier, but in Germany",[]],["this laptop, but lighter",[]]];
 var askText=document.getElementById("askText"), askChips=document.getElementById("askChips"), ai=0;
 function showChips(list, animate){
   if(!askChips) return;
