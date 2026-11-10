@@ -30,7 +30,9 @@ p{margin:0}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .mono{font-family:var(--f-mono)}
-.eyebrow{font:600 12px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font:600 13.5px/1.3 var(--f-sans);letter-spacing:0;text-transform:none;color:var(--muted)}
+.pname{font-weight:700;color:var(--blue);margin-bottom:10px}
+.blk-t{font-weight:700;font-size:15px;color:var(--ink)}
 
 /* menu */
 .menu{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
@@ -603,7 +605,7 @@ footer a:hover{color:var(--ink)}
 .bub.ai{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px;display:grid;gap:4px}
 .bub.ai b{font-weight:800}
 .bub.ai small{font-size:12.5px;color:var(--muted)}
-.why{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:8px 0 -2px}
+.why{font:600 13.5px/1.3 var(--f-sans);color:var(--muted);margin:8px 0 -2px}
 .vs-q{font:500 clamp(15px,1.8vw,18px)/1.4 var(--f-mono)}
 .vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.vs-cols{grid-template-columns:minmax(0,1fr)}}
@@ -664,7 +666,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
 .faqside .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 @media (max-width:860px){.faqwrap{grid-template-columns:minmax(0,1fr)}.faqside{position:static}}
 .faq{display:flex;flex-direction:column;gap:28px}
-.fgroup h3{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.fgroup h3{font:700 15px/1.3 var(--f-sans);color:var(--ink);padding-bottom:10px;border-bottom:1px solid var(--line)}
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;list-style:none;padding:18px 32px 18px 0;font-weight:700;font-size:17px;position:relative}
 .faq summary::-webkit-details-marker{display:none}
@@ -746,7 +748,6 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
     </div>
 
     <section class="wrap whyhome" aria-labelledby="whyhome-h">
-      <p class="eyebrow">Why it works</p>
       <h2 id="whyhome-h">Same question. Different answer.</h2>
       <div class="vs">
         <div class="bub user">What is the notice period in our standard framework agreement?</div>
@@ -839,16 +840,16 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
         <div class="side">
           <p class="say" id="dSay"></p>
           <div class="blk">
-            <p class="eyebrow">What Aspected does here</p>
+            <p class="blk-t">What Aspected does here</p>
             <p id="dRole"></p>
           </div>
           <div class="blk">
-            <p class="eyebrow">Use it yourself</p>
+            <p class="blk-t">Use it yourself</p>
             <p id="dMe"></p>
             <div class="ctas" id="dCta"></div>
           </div>
           <div class="blk">
-            <p class="eyebrow">In your organization</p>
+            <p class="blk-t">In your organization</p>
             <div class="else" id="dElse"></div>
             <a class="talk" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a>
           </div>
@@ -860,7 +861,6 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
   <!-- ABOUT -->
   <section class="view" id="v-about">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">About</p>
       <h1>People ask for several things at once.</h1>
       <p class="lede">Search engines answer with one blended score. We built a database that keeps every aspect of the question, with its weight, and shows why each result is there.</p>
       <div class="timeline">
@@ -881,7 +881,6 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
   <!-- WHY ASPECTED: vs vector search -->
   <section class="view" id="v-why">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Aspected vs plain vector search</p>
       <h1>Same question. Different answer.</h1>
       <div class="vs">
         <div class="bub user">What is the notice period in our standard framework agreement?</div>
@@ -950,7 +949,6 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
   <!-- GET STARTED -->
   <section class="view" id="v-start">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Get started</p>
       <h1>Three ways in.</h1>
       <p class="lede">Pick the one that fits how you work.</p>
       <div class="ways">
@@ -960,7 +958,6 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       </div>
 
       <section class="wsec" id="way-docker">
-        <p class="eyebrow">1 · For developers</p>
         <h2>Docker and the docs</h2>
         <div class="prompt code"><button class="btn copy" type="button" data-copy="dockerCmd">Copy</button><pre id="dockerCmd">docker pull xillio/aspected:latest
 docker run -p 8080:8080 xillio/aspected:latest
@@ -970,7 +967,6 @@ curl http://localhost:8080/indexes</pre></div>
       </section>
 
       <section class="wsec" id="way-ai">
-        <p class="eyebrow">2 · For your AI</p>
         <h2>Point your AI at one page</h2>
         <p class="sub">Paste this line into Claude Code, Claude or another AI that can use a terminal.</p>
         <div class="prompt"><button class="btn copy" type="button" data-copy="aiPrompt">Copy</button><pre id="aiPrompt">Read https://aspected.com/start.md and get Aspected running on my machine, with my data.</pre></div>
@@ -979,7 +975,6 @@ curl http://localhost:8080/indexes</pre></div>
       </section>
 
       <section class="wsec" id="way-data">
-        <p class="eyebrow">3 · For your data</p>
         <h2>Run it on your data</h2>
         <div class="ways two">
           <div class="way"><span class="badge soon">Coming soon</span><h3>Upload a spreadsheet</h3><p>Drop a CSV or Excel file. Aspected finds the aspects and gives you a search page to share, within minutes.</p></div>
@@ -998,7 +993,6 @@ curl http://localhost:8080/indexes</pre></div>
       </section>
 
       <section class="stack wsec" aria-labelledby="stack-h">
-      <p class="eyebrow">Fits what you run</p>
       <h2 id="stack-h">One index under the AI you already use.</h2>
       <div class="stack-grid">
         <div><b>Under Copilot</b><p>Deployed as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
@@ -1013,7 +1007,6 @@ curl http://localhost:8080/indexes</pre></div>
   <!-- FOR CIOs -->
   <section class="view" id="v-cio">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">For CIOs</p>
       <h1>Stand behind every answer your AI gives.</h1>
       <p class="lede">Every answer shows which document it came from, which ones were left out, and why.</p>
 
@@ -1032,7 +1025,6 @@ curl http://localhost:8080/indexes</pre></div>
         <p class="sub" style="margin-top:-4px">Pick a question. You get the answer, and the receipt with it.</p>
         <div class="obd">
           <div class="obd-l">
-            <p class="eyebrow">Ask a question</p>
             <div class="obq" id="obQs"></div>
             <div class="oba" id="obA"><span class="eyebrow">The AI's answer</span><p id="obAt"></p></div>
             <details class="obx" id="obX">
@@ -1101,7 +1093,6 @@ curl http://localhost:8080/indexes</pre></div>
   <!-- SOLUTIONS -->
   <section class="view" id="v-solutions">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Solutions</p>
       <h1>Three ways organisations use Aspected.</h1>
       <p class="lede">Same database underneath. Pick the problem you have today.</p>
       <div class="itiles soltiles">
@@ -1115,7 +1106,6 @@ curl http://localhost:8080/indexes</pre></div>
   <section class="view" id="v-knowledge-base">
     <div class="wrap page">
       <a class="back" href="#solutions">← Solutions</a>
-      <p class="eyebrow" style="margin-bottom:14px">Knowledge base</p>
       <h1>The AI model is here. Your knowledge isn't yet.</h1>
       <p class="lede">Aspected makes your knowledge reachable for Copilot and your own AI, without moving documents. And every answer shows where it came from.</p>
       <section class="csec">
@@ -1175,7 +1165,6 @@ curl http://localhost:8080/indexes</pre></div>
   <section class="view" id="v-ready-for-ai">
     <div class="wrap page">
       <a class="back" href="#solutions">← Solutions</a>
-      <p class="eyebrow" style="margin-bottom:14px">Ready for AI</p>
       <h1>Know what counts before your AI reads it.</h1>
       <p class="lede">File shares and SharePoint hold years of copies, drafts and old versions. Aspected shows which one counts and why, so Copilot or your migration starts from the right one.</p>
       <section class="csec">
@@ -1194,7 +1183,6 @@ curl http://localhost:8080/indexes</pre></div>
   <section class="view" id="v-catalogue-search">
     <div class="wrap page">
       <a class="back" href="#solutions">← Solutions</a>
-      <p class="eyebrow" style="margin-bottom:14px">Catalogue search</p>
       <h1>Let people say what they want.</h1>
       <p class="lede">Shoppers and visitors point at something and say what should change. Aspected keeps what they liked and moves the rest.</p>
       <section class="csec">
@@ -1209,7 +1197,6 @@ curl http://localhost:8080/indexes</pre></div>
   <!-- INDUSTRIES -->
   <section class="view" id="v-industries">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Industries</p>
       <h1>Same engine, your world.</h1>
       <p class="lede">Each page shows the showcases that matter there, and who already runs Aspected.</p>
       <div class="itiles" id="iTiles"></div>
@@ -1219,7 +1206,7 @@ curl http://localhost:8080/indexes</pre></div>
   <section class="view" id="v-industry">
     <div class="wrap page">
       <a class="back" href="#solutions">← Solutions</a>
-      <p class="eyebrow" id="iName" style="margin-bottom:14px"></p>
+      <p class="pname" id="iName"></p>
       <h1 id="iTitle"></h1>
       <p class="lede" id="iLede"></p>
       <div class="grid" id="iGrid" style="margin-top:36px"></div>
@@ -1231,7 +1218,6 @@ curl http://localhost:8080/indexes</pre></div>
   <!-- PRICING -->
   <section class="view" id="v-pricing">
     <div class="wrap page">
-      <p class="eyebrow" style="margin-bottom:14px">Pricing</p>
       <h1>Pay for searches and records.</h1>
       <p class="lede">Nothing else. Every showcase, API and agent bills the same way.</p>
       <div class="tiers">
