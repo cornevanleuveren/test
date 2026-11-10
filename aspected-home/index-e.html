@@ -173,6 +173,8 @@ p{margin:0}
 .vquote figcaption{margin-top:14px;font-size:14px;color:var(--muted)}
 .vquote figcaption b{display:block;color:var(--ink)}
 .vbar{display:none}
+.vbooth{margin-top:14px;font:600 clamp(20px,2.6vw,28px)/1.25 var(--f-sans);letter-spacing:-.01em;color:#fff}
+.vbooth::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:#5CE0A0;margin-right:12px;vertical-align:.15em;box-shadow:0 0 0 4px rgba(92,224,160,.2)}
 @media (max-width:720px){
   body:has(#v-vegas.on) .vbar{display:flex}
   .vbar{gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:25;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
@@ -1084,7 +1086,7 @@ a.know-a,.know>a{text-decoration:none;color:inherit;transition:transform .3s cub
         <div><b>Jan 2026</b><p>US patent 12,517,879 granted for the method. PCT application filed.</p></div>
         <div><b>2026</b><p>Agfa and Mosaic Community Health run Aspected under Copilot, in production.</p></div>
         <div><b>Oct 2026</b><p>samebutbetter.food goes live on 45,000 Dutch supermarket products.</p></div>
-        <div><b>Dec 2026</b><p>Vegas, an independent session finder, goes live for the AWS week in Las Vegas.</p></div>
+        <div><b>Dec 2026</b><p>next session, an independent session finder, goes live for the AWS week in Las Vegas.</p></div>
       </div>
       <div class="about-foot">
         <p>45 people in Hilversum, the Netherlands.</p>
@@ -1294,7 +1296,7 @@ curl http://localhost:8080/indexes</pre></div>
       <div class="itiles soltiles" style="margin-top:0">
         <a class="itile sol-main" href="#knowledge-base"><span class="eyebrow">Knowledge base</span><h3>The AI model is here. Your knowledge isn't yet.</h3><p>Copilot and your own AI find the right document across all your sources, and show why.</p><span class="who">Agfa and Mosaic, in production</span></a>
         <a class="itile" href="#ready-for-ai"><span class="eyebrow">Ready for AI</span><h3>Know what counts before your AI reads it.</h3><p>Copies, drafts and old versions on file shares and SharePoint, settled with their reasons.</p><span class="who">With Xillio</span></a>
-        <a class="itile" href="#catalogue-search"><span class="eyebrow">Catalogue search</span><h3>Let people say what they want.</h3><p>“Like this, but…” on your products, sessions or listings.</p><span class="who">samebutbetter.food and Vegas, live</span></a>
+        <a class="itile" href="#catalogue-search"><span class="eyebrow">Catalogue search</span><h3>Let people say what they want.</h3><p>“Like this, but…” on your products, sessions or listings.</p><span class="who">samebutbetter.food and next session, live</span></a>
       </div>
       </section>
     </div>
@@ -1490,7 +1492,7 @@ curl http://localhost:8080/indexes</pre></div>
         <div class="proofgrid">
           <div class="pcard patent"><b>US patent 12,517,879</b><p>“Multi-aspect vector search index creation and retrieval method and system.” Granted 6 January 2026. Inventors Rikkert Engels and Jorn Verhoeven. PCT application filed.</p><a href="https://patents.google.com/patent/US12517879B1" target="_blank" rel="noopener">Read the patent ↗</a></div>
           <div class="pcard"><b>In production under Copilot</b><p>Agfa and Mosaic Community Health.</p><a href="https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf" target="_blank" rel="noopener">Agfa case study ↗</a><a data-video href="#" target="_blank" rel="noopener">Mosaic on stage ↗</a></div>
-          <div class="pcard"><b>Live, for anyone</b><p>samebutbetter.food on 45,000 supermarket products. Vegas on 2,447 conference sessions.</p><a href="#show-food">Groceries →</a><a href="#show-vegas">Conference sessions →</a></div>
+          <div class="pcard"><b>Live, for anyone</b><p>samebutbetter.food on 45,000 supermarket products. next session on 2,447 conference sessions.</p><a href="#show-food">Groceries →</a><a href="#show-vegas">Conference sessions →</a></div>
         </div>
       </section>
       <section class="csec">
@@ -1566,8 +1568,9 @@ curl http://localhost:8080/indexes</pre></div>
 
       <section class="csec cta">
         <h2>Here this week? Let's talk.</h2>
-        <p class="sub">Twenty minutes, on a question from your own data.</p>
-        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes ↗</a><button class="btn ghost" type="button" data-share>Send this page to yourself</button></div>
+        <p class="sub" id="vTalkP">Twenty minutes, on a question from your own data.</p>
+        <p class="vbooth" id="vBooth" hidden></p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" id="vTalkA" data-book href="#" target="_blank" rel="noopener">Book 20 minutes ↗</a><button class="btn ghost" type="button" data-share>Send this page to yourself</button></div>
         <p class="fine">next session is an independent session finder, not affiliated with AWS.</p>
       </section>
     </div>
@@ -1662,7 +1665,7 @@ document.querySelectorAll("[data-logo]").forEach(function(el,i){
 
 /* ---------- showcase content ---------- */
 var SHOWS = [
-  {id:"vegas", role:"Every session carries its aspects, such as topic, format, level and time. Aspected weighs them in one calculation, and the sliders change the weights.", me:"Open Vegas, pick a session you like and move a slider. During the event, tap Last minute to see what you can still catch.", name:"Vegas", live:true, url:"https://vegas.aspected.com",
+  {id:"vegas", role:"Every session carries its aspects, such as topic, format, level and time. Aspected weighs them in one calculation, and the sliders change the weights.", me:"Open next session, pick a session you like and move a slider. During the event, tap Last minute to see what you can still catch.", name:"next session", live:true, url:"https://vegas.aspected.com",
    title:"2,447 sessions. The one you meant.",
    say:"All 2,447 sessions of the AWS week in Las Vegas. Pick one you like, move the sliders, and fill your day.",
    biz:"Course catalogues and events where people choose instead of filter.",
@@ -2006,9 +2009,9 @@ var INDS=[
    quote:{q:"Aspected includes all context directly in the search query upfront.",who:"Wim Verheij",role:"Managing Director · Novadoc Netherlands"}},
   {id:"events-learning", name:"Events and learning", label:"In events and learning", title:"People choose sessions, not filters.",
    lede:"Attendees and learners pick one thing they like and say what should change.",
-   who:"Vegas, live for the AWS week",
+   who:"next session, live for the AWS week",
    shows:[["vegas","2,447 sessions in Las Vegas: “this one, but hands-on”."],["csv","Course catalogues and internal training, searchable in minutes."],["copies","Course material copied across teams, settled once."]],
-   note:{b:"Vegas is live for the AWS week in Las Vegas.",p:"An independent finder for 2,447 sessions, with Fill my day and Last minute.",a:"Open Vegas ↗",url:"https://vegas.aspected.com"}}
+   note:{b:"next session is live for the AWS week in Las Vegas.",p:"An independent finder for 2,447 sessions, with Fill my day and Last minute.",a:"Open next session ↗",url:"https://vegas.aspected.com"}}
 ];
 var chipsEl=document.getElementById("indChips"), tilesEl=document.getElementById("iTiles");
 INDS.forEach(function(d){
@@ -2162,6 +2165,13 @@ function route(){
   if(scrollTo){var el=document.getElementById(scrollTo); requestAnimationFrame(function(){el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})}
   else window.scrollTo(0,0);
 }
+/* Las Vegas: fill these in before the event. booth: where people find us, e.g. "Booth 1234, Venetian Expo".
+   meet: a calendar link where people pick a time themselves. Empty values fall back to the contact form. */
+var EVENT={booth:"", meet:""};
+(function(){
+  if(EVENT.booth){var b=document.getElementById("vBooth"); b.textContent=EVENT.booth; b.hidden=false; document.getElementById("vTalkP").textContent="Come by, or pick a time that suits you."}
+  if(EVENT.meet){var a=document.getElementById("vTalkA"); a.removeAttribute("data-book"); a.href=EVENT.meet; a.textContent="Pick a time ↗"}
+})();
 /* "Same question" on phones: one answer at a time */
 document.querySelectorAll(".vs[data-col]").forEach(function(vs){
   function show(c){vs.dataset.col=c; vs.querySelectorAll(".vs-seg button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.col===c?"true":"false")})}
@@ -2169,7 +2179,7 @@ document.querySelectorAll(".vs[data-col]").forEach(function(vs){
 });
 /* send this page to yourself: the share sheet on phones, the clipboard elsewhere */
 document.querySelectorAll("[data-share]").forEach(function(b){b.addEventListener("click",function(){
-  var url=location.href, title=document.title;
+  var url=/(^|\.)aspected\.com$/.test(location.hostname)?location.href:"https://aspected.com/"+(location.hash==="#vegas"?"vegas":"");
   if(navigator.share){navigator.share({title:"Aspected",text:"The search behind next session",url:url}).catch(function(){}); return}
   (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){
     if(!b.classList.contains("vshare")){var t=b.textContent; b.textContent="Link copied"; setTimeout(function(){b.textContent=t},1800)}
