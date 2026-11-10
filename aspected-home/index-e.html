@@ -51,8 +51,17 @@ p{margin:0}
 .btn.ghost:hover{border-color:var(--ink);box-shadow:none}
 .menu nav a.btn{padding:9px 16px;font-size:14px;margin-left:8px;color:#fff;background:var(--blue)}
 .menu nav a.btn:hover{color:#fff;background:var(--blue)}
-@media (max-width:720px){.menu nav a.opt{display:none}.menu .wrap{gap:8px}.menu nav a{padding:8px 9px}}
-@media (max-width:480px){.menu nav a.opt2{display:none}}
+.mbtn{display:none;appearance:none;border:0;cursor:pointer;width:42px;height:42px;border-radius:50%;background:var(--stage);place-items:center;margin-left:6px;padding:0}
+.mbtn i,.mbtn i::before{display:block;width:16px;height:2px;border-radius:2px;background:var(--ink);transition:transform .25s}
+.mbtn i{position:relative;transform:translateY(-3px)}
+.mbtn i::before{content:"";position:absolute;left:0;top:6px}
+.mbtn[aria-expanded="true"] i{transform:rotate(45deg)}
+.mbtn[aria-expanded="true"] i::before{transform:translateY(-6px) rotate(-90deg)}
+.msheet{border-top:1px solid var(--line);background:var(--bg);padding:4px max(16px,env(safe-area-inset-left,0px)) 20px;max-height:calc(100svh - 64px);overflow:auto}
+.menu .msheet a{display:block;border-radius:0;background:none;padding:14px 2px;font-size:20px;font-weight:700;letter-spacing:-.01em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)}
+.menu .msheet a[aria-current]{color:var(--blue);background:none}
+@media (max-width:720px){.menu .wrap nav a:not(.btn){display:none}.mbtn{display:inline-grid}.menu .wrap{gap:8px}}
+@media (min-width:721px){.msheet{display:none!important}}
 
 /* views */
 .view{display:none}
@@ -87,11 +96,25 @@ p{margin:0}
 .brandline b{color:var(--ink);font-weight:800;font-size:17px;letter-spacing:-.02em}
 .hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;row-gap:20px}
 @media (min-width:901px){.hero{min-height:calc(100vh - 64px - env(safe-area-inset-top,0px));min-height:calc(100svh - 64px - env(safe-area-inset-top,0px));align-content:center;padding-block:32px 48px}}
-.convo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 24px 50px -36px rgba(20,22,28,.45);min-width:0}
+.convo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 0;display:flex;flex-direction:column;gap:10px;overflow:hidden;box-shadow:0 24px 50px -36px rgba(20,22,28,.45);min-width:0}
 .convo .askbox{box-shadow:none;background:var(--soft);min-height:52px;padding:12px 18px;font-size:15px}
 .convo-sp{max-width:420px;width:100%;margin:6px auto 0}
-.convo-go{align-self:center;margin-top:4px;font-weight:700;font-size:14px;color:var(--blue);text-decoration:none}
-.convo-go:hover{text-decoration:underline}
+.convo-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px -16px 0;padding:12px 16px;border-top:1px solid var(--line);background:var(--soft)}
+.convo-know{font-weight:600;font-size:14px;color:var(--muted);text-decoration:none}
+.convo-know:hover{color:var(--ink)}
+.convo-go{display:inline-flex;align-items:center;gap:9px;padding:8px 14px 8px 8px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font-weight:700;font-size:14px;color:var(--ink);text-decoration:none;transition:box-shadow .2s}
+.convo-go:hover{box-shadow:inset 0 0 0 1.5px var(--blue)}
+.convo-go .play{width:22px;height:22px;border-radius:50%;background:var(--blue);position:relative;flex:none}
+.convo-go .play::after{content:"";position:absolute;left:8.5px;top:6.5px;border-left:7px solid #fff;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.convo-chips{display:flex;flex-wrap:wrap;gap:6px;min-height:26px;padding:0 2px}
+.convo-chips span{font:500 12.5px/1 var(--f-mono);padding:6px 10px;border-radius:999px;background:var(--blue-soft);color:var(--blue);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+.convo-chips span.in{opacity:1;transform:none}
+.convo-chips i{font-style:normal;opacity:.65;margin-right:4px}
+.convo-chips i::after{content:":"}
+.newpill .arr{color:var(--blue);margin-left:-2px}
+.convo-know,.convo-go{white-space:nowrap}
+@media (max-width:420px){.convo-foot{padding:10px 12px;margin-inline:-16px}.convo-know{font-size:13px}.convo-go{font-size:13px;padding:6px 12px 6px 6px}}
+@media (max-width:860px){.proof .quotes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-16px;padding:4px 16px 14px;scrollbar-width:none}.proof .quotes::-webkit-scrollbar{display:none}.proof .quotes figure{flex:0 0 min(84%,420px);scroll-snap-align:center}}
 .convo-cap{display:flex;justify-content:center;gap:18px;font:500 12px/1 var(--f-mono);color:var(--muted);margin:0}
 .convo-cap span{display:inline-flex;align-items:center;gap:7px}
 @media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}}
@@ -714,6 +737,9 @@ html,body{overflow-x:clip}
 .cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.35)}
 .cta .btn.ghost:hover{border-color:#fff}
 .cta .way{color:var(--ink)}
+.cta .way h3{color:var(--ink)}
+.menu .msheet{display:block}
+.menu .msheet[hidden]{display:none}
 .cta .way p{color:var(--muted)}
 .try.cta h2{color:#fff}
 .try.cta>p{color:var(--navy-ink)}
@@ -733,13 +759,59 @@ html,body{overflow-x:clip}
 .prep li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .page>section .bottomline:first-of-type{margin-top:0}
 .page>section.ask{max-width:none}
+.know.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:980px){.know.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.know.four{grid-template-columns:minmax(0,1fr)}}
+a.know-a,.know>a{text-decoration:none;color:inherit;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.know>a:hover{transform:translateY(-3px);border-color:var(--blue)}
+.know .go{margin-top:auto;padding-top:6px;font-weight:700;font-size:14.5px;color:var(--blue)}
+.askfacts.cards{max-width:none}
+.askfacts.cards div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}
+.lede-link{display:inline-block;margin-top:18px}
+#v-introducing .newpill{margin-bottom:18px}
+.newvs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.newvs{grid-template-columns:minmax(0,1fr)}}
+.nv{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow);min-width:0}
+.nv.good{box-shadow:0 0 0 1.5px var(--blue) inset,var(--shadow);border-color:var(--blue)}
+.nv-t{font-weight:800;font-size:19px}
+.nv-doc{font:500 13.5px/1.4 var(--f-mono);background:var(--soft);border-radius:10px;padding:10px 12px}
+.nv-doc span{color:var(--coral);margin-left:6px}
+.nv-how{font-size:13.5px;color:var(--muted)}
+.nv-one{height:30px;border-radius:8px;background:var(--stage);overflow:hidden}
+.nv-one i{display:block;height:100%;width:91%;background:linear-gradient(90deg,#9DB6E8,#5C83D6)}
+.nv-asp{display:grid;gap:7px}
+.nv-asp div{display:grid;grid-template-columns:70px minmax(0,1fr) 92px;align-items:center;gap:10px;font:500 12.5px/1 var(--f-mono)}
+.nv-asp span{color:var(--muted)}
+.nv-asp i{height:10px;border-radius:5px;background:var(--stage);position:relative;overflow:hidden}
+.nv-asp i::after{content:"";position:absolute;inset:0 auto 0 0;width:calc(var(--v) * 100%);background:var(--blue);border-radius:5px}
+.nv-asp i.far::after{background:var(--coral)}
+.nv-asp em{font-style:normal;color:var(--muted)}
+.nv-asp em.far{color:var(--coral);font-weight:600}
+.nv-res{font-size:15.5px}
+.nv-res b{font-weight:800}
+.nv.good .nv-res b{color:var(--blue)}
+.nv-cap{color:var(--muted);font-size:14.5px;margin-top:auto}
+.proofgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+@media (max-width:860px){.proofgrid{grid-template-columns:minmax(0,1fr)}}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);min-width:0}
+.pcard b{font-size:18px;font-weight:800}
+.pcard p{color:var(--muted);font-size:15px}
+.pcard a{color:var(--blue);font-weight:700;font-size:14.5px;text-decoration:none}
+.pcard a:first-of-type{margin-top:auto;padding-top:6px}
+.pcard a:hover{text-decoration:underline}
+.pcard.patent{background:var(--navy);border-color:var(--navy);color:#fff}
+.pcard.patent b{font:600 22px/1.2 var(--f-mono);letter-spacing:-.01em}
+.pcard.patent p{color:var(--navy-ink)}
+.pcard.patent a{color:var(--navy-link)}
+.page .cta>.prompt{max-width:640px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18)}
+.page .cta>.prompt pre{color:#fff}
 @media (min-width:621px){.solgrid:has(>:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}}
 .iproof .note{background:var(--surface);box-shadow:var(--shadow)}
 
 /* how it knows */
 .know{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:10px}
 @media (max-width:860px){.know{grid-template-columns:minmax(0,1fr)}}
-.know>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);min-width:0}
+.know>div,.know>a{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);min-width:0}
 .know .kn{font:700 13px/1 var(--f-mono);color:#fff;background:var(--blue);width:28px;height:28px;border-radius:50%;display:grid;place-items:center}
 .know b{font-size:17px;font-weight:800}
 .know p{color:var(--muted);font-size:15px}
@@ -761,24 +833,37 @@ html,body{overflow-x:clip}
       <a class="opt2" href="#cio" data-nav="cio">For CIOs</a>
       <a class="opt" href="#about" data-nav="about">About</a>
       <a class="btn" href="#start" data-nav="start">Get started</a>
+      <button class="mbtn" id="mbtn" type="button" aria-expanded="false" aria-controls="msheet" aria-label="Menu"><i></i></button>
     </nav>
   </div>
+  <nav class="msheet" id="msheet" aria-label="Menu" hidden>
+    <a href="#showcases" data-nav="home">Showcases</a>
+    <a href="#solutions" data-nav="solutions">Solutions</a>
+    <a href="#why" data-nav="why">Why Aspected</a>
+    <a href="#cio" data-nav="cio">For CIOs</a>
+    <a href="#introducing" data-nav="introducing">Aspect Database</a>
+    <a href="#about" data-nav="about">About</a>
+  </nav>
 </header>
 
 <main>
   <!-- HOME -->
   <section class="view" id="v-home">
     <div class="wrap hero">
-      <p class="newpill herotop"><span class="newtag">New</span>Introducing Aspect Database</p>
+      <a class="newpill herotop" href="#introducing"><span class="newtag">New</span>Introducing Aspect Database<span class="arr" aria-hidden="true">→</span></a>
       <h1 class="pickh herotop" aria-label="Your embeddings don't know what year, version, type, language or size it is.">
         <span class="ph1" aria-hidden="true">Your embeddings don’t know what</span>
         <span class="prow" aria-hidden="true"><span class="picker" id="picker"></span><span class="itis">it is.</span></span>
       </h1>
       <div class="convo">
         <div class="askbox" aria-hidden="true"><span id="askText">the notice period, from this year's contract</span><span class="caret"></span></div>
+        <div class="convo-chips" id="askChips" aria-hidden="true"></div>
         <div class="convo-sp" id="heroSpider" aria-hidden="true"></div>
         <p class="convo-cap"><span><i class="k bet"></i>what you asked</span><span><i class="k"></i>where you started</span></p>
-        <a class="convo-go" id="convoGo" href="#showcases">See it in a showcase →</a>
+        <div class="convo-foot">
+          <a class="convo-know" href="#why">How does it know?</a>
+          <a class="convo-go" id="convoGo" href="#showcases"><span class="play" aria-hidden="true"></span><span id="convoGoT">Watch it on contracts</span></a>
+        </div>
       </div>
       <div class="hero-l">
         <p class="answer">Aspect Database weighs every part of a question at once, and shows why each answer fits.</p>
@@ -797,7 +882,7 @@ html,body{overflow-x:clip}
       </div>
     </div>
 
-    <section class="wrap whyhome" aria-labelledby="whyhome-h">
+    <section class="wrap whyhome" id="same" aria-labelledby="whyhome-h">
       <h2 id="whyhome-h">Same question. Different answer.</h2>
       <div class="vs">
         <div class="bub user">What is the notice period in our standard framework agreement?</div>
@@ -933,34 +1018,9 @@ html,body{overflow-x:clip}
   <!-- WHY ASPECTED: vs vector search -->
   <section class="view" id="v-why">
     <div class="wrap page">
-      <h1>Same question. Different answer.</h1>
-      <div class="vs">
-        <div class="bub user">What is the notice period in our standard framework agreement?</div>
-        <div class="vs-cols">
-          <div class="vs-col">
-            <p class="eyebrow">Plain vector search · text only</p>
-            <div class="bub ai"><span>The notice period is <b>120 days</b>.</span><small>Source: Framework Agreement v3.1</small></div>
-            <p class="why">What it read</p>
-            <ol>
-              <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
-              <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
-              <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
-            </ol>
-            <p class="vs-out">That answer came from a <b>draft</b>.</p>
-          </div>
-          <div class="vs-col good">
-            <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
-            <div class="bub ai"><span>The notice period is <b>90 days</b>.</span><small>Source: Framework Agreement v3.0 · receipt attached</small></div>
-            <p class="why">What it read</p>
-            <ol>
-              <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
-              <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
-              <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
-            </ol>
-            <p class="vs-out">That answer came from the <b>published version</b>.</p>
-          </div>
-        </div>
-      </div>
+      <h1>Why Aspected answers differently.</h1>
+      <p class="lede">Plain vector search turns your question into one score. Aspected keeps each part of it, weighs them, and shows which one decided.</p>
+      <a class="talk lede-link" href="#same">See the same question answered twice →</a>
       <section class="csec">
         <h2>How does it know what you asked?</h2>
         <div class="know">
@@ -1058,16 +1118,6 @@ curl http://localhost:8080/indexes</pre></div>
       </ol>
         <p class="fine">Documents on file shares or SharePoint? Xillio's connectors bring them in with their version, date, owner and department.</p>
       </section>
-
-      <section class="stack wsec" aria-labelledby="stack-h">
-      <h2 id="stack-h">One index under the AI you already use.</h2>
-      <div class="stack-grid">
-        <div><b>Under Copilot</b><p>Deployed as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
-        <div><b>In your agents</b><p>Bedrock agents and other assistants over MCP, your own apps over the REST API.</p></div>
-        <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
-        <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
-      </div>
-    </section>
     </div>
   </section>
 
@@ -1138,21 +1188,20 @@ curl http://localhost:8080/indexes</pre></div>
       </section>
 
       <section class="csec">
-        <h2>A layer of your own, between your documents and your AI.</h2>
+        <h2>A layer of your own, under the AI you already use.</h2>
         <div class="stack-grid">
-          <div><b>Under Copilot</b><p>Deployed as an MCP server. Copilot stays the screen.</p></div>
-          <div><b>Or your own model</b><p>Mistral, your own assistant or an agent. You can switch later.</p></div>
-          <div><b>In your own tenant</b><p>Azure or AWS, including European sovereign cloud.</p></div>
+          <div><b>Under Copilot</b><p>Runs as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
+          <div><b>Or your own AI</b><p>Claude, Mistral, Bedrock agents or your own assistant over MCP, your apps over the REST API. You can switch later.</p></div>
+          <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
           <div><b>Yours to keep</b><p>The index and the receipts are yours, exportable in an open format.</p></div>
         </div>
         <p class="sub" style="margin-top:20px">In production under Copilot at Agfa and Mosaic Community Health. Patented: US 12,517,879. Implemented with Xillio, after 1,000+ content projects for 250+ organisations.</p>
       </section>
 
-      <section class="csec ask cta">
+      <section class="csec cta">
         <h2>Start with one department.</h2>
-        <div class="askfacts"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
-        <p class="sub">Read-only access. After two weeks you know whether you can stand behind the answers. Only then do you decide whether to go further.</p>
-        <div class="ctas" style="margin-top:20px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#why">Why it works</a></div>
+        <p class="sub">Two weeks, twenty questions, one expert of yours. Read-only access.</p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#one-department">How the two weeks go</a></div>
       </section>
     </div>
   </section>
@@ -1209,11 +1258,11 @@ curl http://localhost:8080/indexes</pre></div>
         <div class="grid solgrid" data-cards='[["receipt","In your knowledge base","The answer comes from the signed version, with a receipt."],["copies","In your knowledge base","Versions grouped; the one that counts is marked."]]'></div>
       </section>
       <section class="csec">
-        <h2>Works with the AI you have.</h2>
+        <h2>A layer of your own, under the AI you already use.</h2>
         <div class="stack-grid">
-          <div><b>Copilot</b><p>Aspected runs as an MCP server. Copilot stays the screen.</p></div>
-          <div><b>Your own assistant</b><p>Mistral, your own model or an agent. You can switch later.</p></div>
-          <div><b>Your own cloud</b><p>Your Azure or AWS tenant, including European sovereign cloud.</p></div>
+          <div><b>Under Copilot</b><p>Runs as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
+          <div><b>Or your own AI</b><p>Claude, Mistral, Bedrock agents or your own assistant over MCP, your apps over the REST API. You can switch later.</p></div>
+          <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
           <div><b>Yours to keep</b><p>The index and the receipts are yours, exportable in an open format.</p></div>
         </div>
       </section>
@@ -1223,9 +1272,8 @@ curl http://localhost:8080/indexes</pre></div>
       </section>
       <section class="csec cta">
         <h2>Start with one department.</h2>
-        <div class="askfacts"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
-        <p class="sub">After two weeks you know what your AI can and can't find. Then you decide.</p>
-        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#cio">For CIOs</a></div>
+        <p class="sub">Two weeks, twenty questions, one expert of yours. Read-only access.</p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#one-department">How the two weeks go</a></div>
         <p class="examples">Examples: <a href="#industry-healthcare">Healthcare</a> · <a href="#industry-field-service">Manufacturing and field service</a> · <a href="#industry-government">Government</a></p>
       </section>
     </div>
@@ -1286,6 +1334,99 @@ curl http://localhost:8080/indexes</pre></div>
     </div>
   </section>
 
+  <!-- START WITH ONE DEPARTMENT -->
+  <section class="view" id="v-one-department">
+    <div class="wrap page">
+      <h1>Start with one department.</h1>
+      <p class="lede">Two weeks, twenty questions, one expert of yours. After that you know whether you can stand behind the answers.</p>
+      <section class="csec">
+        <h2>What it takes.</h2>
+        <div class="askfacts cards"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions people really ask</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
+        <p class="sub">Read-only access to that department's sources. Documents stay where they are, and permissions still apply.</p>
+      </section>
+      <section class="csec">
+        <h2>How the two weeks go.</h2>
+        <div class="know four">
+          <div><span class="kn">1</span><b>Pick the questions</b><p>Your expert writes down twenty questions people ask, and which document should answer each one.</p></div>
+          <div><span class="kn">2</span><b>Connect, read-only</b><p>We connect the department's sources. Nothing moves and nothing is changed.</p></div>
+          <div><span class="kn">3</span><b>Answer with receipts</b><p>Every question gets an answer and a receipt: what was used, what was kept out, and why.</p></div>
+          <div><span class="kn">4</span><b>Check against your expert</b><p>Your expert compares each answer with their own pick. Where they differ, the receipt points at the document to fix.</p></div>
+        </div>
+      </section>
+      <section class="csec">
+        <h2>The expert.</h2>
+        <p class="sub">The person people already ask which version is current. They know which document counts, so their picks are the yardstick. After two weeks you decide whether to go further.</p>
+      </section>
+      <section class="csec cta">
+        <h2>Plan the two weeks.</h2>
+        <p class="sub">Tell us which department you have in mind.</p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#cio">For CIOs</a></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- INTRODUCING ASPECT DATABASE -->
+  <section class="view" id="v-introducing">
+    <div class="wrap page">
+      <p class="newpill"><span class="newtag">New</span>Aspect Database</p>
+      <h1>Introducing Aspect Database.</h1>
+      <p class="lede">A vector database that keeps every aspect of a question, such as meaning, version, date, source or price, each with its own weight. It ranks on all of them in one calculation and shows why each answer fits.</p>
+      <section class="csec">
+        <h2>What's new.</h2>
+        <div class="newvs">
+          <div class="nv">
+            <p class="nv-t">A vector database</p>
+            <p class="nv-doc">Framework Agreement v3.1 <span>draft</span></p>
+            <p class="nv-how">One vector, from the text</p>
+            <div class="nv-one"><i></i></div>
+            <p class="nv-res">Score <b>0.91</b>, ranked first.</p>
+            <p class="nv-cap">One number. A draft reads like the signed version, so it scores like one, and nothing says why.</p>
+          </div>
+          <div class="nv good">
+            <p class="nv-t">Aspect Database</p>
+            <p class="nv-doc">Framework Agreement v3.1 <span>draft</span></p>
+            <p class="nv-how">One vector, built from aspects</p>
+            <div class="nv-asp">
+              <div><span>meaning</span><i style="--v:.95"></i><em>close</em></div>
+              <div><span>status</span><i class="far" style="--v:.12"></i><em class="far">far · draft</em></div>
+              <div><span>version</span><i style="--v:.7"></i><em>close</em></div>
+              <div><span>date</span><i style="--v:.8"></i><em>close</em></div>
+              <div><span>source</span><i style="--v:.85"></i><em>close</em></div>
+            </div>
+            <p class="nv-res">Kept out. Decided by <b>status</b>.</p>
+            <p class="nv-cap">A distance per aspect, each with its weight. You see which one decided.</p>
+          </div>
+        </div>
+      </section>
+      <section class="csec">
+        <h2>What it lets you do.</h2>
+        <div class="know">
+          <a href="#show-food"><b>Ask in one sentence</b><p>“This one, but less sugar.” The whole sentence goes in, the <i>but</i> included.</p><span class="go">See it on groceries →</span></a>
+          <a href="#show-receipt"><b>See why</b><p>Every answer comes with a receipt: what was used, what was kept out, and which aspect decided.</p><span class="go">See the receipt →</span></a>
+          <a href="#cio"><b>Decide what counts</b><p>The people who own the content set the weights, once, for every assistant.</p><span class="go">For CIOs →</span></a>
+        </div>
+      </section>
+      <section class="csec">
+        <h2>Proof.</h2>
+        <div class="proofgrid">
+          <div class="pcard patent"><b>US patent 12,517,879</b><p>“Multi-aspect vector search index creation and retrieval method and system.” Granted 6 January 2026. Inventors Rikkert Engels and Jorn Verhoeven. PCT application filed.</p><a href="https://patents.google.com/patent/US12517879B1" target="_blank" rel="noopener">Read the patent ↗</a></div>
+          <div class="pcard"><b>In production under Copilot</b><p>Agfa and Mosaic Community Health.</p><a href="https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf" target="_blank" rel="noopener">Agfa case study ↗</a><a data-video href="#" target="_blank" rel="noopener">Mosaic on stage ↗</a></div>
+          <div class="pcard"><b>Live, for anyone</b><p>samebutbetter.food on 45,000 supermarket products. Vegas on 2,447 conference sessions.</p><a href="#show-food">Groceries →</a><a href="#show-vegas">Conference sessions →</a></div>
+        </div>
+      </section>
+      <section class="csec">
+        <h2>Where it comes from.</h2>
+        <p class="sub">Built by the team behind Xillio, after 1,000+ content projects for 250+ organisations. They kept seeing the same thing: the right document was there, but search could not tell it from its copies.</p>
+        <a class="talk" href="#about">Our story →</a>
+      </section>
+      <section class="csec cta">
+        <h2>Try it today.</h2>
+        <div class="prompt code mini"><button class="btn copy" type="button" data-copy="dockerIntro">Copy</button><pre id="dockerIntro">docker run -p 8080:8080 xillio/aspected:latest</pre></div>
+        <div class="ctas" style="margin-top:16px"><a class="btn" href="#start">Get started</a><a class="btn ghost" href="https://docs.aspected.com" target="_blank" rel="noopener">Read the docs ↗</a></div>
+      </section>
+    </div>
+  </section>
+
   <!-- PRICING -->
   <section class="view" id="v-pricing">
     <div class="wrap page">
@@ -1320,7 +1461,7 @@ curl http://localhost:8080/indexes</pre></div>
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>Similarity, aspect by aspect. · US patent 12,517,879</span></span>
     <button class="themebtn" id="themeBtn" type="button">Dark mode</button>
-    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#solutions">Solutions</a><a href="#why">Why Aspected</a><a href="#cio">For CIOs</a><a href="#about">About</a></nav>
+    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#solutions">Solutions</a><a href="#why">Why Aspected</a><a href="#cio">For CIOs</a><a href="#introducing">Aspect Database</a><a href="#about">About</a></nav>
     <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a></nav>
   </div>
 </footer>
@@ -1743,12 +1884,12 @@ function openIndustry(id){
 
 /* ---------- hero: the aspect picker drives the question and the spider ---------- */
 var PK=[
-  {w:"version", go:"copies", q:"the current safety procedure for Rotterdam", l:["meaning","version","date","owner","site"], a:[.9,.3,.6,.62,.8], b:[.88,.95,.62,.62,.8]},
-  {w:"type", go:"receipt", q:"the contract itself, not an email about it", l:["meaning","type","date","author","site"], a:[.92,.25,.6,.6,.7], b:[.88,.95,.6,.6,.7]},
-  {w:"year", go:"receipt", q:"the notice period, from this year's contract", l:["meaning","year","author","type","language"], a:[.9,.3,.6,.7,.8], b:[.87,.92,.6,.7,.8]},
-  {w:"language", page:"knowledge-base", q:"this manual, but in Dutch", l:["meaning","language","version","model","type"], a:[.9,.25,.7,.8,.7], b:[.86,.93,.7,.8,.7]},
-  {w:"size", page:"knowledge-base", q:"this manual, but the short version", l:["meaning","size","version","language","type"], a:[.9,.85,.7,.8,.7], b:[.86,.3,.7,.8,.7]}];
-var askText=document.getElementById("askText"), askChips=null, pickerEl=document.getElementById("picker"), sel=2, typeT=0;
+  {w:"version", c:["version: current","type: procedure","site: Rotterdam"], go:"copies", q:"the current safety procedure for Rotterdam", l:["meaning","version","date","owner","site"], a:[.9,.3,.6,.62,.8], b:[.88,.95,.62,.62,.8]},
+  {w:"type", c:["meaning: the agreement","type: contract, not email"], go:"receipt", q:"the contract itself, not an email about it", l:["meaning","type","date","author","site"], a:[.92,.25,.6,.6,.7], b:[.88,.95,.6,.6,.7]},
+  {w:"year", c:["meaning: notice period","type: contract","year: 2026"], go:"receipt", q:"the notice period, from this year's contract", l:["meaning","year","author","type","language"], a:[.9,.3,.6,.7,.8], b:[.87,.92,.6,.7,.8]},
+  {w:"language", c:["like: this manual","language: Dutch"], page:"knowledge-base", q:"this manual, but in Dutch", l:["meaning","language","version","model","type"], a:[.9,.25,.7,.8,.7], b:[.86,.93,.7,.8,.7]},
+  {w:"size", c:["like: this manual","size: short"], page:"knowledge-base", q:"this manual, but the short version", l:["meaning","size","version","language","type"], a:[.9,.85,.7,.8,.7], b:[.86,.3,.7,.8,.7]}];
+var askText=document.getElementById("askText"), askChips=document.getElementById("askChips"), chipT=[], pickerEl=document.getElementById("picker"), sel=2, typeT=0;
 var pws=PK.map(function(p){var e=document.createElement("span"); e.className="pw"; e.textContent=p.w; pickerEl.appendChild(e); return e});
 var lastO=[];
 function place(k){
@@ -1763,17 +1904,24 @@ function place(k){
 }
 var hs=Spider(document.getElementById("heroSpider"),5);
 var convoGo=document.getElementById("convoGo");
+var convoGoT=document.getElementById("convoGoT");
 function bridge(k){var p=PK[k];
-  if(p.go){convoGo.textContent="See it work: “"+showById(p.go).title.replace(/\.$/,"")+"” →"; convoGo.href="#showcases"; convoGo.dataset.go=p.go}
-  else {convoGo.textContent="See it in the knowledge base →"; convoGo.href="#"+p.page; delete convoGo.dataset.go}}
+  if(p.go){convoGoT.textContent="Watch it on "+DOM[p.go].toLowerCase(); convoGo.href="#showcases"; convoGo.dataset.go=p.go}
+  else {convoGoT.textContent="See it in a knowledge base"; convoGo.href="#"+p.page; delete convoGo.dataset.go}}
+function chips(k,stagger){
+  chipT.forEach(clearTimeout); chipT=[]; askChips.innerHTML="";
+  PK[k].c.forEach(function(c,i){var e=document.createElement("span"); var j=c.indexOf(":");
+    e.innerHTML="<i>"+esc(c.slice(0,j))+"</i>"+esc(c.slice(j+1)); askChips.appendChild(e);
+    if(stagger){chipT.push(setTimeout(function(){e.classList.add("in")},i*220))} else e.classList.add("in")});
+}
 convoGo.addEventListener("click",function(e){var id=convoGo.dataset.go; if(!id) return; e.preventDefault(); select(id,true); document.getElementById("showcases").scrollIntoView({behavior:reduce?"auto":"smooth"})});
 function showAspect(k,animate){
   bridge(k);
   var p=PK[k], i=0; clearInterval(typeT);
   hs.labels(p.l);
-  if(!animate){askText.textContent=p.q; hs.hi([1]); hs.set(p.a,p.b); return}
-  hs.hi([]); hs.set(p.a,p.a); askText.textContent="";
-  typeT=setInterval(function(){i++; askText.textContent=p.q.slice(0,i); if(i>=p.q.length){clearInterval(typeT); hs.hi([1]); hs.morph(p.b,1300)}},38);
+  if(!animate){askText.textContent=p.q; chips(k,false); hs.hi([1]); hs.set(p.a,p.b); return}
+  hs.hi([]); hs.set(p.a,p.a); askText.textContent=""; chips(k,true); chipT.forEach(clearTimeout); chipT=[];
+  typeT=setInterval(function(){i++; askText.textContent=p.q.slice(0,i); if(i>=p.q.length){clearInterval(typeT); chips(k,true); chipT.push(setTimeout(function(){hs.hi([1]); hs.morph(p.b,1300)},PK[k].c.length*220))}},38);
 }
 place(sel); showAspect(sel,false);
 if(!reduce){
@@ -1853,11 +2001,11 @@ function openShow(id){
 /* ---------- routing ---------- */
 function route(){
   var hsh=(location.hash||"#home").slice(1), view="home", scrollTo=null;
-  if(hsh==="showcases"||hsh==="try"||hsh==="proof"){scrollTo=hsh}
+  if(hsh==="showcases"||hsh==="try"||hsh==="proof"||hsh==="same"){scrollTo=hsh}
   else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
   else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
   else if(hsh==="industries"){view="solutions"}
-  else if(["about","why","pricing","start","cio","solutions","knowledge-base","ready-for-ai","catalogue-search"].indexOf(hsh)>=0){view=hsh}
+  else if(["about","why","pricing","start","cio","solutions","knowledge-base","ready-for-ai","catalogue-search","introducing","one-department"].indexOf(hsh)>=0){view=hsh}
   if(view!=="show" && dPlayer){dPlayer.stop()}
   if(view==="cio" && window.__obStart) window.__obStart();
   document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id==="v-"+view)});
@@ -1867,6 +2015,12 @@ function route(){
   if(scrollTo){var el=document.getElementById(scrollTo); requestAnimationFrame(function(){el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})}
   else window.scrollTo(0,0);
 }
+var mbtn=document.getElementById("mbtn"), msheet=document.getElementById("msheet");
+function sheet(open){mbtn.setAttribute("aria-expanded",open?"true":"false"); msheet.hidden=!open}
+mbtn.addEventListener("click",function(){sheet(msheet.hidden)});
+msheet.addEventListener("click",function(e){if(e.target.closest("a")) sheet(false)});
+addEventListener("keydown",function(e){if(e.key==="Escape"&&!msheet.hidden){sheet(false);mbtn.focus()}});
+addEventListener("hashchange",function(){sheet(false)});
 addEventListener("hashchange",route); route();
 })();
 </script>
