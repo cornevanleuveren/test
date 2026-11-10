@@ -354,7 +354,9 @@ p{margin:0}
 .proof-head .org{color:var(--blue)}
 .quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .quotes figure{margin:0;padding:24px;border-radius:var(--r);background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
-.quotes blockquote{margin:0;font-size:19px;font-weight:600;line-height:1.35;letter-spacing:-.01em}
+.qlink{display:block;margin-top:10px;color:var(--blue);font-weight:700;text-decoration:none}
+.qlink:hover{text-decoration:underline}
+.quotes blockquote{margin:0;font-size:17px;font-weight:600;line-height:1.35;letter-spacing:-.01em}
 .quotes figcaption{font-size:13.5px;color:var(--muted)}
 .quotes figcaption b{display:block;color:var(--ink);font-weight:700}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid var(--line);padding-top:24px}
@@ -543,7 +545,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <div class="hero-l">
       <h1 class="wordmark">Aspected</h1>
       <p class="slogan">Similarity, aspect by aspect.</p>
-      <p class="oneliner">Aspected weighs every part of a question at once, and shows why each answer fits.</p>
+      <p class="oneliner">Aspect Database weighs every part of a question at once, and shows why each answer fits.</p>
       <div class="ask" aria-hidden="true">
         <div class="askbox"><span id="askText">this pasta, but less sugar</span><span class="caret"></span></div>
       </div>
@@ -601,18 +603,15 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
     <section class="proof" id="proof" aria-labelledby="proof-h">
       <div class="wrap">
         <div class="proof-head">
-          <p class="eyebrow">In production</p>
-          <h2 id="proof-h">Running under Copilot at <span class="org">Agfa</span> and <span class="org">Mosaic Community Health</span>.</h2>
+          <h2 id="proof-h">In their words.</h2>
         </div>
         <div class="quotes">
-          <figure><blockquote>“Aspected has added the context Microsoft Copilot needed.”</blockquote><figcaption><b>Rob Kasslack</b>IT Business Partner, AI &amp; Innovation · Agfa</figcaption></figure>
+          <figure><blockquote>“Aspected has added the context Microsoft Copilot needed. The answers are now perfectly aligned with how we organize and use our information.”</blockquote><figcaption><b>Rob Kasslack</b>IT Business Partner, AI &amp; Innovation · Agfa<a class="qlink" href="https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf" target="_blank" rel="noopener">Read the Agfa case study ↗</a></figcaption></figure>
+          <figure><blockquote>“I was experimenting with Copilot Studio… the results were not yet at the standard we needed in response speed, accuracy, and the quality of the feedback.”</blockquote><figcaption><b>Marshall</b>Senior Healthcare Data Strategist · Mosaic Community Health<a class="qlink" data-video href="#" target="_blank" rel="noopener">Watch Mosaic on stage ↗</a></figcaption></figure>
+          <figure><blockquote>“Aspected includes all context directly in the search query upfront. This enables immediate governance, cuts search times in half, and delivers maximum accuracy at lower cost.”</blockquote><figcaption><b>Wim Verheij</b>Managing Director · Novadoc Netherlands</figcaption></figure>
+          <figure><blockquote>“The aspect model gives you, and an agent, real levers to shape relevance per query that a plain vector store simply can't.”</blockquote><figcaption><b>Andy Copland</b>Interim CTO · Vertex Agility (CGA Management)</figcaption></figure>
           <figure><blockquote>“Aspected is a back-end technology that improves speed and accuracy. You do not have to interact with a separate Aspected interface.”</blockquote><figcaption><b>Marshall</b>Senior Healthcare Data Strategist · Mosaic Community Health</figcaption></figure>
           <figure><blockquote>“You guys are purely unique in this space… there's your ROI, isn't it?”</blockquote><figcaption><b>Tom Lane</b>Content Management Lead · Capgemini UK</figcaption></figure>
-        </div>
-        <div class="facts">
-          <a href="https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf" target="_blank" rel="noopener"><b>Agfa case study ↗</b><span>Copilot answers for field engineers</span></a>
-          <a data-video href="#" target="_blank" rel="noopener"><b>Mosaic on stage ↗</b><span>NWRPCA 2026, Portland</span></a>
-          <div><b>Patented</b><span>US 12,517,879, granted 6 January 2026</span></div>
         </div>
       </div>
     </section>
