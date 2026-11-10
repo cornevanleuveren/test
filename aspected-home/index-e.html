@@ -95,7 +95,8 @@ p{margin:0}
 .spider{display:block;width:100%;height:auto;overflow:visible}
 .sp-grid{fill:none;stroke:var(--line);stroke-width:1.5}
 .sp-axis{stroke:var(--line);stroke-width:1.5}
-.sp-lab{font:500 19px var(--f-mono);fill:var(--muted);transition:fill .3s}
+.sp-lab{font:500 19px var(--f-mono);fill:var(--muted);transition:fill .3s,opacity .2s ease}
+.sp-lab.swap{opacity:0}
 .sp-lab.hi{fill:var(--blue);font-weight:600}
 .sp-this{fill:none;stroke:var(--muted);stroke-width:3;stroke-dasharray:9 8}
 .sp-bet{fill:var(--blue);fill-opacity:.16;stroke:var(--blue);stroke-width:4;stroke-linejoin:round}
@@ -729,7 +730,19 @@ footer a:hover{color:var(--ink)}
 .vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.vs-cols{grid-template-columns:minmax(0,1fr)}}
 .vs-col{background:var(--soft);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.vs-col.good{box-shadow:0 0 0 1.5px var(--blue) inset}
+.vs-col.good{box-shadow:none}
+.vs-col{background:transparent;padding:0;gap:18px}
+.vs-read{background:var(--soft);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.vs-col.good .vs-read{box-shadow:0 0 0 1.5px var(--blue) inset}
+.vs-msg{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start}
+.vs-msg .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--coral-soft);color:var(--coral)}
+.vs-col.good .vs-msg .av{background:var(--blue-soft);color:var(--blue)}
+.vs-mb{min-width:0}
+.vs-who{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:15px;margin-bottom:8px}
+.vs-who b{font-weight:800}
+.vs-who time{font-size:13.5px;color:var(--muted)}
+.vs-msg .bub.ai{max-width:100%;padding:14px 18px;font-size:16px}
+@media (max-width:620px){.vs-msg{grid-template-columns:34px minmax(0,1fr);gap:10px}.vs-msg .av{width:34px;height:34px}}
 .vs-col ol{margin:0;padding:0;list-style:none;counter-reset:r;display:grid;gap:8px}
 .vs-col li{counter-increment:r;display:grid;grid-template-columns:1.6em minmax(0,1fr);column-gap:8px;padding:10px 12px;border-radius:8px;background:var(--surface)}
 .vs-col li::before{content:counter(r);grid-row:span 2;font:600 14px/1.5 var(--f-mono);color:var(--muted)}
@@ -989,13 +1002,14 @@ a.know-a,.know>a{text-decoration:none;color:inherit;transition:transform .3s cub
       <div class="vs" data-col="0">
         <div class="bub user">What is the notice period in our standard framework agreement?</div>
         <div class="vs-seg" role="tablist" aria-label="Which search answers">
-          <button type="button" role="tab" aria-selected="true" data-col="0">Plain vector search</button>
-          <button type="button" role="tab" aria-selected="false" data-col="1">Aspected</button>
+          <button type="button" role="tab" aria-selected="true" data-col="0">Assistant</button>
+          <button type="button" role="tab" aria-selected="false" data-col="1">With Aspected</button>
         </div>
         <div class="vs-cols">
           <div class="vs-col">
-            <p class="eyebrow">Plain vector search · text only</p>
-            <div class="bub ai"><span>The notice period is <b>120 days</b>.</span><small>Source: Framework Agreement v3.1</small></div>
+            <div class="vs-msg"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 20.2c.9-4.1 4.2-6.4 8.2-6.4s7.3 2.3 8.2 6.4c.1.5-.3.8-.7.8H4.5c-.4 0-.8-.3-.7-.8z"/></svg></span><div class="vs-mb"><p class="vs-who"><b>Assistant</b><time>10:24 AM</time></p>
+              <div class="bub ai"><span>The notice period is <b>120 days</b>.</span><small>Source: Framework Agreement v3.1</small></div></div></div>
+            <div class="vs-read">
             <p class="why">What it read</p>
             <ol>
               <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
@@ -1004,10 +1018,12 @@ a.know-a,.know>a{text-decoration:none;color:inherit;transition:transform .3s cub
             </ol>
             <p class="vs-out">That answer came from a <b>draft</b>.</p>
             <button type="button" class="vs-next" data-col="1">Now ask Aspected →</button>
+            </div>
           </div>
           <div class="vs-col good">
-            <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
-            <div class="bub ai"><span>The notice period is <b>90 days</b>.</span><small>Source: Framework Agreement v3.0 · receipt attached</small></div>
+            <div class="vs-msg"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 20.2c.9-4.1 4.2-6.4 8.2-6.4s7.3 2.3 8.2 6.4c.1.5-.3.8-.7.8H4.5c-.4 0-.8-.3-.7-.8z"/></svg></span><div class="vs-mb"><p class="vs-who"><b>Assistant powered by Aspected</b><time>10:24 AM</time></p>
+              <div class="bub ai"><span>The notice period is <b>90 days</b>.</span><small>Source: Framework Agreement v3.0 · receipt attached</small></div></div></div>
+            <div class="vs-read">
             <p class="why">What it read</p>
             <ol>
               <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
@@ -1015,6 +1031,7 @@ a.know-a,.know>a{text-decoration:none;color:inherit;transition:transform .3s cub
               <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
             </ol>
             <p class="vs-out">That answer came from the <b>published version</b>.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1795,7 +1812,7 @@ function Spider(host, n){
   host.appendChild(svg);
   var cur=ones.slice(), raf=0;
   return {
-    labels:function(ls){ls.forEach(function(l,i){labs[i].textContent=l})},
+    labels:function(ls){ls.forEach(function(l,i){var t=labs[i]; if(t.textContent===l) return; if(!t.textContent||reduce){t.textContent=l; return} t.classList.add("swap"); setTimeout(function(){t.textContent=l; t.classList.remove("swap")},200)})},
     hi:function(h){labs.forEach(function(t,i){t.classList.toggle("hi",h.indexOf(i)>=0)}); axes.forEach(function(a,i){a.classList.toggle("hi",h.indexOf(i)>=0)})},
     set:function(a,b){cancelAnimationFrame(raf); pThis.setAttribute("points",pts(a)); pBet.setAttribute("points",pts(b)); cur=b.slice()},
     morph:function(to,ms){
