@@ -96,7 +96,8 @@ p{margin:0}
 .herotop{grid-column:1 / -1;margin-bottom:4px}
 .answer{font-size:clamp(20px,2vw,26px);font-weight:600;line-height:1.35;letter-spacing:-.015em;color:var(--ink);max-width:24ch}
 .hero-l .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.picker{position:relative;display:block;width:4.7em;height:3.1em;flex:none}
+@media (max-width:900px){.hero .hero-l{order:1}.hero .convo{order:2}}
+.picker{position:relative;display:block;width:4.7em;height:2.4em;flex:none}
 .picker::before,.picker::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--blue);opacity:.8}
 .picker::before{top:calc(50% - .6em)}
 .picker::after{top:calc(50% + .56em)}
@@ -568,14 +569,14 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
         <span class="ph1" aria-hidden="true">Your embeddings don’t know what</span>
         <span class="prow" aria-hidden="true"><span class="picker" id="picker"></span><span class="itis">it is.</span></span>
       </h1>
-      <div class="hero-l">
-        <p class="answer">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
-        <div class="ctas"><a class="btn" href="#start">Get started</a><a class="btn ghost" href="#showcases">See it work</a></div>
-      </div>
       <div class="convo" aria-hidden="true">
         <div class="askbox"><span id="askText">this report, but from 2026</span><span class="caret"></span></div>
         <div class="convo-sp" id="heroSpider"></div>
         <p class="convo-cap"><span><i class="k bet"></i>what you asked</span><span><i class="k"></i>where you started</span></p>
+      </div>
+      <div class="hero-l">
+        <p class="answer">Aspected weighs every part of a question at once, and shows why each answer fits.</p>
+        <div class="ctas"><a class="btn" href="#start">Get started</a><a class="btn ghost" href="#showcases">See it work</a></div>
       </div>
     </div>
 
@@ -1314,7 +1315,7 @@ function place(k){
     e.classList.toggle("jump", lastO[i]!==undefined && Math.abs(o-lastO[i])>2);
     var off=[0,0.8,1.32][a]*(o<0?-1:1), sc=[1,.62,.42][a];
     e.style.transform="translateY(calc(-50% + "+off+"em)) scale("+sc+")";
-    e.style.opacity=a===0?1:(a===1?.5:.22);
+    e.style.opacity=a===0?1:(a===1?.45:0);
     e.classList.toggle("on",o===0); lastO[i]=o;
   });
 }
