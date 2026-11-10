@@ -7,7 +7,7 @@
 <style>
 /* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then a showcase player: six titles beside one large demo that plays; the contrast (two rankings) and one paragraph on how; proof; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
 :root{
-  --bg:#F8F8F8; --surface:#FFFFFF; --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
+  --bg:#FFFFFF; --surface:#FFFFFF; --tint:#EEF3FB; --soft:#F6F7F9; --navy:#0F1E3D; --navy-ink:#C9D5E8; --navy-link:#8FB3FF; --shadow:0 6px 18px rgba(19,42,78,.06); --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
   --blue:#005CFC; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
   --paper:#FFFFFF; --paper-ink:#14161C; --paper-mute:#6B7080; --paper-blue:#005CFC; --paper-red:#C8432F;
   --f-sans:"Manrope", "Segoe UI", system-ui, sans-serif;
@@ -15,10 +15,10 @@
   --r:14px; --rh:32px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0D1016; --surface:#151922; --stage:#1B2130; --ink:#EEF0F4; --muted:#9AA1B0; --line:#272D3A;
+  --bg:#0D1016; --surface:#151922; --tint:#111827; --soft:#0D1016; --navy:#0A1630; --shadow:none; --stage:#1B2130; --ink:#EEF0F4; --muted:#9AA1B0; --line:#272D3A;
   --blue:#5C8DFF; --blue-soft:#17264B; --coral:#FF8A78; --coral-soft:#3A1E1A; --paper:#ECEAE4; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0D1016; --surface:#151922; --stage:#1B2130; --ink:#EEF0F4; --muted:#9AA1B0; --line:#272D3A;
+  --bg:#0D1016; --surface:#151922; --tint:#111827; --soft:#0D1016; --navy:#0A1630; --shadow:none; --stage:#1B2130; --ink:#EEF0F4; --muted:#9AA1B0; --line:#272D3A;
   --blue:#5C8DFF; --blue-soft:#17264B; --coral:#FF8A78; --coral-soft:#3A1E1A; --paper:#ECEAE4; color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -88,7 +88,7 @@ p{margin:0}
 .hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;row-gap:20px}
 @media (min-width:901px){.hero{min-height:calc(100vh - 64px - env(safe-area-inset-top,0px));min-height:calc(100svh - 64px - env(safe-area-inset-top,0px));align-content:center;padding-block:32px 48px}}
 .convo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 24px 50px -36px rgba(20,22,28,.45);min-width:0}
-.convo .askbox{box-shadow:none;background:var(--bg);min-height:52px;padding:12px 18px;font-size:15px}
+.convo .askbox{box-shadow:none;background:var(--soft);min-height:52px;padding:12px 18px;font-size:15px}
 .convo-sp{max-width:420px;width:100%;margin:6px auto 0}
 .convo-go{align-self:center;margin-top:4px;font-weight:700;font-size:14px;color:var(--blue);text-decoration:none}
 .convo-go:hover{text-decoration:underline}
@@ -512,13 +512,13 @@ p{margin:0}
 .stage.big .nd-cap{left:clamp(16px,3vw,36px);top:clamp(14px,2.6vw,30px)}
 
 /* proof + try */
-.proof{border-block:1px solid var(--line);background:var(--surface)}
+.proof{background:var(--tint)}
 .proof .wrap{display:flex;flex-direction:column;gap:32px;padding-block:clamp(48px,7vw,80px)}
 .proof-head{display:flex;flex-direction:column;gap:10px;max-width:820px}
 .proof-head h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;line-height:1.15}
 .proof-head .org{color:var(--blue)}
 .quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.quotes figure{margin:0;padding:24px;border-radius:var(--r);background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
+.quotes figure{margin:0;padding:24px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
 .qlink{display:block;margin-top:10px;color:var(--blue);font-weight:700;text-decoration:none}
 .qlink:hover{text-decoration:underline}
 .quotes blockquote{margin:0;font-size:17px;font-weight:600;line-height:1.35;letter-spacing:-.01em}
@@ -609,7 +609,7 @@ footer a:hover{color:var(--ink)}
 .vs-q{font:500 clamp(15px,1.8vw,18px)/1.4 var(--f-mono)}
 .vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:760px){.vs-cols{grid-template-columns:minmax(0,1fr)}}
-.vs-col{background:var(--bg);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.vs-col{background:var(--soft);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .vs-col.good{box-shadow:0 0 0 1.5px var(--blue) inset}
 .vs-col ol{margin:0;padding:0;list-style:none;counter-reset:r;display:grid;gap:8px}
 .vs-col li{counter-increment:r;display:grid;grid-template-columns:1.6em minmax(0,1fr);column-gap:8px;padding:10px 12px;border-radius:8px;background:var(--surface)}
@@ -698,6 +698,56 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
 .iproof .note p{color:var(--muted);font-size:15px}
 .iproof .note a{color:var(--blue);font-weight:700;text-decoration:none}
 
+/* Blocks: white and light-blue bands, white cards on them, one navy band to close a page */
+html,body{overflow-x:clip}
+.band,.page>section{position:relative;isolation:isolate;padding-block:clamp(56px,8vw,96px);margin-top:0}
+.band::before,.page>section::before{content:"";position:absolute;inset:0 calc(50% - 50vw);background:var(--band,transparent);z-index:-1}
+.page>section:first-of-type{margin-top:clamp(40px,6vw,64px)}
+.page:has(>section){padding-bottom:0}
+.page>section:nth-of-type(odd){--band:var(--tint)}
+.band.tint{--band:var(--tint)}
+.cta{--band:var(--navy)!important;color:#fff}
+.cta h2,.cta h3{color:#fff}
+.cta .sub,.cta p,.cta .askfacts span,.cta .examples{color:var(--navy-ink)}
+.cta .examples a{color:var(--navy-link)}
+.cta .askfacts b{color:#fff}
+.cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.35)}
+.cta .btn.ghost:hover{border-color:#fff}
+.cta .way{color:var(--ink)}
+.cta .way p{color:var(--muted)}
+.try.cta h2{color:#fff}
+.try.cta>p{color:var(--navy-ink)}
+
+/* cards */
+.itile,.risk:not(.no),.record,.tablewrap,.vs,.ppanel,.iproof figure,.way:not(.hl),.obx,.obq button:not([aria-pressed="true"]){box-shadow:var(--shadow)}
+.way.hl{box-shadow:0 0 0 1px var(--blue) inset,var(--shadow)}
+.risk.no{box-shadow:0 0 0 1px var(--coral) inset,var(--shadow)}
+.stack-grid{gap:16px}
+.stack-grid>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.timeline{border-top:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:4px 24px;box-shadow:var(--shadow);margin-top:0}
+.timeline div:last-child{border-bottom:0}
+.fgroup{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px 4px;box-shadow:var(--shadow)}
+.fgroup h3{border-bottom:0;padding-bottom:0}
+.faq details:last-child{border-bottom:0}
+.faqwrap{margin-top:0}
+.prep li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.page>section .bottomline:first-of-type{margin-top:0}
+.page>section.ask{max-width:none}
+@media (min-width:621px){.solgrid:has(>:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}}
+.iproof .note{background:var(--surface);box-shadow:var(--shadow)}
+
+/* how it knows */
+.know{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:10px}
+@media (max-width:860px){.know{grid-template-columns:minmax(0,1fr)}}
+.know>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);min-width:0}
+.know .kn{font:700 13px/1 var(--f-mono);color:#fff;background:var(--blue);width:28px;height:28px;border-radius:50%;display:grid;place-items:center}
+.know b{font-size:17px;font-weight:800}
+.know p{color:var(--muted);font-size:15px}
+.kmap{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+.kmap span{font:500 12.5px/1.3 var(--f-mono);padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue)}
+.kmap span.open{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+.kq{font:500 13.5px/1.4 var(--f-mono);background:var(--soft);border-radius:10px;padding:8px 12px;margin-top:6px}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -736,7 +786,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       </div>
     </div>
 
-    <div class="wrap sec" id="showcases">
+    <div class="wrap sec band tint" id="showcases">
       <div class="sec-head">
         <h2>See it work on something you know.</h2>
         <p id="playHint">Pick one. Each plays in a few seconds.</p>
@@ -800,7 +850,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
     </section>
 
 
-    <div class="wrap try" id="try">
+    <div class="wrap try band cta" id="try">
       <h2>Try it now</h2>
       <p>Three ways in. Pick the one that fits how you work.</p>
       <div class="ways tryways">
@@ -863,6 +913,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
     <div class="wrap page">
       <h1>People ask for several things at once.</h1>
       <p class="lede">Search engines answer with one blended score. We built a database that keeps every aspect of the question, with its weight, and shows why each result is there.</p>
+      <section>
       <div class="timeline">
         <div><b>2004</b><p>Xillio starts moving enterprise content: 1,000+ projects for 250+ organisations, including NASA, KLM and Moody's.</p></div>
         <div><b>2025</b><p>Rikkert Engels founds Aspected in Hilversum with co-founders Corné van Leuveren and Jorn Verhoeven. Xillio stays on as implementation partner.</p></div>
@@ -875,6 +926,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
         <p>45 people in Hilversum, the Netherlands.</p>
         <div class="ctas"><a class="btn ghost" data-link="investors" href="#" target="_blank" rel="noopener">Investors and press ↗</a></div>
       </div>
+      </section>
     </div>
   </section>
 
@@ -909,6 +961,17 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
           </div>
         </div>
       </div>
+      <section class="csec">
+        <h2>How does it know what you asked?</h2>
+        <div class="know">
+          <div><span class="kn">1</span><b>Your data has the aspects</b><p>Each field in your data becomes an aspect: text for meaning, a list for type or status, a number, a date. For documents they come from where the document lives: version, status, owner, location.</p></div>
+          <div><span class="kn">2</span><b>Your AI fills them in</b><p>Copilot, Claude or your agent reads the question and fills in the aspects it recognises. What it doesn't recognise stays open and doesn't count.</p>
+            <p class="kq">our standard framework agreement</p>
+            <div class="kmap"><span>type: framework agreement</span><span>status: published</span><span>meaning: notice period</span><span class="open">date: open</span></div></div>
+          <div><span class="kn">3</span><b>Aspected weighs them</b><p>It ranks every record on all filled-in aspects at once, in one calculation, and keeps the distance per aspect. That distance is the receipt.</p></div>
+        </div>
+      </section>
+      <section class="csec">
       <div class="bottomline">
         <h3>The word that gets thrown away.</h3>
         <p>“This pasta sauce, but with less sugar, same price.” Search today breaks that into a query and two filters, and the most important word, <i>but</i>, is thrown away before the search starts. Aspected weighs the whole sentence in one calculation.</p>
@@ -917,6 +980,8 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
         <h3>One thing changed, at the bottom.</h3>
         <p>In every database today, a field like price, version or date can only be a filter: in or out. In Aspected, every field becomes an aspect, with a distance to your question and a weight in the ranking. That is what lets a whole sentence go in, and what lets every answer show its reasons.</p>
       </div>
+      </section>
+      <section class="csec">
       <div class="faqwrap">
         <div class="faqside">
           <h2>Questions people ask</h2>
@@ -932,6 +997,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
           </div>
           <div class="fgroup"><h3>Using it</h3>
             <details><summary>Do I need to clean my data first?</summary><p>No. Search today shortlists on one score before anything else is checked, so an old draft can beat the current version. Aspected weighs every aspect of every record, so an old or stray document has a different profile and sinks. Clean data still helps; it is no longer a precondition.</p></details>
+            <details><summary>How does Aspected know what my question is about?</summary><p>Your AI tells it. Copilot, Claude or your agent turns the question into values for the aspects in your index, such as type, status or date. Aspected ranks on those aspects and keeps the distance per aspect, so you can see which one decided.</p></details>
             <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
             <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over MCP or the REST API.</p></details>
             <details><summary>Who decides what counts?</summary><p>You do. Every query can weigh its aspects differently, so the people who own the content decide what counts, not a model.</p></details>
@@ -943,6 +1009,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
           </div>
         </div>
       </div>
+      </section>
     </div>
   </section>
 
@@ -1081,7 +1148,7 @@ curl http://localhost:8080/indexes</pre></div>
         <p class="sub" style="margin-top:20px">In production under Copilot at Agfa and Mosaic Community Health. Patented: US 12,517,879. Implemented with Xillio, after 1,000+ content projects for 250+ organisations.</p>
       </section>
 
-      <section class="csec ask">
+      <section class="csec ask cta">
         <h2>Start with one department.</h2>
         <div class="askfacts"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
         <p class="sub">Read-only access. After two weeks you know whether you can stand behind the answers. Only then do you decide whether to go further.</p>
@@ -1095,11 +1162,13 @@ curl http://localhost:8080/indexes</pre></div>
     <div class="wrap page">
       <h1>Three ways organisations use Aspected.</h1>
       <p class="lede">Same database underneath. Pick the problem you have today.</p>
-      <div class="itiles soltiles">
+      <section>
+      <div class="itiles soltiles" style="margin-top:0">
         <a class="itile sol-main" href="#knowledge-base"><span class="eyebrow">Knowledge base</span><h3>The AI model is here. Your knowledge isn't yet.</h3><p>Copilot and your own AI find the right document across all your sources, and show why.</p><span class="who">Agfa and Mosaic, in production</span></a>
         <a class="itile" href="#ready-for-ai"><span class="eyebrow">Ready for AI</span><h3>Know what counts before your AI reads it.</h3><p>Copies, drafts and old versions on file shares and SharePoint, settled with their reasons.</p><span class="who">With Xillio</span></a>
         <a class="itile" href="#catalogue-search"><span class="eyebrow">Catalogue search</span><h3>Let people say what they want.</h3><p>“Like this, but…” on your products, sessions or listings.</p><span class="who">samebutbetter.food and Vegas, live</span></a>
       </div>
+      </section>
     </div>
   </section>
 
@@ -1152,7 +1221,7 @@ curl http://localhost:8080/indexes</pre></div>
         <div class="iproof"><figure><blockquote>“Aspected has added the context Microsoft Copilot needed.”</blockquote><figcaption><b>Rob Kasslack</b>IT Business Partner, AI &amp; Innovation · Agfa</figcaption></figure>
         <figure><blockquote>“You do not have to interact with a separate Aspected interface.”</blockquote><figcaption><b>Marshall</b>Senior Healthcare Data Strategist · Mosaic Community Health</figcaption></figure></div>
       </section>
-      <section class="csec">
+      <section class="csec cta">
         <h2>Start with one department.</h2>
         <div class="askfacts"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
         <p class="sub">After two weeks you know what your AI can and can't find. Then you decide.</p>
@@ -1171,7 +1240,7 @@ curl http://localhost:8080/indexes</pre></div>
         <h2>See it on your own share.</h2>
         <div class="grid solgrid" data-cards='[["copies","On your file shares","Twelve copies in five places; the one that counts, and why the rest don&#39;t."],["lies","On your file shares","The document in the wrong folder, with the aspect that gives it away."],["receipt","After the cleanup","Copilot answers from the version you settled, with a receipt."]]'></div>
       </section>
-      <section class="csec">
+      <section class="csec cta">
         <h2>With Xillio.</h2>
         <p class="sub">Xillio has moved content for organisations since 2004: 1,000+ projects for 250+ organisations. Its connectors bring documents in with their version, date, owner and department. You settle what matters and leave the rest.</p>
         <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book a near-duplicate analysis ↗</a></div>
@@ -1209,9 +1278,11 @@ curl http://localhost:8080/indexes</pre></div>
       <p class="pname" id="iName"></p>
       <h1 id="iTitle"></h1>
       <p class="lede" id="iLede"></p>
-      <div class="grid" id="iGrid" style="margin-top:36px"></div>
+      <section>
+      <div class="grid" id="iGrid"></div>
       <div class="iproof" id="iProof"></div>
       <div class="ctas" style="margin-top:28px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a><a class="btn ghost" href="#why">Why it works</a></div>
+      </section>
     </div>
   </section>
 
