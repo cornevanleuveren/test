@@ -1,5 +1,5 @@
 <title>Aspected Homepage</title>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("asp-theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
+<script>(function(){var r=document.documentElement;function want(){var p=null;try{p=localStorage.getItem("asp-theme")}catch(e){}return p==="dark"?"dark":"light"}r.dataset.theme=want();new MutationObserver(function(){var w=want();if(r.dataset.theme!==w)r.dataset.theme=w}).observe(r,{attributes:true,attributeFilter:["data-theme"]})})();</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

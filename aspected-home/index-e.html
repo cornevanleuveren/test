@@ -1,5 +1,5 @@
 <title>Aspected Homepage E</title>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("asp-theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
+<script>(function(){var r=document.documentElement;function want(){var p=null;try{p=localStorage.getItem("asp-theme")}catch(e){}return p==="dark"?"dark":"light"}r.dataset.theme=want();new MutationObserver(function(){var w=want();if(r.dataset.theme!==w)r.dataset.theme=w}).observe(r,{attributes:true,attributeFilter:["data-theme"]})})();</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -390,6 +390,25 @@ p{margin:0}
 .askfacts b{font-size:36px;font-weight:800;letter-spacing:-.03em}
 .askfacts span{color:var(--muted);font-size:14px}
 
+/* solutions */
+.soltiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sol-main{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.itile .eyebrow{color:var(--blue)}
+.stack-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){.stack-grid.three{grid-template-columns:minmax(0,1fr)}}
+.solgrid{margin-top:24px}
+.srcs td.y{color:var(--ink)}
+.srcs td.y::before{content:"✓ ";color:var(--blue);font-weight:700}
+.srcs td.n{color:var(--muted)}
+.srcs td.n::before{content:"✕ ";color:var(--coral);font-weight:700}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tablewrap table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+.tablewrap th,.tablewrap td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+.tablewrap th{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tablewrap tr:last-child td{border-bottom:0}
+.examples{margin-top:20px;color:var(--muted);font-size:14.5px}
+.examples a{color:var(--blue);font-weight:600;text-decoration:none}
+
 /* csv */
 .csv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
 .csv span{padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
@@ -606,7 +625,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
     <a class="logo" href="#home" aria-label="Aspected, home"><span data-logo></span></a>
     <nav aria-label="Main">
       <a class="opt" href="#showcases" data-nav="home">Showcases</a>
-      <a href="#industries" data-nav="industries">Industries</a>
+      <a href="#solutions" data-nav="solutions">Solutions</a>
       <a class="opt2" href="#why" data-nav="why">Why Aspected</a>
       <a class="opt2" href="#cio" data-nav="cio">For CIOs</a>
       <a class="opt" href="#about" data-nav="about">About</a>
@@ -973,6 +992,114 @@ curl http://localhost:8080/indexes</pre></div>
     </div>
   </section>
 
+  <!-- SOLUTIONS -->
+  <section class="view" id="v-solutions">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Solutions</p>
+      <h1>Three ways organisations use Aspected.</h1>
+      <p class="lede">Same database underneath. Pick the problem you have today.</p>
+      <div class="itiles soltiles">
+        <a class="itile sol-main" href="#knowledge-base"><span class="eyebrow">Knowledge base</span><h3>The AI model is here. Your knowledge isn't yet.</h3><p>Copilot and your own AI find the right document across all your sources, and show why.</p><span class="who">Agfa and Mosaic, in production</span></a>
+        <a class="itile" href="#ready-for-ai"><span class="eyebrow">Ready for AI</span><h3>Know what counts before your AI reads it.</h3><p>Copies, drafts and old versions on file shares and SharePoint, settled with their reasons.</p><span class="who">With Xillio</span></a>
+        <a class="itile" href="#catalogue-search"><span class="eyebrow">Catalogue search</span><h3>Let people say what they want.</h3><p>“Like this, but…” on your products, sessions or listings.</p><span class="who">samebutbetter.food and Vegas, live</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-knowledge-base">
+    <div class="wrap page">
+      <a class="back" href="#solutions">← Solutions</a>
+      <p class="eyebrow" style="margin-bottom:14px">Knowledge base</p>
+      <h1>The AI model is here. Your knowledge isn't yet.</h1>
+      <p class="lede">Aspected makes your knowledge reachable for Copilot and your own AI, without moving documents. And every answer shows where it came from.</p>
+      <section class="csec">
+        <h2>Why AI disappoints after the demo.</h2>
+        <div class="risks">
+          <div class="risk"><b>It can't reach it</b><span>Document systems, network drives, wikis, CRM and archives sit outside Copilot.</span></div>
+          <div class="risk"><b>It doesn't know what it reads</b><span>A contract, a draft or a meeting note look the same to it. So do client, date and status.</span></div>
+          <div class="risk"><b>It doesn't know which one counts</b><span>Five versions say almost the same thing. Only one is valid.</span></div>
+        </div>
+      </section>
+      <section class="csec">
+        <h2>Where your knowledge lives.</h2>
+        <div class="tablewrap srcs"><table>
+          <thead><tr><th>Source</th><th>Copilot today</th><th>With Aspected</th></tr></thead>
+          <tbody>
+            <tr><td>SharePoint and Teams</td><td class="y">Reachable</td><td class="y">Reachable, with status and version</td></tr>
+            <tr><td>Document systems (OpenText, Documentum, FileNet)</td><td class="n">Not without a connector</td><td class="y">Connected, rights still apply</td></tr>
+            <tr><td>Network drives</td><td class="n">Not without a connector</td><td class="y">Connected</td></tr>
+            <tr><td>Wikis (Confluence)</td><td class="n">Not without a connector</td><td class="y">Connected</td></tr>
+            <tr><td>CRM and ERP</td><td class="n">Not without a connector</td><td class="y">Connected</td></tr>
+            <tr><td>Archives</td><td class="n">Not without a connector</td><td class="y">Connected</td></tr>
+          </tbody></table></div>
+        <p class="fine">60+ connectors, implemented with Xillio. The source stays the source.</p>
+      </section>
+      <section class="csec">
+        <h2>How it works.</h2>
+        <div class="stack-grid three">
+          <div><b>1 · Make it reachable</b><p>Documents stay where they are. Permissions still apply.</p></div>
+          <div><b>2 · Recognise what's there</b><p>Aspected infers type, client, date and status, and groups versions. It proposes which one counts; you confirm.</p></div>
+          <div><b>3 · Choose and explain</b><p>Every answer comes with a receipt: what was used, what was left out, and why.</p></div>
+        </div>
+        <div class="grid solgrid" data-cards='[["receipt","In your knowledge base","The answer comes from the signed version, with a receipt."],["copies","In your knowledge base","Versions grouped; the one that counts is marked."]]'></div>
+      </section>
+      <section class="csec">
+        <h2>Works with the AI you have.</h2>
+        <div class="stack-grid">
+          <div><b>Copilot</b><p>Aspected runs as an MCP server. Copilot stays the screen.</p></div>
+          <div><b>Your own assistant</b><p>Mistral, your own model or an agent. You can switch later.</p></div>
+          <div><b>Your own cloud</b><p>Your Azure or AWS tenant, including European sovereign cloud.</p></div>
+          <div><b>Yours to keep</b><p>The index and the receipts are yours, exportable in an open format.</p></div>
+        </div>
+      </section>
+      <section class="csec">
+        <div class="iproof"><figure><blockquote>“Aspected has added the context Microsoft Copilot needed.”</blockquote><figcaption><b>Rob Kasslack</b>IT Business Partner, AI &amp; Innovation · Agfa</figcaption></figure>
+        <figure><blockquote>“You do not have to interact with a separate Aspected interface.”</blockquote><figcaption><b>Marshall</b>Senior Healthcare Data Strategist · Mosaic Community Health</figcaption></figure></div>
+      </section>
+      <section class="csec">
+        <h2>Start with one department.</h2>
+        <div class="askfacts"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
+        <p class="sub">After two weeks you know what your AI can and can't find. Then you decide.</p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#cio">For CIOs</a></div>
+        <p class="examples">Examples: <a href="#industry-healthcare">Healthcare</a> · <a href="#industry-field-service">Manufacturing and field service</a> · <a href="#industry-government">Government</a></p>
+      </section>
+    </div>
+  </section>
+
+  <section class="view" id="v-ready-for-ai">
+    <div class="wrap page">
+      <a class="back" href="#solutions">← Solutions</a>
+      <p class="eyebrow" style="margin-bottom:14px">Ready for AI</p>
+      <h1>Know what counts before your AI reads it.</h1>
+      <p class="lede">File shares and SharePoint hold years of copies, drafts and old versions. Aspected shows which one counts and why, so Copilot or your migration starts from the right one.</p>
+      <section class="csec">
+        <h2>See it on your own share.</h2>
+        <div class="grid solgrid" data-cards='[["copies","On your file shares","Twelve copies in five places; the one that counts, and why the rest don&#39;t."],["lies","On your file shares","The document in the wrong folder, with the aspect that gives it away."],["receipt","After the cleanup","Copilot answers from the version you settled, with a receipt."]]'></div>
+      </section>
+      <section class="csec">
+        <h2>With Xillio.</h2>
+        <p class="sub">Xillio has moved content for organisations since 2004: 1,000+ projects for 250+ organisations. Its connectors bring documents in with their version, date, owner and department. You settle what matters and leave the rest.</p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book a near-duplicate analysis ↗</a></div>
+        <p class="examples">Examples: <a href="#industry-legal-finance">Legal and finance</a> · <a href="#industry-government">Government</a></p>
+      </section>
+    </div>
+  </section>
+
+  <section class="view" id="v-catalogue-search">
+    <div class="wrap page">
+      <a class="back" href="#solutions">← Solutions</a>
+      <p class="eyebrow" style="margin-bottom:14px">Catalogue search</p>
+      <h1>Let people say what they want.</h1>
+      <p class="lede">Shoppers and visitors point at something and say what should change. Aspected keeps what they liked and moves the rest.</p>
+      <section class="csec">
+        <h2>Two of them are live.</h2>
+        <div class="grid solgrid" data-cards='[["food","In your shop","“This one, but less sugar” on 45,000 products."],["vegas","At your event","“Like this session, but more business” on 2,447 talks."],["csv","On your catalogue","Your product feed, searchable in minutes."]]'></div>
+        <div class="ctas" style="margin-top:20px"><a class="btn" href="#start">Get started</a><a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Book 20 minutes ↗</a></div>
+        <p class="examples">Examples: <a href="#industry-retail">Retail and e-commerce</a> · <a href="#industry-events-learning">Events and learning</a></p>
+      </section>
+    </div>
+  </section>
+
   <!-- INDUSTRIES -->
   <section class="view" id="v-industries">
     <div class="wrap page">
@@ -985,7 +1112,7 @@ curl http://localhost:8080/indexes</pre></div>
 
   <section class="view" id="v-industry">
     <div class="wrap page">
-      <a class="back" href="#industries">← All industries</a>
+      <a class="back" href="#solutions">← Solutions</a>
       <p class="eyebrow" id="iName" style="margin-bottom:14px"></p>
       <h1 id="iTitle"></h1>
       <p class="lede" id="iLede"></p>
@@ -1030,7 +1157,7 @@ curl http://localhost:8080/indexes</pre></div>
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>Similarity, aspect by aspect. · US patent 12,517,879</span></span>
     <button class="themebtn" id="themeBtn" type="button">Dark mode</button>
-    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#cio">For CIOs</a><a href="#about">About</a></nav>
+    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#solutions">Solutions</a><a href="#why">Why Aspected</a><a href="#cio">For CIOs</a><a href="#about">About</a></nav>
     <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a></nav>
   </div>
 </footer>
@@ -1511,11 +1638,13 @@ function route(){
   if(hsh==="showcases"||hsh==="try"||hsh==="proof"){scrollTo=hsh}
   else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
   else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
-  else if(["about","why","pricing","industries","start","cio"].indexOf(hsh)>=0){view=hsh}
+  else if(hsh==="industries"){view="solutions"}
+  else if(["about","why","pricing","start","cio","solutions","knowledge-base","ready-for-ai","catalogue-search"].indexOf(hsh)>=0){view=hsh}
   if(view!=="show" && dPlayer){dPlayer.stop()}
   if(view==="cio"){ if(!window.__cioP) window.__cioP=Player(document.getElementById("cioStage"),showById("receipt"),{once:true}); window.__cioP.start() } else if(window.__cioP){window.__cioP.stop()}
   document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id==="v-"+view)});
-  var navv = view==="industry" ? "industries" : view;
+  var navv = ["industry","knowledge-base","ready-for-ai","catalogue-search"].indexOf(view)>=0 ? "solutions" : view;
+  var vEl=document.getElementById("v-"+view); if(vEl) vEl.querySelectorAll("[data-cards]").forEach(function(g){ if(g.dataset.done) return; g.dataset.done="1"; JSON.parse(g.getAttribute("data-cards")).forEach(function(x){makeCard(showById(x[0]),x[1],x[2],g)}) });
   document.querySelectorAll("[data-nav]").forEach(function(a){a.toggleAttribute("aria-current",a.dataset.nav===navv); if(a.dataset.nav===navv) a.setAttribute("aria-current","page")});
   if(scrollTo){var el=document.getElementById(scrollTo); requestAnimationFrame(function(){el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})}
   else window.scrollTo(0,0);
