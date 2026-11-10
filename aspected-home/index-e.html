@@ -1,0 +1,1375 @@
+<title>Aspected Homepage E</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("asp-theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky menu; hero is the wordmark, one line and a query that types itself; then a showcase player: six titles beside one large demo that plays; the contrast (two rankings) and one paragraph on how; proof; "Try it now". Get started, Industries, Why Aspected, About, Pricing and each showcase are hash views. */
+:root{
+  --bg:#F8F8F8; --surface:#FFFFFF; --stage:#EEF1F6; --ink:#14161C; --muted:#5A606E; --line:#DFE3EA;
+  --blue:#005CFC; --blue-soft:#E3ECFF; --coral:#F0614C; --coral-soft:#FFE6E1;
+  --paper:#FFFFFF; --paper-ink:#14161C; --paper-mute:#6B7080; --paper-blue:#005CFC; --paper-red:#C8432F;
+  --f-sans:"Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r:14px; --rh:32px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1016; --surface:#151922; --stage:#1B2130; --ink:#EEF0F4; --muted:#9AA1B0; --line:#272D3A;
+  --blue:#5C8DFF; --blue-soft:#17264B; --coral:#FF8A78; --coral-soft:#3A1E1A; --paper:#ECEAE4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1016; --surface:#151922; --stage:#1B2130; --ink:#EEF0F4; --muted:#9AA1B0; --line:#272D3A;
+  --blue:#5C8DFF; --blue-soft:#17264B; --coral:#FF8A78; --coral-soft:#3A1E1A; --paper:#ECEAE4; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font:600 12px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* menu */
+.menu{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.menu .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.logo{display:inline-flex;text-decoration:none;color:var(--ink)}
+.logo svg{height:26px;width:auto;display:block}
+.alogo{display:block;width:100%;height:auto;overflow:visible}
+.flogo{display:inline-flex;align-items:center;gap:14px}
+.flogo svg{height:18px;width:auto;display:block;color:var(--ink)}
+.menu nav{display:flex;gap:4px;margin-left:auto;align-items:center}
+.menu nav a{text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 12px;border-radius:999px;color:var(--muted)}
+.menu nav a:hover,.menu nav a[aria-current="page"]{color:var(--ink);background:var(--stage)}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;background:var(--blue);color:#fff;border:0;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px -10px var(--blue)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--ink);box-shadow:none}
+.menu nav a.btn{padding:9px 16px;font-size:14px;margin-left:8px;color:#fff;background:var(--blue)}
+.menu nav a.btn:hover{color:#fff;background:var(--blue)}
+@media (max-width:720px){.menu nav a.opt{display:none}.menu .wrap{gap:8px}.menu nav a{padding:8px 9px}}
+@media (max-width:480px){.menu nav a.opt2{display:none}}
+
+/* views */
+.view{display:none}
+.view.on{display:block;animation:viewin .45s ease both}
+@keyframes viewin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(16px,3vw,32px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero-l{min-width:0}
+.hero-sp{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.hero-sp{max-width:400px;justify-self:end;width:100%}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero-sp{max-width:340px;justify-self:center;width:100%;margin-inline:auto}}
+.spider{display:block;width:100%;height:auto;overflow:visible}
+.sp-grid{fill:none;stroke:var(--line);stroke-width:1.5}
+.sp-axis{stroke:var(--line);stroke-width:1.5}
+.sp-lab{font:500 19px var(--f-mono);fill:var(--muted);transition:fill .3s}
+.sp-lab.hi{fill:var(--blue);font-weight:600}
+.sp-this{fill:none;stroke:var(--muted);stroke-width:3;stroke-dasharray:9 8}
+.sp-bet{fill:var(--blue);fill-opacity:.16;stroke:var(--blue);stroke-width:4;stroke-linejoin:round}
+.legend{display:flex;gap:18px;justify-content:center;font:500 12.5px/1 var(--f-mono);color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.k{display:inline-block;width:18px;border-top:2px dashed var(--muted)}
+.k.bet{height:10px;border:2px solid var(--blue);background:var(--blue-soft);border-radius:2px}
+.herotag{color:var(--blue);margin-bottom:14px}
+.wordmark{font-size:clamp(44px,5.6vw,84px);font-weight:800;line-height:.92;letter-spacing:-.055em}
+.wordmark b{color:var(--blue)}
+.plain{margin-top:14px;font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:44ch}
+.heroproof{display:block;margin-top:22px;font-size:14px;color:var(--muted);text-decoration:none}
+.heroproof b{color:var(--ink);font-weight:700}
+.heroproof:hover b{color:var(--blue)}
+.brandline{font-size:15px;color:var(--muted);margin-bottom:18px}
+.brandline b{color:var(--ink);font-weight:800;font-size:17px;letter-spacing:-.02em}
+.herotop{grid-column:1 / -1}
+.hero{grid-template-columns:minmax(0,1fr)!important;row-gap:18px}
+.hero .hero-l{max-width:760px}
+.askbox{padding-right:8px}
+.asktxt{flex:1;min-width:0}
+.minisp{flex:none;width:52px;height:52px;margin-left:auto;padding-left:8px;border-left:1px solid var(--line)}
+.minisp svg{width:100%;height:100%}
+.minisp .sp-lab{display:none}
+.minisp .sp-grid,.minisp .sp-axis{stroke-width:6}
+.minisp .sp-axis.hi{stroke:var(--blue);stroke-width:14}
+.minisp .sp-this{stroke-width:7}
+.minisp .sp-bet{stroke-width:9}
+.pickh{font-size:clamp(28px,3.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.1;display:flex;flex-wrap:wrap;align-items:center;column-gap:.28em}
+.ph1{display:inline}
+.prow{display:inline-flex;align-items:center;gap:.28em}
+.picker{position:relative;display:block;width:4.7em;height:3.1em;flex:none}
+.picker::before,.picker::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--blue);opacity:.8}
+.picker::before{top:calc(50% - .6em)}
+.picker::after{top:calc(50% + .56em)}
+.pw{position:absolute;left:0;right:0;top:50%;text-align:center;line-height:1;white-space:nowrap;color:var(--muted);transition:transform .7s cubic-bezier(.3,.8,.3,1),opacity .7s,color .4s}
+.pw.on{color:var(--blue)}
+.pw.jump{transition:none}
+.itis{white-space:nowrap}
+.slogan{margin-top:12px;font-size:clamp(20px,2.2vw,28px);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.oneliner{max-width:36ch;font-size:clamp(17px,1.6vw,21px);font-weight:500;line-height:1.45;letter-spacing:-.01em;margin-top:12px;color:var(--muted)}
+.ask{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:640px}
+.askbox{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:14px 22px;font:500 clamp(15px,2vw,18px)/1.3 var(--f-mono);min-height:56px;box-shadow:0 18px 40px -28px rgba(20,22,28,.35)}
+.askbox::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--blue);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;min-height:30px;padding-left:22px}
+.chip{font:500 12.5px/1 var(--f-mono);padding:7px 11px;border-radius:999px;background:var(--blue-soft);color:var(--blue);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+.chip.in{opacity:1;transform:none}
+.chip.open{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+
+/* showcases */
+.sec{padding-block:clamp(40px,6vw,72px)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 24px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:800}
+.sec-head p{color:var(--muted);font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 12px 20px;display:flex;flex-direction:column;gap:14px;min-width:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,border-color .35s ease}
+.card:hover,.card.playing{transform:translateY(-4px);box-shadow:0 28px 50px -30px rgba(20,22,28,.45);border-color:color-mix(in srgb,var(--blue) 35%,var(--line))}
+.card .cover{position:absolute;inset:0;border-radius:var(--r);z-index:1}
+.card .body{padding:0 8px;display:flex;flex-direction:column;gap:8px}
+.card .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+.badge.live{background:var(--blue);color:#fff}
+.badge.live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+.badge.req{background:var(--blue-soft);color:var(--blue)}
+.badge.soon{background:var(--stage);color:var(--muted)}
+.card .name{font:600 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.04em}
+.card h3{font-size:21px;font-weight:800;line-height:1.2}
+.card .say{font-size:14.5px;color:var(--muted)}
+.card .biz{font-size:13.5px;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.card .biz b{font-weight:700;color:var(--blue)}
+.card .foot{padding:0 8px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13.5px;font-weight:700;margin-top:auto}
+.card .foot .go{color:var(--blue)}
+.card .foot a.more{position:relative;z-index:2;color:var(--muted);text-decoration:none;font-weight:600}
+.card .foot a.more:hover{color:var(--ink);text-decoration:underline}
+
+/* the showcase player */
+.player{display:grid;grid-template-columns:minmax(260px,.42fr) minmax(0,1fr);gap:clamp(16px,2.5vw,32px);align-items:start}
+.plist{display:flex;flex-direction:column;gap:2px;min-width:0;padding-top:4px}
+.pgroup{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 16px 6px}
+.pgroup:first-child{padding-top:0}
+.pitem{appearance:none;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer;padding:13px 16px;border-radius:12px;display:grid;grid-template-columns:minmax(0,1fr);row-gap:5px;font:inherit;transition:background .25s}
+.pitem .dom{font:600 12.5px/1.2 var(--f-sans);color:var(--muted)}
+.pitem .dom b{color:var(--blue);font-weight:700}
+.pitem .q{font:500 14.5px/1.4 var(--f-mono);color:var(--muted);transition:color .25s}
+.pitem[aria-selected="true"] .q{color:var(--ink)}
+.livetag{font:600 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
+.pitem .prog{grid-column:1 / -1}
+.pitem:hover{background:color-mix(in srgb,var(--surface) 70%,transparent)}
+.pitem .n{font:600 11.5px/1.2 var(--f-mono);color:var(--muted);display:none;align-items:center;gap:6px}
+.pitem .t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:8px;vertical-align:2px}
+.pitem .n .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.pitem .t{font-size:16.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em;color:var(--muted);transition:color .25s}
+.pitem[aria-selected="true"]{background:var(--surface);box-shadow:0 0 0 1px var(--line) inset}
+.pitem[aria-selected="true"] .t{color:var(--ink)}
+.pitem .prog{height:2px;border-radius:2px;background:var(--line);overflow:hidden;margin-top:6px;display:none}
+.pitem .prog i{display:block;height:100%;width:0;background:var(--blue)}
+.pitem.run .prog{display:block}
+.pitem.run .prog i{animation:prog 13s linear forwards}
+.plist.manual .pitem .prog{display:none}
+@keyframes prog{to{width:100%}}
+.ppanel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.ppanel.swap .stage,.ppanel.swap .pmeta{animation:viewin .45s ease both}
+.ppanel .stage.big{border-radius:10px;aspect-ratio:16/9}
+.pmeta{padding:4px 10px 10px;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;row-gap:8px;align-items:start;min-height:150px}
+.pmeta>*{grid-column:1}
+.pmeta .ctas{grid-column:2;grid-row:1 / span 4;flex-direction:column;align-items:stretch;margin-top:0}
+@media (max-width:760px){.pmeta{grid-template-columns:minmax(0,1fr)}.pmeta .ctas{grid-column:1;grid-row:auto;flex-direction:row;margin-top:6px}}
+.pmeta .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pmeta .name{font:600 12px/1 var(--f-mono);color:var(--muted)}
+.pmeta h3{font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1.2}
+.pmeta .say{color:var(--muted);font-size:15.5px;max-width:62ch}
+.pmeta .biz{font-size:14.5px}
+.pmeta .biz b{color:var(--blue);font-weight:700}
+.pmeta .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+@media (max-width:900px){
+  .player{grid-template-columns:minmax(0,1fr)}
+  .plist{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}
+  .plist::-webkit-scrollbar{display:none}
+  .pgroup{display:none}
+  .pitem{flex:none;display:flex;padding:9px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset;background:var(--surface)}
+  .pitem .q,.pitem .prog{display:none!important}
+  .pitem .dom{font-size:13px;color:var(--ink);white-space:nowrap}
+  .pitem[aria-selected="true"] .dom,.pitem[aria-selected="true"] .dom b{color:#fff}
+  .pitem[aria-selected="true"]{background:var(--blue);box-shadow:none}
+  .pitem[aria-selected="true"] .n{color:#fff}
+  .pitem[aria-selected="true"] .n .dot{background:#fff}
+}
+
+/* the mini demo stage */
+.stage{position:relative;height:250px;--rh:30px;max-width:100%;background:var(--stage);border-radius:10px;overflow:hidden;padding:14px;font:12px/1.3 var(--f-mono);color:var(--ink)}
+.stage.big{height:auto;aspect-ratio:16/10;padding:clamp(16px,3vw,36px);font-size:clamp(12px,1.4vw,15px);--rh:clamp(32px,4.2vw,48px);border-radius:var(--r)}
+.snap,.snap *{transition:none!important;animation:none!important}
+.st-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;min-width:0}
+.st-seed{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.st-tag{flex:none;font-size:.9em;padding:3px 7px;border-radius:999px;background:var(--surface);color:var(--muted)}
+.st-q{display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:999px;padding:7px 12px;margin-bottom:10px;white-space:nowrap;overflow:hidden}
+.st-q::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.st-q .t{color:var(--muted);opacity:.7;overflow:hidden;text-overflow:ellipsis}
+.st-q.typed .t{color:var(--ink);opacity:1}
+.st-slider{display:flex;align-items:center;gap:10px;margin-bottom:10px;color:var(--muted)}
+.st-slider .track{flex:1;height:4px;border-radius:2px;background:var(--line);position:relative}
+.st-slider .knob{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--blue-soft);transform:translate(-50%,-50%);left:var(--k,70%);transition:left .9s cubic-bezier(.2,.8,.2,1)}
+.st-slider .lab{min-width:0;white-space:nowrap}
+.st-list{position:relative;height:calc(var(--n,4) * var(--rh))}
+.st-row{position:absolute;left:0;right:0;top:0;height:var(--rh);transform:translateY(calc(var(--i) * 100%));transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .4s;display:grid;grid-template-columns:minmax(0,1fr) 22% auto;align-items:center;gap:10px;padding:0 10px;border-radius:8px}
+.st-row .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-row .nm small{color:var(--muted);font-size:.9em;margin-left:6px}
+.st-row .bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.st-row .bar i{display:block;height:100%;width:var(--w);background:var(--muted);border-radius:3px;transition:width .8s cubic-bezier(.2,.8,.2,1),background .4s}
+.st-row .v{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;min-width:3.5em}
+.st-row.hit{background:var(--surface);box-shadow:0 0 0 1.5px var(--blue) inset}
+.st-row.hit .bar i{background:var(--blue)}
+.st-row.hit .v{color:var(--blue);font-weight:500}
+.st-row.dim{opacity:.75}
+
+/* real screens of the live sites */
+.stage.lv{padding:0}
+.lvwrap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:minmax(0,100%);gap:clamp(14px,3vw,40px);height:100%;align-items:center;padding:4% 5%}
+.phone{position:relative;box-sizing:content-box;height:calc(100% - 10px);aspect-ratio:390/664;border-radius:clamp(14px,2vw,28px);border:5px solid var(--ink);overflow:hidden;background:#fff;box-shadow:0 22px 44px -26px rgba(0,0,0,.55)}
+.phone img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top;opacity:0;transition:opacity .6s ease}
+.phone img.on{opacity:1}
+.lright{display:flex;flex-direction:column;gap:clamp(10px,1.4vw,18px);min-width:0;align-self:center;max-width:42ch}
+.lctx{margin:0;font:600 clamp(12.5px,1.2vw,15px)/1.4 var(--f-sans);color:var(--ink)}
+.lsteps{margin:0;padding:0;list-style:none;display:grid;gap:clamp(8px,1.1vw,12px);counter-reset:l;min-width:0}
+.lsteps li{counter-increment:l;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start;gap:10px;color:var(--muted);opacity:.6;transition:opacity .4s,color .4s;font:500 clamp(12px,1.1vw,14.5px)/1.4 var(--f-sans)}
+.lsteps li.asp span::after{content:"Aspected";margin-left:8px;font:600 10px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:3px 6px;border-radius:999px;vertical-align:1px;white-space:nowrap}
+.lsteps li::before{content:counter(l);font:600 .8em/1 var(--f-mono);width:1.9em;height:1.9em;border-radius:50%;display:inline-grid;place-items:center;box-shadow:inset 0 0 0 1.5px currentColor;flex:none}
+.lsteps li.on{opacity:1;color:var(--ink)}
+.lsteps li.on::before{background:var(--blue);color:#fff;box-shadow:none}
+.lsteps li.done{opacity:.75}
+.lsteps em{font:600 10.5px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 7px;border-radius:999px}
+
+.stage:not(.big) .lctx{display:none}
+.stage:not(.big) .lsteps li:not(.on){display:none}
+.stage:not(.big) .lsteps li{font-size:11.5px}
+@media (max-width:620px){
+  .stage.big.lv{aspect-ratio:auto;height:auto}
+  .stage.big .lvwrap{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;justify-items:center;padding:16px;gap:16px}
+  .stage.big .lvwrap .phone{height:300px}
+  .stage.big .lright{max-width:none;align-self:stretch}
+}
+/* sweet little lies: the deck's own look (orange = this product, purple = the other) */
+.stage.sl{padding:0;background:linear-gradient(160deg,#FFEDE3 0%,#FFDCD6 45%,#FFD0DF 100%);color:#1E1A2B;font-family:"Plus Jakarta Sans",var(--f-sans)}
+.slslide{height:100%;display:flex;flex-direction:column;gap:6px;padding:12px 14px}
+.sltop{display:flex}
+.slbadge{font:800 9.5px/1 "Plus Jakarta Sans",var(--f-sans);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#F0612A,#E8457A);padding:5px 9px;border-radius:999px}
+.slh{margin:0;font:800 15px/1.2 "Plus Jakarta Sans",var(--f-sans);letter-spacing:-.03em}
+.slv{color:#F0612A;margin-right:6px}
+.slv:empty{margin:0}
+.slsub{margin:0;font-size:11.5px;color:#7D7890;font-weight:600}
+.sltiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sltile{background:#fff;border-radius:14px;padding:6px 10px;display:grid;gap:1px;border:2px solid #F0612A;transition:transform .2s}
+.sltile.b{border-color:#7B61FF;background:#EFEBFF}
+.sltile b{font-weight:800;font-size:12px}
+.sltile span{font-size:10.5px;color:#7D7890}
+.sltile.tap{transform:scale(.94)}
+.slpic{position:relative;flex:1;min-height:0;background:#fff;border-radius:16px;padding:8px 10px;display:flex;flex-direction:column;justify-content:center}
+.slq{position:absolute;inset:0;display:grid;place-items:center;font:800 52px/1 "Plus Jakarta Sans",var(--f-sans);color:#F0612A;transition:opacity .3s;animation:slbob 1.6s ease-in-out infinite}
+@keyframes slbob{50%{transform:translateY(-5px)}}
+.slcubes{display:grid;gap:5px;opacity:0;transition:opacity .25s}
+.slrow{display:grid;grid-template-columns:6.6em minmax(0,1fr) auto;align-items:center;gap:6px;padding:4px 7px;border-radius:8px;font-size:10.5px}
+.slrow.a{background:rgba(240,97,42,.09)}
+.slrow.b{background:rgba(123,97,255,.09)}
+.slrow .lg{display:flex;align-items:center;gap:5px;font-weight:600;white-space:nowrap}
+.slrow .lg i{width:7px;height:7px;border-radius:50%;background:#F0612A}
+.slrow.b .lg i{background:#7B61FF}
+.slrow .g{font-weight:800}
+.cbs{display:flex;gap:2px;overflow:hidden}
+.cbs i{flex:none;width:clamp(9px,1.2vw,16px);aspect-ratio:1;border-radius:2px;background:linear-gradient(135deg,#FFFFFF 0 45%,#E6E0EE 45% 72%,#CFC5DC 72%);box-shadow:inset 0 0 0 1px #B9AFC8;opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .3s cubic-bezier(.3,1.5,.5,1);transition-delay:calc(var(--d) * 60ms)}
+.cbs i.part{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.slcap{margin:2px 0 0;font-size:9.5px;color:#7D7890}
+.stage.sl.rev .slq{opacity:0;animation:none}
+.stage.sl.rev .slcubes{opacity:1}
+.stage.sl.rev .cbs i{opacity:1;transform:none}
+.slfoot{margin:0;font-size:10.5px;color:#4A4560;font-weight:600}
+.slfoot b{color:#F0612A}
+.stage.big.sl .slslide{padding:clamp(14px,2.2vw,28px) clamp(16px,2.6vw,34px);gap:clamp(6px,1vw,12px)}
+.stage.big.sl .slh{font-size:clamp(16px,2vw,26px)}
+.stage.big.sl .slsub,.stage.big.sl .slfoot{font-size:clamp(11.5px,1.2vw,15px)}
+.stage.big.sl .sltile b{font-size:clamp(12px,1.3vw,16px)}
+.stage.big.sl .sltile span,.stage.big.sl .slrow{font-size:clamp(10.5px,1.1vw,14px)}
+.stage.big.sl .slq{font-size:clamp(52px,7vw,96px)}
+.stage.big.sl .cbs{gap:3px}
+.stage.big.sl .cbs i{width:clamp(12px,1.9vw,26px)}
+.stage.big.sl .slcap{font-size:clamp(9.5px,1vw,12.5px)}
+
+/* the receipt */
+.stage.rc{padding:0}
+.slot{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(86%,340px);height:8px;border-radius:0 0 6px 6px;background:var(--ink);z-index:2}
+.stage.big .slot{width:min(76%,500px);height:10px}
+.paper{position:absolute;left:50%;top:4px;width:min(78%,300px);transform:translate(-50%,0);transition:transform 2.2s cubic-bezier(.35,.1,.3,1);background:var(--paper);color:var(--paper-ink);padding:14px 14px 18px;font-size:10.5px;line-height:1.4;box-shadow:0 14px 28px -16px rgba(0,0,0,.55)}
+.stage.big .paper{width:min(66%,440px);font-size:clamp(11px,1.3vw,14px);padding:22px 24px 26px}
+.paper.up{transform:translate(-50%,-102%)}
+.paper .c{text-align:center}
+.paper .hd{font-weight:700;letter-spacing:.14em}
+.paper .mu{color:var(--paper-mute)}
+.paper hr{border:0;border-top:1px dashed var(--paper-mute);margin:6px 0}
+.paper .rs{font-weight:600;letter-spacing:.08em;margin-top:5px}
+.paper .row{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
+.paper .row>span:first-child{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.paper .ok{color:var(--paper-blue);font-weight:600}
+.paper .dec{display:inline-block;background:var(--paper-blue);color:#fff;padding:0 6px;border-radius:3px;transition:background .4s,color .4s}
+.paper .dec.hide{background:transparent;color:var(--paper-ink)}
+.paper .v b{display:inline-block;color:var(--paper-red);border:1.5px solid var(--paper-red);border-radius:2px;padding:0 3px;margin-right:6px;font-weight:700;line-height:1.15;transform:rotate(-4deg);transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.paper .v.hide b{opacity:0;transform:scale(1.9) rotate(-12deg)}
+.paper .barcode{height:24px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--paper-ink) 0 2px,transparent 2px 3px,var(--paper-ink) 3px 4px,transparent 4px 7px,var(--paper-ink) 7px 10px,transparent 10px 12px)}
+
+/* twelve copies */
+.stage.cp{display:flex;flex-direction:column;gap:10px}
+.stage.cp .st-q{margin:0}
+.cpwrap{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:16px;align-items:center}
+.cptiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.cpt{position:relative;aspect-ratio:3/4;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:14% 14%;display:flex;flex-direction:column;gap:4px;transition:opacity .4s,border-color .4s,box-shadow .4s,transform .4s;transition-delay:calc(var(--d) * 40ms)}
+.cpt i{display:block;height:2px;background:var(--line);border-radius:1px}
+.cpt i:nth-child(2){width:70%}
+.cpt span{position:absolute;left:2px;right:2px;bottom:5px;font:600 9.5px/1 var(--f-mono);text-align:center;color:var(--muted);opacity:0;transition:opacity .3s;white-space:nowrap;overflow:hidden}
+.stage.cp.rev .cpt span{opacity:1}
+.stage.cp.rev .cpt:not(.win){opacity:.45}
+.stage.cp.rev .cpt.win{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);transform:scale(1.08)}
+.stage.cp.rev .cpt.win span{color:var(--blue)}
+.cpsum{margin:0;padding:0;list-style:none;display:grid;gap:7px;font:13px/1.3 var(--f-sans)}
+.cpsum li{display:grid;gap:1px;opacity:0;transform:translateX(8px);transition:opacity .35s,transform .35s;transition-delay:calc(400ms + var(--d) * 260ms)}
+.stage.cp.rev .cpsum li{opacity:1;transform:none}
+.cpsum b{font-weight:700}
+.cpsum span{color:var(--muted);font-size:.92em}
+.cpsum li.win b{color:var(--blue)}
+.stage.big.cp .cpsum{font-size:clamp(13px,1.4vw,17px);gap:clamp(7px,1vw,12px)}
+.stage.big.cp .cpt span{font-size:clamp(9.5px,1vw,12px)}
+.stage:not(.big).cp .cpsum li:nth-child(n+4){display:none}
+
+/* csv */
+.csv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.csv span{padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.csv span.h{color:var(--muted);background:var(--stage);transition:background .3s,color .3s}
+.csv span.h.lit{background:var(--blue);color:#fff}
+.csv.away{opacity:.18;transform:scale(.96) translateY(-6px)}
+.aspects{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:24px}
+.aspects .chip{font-size:.92em;padding:5px 9px}
+.result{position:absolute;left:14px;right:14px;bottom:14px;background:var(--surface);border-radius:10px;padding:10px;display:grid;gap:6px;transform:translateY(130%);transition:transform .7s cubic-bezier(.2,.8,.2,1);box-shadow:0 14px 30px -18px rgba(20,22,28,.5)}
+.stage.big .result{left:clamp(16px,3vw,36px);right:clamp(16px,3vw,36px);bottom:clamp(16px,3vw,36px)}
+.result.in{transform:none}
+.result .st-q{margin:0;background:var(--stage)}
+.result .r{display:flex;justify-content:space-between;gap:10px;padding:2px 4px}
+.result .r b{font-weight:500;color:var(--blue)}
+
+/* near-duplicates */
+.doc{position:absolute;left:var(--x);top:var(--y);width:min(12%,64px);aspect-ratio:3/4;background:var(--surface);border:1px solid var(--line);border-radius:5px;transform:translate(-50%,-50%);transition:left 1s cubic-bezier(.2,.8,.2,1),top 1s cubic-bezier(.2,.8,.2,1),opacity .5s,box-shadow .4s,border-color .4s;padding:6px 5px;display:flex;flex-direction:column;gap:4px}
+.doc i{display:block;height:3px;border-radius:2px;background:var(--line)}
+.doc i:nth-child(2){width:80%}.doc i:nth-child(3){width:90%}.doc i:nth-child(4){width:60%}
+.doc .lbl{position:absolute;left:50%;top:104%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:var(--muted);opacity:0;transition:opacity .4s}
+.stage.big .doc .lbl{font-size:12px}
+.doc.lab .lbl{opacity:1}
+.doc.fade{opacity:.35}
+.doc.win{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);opacity:1}
+.doc.win i{background:var(--blue);opacity:.5}
+.doc.win .lbl{color:var(--blue);font-weight:500;opacity:1}
+.nd-cap{position:absolute;left:14px;top:12px;color:var(--muted)}
+.stage.big .nd-cap{left:clamp(16px,3vw,36px);top:clamp(14px,2.6vw,30px)}
+
+/* proof + try */
+.proof{border-block:1px solid var(--line);background:var(--surface)}
+.proof .wrap{display:flex;flex-direction:column;gap:32px;padding-block:clamp(48px,7vw,80px)}
+.proof-head{display:flex;flex-direction:column;gap:10px;max-width:820px}
+.proof-head h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;line-height:1.15}
+.proof-head .org{color:var(--blue)}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.quotes figure{margin:0;padding:24px;border-radius:var(--r);background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
+.quotes blockquote{margin:0;font-size:19px;font-weight:600;line-height:1.35;letter-spacing:-.01em}
+.quotes figcaption{font-size:13.5px;color:var(--muted)}
+.quotes figcaption b{display:block;color:var(--ink);font-weight:700}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid var(--line);padding-top:24px}
+.facts>*{min-width:0;text-decoration:none}
+.facts b{display:block;font-size:16px;font-weight:800}
+.facts a b{color:var(--blue)}
+.facts a:hover b{text-decoration:underline}
+.facts span{font-size:14px;color:var(--muted)}
+@media (max-width:860px){.quotes,.facts{grid-template-columns:minmax(0,1fr)}}
+.stack{padding-block:clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:12px}
+.stack h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;line-height:1.15;max-width:22ch}
+.stack-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:20px}
+.stack-grid div{border-top:2px solid var(--ink);padding-top:14px;display:grid;gap:6px;min-width:0;align-content:start}
+.stack-grid b{font-size:16px;font-weight:800}
+.stack-grid p{font-size:14.5px;color:var(--muted)}
+@media (max-width:980px){.stack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.stack-grid{grid-template-columns:minmax(0,1fr)}}
+.try{padding-block:clamp(48px,8vw,96px) clamp(64px,9vw,112px);text-align:left;border-top:1px solid var(--line)}
+.try h2{font-size:clamp(34px,4.4vw,60px);font-weight:800;letter-spacing:-.045em;line-height:.95}
+.try h2 b{color:var(--blue)}
+.try p{margin-top:16px;color:var(--muted);font-size:17px;max-width:46ch}
+.try .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer .fmore{flex-basis:100%;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--line)}
+@media (max-width:620px){footer .fmore{justify-content:flex-start}}
+footer a{text-decoration:none}
+.themebtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:600 12.5px/1 var(--f-sans);padding:7px 12px;border-radius:999px;cursor:pointer}
+.themebtn:hover{color:var(--ink);border-color:var(--ink)}
+footer a:hover{color:var(--ink)}
+
+/* inner pages */
+.page{padding-block:clamp(40px,7vw,88px)}
+.page h1{font-size:clamp(40px,6vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.page .lede{font-size:clamp(18px,2vw,21px);color:var(--muted);margin-top:16px;max-width:52ch}
+.back{display:inline-flex;gap:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;margin-bottom:24px}
+.back:hover{color:var(--ink)}
+.detail{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start;margin-top:32px}
+@media (max-width:860px){.detail{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.stage.big{aspect-ratio:auto;height:300px;--rh:34px}}
+.detail .side{display:flex;flex-direction:column;gap:28px}
+.detail .side .say{font-size:18px}
+.blk{display:flex;flex-direction:column;gap:8px}
+.blk p:not(.eyebrow){font-size:15.5px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.talk{font-weight:700;font-size:14.5px;color:var(--blue);text-decoration:none;margin-top:4px}
+.talk:hover{text-decoration:underline}
+.vidnote{font:500 12px/1.4 var(--f-mono);color:var(--muted);margin-top:10px}
+.else{display:grid;gap:0;border-top:1px solid var(--line)}
+.else div{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.else b{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.else p{font-size:15px}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+@media (max-width:860px){.tiers{grid-template-columns:minmax(0,1fr)}}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tier.hl{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.tier .price{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.tier .price small{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:0}
+.tier p{color:var(--muted);font-size:15px}
+.tier .btn{margin-top:auto;align-self:flex-start}
+.fine{margin-top:20px;font-size:13px;color:var(--muted)}
+.about-foot{margin-top:32px;display:flex;flex-direction:column;gap:14px;max-width:760px}
+.about-foot p{font-size:18px;font-weight:600}
+.timeline{margin-top:40px;display:grid;border-top:1px solid var(--line);max-width:760px}
+.timeline div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.timeline b{font:600 14px/1.5 var(--f-mono);color:var(--blue)}
+.h2s{font-size:24px;font-weight:800;margin-top:56px}
+.whyhome{padding-block:clamp(48px,7vw,88px);display:flex;flex-direction:column;gap:10px}
+.whyhome h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;line-height:1.15}
+.whyhome .vs{margin-top:20px}
+#v-why .bottomline+.bottomline{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bottomline{margin-top:28px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:8px 40px;align-items:start}
+.bottomline h3{font-size:22px;font-weight:800;line-height:1.25}
+.bottomline p{color:var(--muted);font-size:16.5px;max-width:62ch}
+.bottomline .talk{grid-column:2}
+@media (max-width:760px){.bottomline{grid-template-columns:minmax(0,1fr)}.bottomline .talk{grid-column:1}}
+.vs{margin-top:36px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:20px}
+.vs-q{font:500 clamp(15px,1.8vw,18px)/1.4 var(--f-mono)}
+.vs-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.vs-cols{grid-template-columns:minmax(0,1fr)}}
+.vs-col{background:var(--bg);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.vs-col.good{box-shadow:0 0 0 1.5px var(--blue) inset}
+.vs-col ol{margin:0;padding:0;list-style:none;counter-reset:r;display:grid;gap:8px}
+.vs-col li{counter-increment:r;display:grid;grid-template-columns:1.6em minmax(0,1fr);column-gap:8px;padding:10px 12px;border-radius:8px;background:var(--surface)}
+.vs-col li::before{content:counter(r);grid-row:span 2;font:600 14px/1.5 var(--f-mono);color:var(--muted)}
+.vs-col li b{font-weight:700;font-size:15px}
+.vs-col li span{font-size:13.5px;color:var(--muted)}
+.vs-col li.bad{box-shadow:0 0 0 1.5px var(--coral) inset}
+.vs-col li.bad span{color:var(--coral)}
+.vs-col li.win{box-shadow:0 0 0 1.5px var(--blue) inset}
+.vs-col li.win span{color:var(--blue)}
+.vs-col li.void{opacity:.6}
+.vs-col li.void::before{content:"—"}
+.vs-out{font-size:15px}
+.vs-col .vs-out b{font-weight:800}
+.vs-col:not(.good) .vs-out b{color:var(--coral)}
+.vs-col.good .vs-out b{color:var(--blue)}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+.ways.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}
+a.way{text-decoration:none;color:inherit;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
+.way .wnum{font:700 13px/1 var(--f-mono);color:var(--blue);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--blue)}
+.way.hl .wnum{background:var(--blue);color:#fff;box-shadow:none}
+.way .go{font-weight:700;font-size:14.5px;color:var(--blue)}
+.wsec{margin-top:72px;padding-top:40px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px;scroll-margin-top:84px}
+.wsec>h2{font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.15}
+.wsec .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.stack.wsec{padding-block:40px 0}
+.h3s{font-size:20px;font-weight:800;margin-top:28px}
+.prompt.code pre{padding-top:24px;padding-right:96px}
+@media (max-width:900px){.ways,.ways.two{grid-template-columns:minmax(0,1fr)}}
+.way{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;min-width:0}
+.way.hl{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.way h3{font-size:22px;font-weight:800}
+.way p{color:var(--muted);font-size:15px;flex:1}
+.page .sub{color:var(--muted);margin-top:8px;max-width:65ch}
+.prompt{position:relative;margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.prompt pre{margin:0;padding:24px;padding-top:56px;font:13.5px/1.6 var(--f-mono);white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.prompt .copy{position:absolute;top:12px;right:12px;padding:8px 14px;font-size:13.5px}
+.prep{margin:20px 0 0;padding:0;list-style:none;counter-reset:p;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;max-width:980px}
+@media (max-width:760px){.prep{grid-template-columns:minmax(0,1fr)}}
+.prep li{counter-increment:p;display:grid;grid-template-columns:2em minmax(0,1fr);column-gap:10px;row-gap:4px;padding:16px 0;border-top:1px solid var(--line)}
+.prep li::before{content:counter(p);grid-row:span 2;font:600 15px/1.4 var(--f-mono);color:var(--blue)}
+.prep b{font-size:16px;font-weight:700}
+.prep span{color:var(--muted);font-size:15px}
+.faqwrap{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(24px,5vw,72px);margin-top:72px;align-items:start}
+.faqside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 88px);display:flex;flex-direction:column;gap:12px}
+.faqside h2{font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.15}
+.faqside p{color:var(--muted)}
+.faqside .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+@media (max-width:860px){.faqwrap{grid-template-columns:minmax(0,1fr)}.faqside{position:static}}
+.faq{display:flex;flex-direction:column;gap:28px}
+.fgroup h3{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 32px 18px 0;font-weight:700;font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:14px;font:400 24px/1 var(--f-sans);color:var(--blue)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:65ch;font-size:16px}
+.faq details a{color:var(--blue);font-weight:600}
+.indchips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:28px}
+@media (max-width:620px){.indchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}.indchips::-webkit-scrollbar{display:none}.indchips a,.indchips span{flex:none}}
+.indchips span{font-size:14px;color:var(--muted);margin-right:4px}
+.indchips a{font-size:13.5px;font-weight:600;text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.indchips a:hover{border-color:var(--blue);color:var(--blue)}
+.itiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+@media (max-width:900px){.itiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.itiles{grid-template-columns:minmax(0,1fr)}}
+.itile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;text-decoration:none;display:flex;flex-direction:column;gap:10px;min-width:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.itile:hover{transform:translateY(-3px);border-color:var(--blue)}
+.itile h3{font-size:20px;font-weight:800}
+.itile p{color:var(--muted);font-size:15px}
+.itile .who{margin-top:auto;font:600 12px/1.3 var(--f-mono);letter-spacing:.04em;color:var(--blue)}
+.iproof{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:stretch}
+@media (max-width:760px){.iproof{grid-template-columns:minmax(0,1fr)}}
+.iproof figure{margin:0;padding:24px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;justify-content:space-between}
+.iproof blockquote{margin:0;font-size:20px;font-weight:600;line-height:1.35}
+.iproof figcaption{font-size:13.5px;color:var(--muted)}
+.iproof figcaption b{display:block;color:var(--ink)}
+.iproof .note{padding:24px;border-radius:var(--r);border:1px solid var(--line);display:flex;flex-direction:column;gap:8px;justify-content:center}
+.iproof .note b{font-size:16px;font-weight:800}
+.iproof .note p{color:var(--muted);font-size:15px}
+.iproof .note a{color:var(--blue);font-weight:700;text-decoration:none}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="menu">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="Aspected, home"><span data-logo></span></a>
+    <nav aria-label="Main">
+      <a class="opt" href="#showcases" data-nav="home">Showcases</a>
+      <a href="#industries" data-nav="industries">Industries</a>
+      <a class="opt2" href="#why" data-nav="why">Why Aspected</a>
+      <a class="opt" href="#about" data-nav="about">About</a>
+      <a class="opt2" href="#pricing" data-nav="pricing">Pricing</a>
+      <a class="btn" href="#start" data-nav="start">Get started</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <div class="wrap hero">
+      <div class="herotop">
+      <p class="brandline"><b>Aspected</b> · Similarity, aspect by aspect.</p>
+      <h1 class="pickh" aria-label="Your embeddings don't know what year, version, type, language or size it is.">
+        <span class="ph1" aria-hidden="true">Your embeddings don’t know what</span>
+        <span class="prow" aria-hidden="true"><span class="picker" id="picker"></span><span class="itis">it is.</span></span>
+      </h1>
+      </div>
+      <div class="hero-l">
+      <p class="oneliner" style="margin-top:0">Aspect search weighs every part of a question at once, and shows why each answer fits.</p>
+      <div class="ask" aria-hidden="true">
+        <div class="askbox"><span class="asktxt"><span id="askText">this report, but from 2026</span><span class="caret"></span></span><span class="minisp" id="heroSpider" title="The aspect you asked about lights up"></span></div>
+      </div>
+      <a class="heroproof" href="#proof">In production under Copilot at <b>Agfa</b> and <b>Mosaic Community Health</b> →</a>
+      </div>
+    </div>
+
+    <div class="wrap sec" id="showcases">
+      <div class="sec-head">
+        <h2>See it work on something you know.</h2>
+        <p id="playHint">Pick one. Each plays in a few seconds.</p>
+      </div>
+      <div class="player" id="player">
+        <div class="plist" id="plist" role="tablist" aria-label="Showcases"></div>
+        <div class="ppanel" id="ppanel" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <section class="wrap whyhome" aria-labelledby="whyhome-h">
+      <p class="eyebrow">Why it works</p>
+      <h2 id="whyhome-h">Same question. Different answer.</h2>
+      <div class="vs">
+        <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
+        <div class="vs-cols">
+          <div class="vs-col">
+            <p class="eyebrow">Plain vector search · text only</p>
+            <ol>
+              <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
+              <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
+              <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>120 days</b>, from a draft.</p>
+          </div>
+          <div class="vs-col good">
+            <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
+            <ol>
+              <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+              <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
+              <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>90 days</b>, from the published version, with a receipt.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottomline">
+        <h3>One thing changed, at the bottom.</h3>
+        <p>In every database today, a field like price, version or date can only be a filter: in or out. In Aspected, every field becomes an aspect. It has a distance to your question and a weight in the ranking. That is what lets a whole sentence go in, and what lets every answer show its reasons.</p>
+        <a class="talk" href="#why">Read why it works →</a>
+      </div>
+    </section>
+
+    <section class="proof" id="proof" aria-labelledby="proof-h">
+      <div class="wrap">
+        <div class="proof-head">
+          <p class="eyebrow">In production</p>
+          <h2 id="proof-h">Running under Copilot at <span class="org">Agfa</span> and <span class="org">Mosaic Community Health</span>.</h2>
+        </div>
+        <div class="quotes">
+          <figure><blockquote>“Aspected has added the context Microsoft Copilot needed.”</blockquote><figcaption><b>Rob Kasslack</b>IT Business Partner, AI &amp; Innovation · Agfa</figcaption></figure>
+          <figure><blockquote>“Aspected is a back-end technology that improves speed and accuracy. You do not have to interact with a separate Aspected interface.”</blockquote><figcaption><b>Marshall</b>Senior Healthcare Data Strategist · Mosaic Community Health</figcaption></figure>
+          <figure><blockquote>“You guys are purely unique in this space… there's your ROI, isn't it?”</blockquote><figcaption><b>Tom Lane</b>Content Management Lead · Capgemini UK</figcaption></figure>
+        </div>
+        <div class="facts">
+          <a href="https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf" target="_blank" rel="noopener"><b>Agfa case study ↗</b><span>Copilot answers for field engineers</span></a>
+          <a data-video href="#" target="_blank" rel="noopener"><b>Mosaic on stage ↗</b><span>NWRPCA 2026, Portland</span></a>
+          <div><b>Patented</b><span>US 12,517,879, granted 6 January 2026</span></div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="wrap try" id="try">
+      <h2>Try it now</h2>
+      <p>Two showcases are live. Open one and change what you are looking for, or get started on your own data.</p>
+      <div class="row">
+        <a class="btn" href="https://samebutbetter.food" target="_blank" rel="noopener">Open samebutbetter.food ↗</a>
+        <a class="btn" href="https://vegas.aspected.com" target="_blank" rel="noopener">Open Vegas ↗</a>
+        <a class="btn ghost" href="#start">Run it on your own data →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE DETAIL -->
+  <section class="view" id="v-show">
+    <div class="wrap page">
+      <a class="back" href="#showcases">← All showcases</a>
+      <div class="top" style="display:flex;gap:10px;align-items:center;margin-bottom:14px" id="dTop"></div>
+      <h1 id="dTitle"></h1>
+      <div class="detail">
+        <div>
+          <div class="stage big" id="dStage"></div>
+          <p class="vidnote" id="dNote"></p>
+        </div>
+        <div class="side">
+          <p class="say" id="dSay"></p>
+          <div class="blk">
+            <p class="eyebrow">What Aspected does here</p>
+            <p id="dRole"></p>
+          </div>
+          <div class="blk">
+            <p class="eyebrow">Use it yourself</p>
+            <p id="dMe"></p>
+            <div class="ctas" id="dCta"></div>
+          </div>
+          <div class="blk">
+            <p class="eyebrow">In your organization</p>
+            <div class="else" id="dElse"></div>
+            <a class="talk" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="v-about">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">About</p>
+      <h1>People ask for several things at once.</h1>
+      <p class="lede">Search engines answer with one blended score. We built a database that keeps every aspect of the question, with its weight, and shows why each result is there.</p>
+      <div class="timeline">
+        <div><b>2004</b><p>Xillio starts moving enterprise content: 1,000+ projects for 250+ organisations, including NASA, KLM and Moody's.</p></div>
+        <div><b>2025</b><p>Rikkert Engels founds Aspected in Hilversum with co-founders Corné van Leuveren and Jorn Verhoeven. Xillio stays on as implementation partner.</p></div>
+        <div><b>Jan 2026</b><p>US patent 12,517,879 granted for the method. PCT application filed.</p></div>
+        <div><b>2026</b><p>Agfa and Mosaic Community Health run Aspected under Copilot, in production.</p></div>
+        <div><b>Oct 2026</b><p>samebutbetter.food goes live on 45,000 Dutch supermarket products.</p></div>
+        <div><b>Dec 2026</b><p>Vegas, an independent session finder, goes live for the AWS week in Las Vegas.</p></div>
+      </div>
+      <div class="about-foot">
+        <p>45 people in Hilversum, the Netherlands.</p>
+        <div class="ctas"><a class="btn ghost" data-link="investors" href="#" target="_blank" rel="noopener">Investors and press ↗</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ASPECTED: vs vector search -->
+  <section class="view" id="v-why">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Aspected vs plain vector search</p>
+      <h1>Same question. Different answer.</h1>
+      <div class="vs">
+        <p class="vs-q">“What is the notice period in our standard framework agreement?”</p>
+        <div class="vs-cols">
+          <div class="vs-col">
+            <p class="eyebrow">Plain vector search · text only</p>
+            <ol>
+              <li class="bad"><b>Framework Agreement v3.1</b><span>a draft · 120 days</span></li>
+              <li><b>“FINAL” copy</b><span>team site · 60 days</span></li>
+              <li><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>120 days</b>, from a draft.</p>
+          </div>
+          <div class="vs-col good">
+            <p class="eyebrow">Aspected · meaning, lifecycle, source</p>
+            <ol>
+              <li class="win"><b>Framework Agreement v3.0</b><span>published · 90 days</span></li>
+              <li class="void"><b>Framework Agreement v3.1</b><span>kept out · a draft</span></li>
+              <li class="void"><b>“FINAL” copy</b><span>kept out · a team-site copy</span></li>
+            </ol>
+            <p class="vs-out">The AI answers <b>90 days</b>, from the published version, with a receipt.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottomline">
+        <h3>The word that gets thrown away.</h3>
+        <p>“This pasta, but with less sugar, same price.” Search today breaks that into a query and two filters, and the most important word, <i>but</i>, is thrown away before the search starts. Aspected weighs the whole sentence in one calculation.</p>
+      </div>
+      <div class="bottomline">
+        <h3>One thing changed, at the bottom.</h3>
+        <p>In every database today, a field like price, version or date can only be a filter: in or out. In Aspected, every field becomes an aspect, with a distance to your question and a weight in the ranking. That is what lets a whole sentence go in, and what lets every answer show its reasons.</p>
+      </div>
+      <div class="faqwrap">
+        <div class="faqside">
+          <h2>Questions people ask</h2>
+          <p>Short answers. For the details, read the docs or ask us.</p>
+          <div class="ctas"><a class="btn" data-book href="#" target="_blank" rel="noopener">See it on your own data ↗</a><a class="btn ghost" href="#show-receipt">How the receipt works</a></div>
+        </div>
+        <div class="faq">
+          <div class="fgroup"><h3>How it compares</h3>
+            <details open><summary>Isn't Aspected a vector database too?</summary><p>Yes. The difference is what goes into the vector. A plain vector search embeds the text, so meaning is all it sees. Aspected builds the vector from aspects, such as meaning, version, date, source or price, each with its own weight, and ranks on all of them in one calculation.</p></details>
+            <details><summary>Is this sparse vector search?</summary><p>In our sense, yes: you ask with only the aspects you care about, and the ones you leave out don't count. It is not the "sparse vectors" of keyword-style retrieval such as SPLADE, where each dimension is a word.</p></details>
+            <details><summary>Isn't that just a filter?</summary><p>A filter says yes or no and drops everything else, including the almost-right. An aspect says how close a record is, so a near match still ranks, only lower.</p></details>
+            <details><summary>How is it different from hybrid search, boosting or a reranker?</summary><p>Those add rules or a second model on top of one score, and every rule interacts with the others. Aspected ranks on all aspects in the first pass and shows the distance per aspect.</p></details>
+          </div>
+          <div class="fgroup"><h3>Using it</h3>
+            <details><summary>Do I need to clean my data first?</summary><p>No. Search today shortlists on one score before anything else is checked, so an old draft can beat the current version. Aspected weighs every aspect of every record, so an old or stray document has a different profile and sinks. Clean data still helps; it is no longer a precondition.</p></details>
+            <details><summary>Do I still need a language model?</summary><p>To write the answer, yes. To decide which documents it reads, no: ranking is a calculation.</p></details>
+            <details><summary>Does it replace Copilot or my vector database?</summary><p>It replaces the retrieval step. Copilot, your chat or your agent stays the screen and reads from Aspected over MCP or the REST API.</p></details>
+            <details><summary>Who decides what counts?</summary><p>You do. Every query can weigh its aspects differently, so the people who own the content decide what counts, not a model.</p></details>
+            <details><summary>Can I see why a document was used?</summary><p>Yes. Every answer comes with a receipt: what was used, what was kept out and which aspect decided. It shows why a document was selected, not that the answer is right.</p></details>
+          </div>
+          <div class="fgroup"><h3>Trust and deployment</h3>
+            <details><summary>Where does my data live?</summary><p>In your own Azure or AWS tenant, inside your VPC, including AWS European Sovereign Cloud. Aspected is also on the Azure and AWS marketplaces.</p></details>
+            <details><summary>Is it patented?</summary><p>Yes. US patent 12,517,879, “Multi-aspect vector search index creation and retrieval method and system”, granted 6 January 2026 to Xillio AI, invented by Rikkert Engels and Jorn Verhoeven. A PCT application is filed. <a href="https://patents.google.com/patent/US12517879B1" target="_blank" rel="noopener">Read the patent ↗</a></p></details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET STARTED -->
+  <section class="view" id="v-start">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Get started</p>
+      <h1>Three ways in.</h1>
+      <p class="lede">Pick the one that fits how you work.</p>
+      <div class="ways">
+        <a class="way" href="#way-docker" data-jump="way-docker"><span class="wnum">1</span><h3>Docker and the docs</h3><p>One Docker image with a REST API and Aspected Studio. Running on your machine in about five minutes.</p><span class="go">Show the commands ↓</span></a>
+        <a class="way hl" href="#way-ai" data-jump="way-ai"><span class="wnum">2</span><h3>Point your AI at one page</h3><p>Give Claude, or any AI with a terminal, one link. It reads the steps, starts Aspected and loads your data.</p><span class="go">Get the link ↓</span></a>
+        <a class="way" href="#way-data" data-jump="way-data"><span class="wnum">3</span><h3>Run it on your data</h3><p>Upload a spreadsheet and get a search page, or send us a sample and we run it with you.</p><span class="go">See how ↓</span></a>
+      </div>
+
+      <section class="wsec" id="way-docker">
+        <p class="eyebrow">1 · For developers</p>
+        <h2>Docker and the docs</h2>
+        <div class="prompt code"><button class="btn copy" type="button" data-copy="dockerCmd">Copy</button><pre id="dockerCmd">docker pull xillio/aspected:latest
+docker run -p 8080:8080 xillio/aspected:latest
+curl http://localhost:8080/indexes</pre></div>
+        <p class="sub">Then open Aspected Studio at localhost:8080/studio, or follow the tutorial to create, train and search your first index. GPU images, the license key and security settings are in the docs.</p>
+        <div class="ctas"><a class="btn" href="https://docs.aspected.com/getting-started/" target="_blank" rel="noopener">Getting started ↗</a><a class="btn ghost" href="https://docs.aspected.com/tutorial/" target="_blank" rel="noopener">Tutorial ↗</a></div>
+      </section>
+
+      <section class="wsec" id="way-ai">
+        <p class="eyebrow">2 · For your AI</p>
+        <h2>Point your AI at one page</h2>
+        <p class="sub">Paste this line into Claude Code, Claude or another AI that can use a terminal.</p>
+        <div class="prompt"><button class="btn copy" type="button" data-copy="aiPrompt">Copy</button><pre id="aiPrompt">Read https://aspected.com/start.md and get Aspected running on my machine, with my data.</pre></div>
+        <p class="sub">That page is written for AIs: plain steps taken from the docs, with the moments it should stop and ask you.</p>
+        <div class="ctas"><a class="btn ghost" href="start.md" target="_blank" rel="noopener">Read the page yourself ↗</a></div>
+      </section>
+
+      <section class="wsec" id="way-data">
+        <p class="eyebrow">3 · For your data</p>
+        <h2>Run it on your data</h2>
+        <div class="ways two">
+          <div class="way"><span class="badge soon">Coming soon</span><h3>Upload a spreadsheet</h3><p>Drop a CSV or Excel file. Aspected finds the aspects and gives you a search page to share, within minutes.</p></div>
+          <div class="way"><span class="badge req">Today</span><h3>Send us a sample</h3><p>We run it on your data with you, in a 20-minute session. Bring a question you can't answer today.</p><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes ↗</a></div>
+        </div>
+        <h3 class="h3s">Get your data ready</h3>
+        <ol class="prep">
+        <li><b>One row per thing people look for.</b><span>A product, a document, a session or a contract. Not one row per sale or per page.</span></li>
+        <li><b>Columns become aspects.</b><span>Each gets a resolver: text for descriptions, number for price or size, enum for a fixed list such as type or department, datetime for dates.</span></li>
+        <li><b>One unit per column.</b><span>All grams or all kilos, all euros or all dollars. Mixed units look like outliers.</span></li>
+        <li><b>Empty means unknown.</b><span>Leave a value empty when you don't know it. A zero is read as a real zero.</span></li>
+        <li><b>Say which version counts.</b><span>For documents, keep version, status (draft, published, superseded), owner and source. They decide which copy the AI reads.</span></li>
+        <li><b>Keep the copies.</b><span>Don't clean out near-duplicates first. Aspected finds them and shows what separates them.</span></li>
+      </ol>
+        <p class="fine">Documents on file shares or SharePoint? Xillio's connectors bring them in with their version, date, owner and department.</p>
+      </section>
+
+      <section class="stack wsec" aria-labelledby="stack-h">
+      <p class="eyebrow">Fits what you run</p>
+      <h2 id="stack-h">One index under the AI you already use.</h2>
+      <div class="stack-grid">
+        <div><b>Under Copilot</b><p>Deployed as an MCP server in your Microsoft tenant. Copilot stays the screen.</p></div>
+        <div><b>In your agents</b><p>Bedrock agents and other assistants over MCP, your own apps over the REST API.</p></div>
+        <div><b>In your own tenant</b><p>Azure or AWS, inside your VPC, including AWS European Sovereign Cloud.</p></div>
+        <div><b>No model call to rank</b><p>Ranking is a calculation, so it is fast, cheap and gives the same answer twice.</p></div>
+      </div>
+    </section>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="view" id="v-industries">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Industries</p>
+      <h1>Same engine, your world.</h1>
+      <p class="lede">Each page shows the showcases that matter there, and who already runs Aspected.</p>
+      <div class="itiles" id="iTiles"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-industry">
+    <div class="wrap page">
+      <a class="back" href="#industries">← All industries</a>
+      <p class="eyebrow" id="iName" style="margin-bottom:14px"></p>
+      <h1 id="iTitle"></h1>
+      <p class="lede" id="iLede"></p>
+      <div class="grid" id="iGrid" style="margin-top:36px"></div>
+      <div class="iproof" id="iProof"></div>
+      <div class="ctas" style="margin-top:28px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes on your own data ↗</a><a class="btn ghost" href="#why">Why it works</a></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="view" id="v-pricing">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">Pricing</p>
+      <h1>Pay for searches and records.</h1>
+      <p class="lede">Nothing else. Every showcase, API and agent bills the same way.</p>
+      <div class="tiers">
+        <div class="tier">
+          <span class="eyebrow">Free · hosted</span>
+          <div class="price">€0</div>
+          <p>10,000 searches and 10,000 records a month. Build and share a page.</p>
+          <a class="btn ghost" href="#start">Get started</a>
+        </div>
+        <div class="tier hl">
+          <span class="eyebrow">Pay as you go · hosted</span>
+          <div class="price">€1 <small>per 1,000 searches</small></div>
+          <p>€0.50 per 1,000 records a month. Rates fall with volume. Pay by card.</p>
+          <a class="btn" href="#start">Get started</a>
+        </div>
+        <div class="tier">
+          <span class="eyebrow">Enterprise · your tenant</span>
+          <div class="price">€30k <small>a year, from</small></div>
+          <p>Runs in your own Azure or AWS tenant, including AWS European Sovereign Cloud. With Xillio and partners.</p>
+          <a class="btn ghost" data-book href="#" target="_blank" rel="noopener">Book a call ↗</a>
+        </div>
+      </div>
+      <p class="fine">Proposed list prices, November 2026. They may change at launch.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="flogo"><span data-logo></span><span>Similarity, aspect by aspect. · US patent 12,517,879</span></span>
+    <button class="themebtn" id="themeBtn" type="button">Dark mode</button>
+    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
+    <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+var noHover = matchMedia("(hover: none)").matches;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function h(tag, cls, html){var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e}
+
+/* ---------- booking ---------- */
+/* Contact form on aspected.com (no calendar link exists yet). */
+var BOOK="https://aspected.com/contact-form";
+/* Mosaic at NWRPCA 2026, on the Xillio channel. */
+var MOSAIC_VIDEO="https://youtu.be/FurgujVK_Bc";
+document.querySelectorAll("[data-video]").forEach(function(a){a.href=MOSAIC_VIDEO});
+document.querySelectorAll("[data-book]").forEach(function(a){a.href=BOOK});
+/* PLACEHOLDERS: the secondary audiences, routed from the footer and About. */
+var LINKS={docs:"https://docs.aspected.com",partners:BOOK,analysts:BOOK,investors:BOOK};
+document.querySelectorAll("[data-link]").forEach(function(a){a.href=LINKS[a.getAttribute("data-link")]||BOOK});
+function badge(s){return s.live?'<span class="badge live">Live</span>':(s.onRequest?'<span class="badge req">Live demo on request</span>':'<span class="badge soon">Coming soon</span>')}
+
+/* ---------- light by default, dark on request ---------- */
+var themeBtn=document.getElementById("themeBtn");
+function paintThemeBtn(){themeBtn.textContent=document.documentElement.dataset.theme==="dark"?"Light mode":"Dark mode"}
+themeBtn.addEventListener("click",function(){
+  var next=document.documentElement.dataset.theme==="dark"?"light":"dark";
+  document.documentElement.dataset.theme=next; try{localStorage.setItem("asp-theme",next)}catch(e){} paintThemeBtn();
+});
+paintThemeBtn();
+
+/* ---------- get started: copy the AI instructions ---------- */
+document.querySelectorAll("[data-copy]").forEach(function(btn){btn.addEventListener("click",function(){
+  var el=document.getElementById(btn.getAttribute("data-copy")), txt=el.textContent;
+  function done(){btn.textContent="Copied"; setTimeout(function(){btn.textContent="Copy"},1800)}
+  function select(){var r=document.createRange(); r.selectNodeContents(el); var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent="Selected, press Ctrl+C"}
+  try{navigator.clipboard.writeText(txt).then(done,select)}catch(e){select()}
+})});
+document.querySelectorAll("[data-jump]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault(); document.getElementById(a.getAttribute("data-jump")).scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})});
+
+/* ---------- logo ---------- */
+var LOGO_P=["M5616 5840.5L3700 1709.5L2755.24 3584.5L4981.5 5840.5H5616Z","M0 5840.5L2858.5 0L3700 1709.5L1618.5 5840.5H0Z","M9042.15 4289H8388.8L8235.5 3836.4H7155.1L7005.45 4289H6374L7330.3 1690.2H8063.95L9042.15 4289ZM7476.3 2876.45L7326.65 3321.75H8060.3L7910.65 2876.45C7864.42 2745.05 7791.42 2526.05 7691.65 2219.45C7562.68 2616.08 7490.9 2835.08 7476.3 2876.45ZM10010.8 4343.75C9713.9 4343.75 9492.47 4292.65 9346.47 4190.45C9202.9 4085.82 9122.6 3919.13 9105.57 3690.4H9660.37C9670.1 3790.17 9701.74 3860.73 9755.27 3902.1C9811.24 3943.47 9900.05 3964.15 10021.7 3964.15C10233.4 3964.15 10339.3 3903.32 10339.3 3781.65C10339.3 3723.25 10316.2 3679.45 10269.9 3650.25C10223.7 3618.62 10138.5 3593.07 10014.4 3573.6L9769.87 3533.45C9346.47 3467.75 9134.77 3275.52 9134.77 2956.75C9134.77 2766.95 9207.77 2620.95 9353.77 2518.75C9499.77 2414.12 9709.04 2361.8 9981.57 2361.8C10543.7 2361.8 10835.7 2577.15 10857.6 3007.85H10328.3C10325.9 2830.22 10210.3 2741.4 9981.57 2741.4C9789.34 2741.4 9693.22 2801.02 9693.22 2920.25C9693.22 2973.78 9715.12 3015.15 9758.92 3044.35C9802.72 3073.55 9872.07 3095.45 9966.97 3110.05L10248 3150.2C10474.3 3184.27 10641 3248.75 10748.1 3343.65C10855.1 3438.55 10908.7 3568.73 10908.7 3734.2C10908.7 3928.87 10829.6 4079.73 10671.4 4186.8C10515.7 4291.43 10295.5 4343.75 10010.8 4343.75ZM12239.2 2361.8C12492.3 2361.8 12693 2450.62 12841.5 2628.25C12987.5 2805.88 13060.5 3045.57 13060.5 3347.3C13060.5 3649.03 12987.5 3888.72 12841.5 4066.35C12693 4243.98 12492.3 4332.8 12239.2 4332.8C11998.3 4332.8 11813.4 4241.55 11684.4 4059.05V5004.4H11115V2405.6H11669.8V2657.45C11798.8 2460.35 11988.6 2361.8 12239.2 2361.8ZM12082.3 3876.55C12208.8 3876.55 12307.3 3830.32 12377.9 3737.85C12448.5 3642.95 12483.8 3507.9 12483.8 3332.7C12483.8 2989.6 12349.9 2818.05 12082.3 2818.05C11812.2 2818.05 11677.1 2994.47 11677.1 3347.3C11677.1 3700.13 11812.2 3876.55 12082.3 3876.55ZM15175.9 3402.05V3515.2H13781.6C13801 3644.17 13848.5 3742.72 13923.9 3810.85C13999.3 3878.98 14095.5 3913.05 14212.3 3913.05C14397.2 3913.05 14523.7 3842.48 14591.9 3701.35H15132.1C15081 3896.02 14972.7 4050.53 14807.2 4164.9C14641.7 4276.83 14443.4 4332.8 14212.3 4332.8C13920.3 4332.8 13684.2 4242.77 13504.2 4062.7C13324.1 3882.63 13234.1 3644.17 13234.1 3347.3C13234.1 3048 13322.9 2809.53 13500.5 2631.9C13675.7 2451.83 13910.5 2361.8 14205 2361.8C14497 2361.8 14733 2455.48 14913.1 2642.85C15088.3 2832.65 15175.9 3085.72 15175.9 3402.05ZM14197.7 2781.55C13964.1 2781.55 13826.6 2905.65 13785.2 3153.85H14617.4C14597.9 3037.05 14551.7 2945.8 14478.7 2880.1C14405.7 2814.4 14312 2781.55 14197.7 2781.55ZM16332.9 4332.8C16038.4 4332.8 15803.6 4242.77 15628.4 4062.7C15453.2 3882.63 15365.6 3644.17 15365.6 3347.3C15365.6 3045.57 15453.2 2805.88 15628.4 2628.25C15803.6 2450.62 16038.4 2361.8 16332.9 2361.8C16590.8 2361.8 16801.3 2429.93 16964.3 2566.2C17129.8 2700.03 17225.9 2882.53 17252.7 3113.7H16686.9C16655.3 2921.47 16537.3 2825.35 16332.9 2825.35C16072.5 2825.35 15942.3 2999.33 15942.3 3347.3C15942.3 3692.83 16072.5 3865.6 16332.9 3865.6C16551.9 3865.6 16673.5 3759.75 16697.9 3548.05H17263.6C17246.6 3786.52 17152.9 3977.53 16982.6 4121.1C16812.2 4262.23 16595.7 4332.8 16332.9 4332.8ZM18533.2 2405.6V2821.7H18171.8V3701.35C18171.8 3764.62 18187.6 3808.42 18219.3 3832.75C18250.9 3854.65 18306.9 3865.6 18387.2 3865.6H18533.2V4289C18465 4298.73 18377.4 4303.6 18270.4 4303.6C18034.3 4303.6 17864 4262.23 17759.4 4179.5C17654.7 4094.33 17602.4 3955.63 17602.4 3763.4V2821.7H17321.4V2405.6H17602.4V1847.15H18171.8V2405.6H18533.2ZM20604.5 3402.05V3515.2H19210.2C19229.7 3644.17 19277.1 3742.72 19352.6 3810.85C19428 3878.98 19524.1 3913.05 19640.9 3913.05C19825.9 3913.05 19952.4 3842.48 20020.5 3701.35H20560.7C20509.6 3896.02 20401.3 4050.53 20235.9 4164.9C20070.4 4276.83 19872.1 4332.8 19640.9 4332.8C19348.9 4332.8 19112.9 4242.77 18932.8 4062.7C18752.8 3882.63 18662.7 3644.17 18662.7 3347.3C18662.7 3048 18751.5 2809.53 18929.2 2631.9C19104.4 2451.83 19339.2 2361.8 19633.6 2361.8C19925.6 2361.8 20161.7 2455.48 20341.7 2642.85C20516.9 2832.65 20604.5 3085.72 20604.5 3402.05ZM19626.3 2781.55C19392.7 2781.55 19255.2 2905.65 19213.9 3153.85H20046.1C20026.6 3037.05 19980.4 2945.8 19907.4 2880.1C19834.4 2814.4 19740.7 2781.55 19626.3 2781.55ZM22166.7 2631.9V1690.2H22736.1V4289H22181.3V4044.45C22054.7 4236.68 21866.1 4332.8 21615.5 4332.8C21362.4 4332.8 21162.9 4243.98 21016.9 4066.35C20868.5 3888.72 20794.3 3649.03 20794.3 3347.3C20794.3 3045.57 20868.5 2805.88 21016.9 2628.25C21162.9 2450.62 21362.4 2361.8 21615.5 2361.8C21854 2361.8 22037.7 2451.83 22166.7 2631.9ZM21772.5 3876.55C22042.6 3876.55 22177.6 3700.13 22177.6 3347.3C22177.6 2994.47 22042.6 2818.05 21772.5 2818.05C21645.9 2818.05 21547.4 2865.5 21476.8 2960.4C21406.2 3052.87 21371 3186.7 21371 3361.9C21371 3705 21504.8 3876.55 21772.5 3876.55Z"];
+document.querySelectorAll("[data-logo]").forEach(function(el,i){
+  var g="lg"+i;
+  el.outerHTML='<svg class="alogo" viewBox="0 0 22899 5841" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+
+    '<defs><linearGradient id="'+g+'" x1="2935" y1="2441.5" x2="5781.5" y2="6491.5" gradientUnits="userSpaceOnUse"><stop stop-color="#0040B2"/><stop offset="1" stop-color="#005BFB"/></linearGradient></defs>'+
+    '<path d="'+LOGO_P[0]+'" fill="url(#'+g+')"/><path d="'+LOGO_P[1]+'" fill="#005CFC"/><path d="'+LOGO_P[2]+'" fill="currentColor"/></svg>';
+});
+
+/* ---------- showcase content ---------- */
+var SHOWS = [
+  {id:"vegas", role:"Every session carries its aspects, such as topic, format, level and time. Aspected weighs them in one calculation, and the sliders change the weights.", me:"Open Vegas, pick a session you like and move a slider. During the event, tap Last minute to see what you can still catch.", name:"Vegas", live:true, url:"https://vegas.aspected.com",
+   title:"2,447 sessions. The one you meant.",
+   say:"All 2,447 sessions of the AWS week in Las Vegas. Pick one you like, move the sliders, and fill your day.",
+   biz:"Course catalogues and events where people choose instead of filter.",
+   elsewhere:[["HR and learning","Learning platforms: “like this course, but shorter, in Dutch, for managers.”"],["Events","Conference agendas that plan each visitor's day around what they want."],["Travel","“This hotel, but closer to the venue and quieter.”"]],
+   demo:"live", cfg:{context:"A session finder for the 2,447 talks of the AWS week in Las Vegas, built on Aspected.", frames:[["live/vegas-1.jpg","You ask in your own words: hands-on agents, level 300.",0],["live/vegas-2.jpg","Aspected weighs topic, level and format at once. 98 sessions come close, best first.",1],["live/vegas-4.jpg","Pick one and say what should change: more business. Each result shows why.",1]]}},
+  {id:"food", role:"Each product carries its aspects, from sugar to price. Aspected keeps the kind of product the same and moves only what you asked for.", me:"Search or scan a product on samebutbetter.food, then pick what should change: less sugar, salt or fat.", name:"samebutbetter.food", live:true, url:"https://samebutbetter.food",
+   title:"This one, but healthier.",
+   say:"Scan a supermarket product, pick less sugar or more protein, and 45,000 products re-sort around your wish.",
+   biz:"Catalogues and webshops: alternatives that keep what the customer liked.",
+   elsewhere:[["Procurement","The same part or supply, but cheaper, local or in stock."],["Retail","Substitutes when a product is sold out, close on what mattered."],["Healthcare","Menus that keep the taste and change the nutrients."]],
+   demo:"live", cfg:{context:"A grocery app for 45,000 Dutch supermarket products, built on Aspected.", frames:[["live/food-2.jpg","You search for what is in your hand: chocolate spread.",0],["live/food-3.jpg","You say what should be better: less sugar.",0],["live/food-alt.jpg","Aspected finds the same kind of product with less sugar, the rest as close as possible: 89% alike.",1]]}},
+  {id:"lies", role:"Aspected keeps a product's name and its numbers apart. Ask for a well-known sweet by name plus only its sugar, and the “healthy” products that come as close show up, with the distance per aspect.", me:"Book a live run of the game: 24 products that are not what they seem, each with how Aspected found it.", name:"Sweet Little Lies", live:false, onRequest:true,
+   title:"A smoothie, sweeter than cola.",
+   say:"A guessing game on 14,961 supermarket products. Aspected finds the ones that are not what they seem, and shows why.",
+   biz:"Master data and catalogues: the record that does not fit, and why.",
+   elsewhere:[["IT","A document in the wrong folder, or a file labelled public that reads as confidential."],["Finance","An invoice far above its peers, or one supplier twice under two names."],["Legal","The MSA whose liability cap is far above every other MSA of its type."]],
+   demo:"lies"},
+  {id:"csv", role:"A local model reads your columns and proposes aspects with first weights. Pick the better of two results and the weights adjust.", me:"Drop a CSV or Excel file and get a search page with its own link to share.", name:"Your data", live:false,
+   title:"Your spreadsheet, searchable in minutes.",
+   say:"Drop a CSV. Aspected finds the aspects, sets first weights and hands you a search page to share.",
+   biz:"Supplier lists, asset registers and CRM exports, without a developer.",
+   elsewhere:[["IT","Asset registers: “this laptop model, but newer and in stock in Rotterdam.”"],["Sales","CRM exports: “accounts like this one, but in Germany and not yet a customer.”"],["Any team","Any internal list gets a “like this, but” search on day one."]],
+   demo:"csv"},
+  {id:"copies", role:"Aspected compares every copy on text, version, date and owner, then groups the copies and shows the one aspect that separates each from the rest.", me:"Drop a folder of documents and see which copies belong together, and why.", name:"Near-duplicates", live:false, onRequest:true,
+   title:"Twelve copies. One that counts.",
+   say:"One safety procedure, twelve copies in five places. Aspected finds the one that counts, and says why the others don't.",
+   biz:"SharePoint and file shares: settle the right version before Copilot reads it.",
+   elsewhere:[["IT","Before a Copilot rollout, the current version wins and the older ones stay out."],["Migration","Move one copy instead of seven, with Xillio's connectors."],["Legal","See what changed between the contract you signed and the copy on the share."]],
+   demo:"copies"},
+  {id:"receipt", name:"The receipt", live:false, onRequest:true,
+   role:"Aspected keeps a separate score per aspect, such as content, lifecycle and source. The receipt records why each document was used or kept out. In production it runs in the background, ready for an audit.",
+   me:"Book a live run: ask a question, set one weight to zero, and watch the answer and its receipt change.",
+   title:"Every answer comes with a receipt.",
+   say:"Ask for a notice period. See which document the AI got, which ones it kept out, and why.",
+   biz:"Copilot and agents: a receipt for every answer, kept for audit or shown to the user.",
+   elsewhere:[["Legal","Answers come from the published contract, not the draft that ranks first on meaning."],["Compliance","An audit trail per answer: what the model saw, what was withheld, which aspect decided."],["Agents","Next: a receipt for every agent step, so one wrong document at step one can't steer the rest."]],
+   demo:"receipt"}
+];
+
+/* ---------- spider chart ---------- */
+function Spider(host, n){
+  var C=200, R=150, NS="http://www.w3.org/2000/svg";
+  var svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox","-95 -5 590 410"); svg.setAttribute("class","spider"); svg.setAttribute("aria-hidden","true");
+  function el(t,a){var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e}
+  function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/n; return [C+Math.cos(a)*R*v, C+Math.sin(a)*R*v]}
+  function pts(vals){return vals.map(function(v,i){var p=pt(i,v); return p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")}
+  var ones=[]; for(var z=0;z<n;z++) ones.push(1);
+  [1/3,2/3,1].forEach(function(r){el("polygon",{points:pts(ones.map(function(){return r})),"class":"sp-grid"})});
+  var axes=[]; for(var i=0;i<n;i++){var p=pt(i,1); axes.push(el("line",{x1:C,y1:C,x2:p[0].toFixed(1),y2:p[1].toFixed(1),"class":"sp-axis"}))}
+  var labs=[]; for(var j=0;j<n;j++){var q=pt(j,1.18); labs.push(el("text",{x:q[0].toFixed(1),y:(q[1]+9).toFixed(1),"text-anchor":q[0]>C+8?"start":(q[0]<C-8?"end":"middle"),"class":"sp-lab"}))}
+  var pThis=el("polygon",{"class":"sp-this"}), pBet=el("polygon",{"class":"sp-bet"});
+  host.appendChild(svg);
+  var cur=ones.slice(), raf=0;
+  return {
+    labels:function(ls){ls.forEach(function(l,i){labs[i].textContent=l})},
+    hi:function(h){labs.forEach(function(t,i){t.classList.toggle("hi",h.indexOf(i)>=0)}); axes.forEach(function(a,i){a.classList.toggle("hi",h.indexOf(i)>=0)})},
+    set:function(a,b){cancelAnimationFrame(raf); pThis.setAttribute("points",pts(a)); pBet.setAttribute("points",pts(b)); cur=b.slice()},
+    morph:function(to,ms){
+      cancelAnimationFrame(raf); var from=cur.slice(), t0=performance.now();
+      if(reduce){pBet.setAttribute("points",pts(to)); cur=to.slice(); return}
+      function step(now){var k=Math.min(1,(now-t0)/ms); k=1-Math.pow(1-k,3); cur=from.map(function(f,i){return f+(to[i]-f)*k}); pBet.setAttribute("points",pts(cur)); if(k<1) raf=requestAnimationFrame(step)}
+      raf=requestAnimationFrame(step);
+    },
+    stop:function(){cancelAnimationFrame(raf)}
+  };
+}
+
+/* ---------- demo builders: each returns {reset(), play(at) -> duration} ---------- */
+function typeInto(el, text, at, start, speed){
+  for(var i=1;i<=text.length;i++){(function(i){at(start+i*speed,function(){el.textContent=text.slice(0,i)})})(i)}
+  return start+text.length*speed;
+}
+var BUILD = {
+  rerank:function(stage,c){
+    var html='<div class="st-head"><span class="st-seed">'+esc(c.seed)+'</span><span class="st-tag">'+esc(c.tag)+'</span></div>'+
+      '<div class="st-q"><span class="t">'+esc(c.query)+'</span></div>';
+    if(c.slider) html+='<div class="st-slider"><span class="lab">'+esc(c.slider[0])+'</span><span class="track"><span class="knob"></span></span></div>';
+    html+='<div class="st-list" style="--n:'+c.items.length+'"></div>';
+    stage.innerHTML=html;
+    var list=stage.querySelector(".st-list"), q=stage.querySelector(".st-q"), t=q.querySelector(".t"), knob=stage.querySelector(".knob");
+    var rows=c.items.map(function(it,k){
+      var r=h("div","st-row",'<span class="nm">'+esc(it[0])+'<small>'+esc(it[1])+'</small></span><span class="bar"><i></i></span><span class="v">'+esc(it[3])+'</span>');
+      list.appendChild(r); return r;
+    });
+    function reset(){
+      q.classList.remove("typed"); t.textContent=c.query;
+      if(knob) knob.style.setProperty("--k",c.slider[1]+"%");
+      rows.forEach(function(r,k){r.style.setProperty("--i",k); r.querySelector("i").style.setProperty("--w",(c.items[k][2]*100)+"%"); r.classList.remove("hit","dim")});
+    }
+    function play(at){
+      at(200,function(){q.classList.add("typed"); t.textContent=""});
+      var e=typeInto(t,c.query,at,250,38);
+      if(knob) at(e+150,function(){knob.style.setProperty("--k",c.slider[2]+"%")});
+      at(e+350,function(){rows.forEach(function(r,k){r.style.setProperty("--i",c.after.indexOf(k)); r.querySelector("i").style.setProperty("--w",(c.items[k][4]*100)+"%")})});
+      at(e+1150,function(){rows[c.after[0]].classList.add("hit"); rows.forEach(function(r,k){if(c.after.indexOf(k)>1) r.classList.add("dim")})});
+      return e+3400;
+    }
+    function end(){q.classList.add("typed"); t.textContent=c.query; if(knob) knob.style.setProperty("--k",c.slider[2]+"%");
+      rows.forEach(function(r,k){var p=c.after.indexOf(k); r.style.setProperty("--i",p); r.querySelector("i").style.setProperty("--w",(c.items[k][4]*100)+"%"); r.classList.toggle("hit",p===0); r.classList.toggle("dim",p>1)})}
+    reset(); return {reset:reset,play:play,end:end};
+  },
+  live:function(stage,c){
+    stage.classList.add("lv");
+    stage.innerHTML='<div class="lvwrap"><div class="phone">'+c.frames.map(function(f){return '<img src="'+f[0]+'" alt="'+esc(f[1])+'">'}).join("")+'</div>'+
+      '<div class="lright">'+(c.context?'<p class="lctx">'+esc(c.context)+'</p>':'')+'<ol class="lsteps">'+c.frames.map(function(f){return '<li'+(f[2]?' class="asp"':'')+'><span>'+esc(f[1])+'</span></li>'}).join("")+'</ol></div></div>';
+    var imgs=stage.querySelectorAll(".phone img"), steps=stage.querySelectorAll(".lsteps li"), n=imgs.length;
+    function show(k){imgs.forEach(function(im,i){im.classList.toggle("on",i===k)}); steps.forEach(function(li,i){li.classList.toggle("on",i===k); li.classList.toggle("done",i<k)})}
+    function reset(){show(0)}
+    function end(){show(n-1)}
+    function play(at){for(var k=0;k<n;k++){(function(k){at(300+k*3200,function(){show(k)})})(k)} return 300+n*3200+2000}
+    end(); return {reset:reset,play:play,end:end};
+  },
+  lies:function(stage){
+    stage.classList.add("sl");
+    var Q="Smoothie or cola: which has more sugar?", T="A smoothie, sweeter than cola", ANS="13 g sugar per 100 ml. Cola: 10.6 g.";
+    function cubes(g,base){var n=g/4,out="",k=0;for(;k<Math.floor(n);k++) out+='<i style="--d:'+(base+k)+'"></i>'; if(n%1) out+='<i class="part" style="--d:'+(base+k)+';--p:'+Math.round(n%1*100)+'%"></i>'; return out}
+    stage.innerHTML='<div class="slslide"><div class="sltop"><span class="slbadge">The Great Pretender</span></div>'+
+      '<p class="slh"><span class="slv"></span><span class="slt"></span></p><p class="slsub"></p>'+
+      '<div class="sltiles"><div class="sltile a"><b>Smoothie</b><span>sounds healthy</span></div><div class="sltile b"><b>Cola</b><span>regular</span></div></div>'+
+      '<div class="slpic"><span class="slq">?</span><div class="slcubes">'+
+        '<div class="slrow a"><span class="lg"><i></i>Smoothie</span><span class="cbs">'+cubes(33,0)+'</span><span class="g">33 g</span></div>'+
+        '<div class="slrow b"><span class="lg"><i></i>Cola</span><span class="cbs">'+cubes(27,9)+'</span><span class="g">27 g</span></div>'+
+        '<p class="slcap">Sugar cubes per glass (250 ml), 4 g each</p></div></div>'+
+      '<p class="slfoot"><b>Matched by Aspected:</b> the name + sugar ›</p></div>';
+    var v=stage.querySelector(".slv"), t=stage.querySelector(".slt"), sub=stage.querySelector(".slsub"), a=stage.querySelector(".sltile.a");
+    function reset(){stage.classList.remove("rev"); v.textContent=""; t.textContent=Q; sub.textContent="Tap your guess."; a.classList.remove("tap")}
+    function end(){a.classList.remove("tap"); stage.classList.add("rev"); v.textContent="Right!"; t.textContent=T; sub.textContent=ANS}
+    function play(at){
+      at(1000,function(){a.classList.add("tap")});
+      at(1350,end);
+      return 6200;
+    }
+    reset(); return {reset:reset,play:play,end:end};
+  },
+  receipt:function(stage){
+    stage.classList.add("rc");
+    stage.innerHTML='<span class="slot"></span><div class="paper">'+
+      '<div class="c hd">RETRIEVAL RECEIPT</div><div class="c mu">Aspected · receipt-waterdam-1</div><hr>'+
+      '<div>“What is the notice period in our standard framework agreement?”</div><div class="ok">→ 90 days</div><hr>'+
+      '<div class="rs">SENT TO MODEL</div><div class="row"><span>Framework Agreement v3.0</span><span class="ok">published ✓</span></div>'+
+      '<div class="rs"><span class="dec">DECIDED BY LIFECYCLE</span></div>'+
+      '<div class="rs">KEPT OUT</div>'+
+      '<div class="row v"><span><b>VOID</b>v3.1 · a draft</span><span class="mu">#1 on meaning</span></div>'+
+      '<div class="row v"><span><b>VOID</b>v2.0 · an older version</span></div>'+
+      '<div class="row v"><span><b>VOID</b>“FINAL” · a team-site copy</span></div><hr>'+
+      '<div class="row mu"><span>TOTAL 1 DOC</span><span>of 5 seen · 3 void</span></div>'+
+      '<div class="barcode"></div><div class="c mu" style="margin-top:4px">KEEP THIS RECEIPT</div></div>';
+    var paper=stage.querySelector(".paper"), vs=stage.querySelectorAll(".v"), dec=stage.querySelector(".dec");
+    function reset(){paper.classList.remove("up"); vs.forEach(function(v){v.classList.remove("hide")}); dec.classList.remove("hide")}
+    function play(at){
+      at(30,function(){stage.classList.add("snap"); paper.classList.add("up"); vs.forEach(function(v){v.classList.add("hide")}); dec.classList.add("hide"); void stage.offsetWidth; stage.classList.remove("snap")});
+      at(150,function(){paper.classList.remove("up")});
+      at(2300,function(){dec.classList.remove("hide")});
+      for(var i=0;i<vs.length;i++){(function(i){at(2800+i*380,function(){vs[i].classList.remove("hide")})})(i)}
+      return 6200;
+    }
+    reset(); return {reset:reset,play:play};
+  },
+  copies:function(stage){
+    stage.classList.add("cp");
+    var tiles=[["v6","old"],["draft","draft"],["copy","copy"],["v5","old"],["v7","win"],["copy","copy"],["draft","draft"],["v4","old"],["Antwerp","other"],["v3","old"],["copy","copy"],["draft","draft"]];
+    var groups=[["win","The one that counts","v7 · published · owner QA · Rotterdam"],["old","4 older versions","superseded"],["draft","3 drafts","never approved"],["copy","3 copies","on team sites and in HR"],["other","1 other site","Antwerp, not Rotterdam"]];
+    stage.innerHTML='<div class="st-q typed"><span class="t">the current safety procedure for Rotterdam</span></div>'+
+      '<div class="cpwrap"><div class="cptiles">'+tiles.map(function(t,i){return '<div class="cpt '+t[1]+'" style="--d:'+i+'"><i></i><i></i><i></i><span>'+esc(t[0])+'</span></div>'}).join("")+'</div>'+
+      '<ul class="cpsum">'+groups.map(function(g,i){return '<li class="'+g[0]+'" style="--d:'+i+'"><b>'+esc(g[1])+'</b><span>'+esc(g[2])+'</span></li>'}).join("")+'</ul></div>';
+    function reset(){stage.classList.remove("rev")}
+    function end(){stage.classList.add("rev")}
+    function play(at){at(900,end); return 7000}
+    reset(); return {reset:reset,play:play,end:end};
+  },
+  csv:function(stage){
+    var cells=["model","drive","range","price","Volvo EX30","electric","470 km","€37k","Hyundai Ioniq 5","electric","570 km","€46k","Toyota C-HR","hybrid","900 km","€38k","Kia EV3","electric","600 km","€36k"];
+    var chips=["model · text","drive · enum","range · number","price · number"];
+    stage.innerHTML='<div class="csv">'+cells.map(function(c,i){return '<span'+(i<4?' class="h"':'')+'>'+esc(c)+'</span>'}).join("")+'</div>'+
+      '<div class="aspects">'+chips.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("")+'</div>'+
+      '<div class="result"><div class="st-q typed"><span class="t">like this Volvo EX30, but more range</span></div>'+
+      '<div class="r"><span>Kia EV3 · electric · 600 km</span><b>0.05</b></div><div class="r"><span>Skoda Elroq · electric · 580 km</span><b>0.08</b></div><div class="r"><span>Hyundai Ioniq 5 · electric · 570 km</span><b>0.11</b></div></div>';
+    var hs=stage.querySelectorAll(".csv .h"), cs=stage.querySelectorAll(".aspects .chip"), tbl=stage.querySelector(".csv"), res=stage.querySelector(".result");
+    function reset(){hs.forEach(function(x){x.classList.remove("lit")}); cs.forEach(function(x){x.classList.remove("in")}); tbl.classList.remove("away"); res.classList.remove("in")}
+    function play(at){
+      for(var i=0;i<4;i++){(function(i){at(300+i*420,function(){hs[i].classList.add("lit"); cs[i].classList.add("in")})})(i)}
+      at(2300,function(){tbl.classList.add("away")});
+      at(2500,function(){res.classList.add("in")});
+      return 5600;
+    }
+    function end(){hs.forEach(function(x){x.classList.add("lit")}); cs.forEach(function(x){x.classList.add("in")}); tbl.classList.add("away"); res.classList.add("in")}
+    reset(); return {reset:reset,play:play,end:end};
+  },
+  dups:function(stage){
+    var labels={0:"v7 · current",3:"v6 · 2024",7:"draft · Jan",10:"copy · HR"};
+    var grid=[], ring=[];
+    for(var i=0;i<12;i++){var col=i%6,row=Math.floor(i/6); grid.push([10+col*16, 38+row*36])}
+    ring.push([50,52]);
+    for(var j=1;j<12;j++){var a=(j-1)/11*Math.PI*2-Math.PI/2; ring.push([50+Math.cos(a)*36, 52+Math.sin(a)*30])}
+    var html='<span class="nd-cap">procedure-site-safety.docx × 12</span>';
+    for(var k=0;k<12;k++) html+='<div class="doc" data-k="'+k+'"><i></i><i></i><i></i><i></i><span class="lbl">'+(labels[k]||"")+'</span></div>';
+    stage.innerHTML=html;
+    var docs=stage.querySelectorAll(".doc"), cap=stage.querySelector(".nd-cap");
+    function setPos(arr){docs.forEach(function(d,k){d.style.setProperty("--x",arr[k][0]+"%"); d.style.setProperty("--y",arr[k][1]+"%")})}
+    function reset(){setPos(grid); docs.forEach(function(d){d.classList.remove("fade","win","lab")}); cap.textContent="procedure-site-safety.docx × 12"}
+    function play(at){
+      at(300,function(){setPos(ring)});
+      at(1400,function(){docs.forEach(function(d,k){if(k===0) d.classList.add("win"); else {d.classList.add("fade"); if(labels[k]) d.classList.add("lab")}}); cap.textContent="by version · date · owner"});
+      return 5200;
+    }
+    function end(){setPos(ring); docs.forEach(function(d,k){d.classList.remove("fade","win","lab"); if(k===0) d.classList.add("win"); else {d.classList.add("fade"); if(labels[k]) d.classList.add("lab")}}); cap.textContent="by version · date · owner"}
+    reset(); return {reset:reset,play:play,end:end};
+  }
+};
+
+function Player(stage, show){
+  var demo=BUILD[show.demo](stage, show.cfg), timers=[], on=false;
+  function at(ms,fn){timers.push(setTimeout(fn,ms))}
+  function clear(){timers.forEach(clearTimeout); timers=[]}
+  function snapReset(){stage.classList.add("snap"); demo.reset(); void stage.offsetWidth; stage.classList.remove("snap")}
+  function snapEnd(){stage.classList.add("snap"); (demo.end||demo.reset)(); void stage.offsetWidth; stage.classList.remove("snap")}
+  function run(){clear(); snapReset(); var d=demo.play(at); at(d,run)}
+  snapEnd();
+  return {
+    start:function(){if(on||reduce) return; on=true; run()},
+    stop:function(){if(!on) return; on=false; clear(); snapEnd()}
+  };
+}
+
+/* ---------- cards ---------- */
+
+function makeCard(s, bizLabel, bizText, into){
+  var card=h("article","card");
+  var primary = s.live ? '<a class="cover" href="'+s.url+'" target="_blank" rel="noopener" aria-label="Open '+esc(s.name)+' live"></a>'
+                       : '<a class="cover" href="#show-'+s.id+'" aria-label="See '+esc(s.name)+'"></a>';
+  card.innerHTML=primary+
+    '<div class="stage"></div>'+
+    '<div class="body"><div class="top">'+badge(s)+'<span class="name">'+esc(s.name)+'</span></div>'+
+    '<h3>'+esc(s.title)+'</h3><p class="say">'+esc(s.say)+'</p>'+
+    '<p class="biz"><b>'+esc(bizLabel||"In your business")+':</b> '+esc(bizText||s.biz)+'</p></div>'+
+    '<div class="foot"><span class="go">'+(s.live?"Open live site ↗":s.onRequest?"Preview and book a demo →":"Watch the preview →")+'</span><a class="more" href="#show-'+s.id+'">'+(s.live?"For business":"Details")+'</a></div>';
+  into.appendChild(card);
+  var stage=card.querySelector(".stage");
+  var p=Player(stage,s);
+  function go(){card.classList.add("playing"); p.start()}
+  function halt(){card.classList.remove("playing"); p.stop()}
+  card.addEventListener("mouseenter",go); card.addEventListener("mouseleave",halt);
+  card.addEventListener("focusin",go); card.addEventListener("focusout",function(e){if(!card.contains(e.relatedTarget)) halt()});
+  if(noHover && "IntersectionObserver" in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?go():halt()})},{threshold:.6}).observe(card);
+  }
+}
+/* ---------- the showcase player (home) ---------- */
+var ASK={vegas:"like this session, but more business",food:"this chocolate spread, but less sugar",receipt:"the notice period, from the published version",copies:"the current safety procedure for Rotterdam",lies:"a \u201chealthy\u201d drink, as sweet as cola",csv:"like this Volvo EX30, but more range"};
+var DOM={vegas:"Conference sessions",food:"Groceries",receipt:"Contracts",copies:"Procedures",lies:"Product claims",csv:"Your spreadsheet"};
+var ORDER=["vegas","food","receipt","copies","lies","csv"], ADV=13000;
+var plist=document.getElementById("plist"), ppanel=document.getElementById("ppanel"), playerEl=document.getElementById("player");
+var cur=null, curPlayer=null, auto=!reduce, inView=false, advT=0;
+ORDER.forEach(function(id){var s=showById(id);
+  plist.insertAdjacentHTML("beforeend",'<button type="button" class="pitem" role="tab" id="tab-'+id+'" data-id="'+id+'" aria-selected="false" aria-controls="ppanel">'+
+    '<span class="dom">'+esc(DOM[id])+(s.live?' · <b>live</b>':'')+'</span><span class="q">'+esc(ASK[id])+'</span><span class="prog"><i></i></span></button>');
+});
+function primary(s){
+  return s.live ? '<a class="btn" href="'+s.url+'" target="_blank" rel="noopener">Open '+esc(s.name)+' ↗</a>'
+       : s.onRequest ? '<a class="btn" href="'+BOOK+'" target="_blank" rel="noopener">Book a live demo ↗</a>'
+       : '<a class="btn" href="#show-'+s.id+'">Watch the preview →</a>';
+}
+function select(id, byUser){
+  if(byUser) stopAuto();
+  if(cur===id && !byUser) return;
+  cur=id; var s=showById(id);
+  plist.querySelectorAll(".pitem").forEach(function(b){var on=b.dataset.id===id; b.setAttribute("aria-selected",on); b.tabIndex=on?0:-1; b.classList.remove("run")});
+  if(curPlayer) curPlayer.stop();
+  ppanel.innerHTML='<div class="stage big"></div><div class="pmeta"><div class="top">'+badge(s)+'</div>'+
+    '<h3>'+esc(s.title)+'</h3><p class="say">'+esc(s.say)+'</p><p class="biz"><b>In your business:</b> '+esc(s.biz)+'</p>'+
+    '<div class="ctas">'+primary(s)+'<a class="btn ghost" href="#show-'+s.id+'">Details</a></div></div>';
+  curPlayer=Player(ppanel.querySelector(".stage"), s);
+  ppanel.classList.remove("swap"); void ppanel.offsetWidth; ppanel.classList.add("swap");
+  if(inView){curPlayer.start(); if(auto) schedule()}
+}
+function schedule(){
+  clearTimeout(advT); if(!auto||!inView) return;
+  var b=document.getElementById("tab-"+cur); b.classList.remove("run"); void b.offsetWidth; b.classList.add("run");
+  advT=setTimeout(function(){select(ORDER[(ORDER.indexOf(cur)+1)%ORDER.length]); schedule()},ADV);
+}
+function stopAuto(){auto=false; clearTimeout(advT); plist.classList.add("manual")}
+plist.addEventListener("click",function(e){var b=e.target.closest(".pitem"); if(b) select(b.dataset.id,true)});
+plist.addEventListener("keydown",function(e){
+  if(["ArrowDown","ArrowUp","ArrowLeft","ArrowRight"].indexOf(e.key)<0) return; e.preventDefault();
+  var i=ORDER.indexOf(cur)+((e.key==="ArrowDown"||e.key==="ArrowRight")?1:-1);
+  var id=ORDER[(i+ORDER.length)%ORDER.length]; select(id,true); document.getElementById("tab-"+id).focus();
+});
+ppanel.addEventListener("pointerenter",function(e){if(e.pointerType==="mouse") stopAuto()});
+if("IntersectionObserver" in window){
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    inView=e.isIntersecting;
+    if(inView){curPlayer&&curPlayer.start(); if(auto) schedule()} else {curPlayer&&curPlayer.stop(); clearTimeout(advT)}
+  })},{threshold:.35}).observe(playerEl);
+} else inView=true;
+select(ORDER[0]);
+function showById(id){return SHOWS.filter(function(x){return x.id===id})[0]}
+
+/* ---------- industries ---------- */
+var INDS=[
+  {id:"healthcare", name:"Healthcare", label:"In healthcare", title:"The current protocol, not the one that ranks first.",
+   lede:"Clinical and technical teams ask Copilot in their own words. Aspected makes sure it reads the version that counts.",
+   who:"Mosaic Community Health, in production",
+   shows:[["receipt","Every answer shows which protocol was used, kept for audit."],["copies","One procedure on twelve sites: settle the current one before Copilot reads it."],["csv","Equipment and service lists, searchable as “like this, but”."]],
+   quote:{q:"[Aspected] is a back-end technology that improves speed and accuracy. You do not have to interact with a separate Aspected interface.",who:"Marshall",role:"Senior Healthcare Data Strategist · Mosaic Community Health"},
+   note:{b:"Mosaic Community Health runs Aspected, now in production.",p:"They told the story on video at the Northwest Community Health AI Summit.",a:"Watch it ↗",video:true}},
+  {id:"government", name:"Government", label:"In government", title:"Every answer traceable to the rule in force.",
+   lede:"Policies change, copies stay. Aspected answers from the version in force and keeps a receipt for every answer.",
+   who:"With Xillio, in national and local government",
+   shows:[["receipt","A receipt per answer: which rule was used, which older versions were kept out."],["copies","File shares full of copies: keep the one in force before a migration or Copilot."],["lies","Records filed under the wrong case or department, with the aspect that gives it away."]],
+   note:{b:"Implemented with Xillio.",p:"1,000+ content projects since 2004, including national and local government."}},
+  {id:"field-service", name:"Manufacturing and field service", label:"In field service", title:"One question instead of three searches.",
+   lede:"Engineers need the manual, the instruction and the last ticket for this model and firmware, in one answer.",
+   who:"Agfa, in production",
+   shows:[["receipt","The answer comes from the current manual for this model, not last year's."],["csv","Parts and asset lists: “this part, but in stock and closer”."],["copies","Instructions that drifted across sites, settled in one place."]],
+   quote:{q:"Aspected has added the context Microsoft Copilot needed.",who:"Rob Kasslack",role:"IT Business Partner, AI & Innovation · Agfa"},
+   note:{b:"At Agfa, under Copilot.",p:"Field engineers get manuals, instructions and tickets in one question instead of three searches.",a:"Read the case study ↗",url:"https://aspected.com/hubfs/ENG%20Agfa%20Case%20Study.pdf"}},
+  {id:"retail", name:"Retail and e-commerce", label:"In retail", title:"Let customers say what they want.",
+   lede:"Shoppers point at a product and say what should change. Aspected keeps what they liked and moves the rest.",
+   who:"samebutbetter.food, live",
+   shows:[["food","“This one, but healthier” on 45,000 products, live today."],["lies","Product data errors: lost decimals, wrong units, claims that don't hold."],["csv","Your product feed, searchable in minutes."]],
+   note:{b:"samebutbetter.food is live.",p:"45,000 Dutch supermarket products, one index.",a:"Try it ↗",url:"https://samebutbetter.food"}},
+  {id:"legal-finance", name:"Legal and finance", label:"In legal and finance", title:"The clause that doesn't belong, found and explained.",
+   lede:"Contracts and invoices look alike until one aspect moves. Aspected shows which one, and why.",
+   who:"Contracts, invoices, policies",
+   shows:[["receipt","Answers from the signed contract, not the draft that reads closest."],["lies","The MSA whose liability cap is far above every other MSA of its type."],["copies","What changed between the version you signed and the copy on the share."]],
+   quote:{q:"Aspected includes all context directly in the search query upfront.",who:"Wim Verheij",role:"Managing Director · Novadoc Netherlands"}},
+  {id:"events-learning", name:"Events and learning", label:"In events and learning", title:"People choose sessions, not filters.",
+   lede:"Attendees and learners pick one thing they like and say what should change.",
+   who:"Vegas, live for the AWS week",
+   shows:[["vegas","2,447 sessions in Las Vegas: “this one, but hands-on”."],["csv","Course catalogues and internal training, searchable in minutes."],["copies","Course material copied across teams, settled once."]],
+   note:{b:"Vegas is live for the AWS week in Las Vegas.",p:"An independent finder for 2,447 sessions, with Fill my day and Last minute.",a:"Open Vegas ↗",url:"https://vegas.aspected.com"}}
+];
+var chipsEl=document.getElementById("indChips"), tilesEl=document.getElementById("iTiles");
+INDS.forEach(function(d){
+  if(chipsEl) chipsEl.insertAdjacentHTML("beforeend",'<a href="#industry-'+d.id+'">'+esc(d.name)+'</a>');
+  tilesEl.insertAdjacentHTML("beforeend",'<a class="itile" href="#industry-'+d.id+'"><h3>'+esc(d.name)+'</h3><p>'+esc(d.title)+'</p><span class="who">'+esc(d.who)+'</span></a>');
+});
+function openIndustry(id){
+  var d=INDS.filter(function(x){return x.id===id})[0]; if(!d) return false;
+  document.getElementById("iName").textContent=d.name;
+  document.getElementById("iTitle").textContent=d.title;
+  document.getElementById("iLede").textContent=d.lede;
+  var g=document.getElementById("iGrid"); g.innerHTML="";
+  d.shows.forEach(function(x){makeCard(showById(x[0]),d.label,x[1],g)});
+  var html="";
+  if(d.quote) html+='<figure><blockquote>“'+esc(d.quote.q.replace(/^“|”$/g,""))+'”</blockquote><figcaption><b>'+esc(d.quote.who)+'</b>'+esc(d.quote.role)+'</figcaption></figure>';
+  if(d.note){var href=d.note.video?MOSAIC_VIDEO:d.note.url; html+='<div class="note"><b>'+esc(d.note.b)+'</b><p>'+esc(d.note.p)+'</p>'+(d.note.a?'<a href="'+href+'" target="_blank" rel="noopener">'+esc(d.note.a)+'</a>':'')+'</div>'}
+  var pr=document.getElementById("iProof"); pr.innerHTML=html; pr.style.gridTemplateColumns=(d.quote&&d.note)?"":"minmax(0,1fr)";
+  return true;
+}
+
+/* ---------- hero: the aspect picker drives the question and the spider ---------- */
+var PK=[
+  {w:"version", q:"the current safety procedure, not v6", l:["meaning","version","date","owner","site"], a:[.9,.3,.6,.62,.8], b:[.88,.95,.62,.62,.8]},
+  {w:"type", q:"the contract itself, not an email about it", l:["meaning","type","date","author","site"], a:[.92,.25,.6,.6,.7], b:[.88,.95,.6,.6,.7]},
+  {w:"year", q:"this report, but from 2026", l:["meaning","year","author","type","language"], a:[.9,.3,.6,.7,.8], b:[.87,.92,.6,.7,.8]},
+  {w:"language", q:"this manual, but in Dutch", l:["meaning","language","version","model","type"], a:[.9,.25,.7,.8,.7], b:[.86,.93,.7,.8,.7]},
+  {w:"size", q:"this sofa, but one size smaller", l:["style","size","price","colour","material"], a:[.85,.8,.6,.7,.6], b:[.83,.35,.6,.7,.6]}];
+var askText=document.getElementById("askText"), askChips=null, pickerEl=document.getElementById("picker"), sel=2, typeT=0;
+var pws=PK.map(function(p){var e=document.createElement("span"); e.className="pw"; e.textContent=p.w; pickerEl.appendChild(e); return e});
+var lastO=[];
+function place(k){
+  pws.forEach(function(e,i){
+    var o=((i-k+7)%5)-2, a=Math.abs(o);
+    e.classList.toggle("jump", lastO[i]!==undefined && Math.abs(o-lastO[i])>2);
+    var off=[0,0.8,1.32][a]*(o<0?-1:1), sc=[1,.62,.42][a];
+    e.style.transform="translateY(calc(-50% + "+off+"em)) scale("+sc+")";
+    e.style.opacity=a===0?1:(a===1?.5:.22);
+    e.classList.toggle("on",o===0); lastO[i]=o;
+  });
+}
+var hs=Spider(document.getElementById("heroSpider"),5);
+document.querySelector("#heroSpider svg").setAttribute("viewBox","40 40 320 320");
+function showAspect(k,animate){
+  var p=PK[k], i=0; clearInterval(typeT);
+  hs.labels(p.l);
+  if(!animate){askText.textContent=p.q; hs.hi([1]); hs.set(p.a,p.b); return}
+  hs.hi([]); hs.set(p.a,p.a); askText.textContent="";
+  typeT=setInterval(function(){i++; askText.textContent=p.q.slice(0,i); if(i>=p.q.length){clearInterval(typeT); hs.hi([1]); hs.morph(p.b,1300)}},38);
+}
+place(sel); showAspect(sel,false);
+if(!reduce){
+  setInterval(function(){sel=(sel+1)%PK.length; place(sel); setTimeout(function(){showAspect(sel,true)},500)},5200);
+}
+
+/* ---------- detail view ---------- */
+var dPlayer=null;
+function openShow(id){
+  var s=SHOWS.filter(function(x){return x.id===id})[0]; if(!s) return false;
+  document.getElementById("dTop").innerHTML=badge(s)+'<span class="eyebrow">'+esc(s.name)+'</span>';
+  document.getElementById("dTitle").textContent=s.title;
+  document.getElementById("dSay").textContent=s.say;
+  document.getElementById("dRole").textContent=s.role;
+  document.getElementById("dMe").textContent=s.me;
+  document.getElementById("dCta").innerHTML = (s.live
+    ? '<a class="btn" href="'+s.url+'" target="_blank" rel="noopener">Open '+esc(s.name)+' ↗</a>'
+    : s.onRequest ? '<a class="btn" href="'+BOOK+'" target="_blank" rel="noopener">Book a live demo ↗</a>'
+    : '<span class="btn ghost" style="cursor:default">Launching soon</span>')
+    + (s.id!=="csv" ? '<a class="btn ghost" href="#show-csv">Build this on your own data</a>' : '');
+  document.getElementById("dNote").textContent = s.live ? "Real screens from the live site." : s.onRequest ? "A preview. The full demo runs on request, on real data." : "Preview. The full demo and video launch soon.";
+  document.getElementById("dElse").innerHTML=s.elsewhere.map(function(e){return '<div><b>'+esc(e[0])+'</b><p>'+esc(e[1])+'</p></div>'}).join("");
+  var st=document.getElementById("dStage"); if(dPlayer) dPlayer.stop(); st.innerHTML=""; st.className="stage big";
+  dPlayer=Player(st,s); dPlayer.start();
+  return true;
+}
+
+/* ---------- routing ---------- */
+function route(){
+  var hsh=(location.hash||"#home").slice(1), view="home", scrollTo=null;
+  if(hsh==="showcases"||hsh==="try"||hsh==="proof"){scrollTo=hsh}
+  else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
+  else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
+  else if(["about","why","pricing","industries","start"].indexOf(hsh)>=0){view=hsh}
+  if(view!=="show" && dPlayer){dPlayer.stop()}
+  document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id==="v-"+view)});
+  var navv = view==="industry" ? "industries" : view;
+  document.querySelectorAll("[data-nav]").forEach(function(a){a.toggleAttribute("aria-current",a.dataset.nav===navv); if(a.dataset.nav===navv) a.setAttribute("aria-current","page")});
+  if(scrollTo){var el=document.getElementById(scrollTo); requestAnimationFrame(function(){el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})})}
+  else window.scrollTo(0,0);
+}
+addEventListener("hashchange",route); route();
+})();
+</script>
