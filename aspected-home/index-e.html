@@ -344,6 +344,52 @@ p{margin:0}
 .stage.big.cp .cpt span{font-size:clamp(9.5px,1vw,12px)}
 .stage:not(.big).cp .cpsum li:nth-child(n+4){display:none}
 
+/* the control switch on the receipt */
+.rtoggle{position:absolute;top:18px;right:14px;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 11.5px/1 var(--f-sans);cursor:pointer;box-shadow:0 6px 16px -10px rgba(0,0,0,.4)}
+.stage:not(.big) .rtoggle{display:none}
+.stage.big.rc .paper{left:42%}
+.stage.big .rtoggle{top:clamp(16px,2.4vw,28px);right:clamp(14px,2.4vw,28px);font-size:13px;padding:8px 12px}
+.rt-sw{width:28px;height:16px;border-radius:999px;background:var(--blue);position:relative;transition:background .25s}
+.rt-sw i{position:absolute;top:2px;left:14px;width:12px;height:12px;border-radius:50%;background:#fff;transition:left .25s}
+.rtoggle[aria-pressed="false"] .rt-sw{background:var(--muted)}
+.rtoggle[aria-pressed="false"] .rt-sw i{left:2px}
+.rt-v{color:var(--blue);min-width:4.6em;text-align:left}
+.rtoggle[aria-pressed="false"] .rt-v{color:var(--coral)}
+.paper .bad{color:var(--paper-red);font-weight:600}
+@media (max-width:620px){.stage.big.rc .paper{left:50%}.stage.big .rtoggle{top:auto;bottom:12px}}
+.paper .dec.warn{background:var(--paper-red)}
+
+/* For CIOs */
+.csec{margin-top:72px;padding-top:40px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.csec>h2{font-size:clamp(26px,3vw,36px);font-weight:800;line-height:1.15;max-width:26ch}
+.risks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.risks{grid-template-columns:minmax(0,1fr)}}
+.risk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:6px}
+.risk b{font-size:16px;font-weight:800}
+.risk span{font-size:14.5px;color:var(--muted)}
+.risk.ok span::before{content:"✓ ";color:var(--blue);font-weight:700}
+.risk.no{border-color:var(--coral);box-shadow:0 0 0 1px var(--coral) inset}
+.risk.no span{color:var(--coral)}
+.risk.no span::before{content:"✕ ";font-weight:700}
+.cdemo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:900px){.cdemo{grid-template-columns:minmax(0,1fr)}}
+.cside{display:flex;flex-direction:column;gap:12px;font-size:16px}
+.cside .quiet{color:var(--muted);font-size:14.5px}
+.pull{font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em;margin-top:14px;max-width:40ch}
+.cgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.cgrid{grid-template-columns:minmax(0,1fr)}}
+.record{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px}
+.record b{font-size:17px;font-weight:800}
+.record dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;font-size:14.5px}
+.record dt{color:var(--muted)}
+.record dd{margin:0}
+.rtag{position:absolute;top:14px;right:14px;font:600 10.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--stage);padding:4px 8px;border-radius:999px}
+.askfacts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;max-width:720px}
+@media (max-width:620px){.askfacts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.askfacts div{border-top:2px solid var(--blue);padding-top:10px;display:grid;gap:2px}
+.askfacts b{font-size:36px;font-weight:800;letter-spacing:-.03em}
+.askfacts span{color:var(--muted);font-size:14px}
+
 /* csv */
 .csv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
 .csv span{padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
@@ -481,6 +527,11 @@ footer a:hover{color:var(--ink)}
 .vs-col:not(.good) .vs-out b{color:var(--coral)}
 .vs-col.good .vs-out b{color:var(--blue)}
 .ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+.tryways{margin-top:28px}
+.tryways .way{gap:14px}
+.prompt.mini pre{padding:44px 14px 14px;font-size:12.5px}
+.prompt.mini .copy{top:8px;right:8px;padding:6px 12px;font-size:12.5px}
+.tryways .go{font-weight:700;font-size:14.5px;color:var(--blue);text-decoration:none;margin-top:auto}
 .ways.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}
 a.way{text-decoration:none;color:inherit;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
 a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
@@ -557,6 +608,7 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
       <a class="opt" href="#showcases" data-nav="home">Showcases</a>
       <a href="#industries" data-nav="industries">Industries</a>
       <a class="opt2" href="#why" data-nav="why">Why Aspected</a>
+      <a class="opt2" href="#cio" data-nav="cio">For CIOs</a>
       <a class="opt" href="#about" data-nav="about">About</a>
       <a class="btn" href="#start" data-nav="start">Get started</a>
     </nav>
@@ -649,11 +701,26 @@ a.way:hover{transform:translateY(-3px);border-color:var(--blue)}
 
     <div class="wrap try" id="try">
       <h2>Try it now</h2>
-      <p>Two showcases are live. Open one and change what you are looking for, or get started on your own data.</p>
-      <div class="row">
-        <a class="btn" href="https://samebutbetter.food" target="_blank" rel="noopener">Open samebutbetter.food ↗</a>
-        <a class="btn" href="https://vegas.aspected.com" target="_blank" rel="noopener">Open Vegas ↗</a>
-        <a class="btn ghost" href="#start">Run it on your own data →</a>
+      <p>Three ways in. Pick the one that fits how you work.</p>
+      <div class="ways tryways">
+        <div class="way">
+          <span class="wnum">1</span>
+          <h3>Docker and the docs</h3>
+          <div class="prompt code mini"><button class="btn copy" type="button" data-copy="dockerHome">Copy</button><pre id="dockerHome">docker run -p 8080:8080 xillio/aspected:latest</pre></div>
+          <a class="go" href="https://docs.aspected.com/getting-started/" target="_blank" rel="noopener">Read the docs ↗</a>
+        </div>
+        <div class="way hl">
+          <span class="wnum">2</span>
+          <h3>Point your AI at one page</h3>
+          <div class="prompt mini"><button class="btn copy" type="button" data-copy="aiHome">Copy</button><pre id="aiHome">Read https://aspected.com/start.md and get Aspected running on my machine, with my data.</pre></div>
+          <a class="go" href="#start">How this works →</a>
+        </div>
+        <div class="way">
+          <span class="wnum">3</span>
+          <h3>Run it on your data</h3>
+          <p>Send us a sample. We run it with you in 20 minutes, on a question you can't answer today.</p>
+          <a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes ↗</a>
+        </div>
       </div>
     </div>
   </section>
@@ -839,6 +906,73 @@ curl http://localhost:8080/indexes</pre></div>
     </div>
   </section>
 
+  <!-- FOR CIOs -->
+  <section class="view" id="v-cio">
+    <div class="wrap page">
+      <p class="eyebrow" style="margin-bottom:14px">For CIOs</p>
+      <h1>Stand behind every answer your AI gives.</h1>
+      <p class="lede">Every answer shows which document it came from, which ones were left out, and why.</p>
+
+      <section class="csec">
+        <h2>The risk nobody owns yet.</h2>
+        <div class="risks">
+          <div class="risk ok"><b>The AI shows what it shouldn't</b><span>Owned: permissions and sensitivity labels.</span></div>
+          <div class="risk ok"><b>Data leaves the organisation</b><span>Owned: DLP and logging.</span></div>
+          <div class="risk no"><b>The AI answers from the wrong document</b><span>Not owned yet. There is no good answer for this today.</span></div>
+        </div>
+        <p class="sub">One supplier contract, three versions: a draft that says 30 days, a draft that says 60, and the signed one that says 90. They read almost the same, so the AI can pick any of them. Think of a quote that goes out with last year's terms.</p>
+      </section>
+
+      <section class="csec">
+        <h2>What if every answer had a receipt?</h2>
+        <div class="cdemo">
+          <div class="stage big" id="cioStage"></div>
+          <div class="cside">
+            <p>Ask for the notice period and the AI answers <b>90 days</b>, from the signed contract. The receipt shows the drafts and the copy it left out, and which aspect decided.</p>
+            <p><b>Switch lifecycle off</b> and the same question gets <b>120 days</b>, from a draft. That switch is the control: you decide what counts.</p>
+            <p class="quiet">A receipt does not prove an answer is true. It proves what went in, and why. So when an answer is wrong, it points at the document to fix.</p>
+          </div>
+        </div>
+        <p class="pull">Purview tells you which files Copilot read. The receipt tells you whether they were the right ones.</p>
+      </section>
+
+      <section class="csec">
+        <h2>Who decides what counts?</h2>
+        <div class="cgrid">
+          <p class="sub" style="margin:0">The people who own the content. Aspected weighs content, status, location, client and date in one calculation, and proposes which version counts. The record owner confirms, and sets the weight once as policy for every assistant.</p>
+          <div class="record">
+            <span class="rtag">Example</span>
+            <b>Purchasing terms 2023</b>
+            <dl><dt>Keep</dt><dd>Yes, retention duty</dd><dt>Counts for AI</dt><dd>No, replaced by 2025</dd><dt>Decided by</dt><dd>Head of Purchasing, 14 October</dd><dt>Approved by</dt><dd>Legal, 15 October</dd></dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="csec">
+        <h2>Soon your AI will act, not only answer.</h2>
+        <p class="sub">Agents carry out tasks. One wrong document at the first step then decides every step after it. You will answer for what your AI does, too.</p>
+      </section>
+
+      <section class="csec">
+        <h2>A layer of your own, between your documents and your AI.</h2>
+        <div class="stack-grid">
+          <div><b>Under Copilot</b><p>Deployed as an MCP server. Copilot stays the screen.</p></div>
+          <div><b>Or your own model</b><p>Mistral, your own assistant or an agent. You can switch later.</p></div>
+          <div><b>In your own tenant</b><p>Azure or AWS, including European sovereign cloud.</p></div>
+          <div><b>Yours to keep</b><p>The index and the receipts are yours, exportable in an open format.</p></div>
+        </div>
+        <p class="sub" style="margin-top:20px">In production under Copilot at Agfa and Mosaic Community Health. Patented: US 12,517,879. Implemented with Xillio, after 1,000+ content projects for 250+ organisations.</p>
+      </section>
+
+      <section class="csec ask">
+        <h2>Start with one department.</h2>
+        <div class="askfacts"><div><b>1</b><span>department</span></div><div><b>20</b><span>questions</span></div><div><b>2</b><span>weeks</span></div><div><b>1</b><span>expert of yours</span></div></div>
+        <p class="sub">Read-only access. After two weeks you know whether you can stand behind the answers. Only then do you decide whether to go further.</p>
+        <div class="ctas" style="margin-top:20px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Plan the two weeks ↗</a><a class="btn ghost" href="#why">Why it works</a></div>
+      </section>
+    </div>
+  </section>
+
   <!-- INDUSTRIES -->
   <section class="view" id="v-industries">
     <div class="wrap page">
@@ -896,7 +1030,7 @@ curl http://localhost:8080/indexes</pre></div>
   <div class="wrap">
     <span class="flogo"><span data-logo></span><span>Similarity, aspect by aspect. · US patent 12,517,879</span></span>
     <button class="themebtn" id="themeBtn" type="button">Dark mode</button>
-    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#about">About</a></nav>
+    <nav aria-label="Footer"><a href="#showcases">Showcases</a><a href="#industries">Industries</a><a href="#why">Why Aspected</a><a href="#cio">For CIOs</a><a href="#about">About</a></nav>
     <nav aria-label="More" class="fmore"><a data-link="docs" href="#" target="_blank" rel="noopener">Docs and API</a><a data-link="partners" href="#" target="_blank" rel="noopener">Partners</a><a data-link="analysts" href="#" target="_blank" rel="noopener">Analysts and press</a></nav>
   </div>
 </footer>
@@ -984,7 +1118,7 @@ var SHOWS = [
    role:"Aspected keeps a separate score per aspect, such as content, lifecycle and source. The receipt records why each document was used or kept out. In production it runs in the background, ready for an audit.",
    me:"Book a live run: ask a question, set one weight to zero, and watch the answer and its receipt change.",
    title:"Every answer comes with a receipt.",
-   say:"Ask for a notice period. See which document the AI got, which ones it kept out, and why.",
+   say:"Ask for a notice period and get 90 days, from the published contract. Switch lifecycle off and the AI reads the draft: 120 days. The receipt shows why.",
    biz:"Copilot and agents: a receipt for every answer, kept for audit or shown to the user.",
    elsewhere:[["Legal","Answers come from the published contract, not the draft that ranks first on meaning."],["Compliance","An audit trail per answer: what the model saw, what was withheld, which aspect decided."],["Agents","Next: a receipt for every agent step, so one wrong document at step one can't steer the rest."]],
    demo:"receipt"}
@@ -1087,27 +1221,40 @@ var BUILD = {
   },
   receipt:function(stage){
     stage.classList.add("rc");
-    stage.innerHTML='<span class="slot"></span><div class="paper">'+
-      '<div class="c hd">RETRIEVAL RECEIPT</div><div class="c mu">Aspected · receipt-waterdam-1</div><hr>'+
-      '<div>“What is the notice period in our standard framework agreement?”</div><div class="ok">→ 90 days</div><hr>'+
-      '<div class="rs">SENT TO MODEL</div><div class="row"><span>Framework Agreement v3.0</span><span class="ok">published ✓</span></div>'+
-      '<div class="rs"><span class="dec">DECIDED BY LIFECYCLE</span></div>'+
-      '<div class="rs">KEPT OUT</div>'+
-      '<div class="row v"><span><b>VOID</b>v3.1 · a draft</span><span class="mu">#1 on meaning</span></div>'+
-      '<div class="row v"><span><b>VOID</b>v2.0 · an older version</span></div>'+
-      '<div class="row v"><span><b>VOID</b>“FINAL” · a team-site copy</span></div><hr>'+
-      '<div class="row mu"><span>TOTAL 1 DOC</span><span>of 5 seen · 3 void</span></div>'+
-      '<div class="barcode"></div><div class="c mu" style="margin-top:4px">KEEP THIS RECEIPT</div></div>';
-    var paper=stage.querySelector(".paper"), vs=stage.querySelectorAll(".v"), dec=stage.querySelector(".dec");
+    var on=true;
+    var R={
+      on:{ans:"→ 90 days", bad:false, sent:[["Framework Agreement v3.0","published ✓"]], dec:"DECIDED BY LIFECYCLE",
+          out:[["v3.1 · a draft","#1 on meaning"],["v2.0 · an older version",""],["“FINAL” · a team-site copy",""]], tot:["TOTAL 1 DOC","of 5 seen · 3 void"]},
+      off:{ans:"→ 120 days, from a draft", bad:true, sent:[["Framework Agreement v3.1","draft"],["Framework Agreement v3.0","published"],["“FINAL” copy","team site"]], dec:"DECIDED BY DATE",
+          out:[["v2.0 · an older version",""],["v1.0 · an older version",""]], tot:["TOTAL 3 DOCS","of 5 seen · 2 void"]}};
+    function paperHTML(r){
+      return '<div class="c hd">RETRIEVAL RECEIPT</div><div class="c mu">Aspected · receipt-waterdam-1</div><hr>'+
+        '<div>“What is the notice period in our standard framework agreement?”</div><div class="'+(r.bad?'bad':'ok')+'">'+r.ans+'</div><hr>'+
+        '<div class="rs">SENT TO MODEL</div>'+r.sent.map(function(x){return '<div class="row"><span>'+x[0]+'</span><span class="'+(x[1].indexOf("published")===0?'ok':'mu')+'">'+x[1]+'</span></div>'}).join("")+
+        '<div class="rs"><span class="dec'+(r.bad?' warn':'')+'">'+r.dec+'</span></div>'+
+        '<div class="rs">KEPT OUT</div>'+r.out.map(function(x){return '<div class="row v"><span><b>VOID</b>'+x[0]+'</span><span class="mu">'+x[1]+'</span></div>'}).join("")+'<hr>'+
+        '<div class="row mu"><span>'+r.tot[0]+'</span><span>'+r.tot[1]+'</span></div>'+
+        '<div class="barcode"></div><div class="c mu" style="margin-top:4px">KEEP THIS RECEIPT</div>';
+    }
+    stage.innerHTML='<span class="slot"></span><div class="paper"></div>'+
+      '<button type="button" class="rtoggle" aria-pressed="true"><span class="rt-l">Lifecycle</span><span class="rt-sw"><i></i></span><span class="rt-v">counts</span></button>';
+    var paper=stage.querySelector(".paper"), btn=stage.querySelector(".rtoggle"), vs, dec;
+    function draw(){paper.innerHTML=paperHTML(on?R.on:R.off); vs=paper.querySelectorAll(".v"); dec=paper.querySelector(".dec");
+      btn.setAttribute("aria-pressed",on); btn.querySelector(".rt-v").textContent=on?"counts":"ignored"; stage.classList.toggle("rc-off",!on)}
     function reset(){paper.classList.remove("up"); vs.forEach(function(v){v.classList.remove("hide")}); dec.classList.remove("hide")}
-    function play(at){
-      at(30,function(){stage.classList.add("snap"); paper.classList.add("up"); vs.forEach(function(v){v.classList.add("hide")}); dec.classList.add("hide"); void stage.offsetWidth; stage.classList.remove("snap")});
+    function reprint(at){
+      var list=vs, d=dec;
+      at(30,function(){stage.classList.add("snap"); paper.classList.add("up"); list.forEach(function(v){v.classList.add("hide")}); d.classList.add("hide"); void stage.offsetWidth; stage.classList.remove("snap")});
       at(150,function(){paper.classList.remove("up")});
-      at(2300,function(){dec.classList.remove("hide")});
-      for(var i=0;i<vs.length;i++){(function(i){at(2800+i*380,function(){vs[i].classList.remove("hide")})})(i)}
+      at(2300,function(){d.classList.remove("hide")});
+      for(var i=0;i<list.length;i++){(function(i){at(2800+i*380,function(){list[i].classList.remove("hide")})})(i)}
       return 6200;
     }
-    reset(); return {reset:reset,play:play};
+    btn.addEventListener("click",function(e){
+      e.preventDefault(); e.stopPropagation(); stage.dispatchEvent(new CustomEvent("demo:hold",{bubbles:true})); on=!on; draw();
+      var t=[]; reprint(function(ms,fn){t.push(setTimeout(fn,ms))});
+    });
+    draw(); reset(); return {reset:reset,play:reprint};
   },
   copies:function(stage){
     stage.classList.add("cp");
@@ -1161,16 +1308,17 @@ var BUILD = {
   }
 };
 
-function Player(stage, show){
+function Player(stage, show, opts){
   var demo=BUILD[show.demo](stage, show.cfg), timers=[], on=false;
   function at(ms,fn){timers.push(setTimeout(fn,ms))}
   function clear(){timers.forEach(clearTimeout); timers=[]}
   function snapReset(){stage.classList.add("snap"); demo.reset(); void stage.offsetWidth; stage.classList.remove("snap")}
   function snapEnd(){stage.classList.add("snap"); (demo.end||demo.reset)(); void stage.offsetWidth; stage.classList.remove("snap")}
-  function run(){clear(); snapReset(); var d=demo.play(at); at(d,run)}
+  function run(){clear(); snapReset(); var d=demo.play(at); at(d, opts&&opts.once ? function(){on=false} : run)}
   snapEnd();
+  var held=false; stage.addEventListener("demo:hold",function(){held=true; on=false; clear()});
   return {
-    start:function(){if(on||reduce) return; on=true; run()},
+    start:function(){if(on||reduce||held) return; on=true; run()},
     stop:function(){if(!on) return; on=false; clear(); snapEnd()}
   };
 }
@@ -1232,6 +1380,7 @@ function schedule(){
   advT=setTimeout(function(){select(ORDER[(ORDER.indexOf(cur)+1)%ORDER.length]); schedule()},ADV);
 }
 function stopAuto(){auto=false; clearTimeout(advT); plist.classList.add("manual")}
+ppanel.addEventListener("demo:hold",stopAuto);
 plist.addEventListener("click",function(e){var b=e.target.closest(".pitem"); if(b) select(b.dataset.id,true)});
 plist.addEventListener("keydown",function(e){
   if(["ArrowDown","ArrowUp","ArrowLeft","ArrowRight"].indexOf(e.key)<0) return; e.preventDefault();
@@ -1362,8 +1511,9 @@ function route(){
   if(hsh==="showcases"||hsh==="try"||hsh==="proof"){scrollTo=hsh}
   else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
   else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
-  else if(["about","why","pricing","industries","start"].indexOf(hsh)>=0){view=hsh}
+  else if(["about","why","pricing","industries","start","cio"].indexOf(hsh)>=0){view=hsh}
   if(view!=="show" && dPlayer){dPlayer.stop()}
+  if(view==="cio"){ if(!window.__cioP) window.__cioP=Player(document.getElementById("cioStage"),showById("receipt"),{once:true}); window.__cioP.start() } else if(window.__cioP){window.__cioP.stop()}
   document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id==="v-"+view)});
   var navv = view==="industry" ? "industries" : view;
   document.querySelectorAll("[data-nav]").forEach(function(a){a.toggleAttribute("aria-current",a.dataset.nav===navv); if(a.dataset.nav===navv) a.setAttribute("aria-current","page")});
