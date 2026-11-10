@@ -172,6 +172,32 @@ p{margin:0}
 .vquote blockquote{margin:0;font-size:clamp(20px,2.4vw,28px);font-weight:700;line-height:1.3;letter-spacing:-.015em}
 .vquote figcaption{margin-top:14px;font-size:14px;color:var(--muted)}
 .vquote figcaption b{display:block;color:var(--ink)}
+.rprint{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:24px}
+.rauto{display:none;align-items:center;gap:8px;font-weight:600;font-size:14.5px;cursor:pointer}
+.rauto input{width:18px;height:18px;accent-color:var(--fill)}
+.is-station .rauto{display:inline-flex}
+#v-receipt .obd{margin-top:0}
+/* the printed slip: 80 mm paper, about 72 mm printable */
+.slip{display:none}
+@media print{
+  @page{margin:0}
+  body.printing>*:not(.slip){display:none!important}
+  body.printing{background:#fff!important}
+  body.printing .slip{display:block;width:72mm;margin:0 auto;padding:4mm 1mm 12mm;font:9pt/1.4 "IBM Plex Mono",ui-monospace,Consolas,monospace;color:#000;background:#fff}
+  .slip .sc{text-align:center}
+  .slip .sb{font-weight:700}
+  .slip .sdec{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+  .slip .si{padding-left:3mm}
+  .slip .si0{margin-top:2mm}
+  .slip .sx{text-decoration:line-through}
+  .slip .srow{display:flex;justify-content:space-between;gap:2mm}
+  .slip .sbig{font-weight:700;font-size:11pt}
+  .slip .shr{border-top:1px dashed #000;margin:2mm 0}
+  .slip .shr.d{border-top:3px double #000}
+  .slip .snote{margin:3mm 0 0;font-size:8pt}
+  .slip .sqr{width:24mm;margin:4mm auto 1mm}
+  .slip .sqr svg{display:block;width:100%;height:auto}
+}
 .vbar{display:none}
 .vbooth{margin-top:14px;font:600 clamp(20px,2.6vw,28px)/1.25 var(--f-sans);letter-spacing:-.01em;color:#fff}
 .vbooth::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:#5CE0A0;margin-right:12px;vertical-align:.15em;box-shadow:0 0 0 4px rgba(92,224,160,.2)}
@@ -1221,7 +1247,7 @@ curl http://localhost:8080/indexes</pre></div>
       <section class="csec">
         <h2>What if every answer had a receipt?</h2>
         <p class="sub" style="margin-top:-4px">Pick a question. You get the answer, and the receipt with it.</p>
-        <div class="obd">
+        <div class="obd" id="cioDemo">
           <div class="obd-l">
             <div class="obq" id="obQs"></div>
             <div class="oba" id="obA"><span class="eyebrow">The AI's answer</span><p id="obAt"></p></div>
@@ -1241,7 +1267,7 @@ curl http://localhost:8080/indexes</pre></div>
           </div>
           <ol class="obn" id="obN"></ol>
         </div>
-        <p class="quiet" style="margin-top:18px">A receipt does not prove an answer is true. It proves what went in, and why. So when an answer is wrong, it points at the document to fix.</p>
+        <p class="quiet" style="margin-top:18px">A receipt does not prove an answer is true. It proves what went in, and why. So when an answer is wrong, it points at the document to fix. <a class="talk" href="#receipt">Print one yourself →</a></p>
         <p class="pull">Purview tells you which files Copilot read. The receipt tells you whether they were the right ones.</p>
       </section>
 
@@ -1576,6 +1602,54 @@ curl http://localhost:8080/indexes</pre></div>
     </div>
   </section>
 
+  <!-- RECEIPT: the full receipt demo. A receipt printer will print every receipt here. -->
+  <section class="view" id="v-receipt">
+    <div class="wrap page">
+      <h1>What if every answer had a receipt?</h1>
+      <p class="lede">Pick a question. You get the answer, and the receipt with it. Then print it.</p>
+      <section class="rstation">
+        <div class="obd" id="rcDemo">
+          <div class="obd-l">
+            <div class="obq"></div>
+            <div class="oba"><span class="eyebrow">The AI's answer</span><p></p></div>
+            <details class="obx">
+              <summary>How did it decide? Move the weight.</summary>
+              <div class="obx-in">
+                <label for="rcW">Weight on <b>status</b></label>
+                <input type="range" id="rcW" min="0" max="100" value="100">
+                <p class="quiet">Aspected weighs content, status, location, client and date in one calculation. Turn this weight down and see what the AI would have read.</p>
+              </div>
+            </details>
+          </div>
+          <div class="obd-m">
+            <div class="obp-top"><i></i><span>ASPECTED · RECEIPT</span></div>
+            <div class="obp-slot"></div>
+            <div class="obp-paper"></div>
+            <div class="rprint">
+              <button class="btn" type="button" id="rcPrint">Print this receipt</button>
+              <label class="rauto"><input type="checkbox" id="rcAuto"> Print every new receipt</label>
+            </div>
+          </div>
+          <ol class="obn"></ol>
+        </div>
+      </section>
+      <section class="csec">
+        <h2>What a receipt shows.</h2>
+        <div class="know">
+          <div><b>Used</b><p>The document the AI read, and the aspects that matched your question.</p></div>
+          <div><b>Kept out</b><p>The documents that came close, and why each one lost.</p></div>
+          <div><b>Decided by</b><p>The one aspect that made the difference, such as status, location or client.</p></div>
+        </div>
+        <p class="sub">A receipt does not prove an answer is true. It proves what went in, and why. So when an answer is wrong, it points at the document to fix.</p>
+      </section>
+      <section class="csec cta">
+        <h2>Want this under your own AI?</h2>
+        <p class="sub">Copilot, Claude or your own agent. Every answer with a receipt.</p>
+        <div class="ctas" style="margin-top:16px"><a class="btn" data-book href="#" target="_blank" rel="noopener">Book 20 minutes ↗</a><a class="btn ghost" href="#cio">For CIOs</a></div>
+      </section>
+    </div>
+  </section>
+
   <!-- PRICING -->
   <section class="view" id="v-pricing">
     <div class="wrap page">
@@ -1606,6 +1680,7 @@ curl http://localhost:8080/indexes</pre></div>
   </section>
 </main>
 
+<div class="slip" id="slip" aria-hidden="true"></div>
 <div class="vbar"><a class="btn" href="https://vegas.aspected.com" target="_blank" rel="noopener">Open next session ↗</a><button class="vshare" type="button" data-share aria-label="Send this page to yourself"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div>
 <footer>
   <div class="wrap">
@@ -2123,15 +2198,17 @@ function openShow(id){
      off:{a:"Within 8 hours, during office hours.", used:"Standard SLA 2026", lines:["content matches the question ✓","client: all clients ✕","status: adopted ✓"],
          dec:"MEANING", dnote:"the standard reads closest", voids:[["SLA client Y, 2026","✕ ranked below the standard"],["SLA client Y, 2024","✕ expired"]], total:"8 HOURS",
          notes:["Without client, the standard SLA wins.","Wording decided, not who it is for.","Client Y's own agreement was kept out."]}}];
-  var qsEl=document.getElementById("obQs"); if(!qsEl) return;
-  var paper=document.getElementById("obPaper"), notes=document.getElementById("obN"), at=document.getElementById("obAt"), w=document.getElementById("obW"), wl=document.getElementById("obWl");
+  function Demo(root, opts){
+  opts=opts||{};
+  var qsEl=root.querySelector(".obq"), ans=root.querySelector(".oba"), at=ans.querySelector("p"), w=root.querySelector(".obx input[type=range]"), wl=root.querySelector(".obx label b");
+  var paper=root.querySelector(".obp-paper"), notes=root.querySelector(".obn");
   var cur=0, on=true, started=false;
   QS.forEach(function(Q,i){qsEl.insertAdjacentHTML("beforeend",'<button type="button" data-i="'+i+'">'+esc(Q.q)+'</button>')});
   function L(h,i){return '<div class="ol" style="--i:'+i+'">'+h+'</div>'}
   function draw(){
     var Q=QS[cur], R=on?Q.on:Q.off, n=0;
     qsEl.querySelectorAll("button").forEach(function(b,i){b.setAttribute("aria-pressed",i===cur)});
-    wl.textContent=Q.w; at.textContent=R.a; document.getElementById("obA").classList.toggle("bad",!on);
+    wl.textContent=Q.w; at.textContent=R.a; ans.classList.toggle("bad",!on);
     var h=L('<div class="ok-kind">RECEIPT FOR THIS ANSWER</div>',n++)+L('<div class="ohr"></div>',n++)+L('<div>“'+esc(Q.q)+'”</div>',n++)+L('<div class="ohr"></div>',n++)+
       '<div class="omark used">'+L('<div class="oh">USED</div>',n++)+L('<div class="ot">'+esc(R.used)+'</div>',n++)+R.lines.map(function(x){return L('<div class="osub">'+esc(x)+'</div>',n++)}).join("")+
       '<svg class="pen loop" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M10,58 C4,22 70,4 93,30 C104,52 84,94 44,94 C14,94 2,70 14,44 C22,30 40,22 58,20"/></svg></div>'+
@@ -2142,10 +2219,49 @@ function openShow(id){
       L('<div class="ohr d"></div>',n++)+L('<div class="orow"><span>ANSWER</span><span>'+esc(R.total)+'</span></div>',n++)+L('<div class="ohr d"></div>',n++);
     paper.classList.remove("in"); paper.innerHTML=h; paper.style.setProperty("--n",n); void paper.offsetWidth; paper.classList.add("in");
     notes.innerHTML=R.notes.map(function(t,i){return '<li style="--i:'+i+'">'+esc(t)+'</li>'}).join(""); notes.classList.remove("in"); void notes.offsetWidth; notes.classList.add("in");
+    if(opts.onDraw) opts.onDraw(Q,R,on,n);
   }
   qsEl.addEventListener("click",function(e){var b=e.target.closest("button"); if(!b) return; cur=+b.dataset.i; on=true; w.value=100; draw()});
   w.addEventListener("input",function(){var nOn=+w.value>=50; if(nOn!==on){on=nOn; draw()}});
-  window.__obStart=function(){if(started) return; started=true; draw()};
+  return {start:function(){if(started) return; started=true; draw()}, now:function(){var Q=QS[cur]; return {Q:Q,R:on?Q.on:Q.off,on:on,weight:+w.value}}};
+  }
+  var cio=document.getElementById("cioDemo"); if(cio){var d1=Demo(cio); window.__obStart=d1.start}
+
+  /* /receipt: the receipt station. "Print this receipt" prints a slip sized for an 80 mm receipt printer.
+     #receipt-station turns this browser into a station: every new receipt prints by itself.
+     For silent printing, set the receipt printer as the default printer and run Chrome with --kiosk-printing. */
+  var rc=document.getElementById("rcDemo"); if(!rc) return;
+  var slip=document.getElementById("slip"), autoEl=document.getElementById("rcAuto"), autoT=0;
+  function station(){try{return localStorage.getItem("asp-station")==="1"}catch(e){return false}}
+  function nextNo(){var n=1; try{n=(+localStorage.getItem("asp-receipt-no")||0)+1; localStorage.setItem("asp-receipt-no",n)}catch(e){} return ("00000"+n).slice(-6)}
+  function stamp(){var d=new Date(); return d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})+" "+d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}
+  var d2=Demo(rc,{onDraw:function(Q,R,on,n){
+    clearTimeout(autoT);
+    if(autoEl.checked) autoT=setTimeout(printSlip, n*90+1600);
+  }});
+  function printSlip(){
+    var x=d2.now(), Q=x.Q, R=x.R;
+    function row(a,b){return '<div class="srow"><span>'+esc(a)+'</span><span>'+esc(b)+'</span></div>'}
+    slip.innerHTML='<div class="sc sb">ASPECTED · RECEIPT</div>'+row("No. "+nextNo(),stamp())+'<div class="shr"></div>'+
+      '<div>“'+esc(Q.q)+'”</div><div class="shr"></div>'+
+      '<div class="sb">USED</div><div class="sb">'+esc(R.used)+'</div>'+R.lines.map(function(l){return '<div class="si">'+esc(l)+'</div>'}).join("")+'<div class="shr"></div>'+
+      '<div class="sb sdec">DECIDED BY: '+esc(R.dec)+'</div><div class="si">'+esc(R.dnote)+'</div><div class="shr"></div>'+
+      '<div class="sb">NOT USED</div>'+R.voids.map(function(v){return '<div class="sx">'+esc(v[0])+'</div><div class="si">'+esc(v[1])+'</div>'}).join("")+
+      '<div class="shr d"></div>'+row("ANSWER",R.total).replace('class="srow"','class="srow sbig"')+'<div class="shr d"></div>'+
+      '<div class="si0">Weight on '+esc(Q.w)+': '+x.weight+' of 100</div>'+
+      '<p class="snote">A receipt does not prove an answer is true. It proves what went in, and why.</p>'+
+      '<div class="sqr"><svg viewBox="0 0 33 33" class="segno"><path class="qrline" stroke="#000" d="M0 0.5h7m2 0h2m8 0h5m2 0h7m-33 1h1m5 0h1m1 0h1m1 0h3m1 0h1m2 0h1m3 0h1m1 0h2m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h3m2 0h1m6 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m2 0h3m3 0h2m2 0h1m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h1m1 0h2m2 0h1m3 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m3 0h1m2 0h1m1 0h3m1 0h1m4 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h1m1 0h1m2 0h4m2 0h1m2 0h2m-24 1h3m1 0h2m2 0h1m1 0h1m4 0h4m1 0h1m8 0h2m-32 1h3m1 0h1m4 0h2m1 0h8m1 0h1m1 0h1m2 0h2m1 0h2m1 0h1m-31 1h2m1 0h3m3 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h7m1 0h2m-32 1h2m1 0h1m3 0h4m4 0h2m1 0h2m3 0h2m1 0h1m1 0h1m-27 1h4m5 0h4m3 0h2m1 0h1m2 0h1m2 0h2m1 0h1m-32 1h1m1 0h1m1 0h1m2 0h3m2 0h1m2 0h1m3 0h1m4 0h1m2 0h1m1 0h3m-31 1h2m3 0h3m2 0h2m1 0h1m1 0h1m1 0h3m3 0h1m1 0h4m-27 1h2m3 0h3m1 0h4m1 0h1m3 0h3m1 0h2m2 0h2m-29 1h1m3 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h4m2 0h2m1 0h1m1 0h1m-31 1h4m1 0h1m2 0h5m1 0h1m2 0h1m2 0h1m1 0h5m1 0h2m1 0h2m-32 1h3m1 0h2m1 0h1m2 0h1m3 0h4m1 0h3m1 0h5m1 0h2m-31 1h1m1 0h2m4 0h2m2 0h1m2 0h2m1 0h1m2 0h2m1 0h2m1 0h1m2 0h1m-32 1h2m1 0h8m1 0h2m2 0h3m2 0h2m4 0h1m1 0h3m-32 1h1m1 0h4m1 0h1m2 0h1m2 0h3m3 0h5m1 0h1m4 0h1m1 0h1m-31 1h1m3 0h2m3 0h1m1 0h2m1 0h3m1 0h1m1 0h3m1 0h4m1 0h2m-32 1h2m5 0h2m1 0h4m4 0h2m1 0h2m3 0h1m1 0h1m1 0h1m-32 1h1m1 0h8m3 0h1m1 0h5m4 0h6m1 0h2m-25 1h1m2 0h2m1 0h2m2 0h2m1 0h1m2 0h1m3 0h2m-30 1h7m2 0h1m1 0h1m3 0h1m1 0h4m2 0h2m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m3 0h1m2 0h1m3 0h1m1 0h4m3 0h4m-32 1h1m1 0h3m1 0h1m2 0h2m2 0h3m1 0h1m2 0h9m1 0h3m-33 1h1m1 0h3m1 0h1m1 0h2m6 0h1m1 0h1m1 0h2m1 0h2m2 0h1m1 0h1m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h2m3 0h3m1 0h1m1 0h1m1 0h4m2 0h1m-31 1h1m5 0h1m1 0h4m4 0h2m1 0h2m3 0h2m1 0h3m2 0h1m-33 1h7m2 0h1m2 0h1m1 0h2m2 0h2m1 0h1m1 0h1m2 0h1m1 0h3"/></svg></div><div class="sc">aspected.com/receipt</div>';
+    document.body.classList.add("printing");
+    setTimeout(function(){window.print()},30);
+  }
+  addEventListener("afterprint",function(){document.body.classList.remove("printing")});
+  document.getElementById("rcPrint").addEventListener("click",printSlip);
+  window.__rcStart=function(){
+    var st=station(); rc.closest("section").classList.toggle("is-station",st);
+    if(st){try{autoEl.checked=localStorage.getItem("asp-station-auto")!=="0"}catch(e){autoEl.checked=true}}
+    d2.start();
+  };
+  autoEl.addEventListener("change",function(){try{localStorage.setItem("asp-station-auto",autoEl.checked?"1":"0")}catch(e){}});
 })();
 
 /* ---------- routing ---------- */
@@ -2155,9 +2271,11 @@ function route(){
   else if(hsh.indexOf("show-")===0){ view = openShow(hsh.slice(5)) ? "show" : "home" }
   else if(hsh.indexOf("industry-")===0){ view = openIndustry(hsh.slice(9)) ? "industry" : "industries" }
   else if(hsh==="industries"){view="solutions"}
-  else if(["about","why","pricing","start","cio","solutions","knowledge-base","ready-for-ai","catalogue-search","introducing","one-department","vegas"].indexOf(hsh)>=0){view=hsh}
+  else if(hsh==="receipt-station"){try{localStorage.setItem("asp-station","1")}catch(e){} view="receipt"}
+  else if(["about","why","pricing","start","cio","solutions","knowledge-base","ready-for-ai","catalogue-search","introducing","one-department","vegas","receipt"].indexOf(hsh)>=0){view=hsh}
   if(view!=="show" && dPlayer){dPlayer.stop()}
   if(view==="cio" && window.__obStart) window.__obStart();
+  if(view==="receipt" && window.__rcStart) window.__rcStart();
   document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id==="v-"+view)});
   var navv = ["industry","knowledge-base","ready-for-ai","catalogue-search"].indexOf(view)>=0 ? "solutions" : view;
   var vEl=document.getElementById("v-"+view); if(vEl) vEl.querySelectorAll("[data-cards]").forEach(function(g){ if(g.dataset.done) return; g.dataset.done="1"; JSON.parse(g.getAttribute("data-cards")).forEach(function(x){makeCard(showById(x[0]),x[1],x[2],g)}) });
